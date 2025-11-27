@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git Commands & Workflows Cheatsheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e6ed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #f05033 0%, #ff8c42 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #8b95a5;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(240, 80, 51, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(240, 80, 51, 0.15);
+        }
+
+        .card-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #f05033;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(240, 80, 51, 0.3);
+        }
+
+        .cmd-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+
+        .cmd-row:hover {
+            background: rgba(240, 80, 51, 0.1);
+        }
+
+        .cmd-name {
+            color: #ff8c42;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+        }
+
+        .cmd-desc {
+            color: #cbd5e1;
+            padding-left: 1rem;
+            font-size: 0.9rem;
+        }
+
+        code {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #a5d6ff;
+            font-size: 0.9em;
+        }
+
+        .workflow-box {
+            background: rgba(240, 80, 51, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #f05033;
+            margin: 1rem 0;
+        }
+
+        .workflow-title {
+            color: #ff8c42;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .workflow-step {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.5rem;
+            margin: 0.3rem 0;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #a5d6ff;
+        }
+
+        .note {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid #3b82f6;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .tip {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .warning {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 116, 139, 0.3);
+            color: #8b95a5;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔀 Git Commands & Workflows</h1>
+        <p class="subtitle">Version control essentials and best practices</p>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">🎯 Setup & Configuration</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git config --global user.name "Name"</div>
+                    <div class="cmd-desc">Set your name</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git config --global user.email "email@example.com"</div>
+                    <div class="cmd-desc">Set your email</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git config --global core.editor vim</div>
+                    <div class="cmd-desc">Set default editor</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git config --list</div>
+                    <div class="cmd-desc">View all settings</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git config --global alias.st status</div>
+                    <div class="cmd-desc">Create alias (git st)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git config --global init.defaultBranch main</div>
+                    <div class="cmd-desc">Set default branch name</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🆕 Creating Repositories</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git init</div>
+                    <div class="cmd-desc">Initialize new repository</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git init --bare</div>
+                    <div class="cmd-desc">Create bare repository (for servers)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git clone [url]</div>
+                    <div class="cmd-desc">Clone remote repository</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git clone [url] [directory]</div>
+                    <div class="cmd-desc">Clone to specific directory</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git clone --depth 1 [url]</div>
+                    <div class="cmd-desc">Shallow clone (latest commit only)</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📊 Basic Snapshotting</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git status</div>
+                    <div class="cmd-desc">Show working tree status</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git status -s</div>
+                    <div class="cmd-desc">Short status format</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git add [file]</div>
+                    <div class="cmd-desc">Stage specific file</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git add .</div>
+                    <div class="cmd-desc">Stage all changes</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git add -p</div>
+                    <div class="cmd-desc">Stage interactively (by hunks)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git commit -m "message"</div>
+                    <div class="cmd-desc">Commit staged changes</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git commit -am "message"</div>
+                    <div class="cmd-desc">Stage all and commit</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git commit --amend</div>
+                    <div class="cmd-desc">Modify last commit</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git commit --amend --no-edit</div>
+                    <div class="cmd-desc">Amend without changing message</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🌿 Branching & Merging</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git branch</div>
+                    <div class="cmd-desc">List local branches</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git branch -a</div>
+                    <div class="cmd-desc">List all branches (local + remote)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git branch [branch-name]</div>
+                    <div class="cmd-desc">Create new branch</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git checkout [branch]</div>
+                    <div class="cmd-desc">Switch to branch</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git checkout -b [branch]</div>
+                    <div class="cmd-desc">Create and switch to branch</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git switch [branch]</div>
+                    <div class="cmd-desc">Switch branch (modern)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git switch -c [branch]</div>
+                    <div class="cmd-desc">Create and switch (modern)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git merge [branch]</div>
+                    <div class="cmd-desc">Merge branch into current</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git merge --no-ff [branch]</div>
+                    <div class="cmd-desc">Merge with merge commit</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git branch -d [branch]</div>
+                    <div class="cmd-desc">Delete branch (safe)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git branch -D [branch]</div>
+                    <div class="cmd-desc">Force delete branch</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔄 Remote Repositories</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git remote -v</div>
+                    <div class="cmd-desc">List remote repositories</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git remote add origin [url]</div>
+                    <div class="cmd-desc">Add remote repository</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git remote remove origin</div>
+                    <div class="cmd-desc">Remove remote</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git fetch</div>
+                    <div class="cmd-desc">Download remote changes</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git fetch --prune</div>
+                    <div class="cmd-desc">Fetch and remove deleted branches</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git pull</div>
+                    <div class="cmd-desc">Fetch and merge</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git pull --rebase</div>
+                    <div class="cmd-desc">Fetch and rebase</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git push</div>
+                    <div class="cmd-desc">Push to remote</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git push -u origin [branch]</div>
+                    <div class="cmd-desc">Push and set upstream</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git push --force-with-lease</div>
+                    <div class="cmd-desc">Safe force push</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📜 History & Inspection</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git log</div>
+                    <div class="cmd-desc">Show commit history</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git log --oneline</div>
+                    <div class="cmd-desc">Compact log</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git log --graph --all</div>
+                    <div class="cmd-desc">Visual branch graph</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git log -p</div>
+                    <div class="cmd-desc">Show patches (diffs)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git log --author="name"</div>
+                    <div class="cmd-desc">Filter by author</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git log --since="2 weeks ago"</div>
+                    <div class="cmd-desc">Filter by date</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git show [commit]</div>
+                    <div class="cmd-desc">Show commit details</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git diff</div>
+                    <div class="cmd-desc">Show unstaged changes</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git diff --staged</div>
+                    <div class="cmd-desc">Show staged changes</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git diff [branch1]..[branch2]</div>
+                    <div class="cmd-desc">Compare branches</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git blame [file]</div>
+                    <div class="cmd-desc">Show line-by-line authorship</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">↩️ Undoing Changes</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git restore [file]</div>
+                    <div class="cmd-desc">Discard working directory changes</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git restore --staged [file]</div>
+                    <div class="cmd-desc">Unstage file</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git reset [file]</div>
+                    <div class="cmd-desc">Unstage file (old way)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git reset --soft HEAD~1</div>
+                    <div class="cmd-desc">Undo commit, keep changes staged</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git reset --mixed HEAD~1</div>
+                    <div class="cmd-desc">Undo commit, unstage changes</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git reset --hard HEAD~1</div>
+                    <div class="cmd-desc">Undo commit, discard changes</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git revert [commit]</div>
+                    <div class="cmd-desc">Create new commit to undo</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git clean -fd</div>
+                    <div class="cmd-desc">Remove untracked files/directories</div>
+                </div>
+                <div class="warning">
+                    ⚠️ <strong>Warning:</strong> <code>git reset --hard</code> permanently discards changes!
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔀 Rebasing</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git rebase [branch]</div>
+                    <div class="cmd-desc">Rebase current branch onto another</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git rebase -i HEAD~3</div>
+                    <div class="cmd-desc">Interactive rebase last 3 commits</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git rebase --continue</div>
+                    <div class="cmd-desc">Continue after resolving conflicts</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git rebase --abort</div>
+                    <div class="cmd-desc">Cancel rebase</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git rebase --skip</div>
+                    <div class="cmd-desc">Skip current commit</div>
+                </div>
+                <div class="note">
+                    <strong>Interactive rebase commands:</strong><br>
+                    pick = use commit | reword = edit message<br>
+                    edit = modify commit | squash = combine with previous<br>
+                    drop = remove commit
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📦 Stashing</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git stash</div>
+                    <div class="cmd-desc">Save changes temporarily</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git stash push -m "message"</div>
+                    <div class="cmd-desc">Stash with message</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git stash list</div>
+                    <div class="cmd-desc">List all stashes</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git stash pop</div>
+                    <div class="cmd-desc">Apply and remove latest stash</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git stash apply</div>
+                    <div class="cmd-desc">Apply without removing</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git stash drop</div>
+                    <div class="cmd-desc">Delete latest stash</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git stash clear</div>
+                    <div class="cmd-desc">Delete all stashes</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git stash show -p</div>
+                    <div class="cmd-desc">Show stash contents</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🏷️ Tags</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git tag</div>
+                    <div class="cmd-desc">List all tags</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git tag [tagname]</div>
+                    <div class="cmd-desc">Create lightweight tag</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git tag -a v1.0 -m "message"</div>
+                    <div class="cmd-desc">Create annotated tag</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git tag -d [tagname]</div>
+                    <div class="cmd-desc">Delete local tag</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git push origin [tagname]</div>
+                    <div class="cmd-desc">Push specific tag</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git push origin --tags</div>
+                    <div class="cmd-desc">Push all tags</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git push origin :refs/tags/[tag]</div>
+                    <div class="cmd-desc">Delete remote tag</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔍 Advanced Commands</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git cherry-pick [commit]</div>
+                    <div class="cmd-desc">Apply specific commit</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git reflog</div>
+                    <div class="cmd-desc">Show reference log (recovery)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git bisect start</div>
+                    <div class="cmd-desc">Start binary search for bugs</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git grep "pattern"</div>
+                    <div class="cmd-desc">Search in tracked files</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git archive --format=zip HEAD</div>
+                    <div class="cmd-desc">Export repository as zip</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git shortlog -sn</div>
+                    <div class="cmd-desc">Show commit count by author</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git submodule add [url]</div>
+                    <div class="cmd-desc">Add submodule</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git submodule update --init</div>
+                    <div class="cmd-desc">Initialize submodules</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">⚙️ Configuration Tips</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git config --global pull.rebase true</div>
+                    <div class="cmd-desc">Always rebase on pull</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git config --global rerere.enabled true</div>
+                    <div class="cmd-desc">Remember conflict resolutions</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git config --global core.autocrlf true</div>
+                    <div class="cmd-desc">Handle line endings (Windows)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git config --global core.autocrlf input</div>
+                    <div class="cmd-desc">Handle line endings (Mac/Linux)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">git config --global color.ui auto</div>
+                    <div class="cmd-desc">Enable color output</div>
+                </div>
+                <div class="tip">
+                    💡 Create aliases for common commands to save time!<br>
+                    <code>git config --global alias.co checkout</code><br>
+                    <code>git config --global alias.br branch</code>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">🔄 Common Workflows</div>
+            
+            <div class="workflow-box">
+                <div class="workflow-title">Feature Branch Workflow</div>
+                <div class="workflow-step">1. git checkout -b feature/new-feature</div>
+                <div class="workflow-step">2. # Make changes and commits</div>
+                <div class="workflow-step">3. git push -u origin feature/new-feature</div>
+                <div class="workflow-step">4. # Create pull request</div>
+                <div class="workflow-step">5. git checkout main && git pull</div>
+                <div class="workflow-step">6. git merge feature/new-feature</div>
+                <div class="workflow-step">7. git push && git branch -d feature/new-feature</div>
+            </div>
+
+            <div class="workflow-box">
+                <div class="workflow-title">Fixing Mistakes</div>
+                <div class="workflow-step"># Undo last commit but keep changes</div>
+                <div class="workflow-step">git reset --soft HEAD~1</div>
+                <div class="workflow-step"># Change commit message</div>
+                <div class="workflow-step">git commit --amend -m "New message"</div>
+                <div class="workflow-step"># Recover deleted commits</div>
+                <div class="workflow-step">git reflog && git checkout [commit-hash]</div>
+            </div>
+
+            <div class="workflow-box">
+                <div class="workflow-title">Syncing Fork</div>
+                <div class="workflow-step">git remote add upstream [original-repo-url]</div>
+                <div class="workflow-step">git fetch upstream</div>
+                <div class="workflow-step">git checkout main</div>
+                <div class="workflow-step">git merge upstream/main</div>
+                <div class="workflow-step">git push origin main</div>
+            </div>
+
+            <div class="workflow-box">
+                <div class="workflow-title">Release Workflow</div>
+                <div class="workflow-step">git checkout -b release/v1.0</div>
+                <div class="workflow-step"># Final testing and bug fixes</div>
+                <div class="workflow-step">git checkout main && git merge release/v1.0</div>
+                <div class="workflow-step">git tag -a v1.0 -m "Release version 1.0"</div>
+                <div class="workflow-step">git push origin main --tags</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">📝 .gitignore Patterns</div>
+            <div class="workflow-step"># Ignore all .log files</div>
+            <div class="workflow-step">*.log</div>
+            <div class="workflow-step"># Ignore node_modules directory</div>
+            <div class="workflow-step">node_modules/</div>
+            <div class="workflow-step"># Ignore all files in build directory</div>
+            <div class="workflow-step">build/*</div>
+            <div class="workflow-step"># But track this specific file</div>
+            <div class="workflow-step">!build/.gitkeep</div>
+            <div class="workflow-step"># Ignore OS files</div>
+            <div class="workflow-step">.DS_Store</div>
+            <div class="workflow-step">Thumbs.db</div>
+        </div>
+
+        <div class="footer">
+            <p>Essential Git Commands & Workflows Reference</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">💡 Use <code>git help [command]</code> for detailed documentation</p>
+        </div>
+    </div>
+</body>
+</html>

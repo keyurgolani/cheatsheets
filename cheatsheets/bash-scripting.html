@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bash Scripting Essentials Cheatsheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            color: #e0e6ed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #48bb78 0%, #38b2ac 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #8b95a5;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(72, 187, 120, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(72, 187, 120, 0.15);
+        }
+
+        .card-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #48bb78;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(72, 187, 120, 0.3);
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            color: #a5d6ff;
+            margin: 0.5rem 0;
+            border-left: 3px solid #48bb78;
+            overflow-x: auto;
+        }
+
+        .code-line {
+            margin: 0.2rem 0;
+        }
+
+        .comment {
+            color: #68d391;
+        }
+
+        .keyword {
+            color: #fbbf24;
+        }
+
+        .string {
+            color: #f687b3;
+        }
+
+        code {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #a5d6ff;
+            font-size: 0.9em;
+        }
+
+        .cmd-row {
+            margin-bottom: 0.75rem;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+
+        .cmd-row:hover {
+            background: rgba(72, 187, 120, 0.1);
+        }
+
+        .cmd-title {
+            color: #68d391;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 0.3rem;
+        }
+
+        .cmd-desc {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+        }
+
+        .note {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid #3b82f6;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .tip {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .warning {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 116, 139, 0.3);
+            color: #8b95a5;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>#!/bin/bash Scripting Essentials</h1>
+        <p class="subtitle">Complete guide to shell scripting in Bash</p>
+
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">🚀 Script Template</div>
+            <div class="code-block">
+                <div class="code-line"><span class="comment">#!/bin/bash</span></div>
+                <div class="code-line"><span class="comment"># Script: script_name.sh</span></div>
+                <div class="code-line"><span class="comment"># Description: What this script does</span></div>
+                <div class="code-line"><span class="comment"># Author: Your Name</span></div>
+                <div class="code-line"><span class="comment"># Date: 2025-01-01</span></div>
+                <div class="code-line"></div>
+                <div class="code-line"><span class="comment"># Exit on error, undefined variables, pipe failures</span></div>
+                <div class="code-line"><span class="keyword">set</span> -euo pipefail</div>
+                <div class="code-line"></div>
+                <div class="code-line"><span class="comment"># Main script logic here</span></div>
+                <div class="code-line">echo <span class="string">"Hello, World!"</span></div>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">📝 Variables</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment"># Variable assignment (no spaces!)</span></div>
+                    <div class="code-line">NAME=<span class="string">"John"</span></div>
+                    <div class="code-line">AGE=30</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Using variables</span></div>
+                    <div class="code-line">echo <span class="string">"$NAME"</span></div>
+                    <div class="code-line">echo <span class="string">"${NAME}"</span>  <span class="comment"># preferred</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Command substitution</span></div>
+                    <div class="code-line">CURRENT_DATE=$(date)</div>
+                    <div class="code-line">FILES=`ls`  <span class="comment"># old style</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Read-only variable</span></div>
+                    <div class="code-line"><span class="keyword">readonly</span> PI=3.14159</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Environment variable</span></div>
+                    <div class="code-line"><span class="keyword">export</span> PATH=$PATH:/new/path</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔢 Special Variables</div>
+                <div class="cmd-row">
+                    <div class="cmd-title">$0</div>
+                    <div class="cmd-desc">Script name</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">$1, $2, $3...</div>
+                    <div class="cmd-desc">Positional parameters (arguments)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">$#</div>
+                    <div class="cmd-desc">Number of arguments</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">$@</div>
+                    <div class="cmd-desc">All arguments (as separate words)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">$*</div>
+                    <div class="cmd-desc">All arguments (as single word)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">$?</div>
+                    <div class="cmd-desc">Exit status of last command</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">$$</div>
+                    <div class="cmd-desc">Process ID of current shell</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">$!</div>
+                    <div class="cmd-desc">Process ID of last background command</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🎯 String Operations</div>
+                <div class="code-block">
+                    <div class="code-line">STRING=<span class="string">"Hello World"</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Length</span></div>
+                    <div class="code-line">echo ${#STRING}  <span class="comment"># 11</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Substring</span></div>
+                    <div class="code-line">echo ${STRING:0:5}  <span class="comment"># Hello</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Replace first occurrence</span></div>
+                    <div class="code-line">echo ${STRING/World/Universe}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Replace all occurrences</span></div>
+                    <div class="code-line">echo ${STRING//o/0}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Default value if empty</span></div>
+                    <div class="code-line">echo ${VAR:-<span class="string">"default"</span>}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Convert to uppercase/lowercase</span></div>
+                    <div class="code-line">echo ${STRING^^}  <span class="comment"># HELLO WORLD</span></div>
+                    <div class="code-line">echo ${STRING,,}  <span class="comment"># hello world</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔍 Conditional Statements</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment"># if-else</span></div>
+                    <div class="code-line"><span class="keyword">if</span> [ $AGE -gt 18 ]; <span class="keyword">then</span></div>
+                    <div class="code-line">    echo <span class="string">"Adult"</span></div>
+                    <div class="code-line"><span class="keyword">elif</span> [ $AGE -eq 18 ]; <span class="keyword">then</span></div>
+                    <div class="code-line">    echo <span class="string">"Just turned adult"</span></div>
+                    <div class="code-line"><span class="keyword">else</span></div>
+                    <div class="code-line">    echo <span class="string">"Minor"</span></div>
+                    <div class="code-line"><span class="keyword">fi</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># One-liner</span></div>
+                    <div class="code-line">[ $AGE -gt 18 ] && echo <span class="string">"Adult"</span> || echo <span class="string">"Minor"</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Modern test syntax</span></div>
+                    <div class="code-line"><span class="keyword">if</span> [[ $NAME == <span class="string">"John"</span> ]]; <span class="keyword">then</span></div>
+                    <div class="code-line">    echo <span class="string">"Found John"</span></div>
+                    <div class="code-line"><span class="keyword">fi</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">⚖️ Test Operators</div>
+                <div class="cmd-row">
+                    <div class="cmd-title">-eq, -ne, -lt, -le, -gt, -ge</div>
+                    <div class="cmd-desc">Numeric comparisons (equal, not equal, less than, etc.)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">=, !=, <, ></div>
+                    <div class="cmd-desc">String comparisons</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">-z, -n</div>
+                    <div class="cmd-desc">String is empty, string is not empty</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">-e, -f, -d</div>
+                    <div class="cmd-desc">File exists, is regular file, is directory</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">-r, -w, -x</div>
+                    <div class="cmd-desc">File is readable, writable, executable</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">-s</div>
+                    <div class="cmd-desc">File exists and is not empty</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">&&, ||, !</div>
+                    <div class="cmd-desc">Logical AND, OR, NOT</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔄 Loops</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment"># For loop</span></div>
+                    <div class="code-line"><span class="keyword">for</span> i in 1 2 3 4 5; <span class="keyword">do</span></div>
+                    <div class="code-line">    echo <span class="string">"Number: $i"</span></div>
+                    <div class="code-line"><span class="keyword">done</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># For loop with range</span></div>
+                    <div class="code-line"><span class="keyword">for</span> i in {1..10}; <span class="keyword">do</span></div>
+                    <div class="code-line">    echo $i</div>
+                    <div class="code-line"><span class="keyword">done</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># C-style for loop</span></div>
+                    <div class="code-line"><span class="keyword">for</span> ((i=0; i<10; i++)); <span class="keyword">do</span></div>
+                    <div class="code-line">    echo $i</div>
+                    <div class="code-line"><span class="keyword">done</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># While loop</span></div>
+                    <div class="code-line">COUNT=0</div>
+                    <div class="code-line"><span class="keyword">while</span> [ $COUNT -lt 5 ]; <span class="keyword">do</span></div>
+                    <div class="code-line">    echo $COUNT</div>
+                    <div class="code-line">    ((COUNT++))</div>
+                    <div class="code-line"><span class="keyword">done</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Until loop</span></div>
+                    <div class="code-line"><span class="keyword">until</span> [ $COUNT -eq 10 ]; <span class="keyword">do</span></div>
+                    <div class="code-line">    echo $COUNT</div>
+                    <div class="code-line">    ((COUNT++))</div>
+                    <div class="code-line"><span class="keyword">done</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📋 Arrays</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment"># Define array</span></div>
+                    <div class="code-line">FRUITS=(<span class="string">"Apple"</span> <span class="string">"Banana"</span> <span class="string">"Orange"</span>)</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Access elements</span></div>
+                    <div class="code-line">echo ${FRUITS[0]}  <span class="comment"># Apple</span></div>
+                    <div class="code-line">echo ${FRUITS[@]}  <span class="comment"># All elements</span></div>
+                    <div class="code-line">echo ${#FRUITS[@]}  <span class="comment"># Array length</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Add element</span></div>
+                    <div class="code-line">FRUITS+=(<span class="string">"Grape"</span>)</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Loop through array</span></div>
+                    <div class="code-line"><span class="keyword">for</span> fruit in <span class="string">"${FRUITS[@]}"</span>; <span class="keyword">do</span></div>
+                    <div class="code-line">    echo $fruit</div>
+                    <div class="code-line"><span class="keyword">done</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Associative array (hash/dict)</span></div>
+                    <div class="code-line"><span class="keyword">declare</span> -A COLORS</div>
+                    <div class="code-line">COLORS[red]=<span class="string">"#FF0000"</span></div>
+                    <div class="code-line">COLORS[green]=<span class="string">"#00FF00"</span></div>
+                    <div class="code-line">echo ${COLORS[red]}</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔧 Functions</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment"># Define function</span></div>
+                    <div class="code-line"><span class="keyword">function</span> greet() {</div>
+                    <div class="code-line">    echo <span class="string">"Hello, $1!"</span></div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Alternative syntax</span></div>
+                    <div class="code-line">greet() {</div>
+                    <div class="code-line">    local NAME=$1  <span class="comment"># local variable</span></div>
+                    <div class="code-line">    echo <span class="string">"Hello, $NAME!"</span></div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Call function</span></div>
+                    <div class="code-line">greet <span class="string">"World"</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Return value</span></div>
+                    <div class="code-line">add() {</div>
+                    <div class="code-line">    local result=$(($1 + $2))</div>
+                    <div class="code-line">    echo $result</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line">SUM=$(add 5 3)</div>
+                    <div class="code-line">echo $SUM  <span class="comment"># 8</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📥 User Input</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment"># Read input</span></div>
+                    <div class="code-line">echo <span class="string">"Enter your name:"</span></div>
+                    <div class="code-line"><span class="keyword">read</span> NAME</div>
+                    <div class="code-line">echo <span class="string">"Hello, $NAME!"</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Read with prompt</span></div>
+                    <div class="code-line"><span class="keyword">read</span> -p <span class="string">"Enter age: "</span> AGE</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Read password (hidden)</span></div>
+                    <div class="code-line"><span class="keyword">read</span> -sp <span class="string">"Enter password: "</span> PASSWORD</div>
+                    <div class="code-line">echo</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Read with timeout</span></div>
+                    <div class="code-line"><span class="keyword">read</span> -t 5 -p <span class="string">"Quick! Enter something: "</span> INPUT</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Read file line by line</span></div>
+                    <div class="code-line"><span class="keyword">while</span> IFS= <span class="keyword">read</span> -r line; <span class="keyword">do</span></div>
+                    <div class="code-line">    echo <span class="string">"Line: $line"</span></div>
+                    <div class="code-line"><span class="keyword">done</span> < file.txt</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔀 Case Statement</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="keyword">case</span> $1 in</div>
+                    <div class="code-line">    start)</div>
+                    <div class="code-line">        echo <span class="string">"Starting..."</span></div>
+                    <div class="code-line">        ;;</div>
+                    <div class="code-line">    stop)</div>
+                    <div class="code-line">        echo <span class="string">"Stopping..."</span></div>
+                    <div class="code-line">        ;;</div>
+                    <div class="code-line">    restart)</div>
+                    <div class="code-line">        echo <span class="string">"Restarting..."</span></div>
+                    <div class="code-line">        ;;</div>
+                    <div class="code-line">    *)</div>
+                    <div class="code-line">        echo <span class="string">"Usage: $0 {start|stop|restart}"</span></div>
+                    <div class="code-line">        exit 1</div>
+                    <div class="code-line">        ;;</div>
+                    <div class="code-line"><span class="keyword">esac</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📤 Input/Output Redirection</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment"># Redirect output</span></div>
+                    <div class="code-line">echo <span class="string">"Hello"</span> > file.txt</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Append output</span></div>
+                    <div class="code-line">echo <span class="string">"World"</span> >> file.txt</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Redirect stderr</span></div>
+                    <div class="code-line">command 2> errors.txt</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Redirect both stdout and stderr</span></div>
+                    <div class="code-line">command &> output.txt</div>
+                    <div class="code-line">command > output.txt 2>&1</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Discard output</span></div>
+                    <div class="code-line">command > /dev/null 2>&1</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Here document</span></div>
+                    <div class="code-line">cat << EOF</div>
+                    <div class="code-line">Multiple lines</div>
+                    <div class="code-line">of text</div>
+                    <div class="code-line">EOF</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔢 Arithmetic</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment"># Using (( ))</span></div>
+                    <div class="code-line">((x = 5 + 3))</div>
+                    <div class="code-line">((x++))</div>
+                    <div class="code-line">((x += 5))</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Using expr</span></div>
+                    <div class="code-line">x=$(expr 5 + 3)</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Using $[ ]</span></div>
+                    <div class="code-line">x=$[5 + 3]</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Using $(( ))</span></div>
+                    <div class="code-line">x=$((5 + 3))</div>
+                    <div class="code-line">y=$((x * 2))</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment"># Floating point with bc</span></div>
+                    <div class="code-line">result=$(echo <span class="string">"scale=2; 10 / 3"</span> | bc)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">💡 Practical Examples</div>
+            <div class="code-block">
+                <div class="code-line"><span class="comment"># Check if command exists</span></div>
+                <div class="code-line"><span class="keyword">if</span> command -v git &> /dev/null; <span class="keyword">then</span></div>
+                <div class="code-line">    echo <span class="string">"Git is installed"</span></div>
+                <div class="code-line"><span class="keyword">fi</span></div>
+                <div class="code-line"></div>
+                <div class="code-line"><span class="comment"># Parse command line options</span></div>
+                <div class="code-line"><span class="keyword">while</span> getopts <span class="string">"hv:f:"</span> opt; <span class="keyword">do</span></div>
+                <div class="code-line">    <span class="keyword">case</span> $opt in</div>
+                <div class="code-line">        h) echo <span class="string">"Help message"</span> ;;</div>
+                <div class="code-line">        v) VERSION=$OPTARG ;;</div>
+                <div class="code-line">        f) FILE=$OPTARG ;;</div>
+                <div class="code-line">        *) exit 1 ;;</div>
+                <div class="code-line">    <span class="keyword">esac</span></div>
+                <div class="code-line"><span class="keyword">done</span></div>
+                <div class="code-line"></div>
+                <div class="code-line"><span class="comment"># Progress bar</span></div>
+                <div class="code-line"><span class="keyword">for</span> i in {1..100}; <span class="keyword">do</span></div>
+                <div class="code-line">    printf <span class="string">"\rProgress: [%-50s] %d%%"</span> $(printf <span class="string">'#%.0s'</span> $(seq 1 $((i/2)))) $i</div>
+                <div class="code-line">    sleep 0.05</div>
+                <div class="code-line"><span class="keyword">done</span></div>
+                <div class="code-line">echo</div>
+                <div class="code-line"></div>
+                <div class="code-line"><span class="comment"># Error handling with trap</span></div>
+                <div class="code-line">cleanup() {</div>
+                <div class="code-line">    echo <span class="string">"Cleaning up..."</span></div>
+                <div class="code-line">    rm -f /tmp/tempfile</div>
+                <div class="code-line">}</div>
+                <div class="code-line">trap cleanup EXIT</div>
+                <div class="code-line"></div>
+                <div class="code-line"><span class="comment"># Check if script is run as root</span></div>
+                <div class="code-line"><span class="keyword">if</span> [ <span class="string">"$(id -u)"</span> -ne 0 ]; <span class="keyword">then</span></div>
+                <div class="code-line">    echo <span class="string">"This script must be run as root"</span></div>
+                <div class="code-line">    exit 1</div>
+                <div class="code-line"><span class="keyword">fi</span></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">⚡ Best Practices</div>
+            <div class="tip">
+                <strong>✅ Do:</strong><br>
+                • Use <code>set -euo pipefail</code> at the start<br>
+                • Quote variables: <code>"$VAR"</code><br>
+                • Use <code>[[ ]]</code> instead of <code>[ ]</code><br>
+                • Use <code>$(command)</code> instead of backticks<br>
+                • Check exit codes: <code>if command; then</code><br>
+                • Use functions for repeated code<br>
+                • Add comments and documentation
+            </div>
+            <div class="warning">
+                <strong>❌ Avoid:</strong><br>
+                • Parsing <code>ls</code> output<br>
+                • Using <code>eval</code> unnecessarily<br>
+                • Forgetting to quote variables<br>
+                • Not checking if files exist before operations<br>
+                • Hardcoding paths - use variables
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Essential Bash Scripting Reference</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">💡 Use <code>shellcheck</code> to validate your scripts!</p>
+        </div>
+    </div>
+</body>
+</html>

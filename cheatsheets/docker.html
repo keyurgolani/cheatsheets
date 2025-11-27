@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Commands & Dockerfile Cheatsheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0db7ed 0%, #1488c6 100%);
+            color: #e0e6ed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 0.5rem;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            color: #1a202c;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0db7ed;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #0db7ed;
+        }
+
+        .cmd-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            padding: 0.5rem;
+            background: rgba(13, 183, 237, 0.05);
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+
+        .cmd-row:hover {
+            background: rgba(13, 183, 237, 0.1);
+        }
+
+        .cmd-name {
+            color: #0db7ed;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+        }
+
+        .cmd-desc {
+            color: #4a5568;
+            padding-left: 1rem;
+            font-size: 0.9rem;
+        }
+
+        code {
+            background: rgba(13, 183, 237, 0.1);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #0db7ed;
+            font-size: 0.9em;
+        }
+
+        .dockerfile-box {
+            background: rgba(26, 32, 44, 0.95);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            color: #e0e6ed;
+            overflow-x: auto;
+        }
+
+        .dockerfile-line {
+            margin: 0.3rem 0;
+        }
+
+        .dockerfile-keyword {
+            color: #0db7ed;
+            font-weight: 600;
+        }
+
+        .dockerfile-comment {
+            color: #68d391;
+        }
+
+        .note {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid #3b82f6;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+            color: #1a202c;
+        }
+
+        .tip {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+            color: #1a202c;
+        }
+
+        .warning {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+            color: #1a202c;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐳 Docker Commands & Dockerfile</h1>
+        <p class="subtitle">Container management and image building essentials</p>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">📦 Container Basics</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker run [image]</div>
+                    <div class="cmd-desc">Create and start container</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker run -d [image]</div>
+                    <div class="cmd-desc">Run in detached mode (background)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker run -it [image] /bin/bash</div>
+                    <div class="cmd-desc">Run interactive with terminal</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker run -p 8080:80 [image]</div>
+                    <div class="cmd-desc">Map port 8080 to container port 80</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker run --name myapp [image]</div>
+                    <div class="cmd-desc">Assign name to container</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker run -v /host:/container [image]</div>
+                    <div class="cmd-desc">Mount volume</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker run --rm [image]</div>
+                    <div class="cmd-desc">Auto-remove when stopped</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker run -e VAR=value [image]</div>
+                    <div class="cmd-desc">Set environment variable</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🎛️ Container Management</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker ps</div>
+                    <div class="cmd-desc">List running containers</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker ps -a</div>
+                    <div class="cmd-desc">List all containers</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker start [container]</div>
+                    <div class="cmd-desc">Start stopped container</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker stop [container]</div>
+                    <div class="cmd-desc">Stop running container</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker restart [container]</div>
+                    <div class="cmd-desc">Restart container</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker kill [container]</div>
+                    <div class="cmd-desc">Force stop container</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker rm [container]</div>
+                    <div class="cmd-desc">Remove container</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker rm -f [container]</div>
+                    <div class="cmd-desc">Force remove running container</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker container prune</div>
+                    <div class="cmd-desc">Remove all stopped containers</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔍 Container Inspection</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker logs [container]</div>
+                    <div class="cmd-desc">View container logs</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker logs -f [container]</div>
+                    <div class="cmd-desc">Follow log output</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker logs --tail 100 [container]</div>
+                    <div class="cmd-desc">Show last 100 lines</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker inspect [container]</div>
+                    <div class="cmd-desc">Show detailed info</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker top [container]</div>
+                    <div class="cmd-desc">Show running processes</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker stats</div>
+                    <div class="cmd-desc">Show resource usage stats</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker port [container]</div>
+                    <div class="cmd-desc">Show port mappings</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🖼️ Image Management</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker images</div>
+                    <div class="cmd-desc">List local images</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker pull [image]</div>
+                    <div class="cmd-desc">Download image</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker pull [image]:[tag]</div>
+                    <div class="cmd-desc">Pull specific version</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker push [image]</div>
+                    <div class="cmd-desc">Upload image to registry</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker rmi [image]</div>
+                    <div class="cmd-desc">Remove image</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker rmi -f [image]</div>
+                    <div class="cmd-desc">Force remove image</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker image prune</div>
+                    <div class="cmd-desc">Remove unused images</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker image prune -a</div>
+                    <div class="cmd-desc">Remove all unused images</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🏗️ Building Images</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker build -t myapp .</div>
+                    <div class="cmd-desc">Build image from Dockerfile</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker build -t myapp:v1.0 .</div>
+                    <div class="cmd-desc">Build with tag</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker build -f Dockerfile.prod .</div>
+                    <div class="cmd-desc">Use specific Dockerfile</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker build --no-cache .</div>
+                    <div class="cmd-desc">Build without cache</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker tag [image] user/repo:tag</div>
+                    <div class="cmd-desc">Tag image</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker history [image]</div>
+                    <div class="cmd-desc">Show image layers</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">💾 Volumes & Data</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker volume ls</div>
+                    <div class="cmd-desc">List volumes</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker volume create [name]</div>
+                    <div class="cmd-desc">Create volume</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker volume rm [name]</div>
+                    <div class="cmd-desc">Remove volume</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker volume prune</div>
+                    <div class="cmd-desc">Remove unused volumes</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker cp [container]:path host:path</div>
+                    <div class="cmd-desc">Copy files from container</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker cp host:path [container]:path</div>
+                    <div class="cmd-desc">Copy files to container</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🌐 Networks</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker network ls</div>
+                    <div class="cmd-desc">List networks</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker network create [name]</div>
+                    <div class="cmd-desc">Create network</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker network rm [name]</div>
+                    <div class="cmd-desc">Remove network</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker network connect [net] [container]</div>
+                    <div class="cmd-desc">Connect container to network</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker network disconnect [net] [container]</div>
+                    <div class="cmd-desc">Disconnect from network</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker network inspect [name]</div>
+                    <div class="cmd-desc">Show network details</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔧 Docker Compose</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker-compose up</div>
+                    <div class="cmd-desc">Start services</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker-compose up -d</div>
+                    <div class="cmd-desc">Start in background</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker-compose down</div>
+                    <div class="cmd-desc">Stop and remove services</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker-compose ps</div>
+                    <div class="cmd-desc">List services</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker-compose logs -f</div>
+                    <div class="cmd-desc">Follow logs</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker-compose build</div>
+                    <div class="cmd-desc">Build services</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker-compose restart</div>
+                    <div class="cmd-desc">Restart services</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker-compose exec [service] bash</div>
+                    <div class="cmd-desc">Execute command in service</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🧹 Cleanup Commands</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker system prune</div>
+                    <div class="cmd-desc">Remove unused data</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker system prune -a</div>
+                    <div class="cmd-desc">Remove all unused data</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker system prune --volumes</div>
+                    <div class="cmd-desc">Include volumes in cleanup</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker system df</div>
+                    <div class="cmd-desc">Show disk usage</div>
+                </div>
+                <div class="warning">
+                    ⚠️ <strong>Warning:</strong> <code>system prune -a</code> removes ALL unused images, not just dangling ones!
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔐 Registry & Authentication</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker login</div>
+                    <div class="cmd-desc">Log in to Docker Hub</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker login [registry]</div>
+                    <div class="cmd-desc">Log in to custom registry</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker logout</div>
+                    <div class="cmd-desc">Log out from registry</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker search [term]</div>
+                    <div class="cmd-desc">Search Docker Hub</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🎯 Interactive Commands</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker exec -it [container] bash</div>
+                    <div class="cmd-desc">Open bash in running container</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker exec -it [container] sh</div>
+                    <div class="cmd-desc">Open sh (for Alpine)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker exec [container] [command]</div>
+                    <div class="cmd-desc">Run command in container</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker attach [container]</div>
+                    <div class="cmd-desc">Attach to running container</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">ℹ️ Info Commands</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker version</div>
+                    <div class="cmd-desc">Show Docker version</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker info</div>
+                    <div class="cmd-desc">Display system information</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">docker events</div>
+                    <div class="cmd-desc">Monitor real-time events</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">📄 Dockerfile Instructions</div>
+            <div class="dockerfile-box">
+                <div class="dockerfile-line"><span class="dockerfile-comment"># Base image</span></div>
+                <div class="dockerfile-line"><span class="dockerfile-keyword">FROM</span> ubuntu:20.04</div>
+                <div class="dockerfile-line"></div>
+                <div class="dockerfile-line"><span class="dockerfile-comment"># Set metadata</span></div>
+                <div class="dockerfile-line"><span class="dockerfile-keyword">LABEL</span> maintainer="user@example.com"</div>
+                <div class="dockerfile-line"></div>
+                <div class="dockerfile-line"><span class="dockerfile-comment"># Set environment variables</span></div>
+                <div class="dockerfile-line"><span class="dockerfile-keyword">ENV</span> NODE_ENV=production</div>
+                <div class="dockerfile-line"><span class="dockerfile-keyword">ENV</span> PORT=3000</div>
+                <div class="dockerfile-line"></div>
+                <div class="dockerfile-line"><span class="dockerfile-comment"># Set working directory</span></div>
+                <div class="dockerfile-line"><span class="dockerfile-keyword">WORKDIR</span> /app</div>
+                <div class="dockerfile-line"></div>
+                <div class="dockerfile-line"><span class="dockerfile-comment"># Copy files</span></div>
+                <div class="dockerfile-line"><span class="dockerfile-keyword">COPY</span> package*.json ./</div>
+                <div class="dockerfile-line"><span class="dockerfile-keyword">COPY</span> . .</div>
+                <div class="dockerfile-line"></div>
+                <div class="dockerfile-line"><span class="dockerfile-comment"># Add files (with extraction for tar)</span></div>
+                <div class="dockerfile-line"><span class="dockerfile-keyword">ADD</span> archive.tar.gz /app</div>
+                <div class="dockerfile-line"></div>
+                <div class="dockerfile-line"><span class="dockerfile-comment"># Run commands</span></div>
+                <div class="dockerfile-line"><span class="dockerfile-keyword">RUN</span> apt-get update && apt-get install -y nodejs</div>
+                <div class="dockerfile-line"><span class="dockerfile-keyword">RUN</span> npm install</div>
+                <div class="dockerfile-line"></div>
+                <div class="dockerfile-line"><span class="dockerfile-comment"># Expose port</span></div>
+                <div class="dockerfile-line"><span class="dockerfile-keyword">EXPOSE</span> 3000</div>
+                <div class="dockerfile-line"></div>
+                <div class="dockerfile-line"><span class="dockerfile-comment"># Create volume mount point</span></div>
+                <div class="dockerfile-line"><span class="dockerfile-keyword">VOLUME</span> ["/data"]</div>
+                <div class="dockerfile-line"></div>
+                <div class="dockerfile-line"><span class="dockerfile-comment"># Set user</span></div>
+                <div class="dockerfile-line"><span class="dockerfile-keyword">USER</span> node</div>
+                <div class="dockerfile-line"></div>
+                <div class="dockerfile-line"><span class="dockerfile-comment"># Default command (can be overridden)</span></div>
+                <div class="dockerfile-line"><span class="dockerfile-keyword">CMD</span> ["npm", "start"]</div>
+                <div class="dockerfile-line"></div>
+                <div class="dockerfile-line"><span class="dockerfile-comment"># Entrypoint (not easily overridden)</span></div>
+                <div class="dockerfile-line"><span class="dockerfile-keyword">ENTRYPOINT</span> ["node", "server.js"]</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">🎨 Dockerfile Best Practices</div>
+            <div class="dockerfile-box">
+                <div class="dockerfile-line"><span class="dockerfile-comment"># Use multi-stage builds</span></div>
+                <div class="dockerfile-line"><span class="dockerfile-keyword">FROM</span> node:16 AS builder</div>
+                <div class="dockerfile-line"><span class="dockerfile-keyword">WORKDIR</span> /app</div>
+                <div class="dockerfile-line"><span class="dockerfile-keyword">COPY</span> package*.json ./</div>
+                <div class="dockerfile-line"><span class="dockerfile-keyword">RUN</span> npm install</div>
+                <div class="dockerfile-line"><span class="dockerfile-keyword">COPY</span> . .</div>
+                <div class="dockerfile-line"><span class="dockerfile-keyword">RUN</span> npm run build</div>
+                <div class="dockerfile-line"></div>
+                <div class="dockerfile-line"><span class="dockerfile-keyword">FROM</span> node:16-alpine</div>
+                <div class="dockerfile-line"><span class="dockerfile-keyword">WORKDIR</span> /app</div>
+                <div class="dockerfile-line"><span class="dockerfile-keyword">COPY</span> --from=builder /app/dist ./dist</div>
+                <div class="dockerfile-line"><span class="dockerfile-keyword">COPY</span> package*.json ./</div>
+                <div class="dockerfile-line"><span class="dockerfile-keyword">RUN</span> npm install --production</div>
+                <div class="dockerfile-line"><span class="dockerfile-keyword">CMD</span> ["node", "dist/index.js"]</div>
+            </div>
+            <div class="tip">
+                💡 <strong>Tips:</strong><br>
+                • Use specific image tags, not <code>latest</code><br>
+                • Minimize layers by combining RUN commands<br>
+                • Order instructions from least to most frequently changing<br>
+                • Use .dockerignore to exclude files<br>
+                • Leverage build cache for faster builds
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">📋 docker-compose.yml Example</div>
+            <div class="dockerfile-box">
+                <div class="dockerfile-line">version: '3.8'</div>
+                <div class="dockerfile-line"></div>
+                <div class="dockerfile-line">services:</div>
+                <div class="dockerfile-line">  web:</div>
+                <div class="dockerfile-line">    build: .</div>
+                <div class="dockerfile-line">    ports:</div>
+                <div class="dockerfile-line">      - "3000:3000"</div>
+                <div class="dockerfile-line">    environment:</div>
+                <div class="dockerfile-line">      - NODE_ENV=production</div>
+                <div class="dockerfile-line">    volumes:</div>
+                <div class="dockerfile-line">      - ./app:/app</div>
+                <div class="dockerfile-line">    depends_on:</div>
+                <div class="dockerfile-line">      - db</div>
+                <div class="dockerfile-line">    networks:</div>
+                <div class="dockerfile-line">      - mynetwork</div>
+                <div class="dockerfile-line"></div>
+                <div class="dockerfile-line">  db:</div>
+                <div class="dockerfile-line">    image: postgres:14</div>
+                <div class="dockerfile-line">    environment:</div>
+                <div class="dockerfile-line">      - POSTGRES_PASSWORD=secret</div>
+                <div class="dockerfile-line">    volumes:</div>
+                <div class="dockerfile-line">      - db-data:/var/lib/postgresql/data</div>
+                <div class="dockerfile-line">    networks:</div>
+                <div class="dockerfile-line">      - mynetwork</div>
+                <div class="dockerfile-line"></div>
+                <div class="dockerfile-line">volumes:</div>
+                <div class="dockerfile-line">  db-data:</div>
+                <div class="dockerfile-line"></div>
+                <div class="dockerfile-line">networks:</div>
+                <div class="dockerfile-line">  mynetwork:</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Essential Docker Commands & Dockerfile Reference</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">🐳 Containerize all the things!</p>
+        </div>
+    </div>
+</body>
+</html>

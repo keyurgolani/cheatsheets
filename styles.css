@@ -51,6 +51,35 @@ main {
     gap: 20px;
 }
 
+.cheatsheet-card {
+    display: block;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+.cheatsheet-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-color: #2c3e50;
+}
+
+.cheatsheet-card h3 {
+    margin-bottom: 8px;
+    color: #2c3e50;
+    font-size: 1.2rem;
+}
+
+.cheatsheet-card p {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
 footer {
     text-align: center;
     padding: 20px 0;
