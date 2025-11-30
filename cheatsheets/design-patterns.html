@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Software design patterns including creational, structural, and behavioral patterns.">
+    <title>Design Patterns Cheatsheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e6ed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #8b95a5;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(168, 85, 247, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(168, 85, 247, 0.15);
+        }
+
+        .card-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #a855f7;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(168, 85, 247, 0.3);
+        }
+
+        .pattern-name {
+            color: #ec4899;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pattern-desc {
+            color: #cbd5e1;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .uml-box {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #a5d6ff;
+            margin: 0.75rem 0;
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 0.75rem 0;
+            overflow-x: auto;
+        }
+
+        .code-line {
+            display: block;
+            line-height: 1.5;
+        }
+
+        .comment {
+            color: #10b981;
+        }
+
+        .keyword {
+            color: #fbbf24;
+        }
+
+        .string {
+            color: #ec4899;
+        }
+
+        code {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #a5d6ff;
+            font-size: 0.9em;
+        }
+
+        .note {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid #3b82f6;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .tip {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .use-case {
+            background: rgba(168, 85, 247, 0.1);
+            border-left: 4px solid #a855f7;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 116, 139, 0.3);
+            color: #8b95a5;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Design Patterns</h1>
+        <p class="subtitle">Essential software design patterns for object-oriented programming</p>
+
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">🏗️ Creational: Singleton</div>
+                <div class="pattern-desc">Ensures a class has only one instance and provides a global point of access to it.</div>
+                
+                <div class="uml-box">┌─────────────────┐
+│   Singleton     │
+├─────────────────┤
+│ - instance      │
+├─────────────────┤
+│ + getInstance() │
+│ - Singleton()   │
+└─────────────────┘</div>
+
+                <div class="code-block"><span class="code-line"><span class="keyword">class</span> Singleton {</span>
+<span class="code-line">  <span class="keyword">private static</span> instance: Singleton;</span>
+<span class="code-line">  </span>
+<span class="code-line">  <span class="keyword">private</span> <span class="keyword">constructor</span>() {}</span>
+<span class="code-line">  </span>
+<span class="code-line">  <span class="keyword">public static</span> getInstance(): Singleton {</span>
+<span class="code-line">    <span class="keyword">if</span> (!Singleton.instance) {</span>
+<span class="code-line">      Singleton.instance = <span class="keyword">new</span> Singleton();</span>
+<span class="code-line">    }</span>
+<span class="code-line">    <span class="keyword">return</span> Singleton.instance;</span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span></div>
+
+                <div class="use-case">
+                    <strong>Use When:</strong> Database connections, logging, configuration managers, thread pools
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🏗️ Creational: Factory Method</div>
+                <div class="pattern-desc">Defines an interface for creating objects, but lets subclasses decide which class to instantiate.</div>
+                
+                <div class="uml-box">┌──────────────┐
+│   Creator    │
+├──────────────┤
+│ factoryMethod│◄─────┐
+└──────────────┘      │
+       △              │
+       │              │
+┌──────────────┐      │
+│ConcreteCreator│     │
+├──────────────┤      │
+│ factoryMethod├──────┘
+└──────────────┘
+    creates
+       │
+       ▼
+┌──────────────┐
+│   Product    │
+└──────────────┘</div>
+
+                <div class="code-block"><span class="code-line"><span class="keyword">abstract class</span> Creator {</span>
+<span class="code-line">  <span class="keyword">abstract</span> factoryMethod(): Product;</span>
+<span class="code-line">  </span>
+<span class="code-line">  operation(): <span class="keyword">string</span> {</span>
+<span class="code-line">    <span class="keyword">const</span> product = <span class="keyword">this</span>.factoryMethod();</span>
+<span class="code-line">    <span class="keyword">return</span> product.operation();</span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="keyword">class</span> ConcreteCreator <span class="keyword">extends</span> Creator {</span>
+<span class="code-line">  factoryMethod(): Product {</span>
+<span class="code-line">    <span class="keyword">return new</span> ConcreteProduct();</span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span></div>
+
+                <div class="use-case">
+                    <strong>Use When:</strong> UI frameworks, document generators, plugin systems
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-header">🏗️ Creational: Builder</div>
+                <div class="pattern-desc">Separates the construction of a complex object from its representation, allowing step-by-step creation.</div>
+                
+                <div class="uml-box">┌──────────────┐
+│   Director   │
+├──────────────┤
+│ construct()  │
+└──────┬───────┘
+       │ uses
+       ▼
+┌──────────────┐
+│   Builder    │
+├──────────────┤
+│ buildPart()  │
+└──────────────┘
+       △
+       │
+┌──────────────┐
+│ConcreteBuilder│
+├──────────────┤
+│ buildPart()  │
+│ getResult()  │
+└──────────────┘</div>
+
+                <div class="code-block"><span class="code-line"><span class="keyword">class</span> ProductBuilder {</span>
+<span class="code-line">  <span class="keyword">private</span> product = <span class="keyword">new</span> Product();</span>
+<span class="code-line">  </span>
+<span class="code-line">  setPartA(value: <span class="keyword">string</span>): <span class="keyword">this</span> {</span>
+<span class="code-line">    <span class="keyword">this</span>.product.partA = value;</span>
+<span class="code-line">    <span class="keyword">return this</span>;</span>
+<span class="code-line">  }</span>
+<span class="code-line">  </span>
+<span class="code-line">  setPartB(value: <span class="keyword">number</span>): <span class="keyword">this</span> {</span>
+<span class="code-line">    <span class="keyword">this</span>.product.partB = value;</span>
+<span class="code-line">    <span class="keyword">return this</span>;</span>
+<span class="code-line">  }</span>
+<span class="code-line">  </span>
+<span class="code-line">  build(): Product {</span>
+<span class="code-line">    <span class="keyword">return this</span>.product;</span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span></div>
+
+                <div class="use-case">
+                    <strong>Use When:</strong> Complex object construction, query builders, HTTP request builders, test data builders
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔌 Structural: Adapter</div>
+                <div class="pattern-desc">Converts the interface of a class into another interface clients expect, allowing incompatible interfaces to work together.</div>
+                
+                <div class="uml-box">┌──────────────┐
+│    Client    │
+└──────┬───────┘
+       │ uses
+       ▼
+┌──────────────┐
+│    Target    │
+├──────────────┤
+│  request()   │
+└──────────────┘
+       △
+       │
+┌──────────────┐      ┌──────────────┐
+│   Adapter    │─────►│   Adaptee    │
+├──────────────┤      ├──────────────┤
+│  request()   │      │specificRequest│
+└──────────────┘      └──────────────┘</div>
+
+                <div class="code-block"><span class="code-line"><span class="keyword">class</span> Adapter <span class="keyword">implements</span> Target {</span>
+<span class="code-line">  <span class="keyword">constructor</span>(<span class="keyword">private</span> adaptee: Adaptee) {}</span>
+<span class="code-line">  </span>
+<span class="code-line">  request(): <span class="keyword">void</span> {</span>
+<span class="code-line">    <span class="comment">// Translate the call</span></span>
+<span class="code-line">    <span class="keyword">this</span>.adaptee.specificRequest();</span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span></div>
+
+                <div class="use-case">
+                    <strong>Use When:</strong> Legacy code integration, third-party library wrappers, API versioning
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-header">🔌 Structural: Decorator</div>
+                <div class="pattern-desc">Attaches additional responsibilities to an object dynamically, providing a flexible alternative to subclassing.</div>
+                
+                <div class="uml-box">┌──────────────┐
+│  Component   │
+├──────────────┤
+│  operation() │
+└──────────────┘
+       △
+       │
+       ├─────────────────┐
+       │                 │
+┌──────────────┐  ┌──────────────┐
+│ConcreteComp  │  │  Decorator   │
+├──────────────┤  ├──────────────┤
+│  operation() │  │  operation() │
+└──────────────┘  └──────┬───────┘
+                         │
+                  ┌──────────────┐
+                  │ConcreteDecorator│
+                  ├──────────────┤
+                  │  operation() │
+                  │  addedBehavior│
+                  └──────────────┘</div>
+
+                <div class="code-block"><span class="code-line"><span class="keyword">class</span> Decorator <span class="keyword">implements</span> Component {</span>
+<span class="code-line">  <span class="keyword">constructor</span>(<span class="keyword">protected</span> component: Component) {}</span>
+<span class="code-line">  </span>
+<span class="code-line">  operation(): <span class="keyword">string</span> {</span>
+<span class="code-line">    <span class="keyword">return this</span>.component.operation();</span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="keyword">class</span> ConcreteDecorator <span class="keyword">extends</span> Decorator {</span>
+<span class="code-line">  operation(): <span class="keyword">string</span> {</span>
+<span class="code-line">    <span class="keyword">return</span> <span class="string">`Extra(${super.operation()})`</span>;</span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span></div>
+
+                <div class="use-case">
+                    <strong>Use When:</strong> Adding features to objects at runtime, logging, caching, validation layers
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔌 Structural: Proxy</div>
+                <div class="pattern-desc">Provides a surrogate or placeholder for another object to control access to it.</div>
+                
+                <div class="uml-box">┌──────────────┐
+│    Client    │
+└──────┬───────┘
+       │ uses
+       ▼
+┌──────────────┐
+│   Subject    │
+├──────────────┤
+│  request()   │
+└──────────────┘
+       △
+       │
+       ├─────────────────┐
+       │                 │
+┌──────────────┐  ┌──────────────┐
+│ RealSubject  │  │    Proxy     │
+├──────────────┤  ├──────────────┤
+│  request()   │  │  request()   │──►
+└──────────────┘  └──────────────┘</div>
+
+                <div class="code-block"><span class="code-line"><span class="keyword">class</span> Proxy <span class="keyword">implements</span> Subject {</span>
+<span class="code-line">  <span class="keyword">constructor</span>(<span class="keyword">private</span> realSubject: RealSubject) {}</span>
+<span class="code-line">  </span>
+<span class="code-line">  request(): <span class="keyword">void</span> {</span>
+<span class="code-line">    <span class="keyword">if</span> (<span class="keyword">this</span>.checkAccess()) {</span>
+<span class="code-line">      <span class="keyword">this</span>.realSubject.request();</span>
+<span class="code-line">      <span class="keyword">this</span>.logAccess();</span>
+<span class="code-line">    }</span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span></div>
+
+                <div class="use-case">
+                    <strong>Use When:</strong> Lazy loading, access control, remote proxies, caching, logging
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-header">⚡ Behavioral: Observer</div>
+                <div class="pattern-desc">Defines a one-to-many dependency between objects so that when one object changes state, all dependents are notified.</div>
+                
+                <div class="uml-box">┌──────────────┐
+│   Subject    │
+├──────────────┤
+│  attach()    │
+│  detach()    │
+│  notify()    │
+└──────┬───────┘
+       │
+       │ notifies
+       ▼
+┌──────────────┐
+│   Observer   │
+├──────────────┤
+│  update()    │
+└──────────────┘
+       △
+       │
+┌──────────────┐
+│ConcreteObserver│
+├──────────────┤
+│  update()    │
+└──────────────┘</div>
+
+                <div class="code-block"><span class="code-line"><span class="keyword">class</span> Subject {</span>
+<span class="code-line">  <span class="keyword">private</span> observers: Observer[] = [];</span>
+<span class="code-line">  </span>
+<span class="code-line">  attach(observer: Observer): <span class="keyword">void</span> {</span>
+<span class="code-line">    <span class="keyword">this</span>.observers.push(observer);</span>
+<span class="code-line">  }</span>
+<span class="code-line">  </span>
+<span class="code-line">  notify(): <span class="keyword">void</span> {</span>
+<span class="code-line">    <span class="keyword">this</span>.observers.forEach(o => o.update());</span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span></div>
+
+                <div class="use-case">
+                    <strong>Use When:</strong> Event handling systems, MVC architecture, pub/sub messaging, reactive programming
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">⚡ Behavioral: Strategy</div>
+                <div class="pattern-desc">Defines a family of algorithms, encapsulates each one, and makes them interchangeable at runtime.</div>
+                
+                <div class="uml-box">┌──────────────┐
+│   Context    │
+├──────────────┤
+│ setStrategy()│
+│ execute()    │
+└──────┬───────┘
+       │ uses
+       ▼
+┌──────────────┐
+│   Strategy   │
+├──────────────┤
+│  algorithm() │
+└──────────────┘
+       △
+       │
+       ├─────────────────┐
+       │                 │
+┌──────────────┐  ┌──────────────┐
+│ConcreteStratA│  │ConcreteStratB│
+├──────────────┤  ├──────────────┤
+│  algorithm() │  │  algorithm() │
+└──────────────┘  └──────────────┘</div>
+
+                <div class="code-block"><span class="code-line"><span class="keyword">class</span> Context {</span>
+<span class="code-line">  <span class="keyword">constructor</span>(<span class="keyword">private</span> strategy: Strategy) {}</span>
+<span class="code-line">  </span>
+<span class="code-line">  setStrategy(strategy: Strategy): <span class="keyword">void</span> {</span>
+<span class="code-line">    <span class="keyword">this</span>.strategy = strategy;</span>
+<span class="code-line">  }</span>
+<span class="code-line">  </span>
+<span class="code-line">  execute(): <span class="keyword">void</span> {</span>
+<span class="code-line">    <span class="keyword">this</span>.strategy.algorithm();</span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span></div>
+
+                <div class="use-case">
+                    <strong>Use When:</strong> Sorting algorithms, payment methods, compression algorithms, validation rules
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-header">⚡ Behavioral: Command</div>
+                <div class="pattern-desc">Encapsulates a request as an object, allowing parameterization of clients with different requests and support for undo.</div>
+                
+                <div class="uml-box">┌──────────────┐
+│   Invoker    │
+├──────────────┤
+│ setCommand() │
+│ execute()    │
+└──────┬───────┘
+       │ uses
+       ▼
+┌──────────────┐
+│   Command    │
+├──────────────┤
+│  execute()   │
+└──────────────┘
+       △
+       │
+┌──────────────┐      ┌──────────────┐
+│ConcreteCommand│─────►│   Receiver   │
+├──────────────┤      ├──────────────┤
+│  execute()   │      │  action()    │
+└──────────────┘      └──────────────┘</div>
+
+                <div class="code-block"><span class="code-line"><span class="keyword">interface</span> Command {</span>
+<span class="code-line">  execute(): <span class="keyword">void</span>;</span>
+<span class="code-line">  undo(): <span class="keyword">void</span>;</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="keyword">class</span> ConcreteCommand <span class="keyword">implements</span> Command {</span>
+<span class="code-line">  <span class="keyword">constructor</span>(<span class="keyword">private</span> receiver: Receiver) {}</span>
+<span class="code-line">  </span>
+<span class="code-line">  execute(): <span class="keyword">void</span> {</span>
+<span class="code-line">    <span class="keyword">this</span>.receiver.action();</span>
+<span class="code-line">  }</span>
+<span class="code-line">  </span>
+<span class="code-line">  undo(): <span class="keyword">void</span> {</span>
+<span class="code-line">    <span class="keyword">this</span>.receiver.reverseAction();</span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span></div>
+
+                <div class="use-case">
+                    <strong>Use When:</strong> Undo/redo functionality, transaction systems, macro recording, job queues
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🏗️ Creational: Abstract Factory</div>
+                <div class="pattern-desc">Provides an interface for creating families of related objects without specifying their concrete classes.</div>
+                
+                <div class="uml-box">┌──────────────────┐
+│ AbstractFactory  │
+├──────────────────┤
+│ createProductA() │
+│ createProductB() │
+└──────────────────┘
+         △
+         │
+┌──────────────────┐
+│ ConcreteFactory  │
+├──────────────────┤
+│ createProductA() │
+│ createProductB() │
+└──────────────────┘</div>
+
+                <div class="code-block"><span class="code-line"><span class="keyword">interface</span> GUIFactory {</span>
+<span class="code-line">  createButton(): Button;</span>
+<span class="code-line">  createCheckbox(): Checkbox;</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="keyword">class</span> WindowsFactory <span class="keyword">implements</span> GUIFactory {</span>
+<span class="code-line">  createButton(): Button {</span>
+<span class="code-line">    <span class="keyword">return new</span> WindowsButton();</span>
+<span class="code-line">  }</span>
+<span class="code-line">  createCheckbox(): Checkbox {</span>
+<span class="code-line">    <span class="keyword">return new</span> WindowsCheckbox();</span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span></div>
+
+                <div class="use-case">
+                    <strong>Use When:</strong> Cross-platform UI components, database drivers, theme systems
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-header">🔌 Structural: Composite</div>
+                <div class="pattern-desc">Composes objects into tree structures to represent part-whole hierarchies, allowing uniform treatment of individual and composite objects.</div>
+                
+                <div class="uml-box">┌──────────────┐
+│  Component   │
+├──────────────┤
+│  operation() │
+└──────────────┘
+       △
+       │
+       ├─────────────────┐
+       │                 │
+┌──────────────┐  ┌──────────────┐
+│     Leaf     │  │  Composite   │
+├──────────────┤  ├──────────────┤
+│  operation() │  │  operation() │
+└──────────────┘  │  add()       │
+                  │  remove()    │
+                  └──────────────┘</div>
+
+                <div class="code-block"><span class="code-line"><span class="keyword">class</span> Composite <span class="keyword">implements</span> Component {</span>
+<span class="code-line">  <span class="keyword">private</span> children: Component[] = [];</span>
+<span class="code-line">  </span>
+<span class="code-line">  add(component: Component): <span class="keyword">void</span> {</span>
+<span class="code-line">    <span class="keyword">this</span>.children.push(component);</span>
+<span class="code-line">  }</span>
+<span class="code-line">  </span>
+<span class="code-line">  operation(): <span class="keyword">void</span> {</span>
+<span class="code-line">    <span class="keyword">this</span>.children.forEach(c => c.operation());</span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span></div>
+
+                <div class="use-case">
+                    <strong>Use When:</strong> File systems, UI component trees, organization hierarchies, graphics rendering
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">⚡ Behavioral: Template Method</div>
+                <div class="pattern-desc">Defines the skeleton of an algorithm in a base class, letting subclasses override specific steps without changing the structure.</div>
+                
+                <div class="uml-box">┌──────────────────┐
+│  AbstractClass   │
+├──────────────────┤
+│ templateMethod() │
+│ step1()          │
+│ step2()          │
+└──────────────────┘
+         △
+         │
+┌──────────────────┐
+│  ConcreteClass   │
+├──────────────────┤
+│ step1()          │
+│ step2()          │
+└──────────────────┘</div>
+
+                <div class="code-block"><span class="code-line"><span class="keyword">abstract class</span> AbstractClass {</span>
+<span class="code-line">  templateMethod(): <span class="keyword">void</span> {</span>
+<span class="code-line">    <span class="keyword">this</span>.step1();</span>
+<span class="code-line">    <span class="keyword">this</span>.step2();</span>
+<span class="code-line">    <span class="keyword">this</span>.step3();</span>
+<span class="code-line">  }</span>
+<span class="code-line">  </span>
+<span class="code-line">  <span class="keyword">abstract</span> step1(): <span class="keyword">void</span>;</span>
+<span class="code-line">  <span class="keyword">abstract</span> step2(): <span class="keyword">void</span>;</span>
+<span class="code-line">  </span>
+<span class="code-line">  step3(): <span class="keyword">void</span> {</span>
+<span class="code-line">    <span class="comment">// Default implementation</span></span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span></div>
+
+                <div class="use-case">
+                    <strong>Use When:</strong> Frameworks, data processing pipelines, game AI, test frameworks
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">⚡ Behavioral: State</div>
+                <div class="pattern-desc">Allows an object to alter its behavior when its internal state changes, appearing to change its class.</div>
+                
+                <div class="uml-box">┌──────────────┐
+│   Context    │
+├──────────────┤
+│ setState()   │
+│ request()    │
+└──────┬───────┘
+       │ uses
+       ▼
+┌──────────────┐
+│    State     │
+├──────────────┤
+│  handle()    │
+└──────────────┘
+       △
+       │
+       ├─────────────────┐
+       │                 │
+┌──────────────┐  ┌──────────────┐
+│ConcreteStateA│  │ConcreteStateB│
+├──────────────┤  ├──────────────┤
+│  handle()    │  │  handle()    │
+└──────────────┘  └──────────────┘</div>
+
+                <div class="code-block"><span class="code-line"><span class="keyword">class</span> Context {</span>
+<span class="code-line">  <span class="keyword">constructor</span>(<span class="keyword">private</span> state: State) {}</span>
+<span class="code-line">  </span>
+<span class="code-line">  setState(state: State): <span class="keyword">void</span> {</span>
+<span class="code-line">    <span class="keyword">this</span>.state = state;</span>
+<span class="code-line">  }</span>
+<span class="code-line">  </span>
+<span class="code-line">  request(): <span class="keyword">void</span> {</span>
+<span class="code-line">    <span class="keyword">this</span>.state.handle(<span class="keyword">this</span>);</span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span></div>
+
+                <div class="use-case">
+                    <strong>Use When:</strong> State machines, workflow engines, connection states, document lifecycle
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">📚 Pattern Categories Overview</div>
+            
+            <div class="pattern-name">Creational Patterns</div>
+            <div class="pattern-desc">Deal with object creation mechanisms, trying to create objects in a manner suitable to the situation.</div>
+            <div class="note">
+                <strong>Patterns:</strong> Singleton, Factory Method, Abstract Factory, Builder, Prototype<br>
+                <strong>Focus:</strong> How objects are created and initialized
+            </div>
+
+            <div class="pattern-name">Structural Patterns</div>
+            <div class="pattern-desc">Deal with object composition, creating relationships between objects to form larger structures.</div>
+            <div class="note">
+                <strong>Patterns:</strong> Adapter, Bridge, Composite, Decorator, Facade, Flyweight, Proxy<br>
+                <strong>Focus:</strong> How objects are composed and related
+            </div>
+
+            <div class="pattern-name">Behavioral Patterns</div>
+            <div class="pattern-desc">Deal with object collaboration and the delegation of responsibilities between objects.</div>
+            <div class="note">
+                <strong>Patterns:</strong> Chain of Responsibility, Command, Iterator, Mediator, Memento, Observer, State, Strategy, Template Method, Visitor<br>
+                <strong>Focus:</strong> How objects communicate and interact
+            </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">💡 Pattern Selection Guide</div>
+            
+            <div class="tip">
+                <strong>When to use Creational Patterns:</strong><br>
+                • You need to control how objects are created<br>
+                • Object creation is complex or resource-intensive<br>
+                • You want to decouple object creation from usage<br>
+                • You need to ensure only one instance exists (Singleton)
+            </div>
+
+            <div class="tip">
+                <strong>When to use Structural Patterns:</strong><br>
+                • You need to adapt incompatible interfaces (Adapter)<br>
+                • You want to add functionality without modifying code (Decorator)<br>
+                • You need to represent part-whole hierarchies (Composite)<br>
+                • You want to control access to an object (Proxy)
+            </div>
+
+            <div class="tip">
+                <strong>When to use Behavioral Patterns:</strong><br>
+                • You need to notify multiple objects of state changes (Observer)<br>
+                • You want to swap algorithms at runtime (Strategy)<br>
+                • You need undo/redo functionality (Command)<br>
+                • Object behavior depends on its state (State)
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">⚠️ Common Pitfalls</div>
+            
+            <div class="pattern-name">Over-Engineering</div>
+            <div class="pattern-desc">Don't use patterns just because they exist. Apply them when they solve a real problem.</div>
+
+            <div class="pattern-name">Singleton Abuse</div>
+            <div class="pattern-desc">Singletons can make testing difficult and hide dependencies. Consider dependency injection instead.</div>
+
+            <div class="pattern-name">Pattern Mixing</div>
+            <div class="pattern-desc">Patterns can be combined, but too many patterns in one solution can make code hard to understand.</div>
+
+            <div class="pattern-name">Premature Optimization</div>
+            <div class="pattern-desc">Start with simple solutions. Refactor to patterns when complexity justifies them.</div>
+
+            <div class="note">
+                <strong>Remember:</strong> Patterns are tools, not rules. Use them to solve problems, not to show off knowledge.
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Essential Design Patterns Reference</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">📖 Based on "Design Patterns: Elements of Reusable Object-Oriented Software" by Gang of Four</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dynamic programming patterns and techniques for optimization problems.">
+    <title>Dynamic Programming Patterns Cheatsheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e6ed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #8b95a5;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(251, 191, 36, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(251, 191, 36, 0.15);
+        }
+
+        .card-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #fbbf24;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(251, 191, 36, 0.3);
+        }
+
+        .pattern-name {
+            color: #f59e0b;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pattern-name:first-child {
+            margin-top: 0;
+        }
+
+        .complexity {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .complexity-label {
+            color: #8b95a5;
+            font-weight: 500;
+        }
+
+        .complexity-value {
+            color: #cbd5e1;
+            font-family: 'Courier New', monospace;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 0.75rem 0;
+            border-left: 3px solid #fbbf24;
+        }
+
+        .code-line {
+            font-family: 'Courier New', monospace;
+            color: #a5d6ff;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin: 0.2rem 0;
+        }
+
+        .comment {
+            color: #48bb78;
+        }
+
+        .keyword {
+            color: #fbbf24;
+        }
+
+        .string {
+            color: #f472b6;
+        }
+
+        code {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #a5d6ff;
+            font-size: 0.9em;
+        }
+
+        .note {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid #3b82f6;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .tip {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .warning {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .recognition-box {
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+        }
+
+        .recognition-title {
+            color: #fbbf24;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .example-list {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .example-list li {
+            margin: 0.3rem 0;
+            color: #cbd5e1;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 116, 139, 0.3);
+            color: #8b95a5;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💰 Dynamic Programming Patterns</h1>
+        <p class="subtitle">Master the art of solving optimization problems through memoization and tabulation</p>
+
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">🎯 What is Dynamic Programming?</div>
+            <p style="margin-bottom: 1rem;">Dynamic Programming (DP) is an optimization technique that solves complex problems by breaking them down into simpler overlapping subproblems. It stores the results of subproblems to avoid redundant calculations.</p>
+            
+            <div class="recognition-box">
+                <div class="recognition-title">✅ When to Use DP:</div>
+                <ul class="example-list">
+                    <li><strong>Optimal Substructure:</strong> Optimal solution can be constructed from optimal solutions of subproblems</li>
+                    <li><strong>Overlapping Subproblems:</strong> Same subproblems are solved multiple times</li>
+                    <li><strong>Optimization:</strong> Finding maximum, minimum, or counting ways</li>
+                    <li>Keywords: "maximum", "minimum", "longest", "shortest", "count ways", "optimize"</li>
+                </ul>
+            </div>
+
+            <div class="note">
+                <strong>Key Insight:</strong> DP = Recursion + Memoization (or Iteration + Tabulation). It trades space for time by storing intermediate results.
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">📝 Memoization (Top-Down)</div>
+                <div class="pattern-name">Recursive Approach with Caching</div>
+                
+                <div class="complexity">
+                    <div class="complexity-label">Approach:</div>
+                    <div class="complexity-value">Start from problem, recurse to base cases</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Implementation:</div>
+                    <div class="complexity-value">Recursion + Hash Map/Array</div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Fibonacci with memoization</span></div>
+                    <div class="code-line"><span class="keyword">function</span> fib(n, memo = {}):</div>
+                    <div class="code-line">    <span class="comment">// Base cases</span></div>
+                    <div class="code-line">    <span class="keyword">if</span> n &lt;= 1:</div>
+                    <div class="code-line">        <span class="keyword">return</span> n</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// Check if already computed</span></div>
+                    <div class="code-line">    <span class="keyword">if</span> n <span class="keyword">in</span> memo:</div>
+                    <div class="code-line">        <span class="keyword">return</span> memo[n]</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// Compute and store</span></div>
+                    <div class="code-line">    memo[n] = fib(n - 1, memo) + fib(n - 2, memo)</div>
+                    <div class="code-line">    <span class="keyword">return</span> memo[n]</div>
+                </div>
+
+                <div class="recognition-box">
+                    <div class="recognition-title">✅ Advantages:</div>
+                    <ul class="example-list">
+                        <li>Intuitive - follows natural recursive thinking</li>
+                        <li>Only computes needed subproblems</li>
+                        <li>Easier to implement from recursive solution</li>
+                    </ul>
+                </div>
+
+                <div class="recognition-box">
+                    <div class="recognition-title">❌ Disadvantages:</div>
+                    <ul class="example-list">
+                        <li>Stack overflow risk for deep recursion</li>
+                        <li>Function call overhead</li>
+                        <li>May use more memory for call stack</li>
+                    </ul>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Best for:</strong> Problems where recursive solution is natural and not all subproblems need solving
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📊 Tabulation (Bottom-Up)</div>
+                <div class="pattern-name">Iterative Approach with Table</div>
+                
+                <div class="complexity">
+                    <div class="complexity-label">Approach:</div>
+                    <div class="complexity-value">Start from base cases, build up to problem</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Implementation:</div>
+                    <div class="complexity-value">Iteration + Array/Matrix</div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Fibonacci with tabulation</span></div>
+                    <div class="code-line"><span class="keyword">function</span> fib(n):</div>
+                    <div class="code-line">    <span class="keyword">if</span> n &lt;= 1:</div>
+                    <div class="code-line">        <span class="keyword">return</span> n</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// Create table</span></div>
+                    <div class="code-line">    dp = <span class="keyword">array</span>[n + 1]</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// Base cases</span></div>
+                    <div class="code-line">    dp[0] = 0</div>
+                    <div class="code-line">    dp[1] = 1</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// Fill table bottom-up</span></div>
+                    <div class="code-line">    <span class="keyword">for</span> i = 2 <span class="keyword">to</span> n:</div>
+                    <div class="code-line">        dp[i] = dp[i - 1] + dp[i - 2]</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> dp[n]</div>
+                </div>
+
+                <div class="recognition-box">
+                    <div class="recognition-title">✅ Advantages:</div>
+                    <ul class="example-list">
+                        <li>No recursion - no stack overflow</li>
+                        <li>Better performance (no function calls)</li>
+                        <li>Can optimize space easily</li>
+                    </ul>
+                </div>
+
+                <div class="recognition-box">
+                    <div class="recognition-title">❌ Disadvantages:</div>
+                    <ul class="example-list">
+                        <li>Must compute all subproblems</li>
+                        <li>Less intuitive than recursion</li>
+                        <li>Harder to derive from problem statement</li>
+                    </ul>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Best for:</strong> Problems where all subproblems must be solved and space optimization is important
+                </div>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">🎒 0/1 Knapsack Pattern</div>
+                <div class="pattern-name">Choose or Skip Each Item</div>
+                
+                <div class="complexity">
+                    <div class="complexity-label">Time:</div>
+                    <div class="complexity-value">O(n × capacity)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Space:</div>
+                    <div class="complexity-value">O(n × capacity) or O(capacity) optimized</div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Problem: Max value with weight limit</span></div>
+                    <div class="code-line"><span class="keyword">function</span> knapsack(weights, values, capacity):</div>
+                    <div class="code-line">    n = length(weights)</div>
+                    <div class="code-line">    dp = <span class="keyword">array</span>[n + 1][capacity + 1]</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// Base case: 0 items or 0 capacity = 0 value</span></div>
+                    <div class="code-line">    <span class="keyword">for</span> i = 0 <span class="keyword">to</span> n:</div>
+                    <div class="code-line">        dp[i][0] = 0</div>
+                    <div class="code-line">    <span class="keyword">for</span> w = 0 <span class="keyword">to</span> capacity:</div>
+                    <div class="code-line">        dp[0][w] = 0</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// Fill table</span></div>
+                    <div class="code-line">    <span class="keyword">for</span> i = 1 <span class="keyword">to</span> n:</div>
+                    <div class="code-line">        <span class="keyword">for</span> w = 1 <span class="keyword">to</span> capacity:</div>
+                    <div class="code-line">            <span class="keyword">if</span> weights[i - 1] &lt;= w:</div>
+                    <div class="code-line">                <span class="comment">// Max of: include item or exclude item</span></div>
+                    <div class="code-line">                include = values[i - 1] + dp[i - 1][w - weights[i - 1]]</div>
+                    <div class="code-line">                exclude = dp[i - 1][w]</div>
+                    <div class="code-line">                dp[i][w] = max(include, exclude)</div>
+                    <div class="code-line">            <span class="keyword">else</span>:</div>
+                    <div class="code-line">                <span class="comment">// Can't include, too heavy</span></div>
+                    <div class="code-line">                dp[i][w] = dp[i - 1][w]</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> dp[n][capacity]</div>
+                </div>
+
+                <div class="recognition-box">
+                    <div class="recognition-title">🔍 Recurrence Relation:</div>
+                    <div class="code-block">
+                        <div class="code-line">dp[i][w] = max(</div>
+                        <div class="code-line">    dp[i-1][w],                      <span class="comment">// exclude item i</span></div>
+                        <div class="code-line">    values[i] + dp[i-1][w-weights[i]] <span class="comment">// include item i</span></div>
+                        <div class="code-line">)</div>
+                    </div>
+                </div>
+
+                <div class="recognition-box">
+                    <div class="recognition-title">🎯 When to Use:</div>
+                    <ul class="example-list">
+                        <li>Subset selection with constraints</li>
+                        <li>Resource allocation problems</li>
+                        <li>Binary choice for each element</li>
+                    </ul>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Example Problems:</strong> Subset sum, partition equal subset sum, target sum, minimum subset sum difference
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🧬 Longest Common Subsequence (LCS)</div>
+                <div class="pattern-name">Matching Elements in Two Sequences</div>
+                
+                <div class="complexity">
+                    <div class="complexity-label">Time:</div>
+                    <div class="complexity-value">O(m × n)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Space:</div>
+                    <div class="complexity-value">O(m × n) or O(min(m, n)) optimized</div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Find longest common subsequence</span></div>
+                    <div class="code-line"><span class="keyword">function</span> lcs(text1, text2):</div>
+                    <div class="code-line">    m = length(text1)</div>
+                    <div class="code-line">    n = length(text2)</div>
+                    <div class="code-line">    dp = <span class="keyword">array</span>[m + 1][n + 1]</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// Base case: empty string has LCS of 0</span></div>
+                    <div class="code-line">    <span class="keyword">for</span> i = 0 <span class="keyword">to</span> m:</div>
+                    <div class="code-line">        dp[i][0] = 0</div>
+                    <div class="code-line">    <span class="keyword">for</span> j = 0 <span class="keyword">to</span> n:</div>
+                    <div class="code-line">        dp[0][j] = 0</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// Fill table</span></div>
+                    <div class="code-line">    <span class="keyword">for</span> i = 1 <span class="keyword">to</span> m:</div>
+                    <div class="code-line">        <span class="keyword">for</span> j = 1 <span class="keyword">to</span> n:</div>
+                    <div class="code-line">            <span class="keyword">if</span> text1[i - 1] == text2[j - 1]:</div>
+                    <div class="code-line">                <span class="comment">// Characters match, extend LCS</span></div>
+                    <div class="code-line">                dp[i][j] = 1 + dp[i - 1][j - 1]</div>
+                    <div class="code-line">            <span class="keyword">else</span>:</div>
+                    <div class="code-line">                <span class="comment">// Take max from excluding one char</span></div>
+                    <div class="code-line">                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> dp[m][n]</div>
+                </div>
+
+                <div class="recognition-box">
+                    <div class="recognition-title">🔍 Recurrence Relation:</div>
+                    <div class="code-block">
+                        <div class="code-line"><span class="keyword">if</span> text1[i] == text2[j]:</div>
+                        <div class="code-line">    dp[i][j] = 1 + dp[i-1][j-1]</div>
+                        <div class="code-line"><span class="keyword">else</span>:</div>
+                        <div class="code-line">    dp[i][j] = max(dp[i-1][j], dp[i][j-1])</div>
+                    </div>
+                </div>
+
+                <div class="recognition-box">
+                    <div class="recognition-title">🎯 When to Use:</div>
+                    <ul class="example-list">
+                        <li>Comparing two sequences</li>
+                        <li>Finding common patterns</li>
+                        <li>Edit distance problems</li>
+                    </ul>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Example Problems:</strong> Longest common subsequence, edit distance, shortest common supersequence, delete operations
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📈 Longest Increasing Subsequence (LIS)</div>
+                <div class="pattern-name">Finding Increasing Patterns</div>
+                
+                <div class="complexity">
+                    <div class="complexity-label">Time:</div>
+                    <div class="complexity-value">O(n²) DP or O(n log n) Binary Search</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Space:</div>
+                    <div class="complexity-value">O(n)</div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// DP approach O(n²)</span></div>
+                    <div class="code-line"><span class="keyword">function</span> lengthOfLIS(nums):</div>
+                    <div class="code-line">    n = length(nums)</div>
+                    <div class="code-line">    <span class="keyword">if</span> n == 0:</div>
+                    <div class="code-line">        <span class="keyword">return</span> 0</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// dp[i] = length of LIS ending at index i</span></div>
+                    <div class="code-line">    dp = <span class="keyword">array</span>[n] filled with 1</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">for</span> i = 1 <span class="keyword">to</span> n - 1:</div>
+                    <div class="code-line">        <span class="keyword">for</span> j = 0 <span class="keyword">to</span> i - 1:</div>
+                    <div class="code-line">            <span class="keyword">if</span> nums[j] &lt; nums[i]:</div>
+                    <div class="code-line">                <span class="comment">// Can extend LIS ending at j</span></div>
+                    <div class="code-line">                dp[i] = max(dp[i], dp[j] + 1)</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> max(dp)</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Binary search approach O(n log n)</span></div>
+                    <div class="code-line"><span class="keyword">function</span> lengthOfLIS_Optimized(nums):</div>
+                    <div class="code-line">    tails = []  <span class="comment">// tails[i] = smallest tail of LIS of length i+1</span></div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">for</span> num <span class="keyword">in</span> nums:</div>
+                    <div class="code-line">        <span class="comment">// Binary search for position</span></div>
+                    <div class="code-line">        pos = binarySearch(tails, num)</div>
+                    <div class="code-line">        </div>
+                    <div class="code-line">        <span class="keyword">if</span> pos == length(tails):</div>
+                    <div class="code-line">            tails.append(num)</div>
+                    <div class="code-line">        <span class="keyword">else</span>:</div>
+                    <div class="code-line">            tails[pos] = num</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> length(tails)</div>
+                </div>
+
+                <div class="recognition-box">
+                    <div class="recognition-title">🔍 Recurrence Relation:</div>
+                    <div class="code-block">
+                        <div class="code-line">dp[i] = max(dp[j] + 1) <span class="keyword">for all</span> j &lt; i <span class="keyword">where</span> nums[j] &lt; nums[i]</div>
+                    </div>
+                </div>
+
+                <div class="recognition-box">
+                    <div class="recognition-title">🎯 When to Use:</div>
+                    <ul class="example-list">
+                        <li>Finding increasing/decreasing patterns</li>
+                        <li>Sequence optimization problems</li>
+                        <li>Building on previous elements</li>
+                    </ul>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Example Problems:</strong> Longest increasing subsequence, Russian doll envelopes, maximum length of pair chain, number of LIS
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🪙 Unbounded Knapsack</div>
+                <div class="pattern-name">Unlimited Use of Each Item</div>
+                
+                <div class="complexity">
+                    <div class="complexity-label">Time:</div>
+                    <div class="complexity-value">O(n × capacity)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Space:</div>
+                    <div class="complexity-value">O(capacity)</div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Coin change: min coins to make amount</span></div>
+                    <div class="code-line"><span class="keyword">function</span> coinChange(coins, amount):</div>
+                    <div class="code-line">    dp = <span class="keyword">array</span>[amount + 1] filled with infinity</div>
+                    <div class="code-line">    dp[0] = 0  <span class="comment">// Base case: 0 coins for amount 0</span></div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">for</span> a = 1 <span class="keyword">to</span> amount:</div>
+                    <div class="code-line">        <span class="keyword">for</span> coin <span class="keyword">in</span> coins:</div>
+                    <div class="code-line">            <span class="keyword">if</span> a - coin &gt;= 0:</div>
+                    <div class="code-line">                <span class="comment">// Can use this coin</span></div>
+                    <div class="code-line">                dp[a] = min(dp[a], 1 + dp[a - coin])</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> dp[amount] <span class="keyword">if</span> dp[amount] != infinity <span class="keyword">else</span> -1</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Coin change: count ways to make amount</span></div>
+                    <div class="code-line"><span class="keyword">function</span> coinChangeWays(coins, amount):</div>
+                    <div class="code-line">    dp = <span class="keyword">array</span>[amount + 1] filled with 0</div>
+                    <div class="code-line">    dp[0] = 1  <span class="comment">// One way to make 0: use no coins</span></div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// Iterate coins first to avoid duplicates</span></div>
+                    <div class="code-line">    <span class="keyword">for</span> coin <span class="keyword">in</span> coins:</div>
+                    <div class="code-line">        <span class="keyword">for</span> a = coin <span class="keyword">to</span> amount:</div>
+                    <div class="code-line">            dp[a] += dp[a - coin]</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> dp[amount]</div>
+                </div>
+
+                <div class="recognition-box">
+                    <div class="recognition-title">🔍 Recurrence Relation:</div>
+                    <div class="code-block">
+                        <div class="code-line"><span class="comment">// Minimum coins</span></div>
+                        <div class="code-line">dp[amount] = min(dp[amount - coin] + 1) <span class="keyword">for all</span> coins</div>
+                        <div class="code-line"></div>
+                        <div class="code-line"><span class="comment">// Count ways</span></div>
+                        <div class="code-line">dp[amount] = sum(dp[amount - coin]) <span class="keyword">for all</span> coins</div>
+                    </div>
+                </div>
+
+                <div class="recognition-box">
+                    <div class="recognition-title">🎯 When to Use:</div>
+                    <ul class="example-list">
+                        <li>Items can be used unlimited times</li>
+                        <li>Coin change problems</li>
+                        <li>Rod cutting problems</li>
+                    </ul>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Example Problems:</strong> Coin change, coin change 2, unbounded knapsack, rod cutting, minimum cost for tickets
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🎭 Palindrome Patterns</div>
+                <div class="pattern-name">Symmetric Subsequences and Substrings</div>
+                
+                <div class="complexity">
+                    <div class="complexity-label">Time:</div>
+                    <div class="complexity-value">O(n²)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Space:</div>
+                    <div class="complexity-value">O(n²) or O(n) optimized</div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Longest palindromic subsequence</span></div>
+                    <div class="code-line"><span class="keyword">function</span> longestPalindromeSubseq(s):</div>
+                    <div class="code-line">    n = length(s)</div>
+                    <div class="code-line">    dp = <span class="keyword">array</span>[n][n]</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// Base case: single character is palindrome</span></div>
+                    <div class="code-line">    <span class="keyword">for</span> i = 0 <span class="keyword">to</span> n - 1:</div>
+                    <div class="code-line">        dp[i][i] = 1</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// Fill table for increasing lengths</span></div>
+                    <div class="code-line">    <span class="keyword">for</span> length = 2 <span class="keyword">to</span> n:</div>
+                    <div class="code-line">        <span class="keyword">for</span> i = 0 <span class="keyword">to</span> n - length:</div>
+                    <div class="code-line">            j = i + length - 1</div>
+                    <div class="code-line">            </div>
+                    <div class="code-line">            <span class="keyword">if</span> s[i] == s[j]:</div>
+                    <div class="code-line">                <span class="comment">// Characters match, add 2</span></div>
+                    <div class="code-line">                dp[i][j] = 2 + dp[i + 1][j - 1]</div>
+                    <div class="code-line">            <span class="keyword">else</span>:</div>
+                    <div class="code-line">                <span class="comment">// Take max excluding one end</span></div>
+                    <div class="code-line">                dp[i][j] = max(dp[i + 1][j], dp[i][j - 1])</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> dp[0][n - 1]</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Longest palindromic substring (expand around center)</span></div>
+                    <div class="code-line"><span class="keyword">function</span> longestPalindrome(s):</div>
+                    <div class="code-line">    <span class="keyword">if</span> length(s) &lt; 2:</div>
+                    <div class="code-line">        <span class="keyword">return</span> s</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    start = 0, maxLen = 0</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">for</span> i = 0 <span class="keyword">to</span> length(s) - 1:</div>
+                    <div class="code-line">        <span class="comment">// Odd length palindrome</span></div>
+                    <div class="code-line">        len1 = expandAroundCenter(s, i, i)</div>
+                    <div class="code-line">        <span class="comment">// Even length palindrome</span></div>
+                    <div class="code-line">        len2 = expandAroundCenter(s, i, i + 1)</div>
+                    <div class="code-line">        </div>
+                    <div class="code-line">        len = max(len1, len2)</div>
+                    <div class="code-line">        <span class="keyword">if</span> len &gt; maxLen:</div>
+                    <div class="code-line">            start = i - (len - 1) / 2</div>
+                    <div class="code-line">            maxLen = len</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> s[start:start + maxLen]</div>
+                </div>
+
+                <div class="recognition-box">
+                    <div class="recognition-title">🔍 Recurrence Relation:</div>
+                    <div class="code-block">
+                        <div class="code-line"><span class="keyword">if</span> s[i] == s[j]:</div>
+                        <div class="code-line">    dp[i][j] = 2 + dp[i+1][j-1]</div>
+                        <div class="code-line"><span class="keyword">else</span>:</div>
+                        <div class="code-line">    dp[i][j] = max(dp[i+1][j], dp[i][j-1])</div>
+                    </div>
+                </div>
+
+                <div class="recognition-box">
+                    <div class="recognition-title">🎯 When to Use:</div>
+                    <ul class="example-list">
+                        <li>Finding palindromic patterns</li>
+                        <li>Symmetric subsequences/substrings</li>
+                        <li>Minimum insertions/deletions for palindrome</li>
+                    </ul>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Example Problems:</strong> Longest palindromic subsequence, longest palindromic substring, palindrome partitioning, minimum insertions
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔢 State Transition</div>
+                <div class="pattern-name">Finite State Machine DP</div>
+                
+                <div class="complexity">
+                    <div class="complexity-label">Time:</div>
+                    <div class="complexity-value">O(n × states)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Space:</div>
+                    <div class="complexity-value">O(n × states) or O(states) optimized</div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Best time to buy/sell stock with cooldown</span></div>
+                    <div class="code-line"><span class="keyword">function</span> maxProfit(prices):</div>
+                    <div class="code-line">    n = length(prices)</div>
+                    <div class="code-line">    <span class="keyword">if</span> n &lt;= 1:</div>
+                    <div class="code-line">        <span class="keyword">return</span> 0</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// States: hold stock, sold (cooldown), rest</span></div>
+                    <div class="code-line">    hold = -prices[0]  <span class="comment">// Bought first stock</span></div>
+                    <div class="code-line">    sold = 0           <span class="comment">// Just sold</span></div>
+                    <div class="code-line">    rest = 0           <span class="comment">// Resting/can buy</span></div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">for</span> i = 1 <span class="keyword">to</span> n - 1:</div>
+                    <div class="code-line">        prevHold = hold</div>
+                    <div class="code-line">        prevSold = sold</div>
+                    <div class="code-line">        prevRest = rest</div>
+                    <div class="code-line">        </div>
+                    <div class="code-line">        <span class="comment">// Transitions</span></div>
+                    <div class="code-line">        hold = max(prevHold, prevRest - prices[i])  <span class="comment">// Keep or buy</span></div>
+                    <div class="code-line">        sold = prevHold + prices[i]                 <span class="comment">// Sell</span></div>
+                    <div class="code-line">        rest = max(prevRest, prevSold)              <span class="comment">// Rest</span></div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> max(sold, rest)</div>
+                </div>
+
+                <div class="recognition-box">
+                    <div class="recognition-title">🔍 State Transitions:</div>
+                    <div class="code-block">
+                        <div class="code-line">rest → hold  (buy stock)</div>
+                        <div class="code-line">hold → sold  (sell stock)</div>
+                        <div class="code-line">sold → rest  (cooldown)</div>
+                        <div class="code-line">rest → rest  (do nothing)</div>
+                        <div class="code-line">hold → hold  (keep holding)</div>
+                    </div>
+                </div>
+
+                <div class="recognition-box">
+                    <div class="recognition-title">🎯 When to Use:</div>
+                    <ul class="example-list">
+                        <li>Problems with distinct states</li>
+                        <li>State transitions with constraints</li>
+                        <li>Stock trading with rules</li>
+                    </ul>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Example Problems:</strong> Best time to buy/sell stock (all variants), house robber, paint house, decode ways
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">🎓 DP Problem-Solving Framework</div>
+            
+            <div class="pattern-name">Step-by-Step Approach</div>
+            
+            <div class="recognition-box">
+                <div class="recognition-title">1️⃣ Identify if it's a DP Problem:</div>
+                <ul class="example-list">
+                    <li>Can be broken into overlapping subproblems?</li>
+                    <li>Has optimal substructure?</li>
+                    <li>Asks for optimization (max/min) or counting?</li>
+                    <li>Keywords: "maximum", "minimum", "longest", "count ways"</li>
+                </ul>
+            </div>
+
+            <div class="recognition-box">
+                <div class="recognition-title">2️⃣ Define the State:</div>
+                <ul class="example-list">
+                    <li>What information do we need to solve subproblems?</li>
+                    <li>Usually: dp[i] = answer for first i elements</li>
+                    <li>Or: dp[i][j] = answer for range [i, j] or two sequences</li>
+                    <li>Example: dp[i] = max profit up to day i</li>
+                </ul>
+            </div>
+
+            <div class="recognition-box">
+                <div class="recognition-title">3️⃣ Find the Recurrence Relation:</div>
+                <ul class="example-list">
+                    <li>How does dp[i] relate to previous states?</li>
+                    <li>What choices do we have at each step?</li>
+                    <li>Example: dp[i] = max(dp[i-1], dp[i-2] + nums[i])</li>
+                </ul>
+            </div>
+
+            <div class="recognition-box">
+                <div class="recognition-title">4️⃣ Determine Base Cases:</div>
+                <ul class="example-list">
+                    <li>What are the simplest subproblems?</li>
+                    <li>Usually: empty array, single element, or zero</li>
+                    <li>Example: dp[0] = 0, dp[1] = nums[0]</li>
+                </ul>
+            </div>
+
+            <div class="recognition-box">
+                <div class="recognition-title">5️⃣ Decide Implementation:</div>
+                <ul class="example-list">
+                    <li>Top-down (memoization): Natural recursion, easier to write</li>
+                    <li>Bottom-up (tabulation): Better performance, easier to optimize space</li>
+                    <li>Start with memoization, optimize to tabulation if needed</li>
+                </ul>
+            </div>
+
+            <div class="recognition-box">
+                <div class="recognition-title">6️⃣ Optimize Space:</div>
+                <ul class="example-list">
+                    <li>Do we need the entire table or just previous row/column?</li>
+                    <li>Can reduce O(n²) space to O(n) or O(1)</li>
+                    <li>Example: Fibonacci only needs last 2 values</li>
+                </ul>
+            </div>
+
+            <div class="note">
+                <strong>Pro Tip:</strong> Always start by writing the recursive solution with base cases. Then add memoization. Finally, convert to tabulation if needed. This progression makes DP much easier to understand and debug.
+            </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">🗺️ DP Pattern Recognition Map</div>
+            
+            <div class="code-block">
+                <div class="code-line">Problem Type                    | Pattern              | State Definition</div>
+                <div class="code-line">--------------------------------|----------------------|---------------------------</div>
+                <div class="code-line">Subset selection with limit     | 0/1 Knapsack         | dp[i][w] = max value</div>
+                <div class="code-line">Unlimited item usage            | Unbounded Knapsack   | dp[amount] = min/max/count</div>
+                <div class="code-line">Two sequences comparison        | LCS                  | dp[i][j] = LCS length</div>
+                <div class="code-line">Single sequence optimization    | LIS                  | dp[i] = LIS ending at i</div>
+                <div class="code-line">Palindrome problems             | Palindrome DP        | dp[i][j] = palindrome [i,j]</div>
+                <div class="code-line">State-based decisions           | State Machine        | dp[i][state] = value</div>
+                <div class="code-line">Path counting in grid           | Grid DP              | dp[i][j] = paths to (i,j)</div>
+                <div class="code-line">Partition problems              | Partition DP         | dp[i] = can partition</div>
+                <div class="code-line">String transformation           | Edit Distance        | dp[i][j] = min operations</div>
+            </div>
+
+            <div class="tip">
+                💡 <strong>Quick Recognition:</strong> If you see "maximum/minimum/longest/shortest/count ways" + constraints, think DP. If brute force is exponential but has overlapping subproblems, definitely DP.
+            </div>
+
+            <div class="warning">
+                ⚠️ <strong>Common Pitfalls:</strong> Not all optimization problems are DP. Greedy algorithms work when local optimal = global optimal. DP is for when you need to consider all possibilities.
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">💡 Complexity Analysis</div>
+            
+            <div class="code-block">
+                <div class="code-line">Pattern              | Time Complexity | Space Complexity | Space Optimized</div>
+                <div class="code-line">---------------------|-----------------|------------------|------------------</div>
+                <div class="code-line">0/1 Knapsack         | O(n × W)        | O(n × W)         | O(W)</div>
+                <div class="code-line">Unbounded Knapsack   | O(n × W)        | O(W)             | O(W)</div>
+                <div class="code-line">LCS                  | O(m × n)        | O(m × n)         | O(min(m,n))</div>
+                <div class="code-line">LIS (DP)             | O(n²)           | O(n)             | O(n)</div>
+                <div class="code-line">LIS (Binary Search)  | O(n log n)      | O(n)             | O(n)</div>
+                <div class="code-line">Palindrome DP        | O(n²)           | O(n²)            | O(n)</div>
+                <div class="code-line">State Machine        | O(n × states)   | O(n × states)    | O(states)</div>
+                <div class="code-line">Grid Path            | O(m × n)        | O(m × n)         | O(n)</div>
+            </div>
+
+            <div class="note">
+                <strong>Space Optimization Tip:</strong> If dp[i] only depends on dp[i-1] and dp[i-2], you can use just 2 variables instead of an array. If dp[i][j] only depends on previous row, use 2 rows instead of full matrix.
+            </div>
+
+            <div class="tip">
+                💡 <strong>Interview Strategy:</strong> Start with recursive solution → Add memoization → Convert to tabulation → Optimize space. Show this progression to demonstrate deep understanding.
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Dynamic Programming Patterns Reference for Optimization Problems</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">💰 Master these patterns to solve complex optimization and counting problems efficiently</p>
+        </div>
+    </div>
+</body>
+</html>

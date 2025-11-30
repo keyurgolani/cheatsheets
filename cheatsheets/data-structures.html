@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Data structures reference including arrays, linked lists, trees, graphs, and hash tables.">
+    <title>Data Structures Cheatsheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e6ed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #8b95a5;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(59, 130, 246, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+        }
+
+        .card-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #3b82f6;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .ds-name {
+            color: #10b981;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .ds-name:first-child {
+            margin-top: 0;
+        }
+
+        .complexity {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .complexity-label {
+            color: #8b95a5;
+            font-weight: 500;
+        }
+
+        .complexity-value {
+            color: #cbd5e1;
+            font-family: 'Courier New', monospace;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 0.75rem 0;
+            border-left: 3px solid #3b82f6;
+        }
+
+        .code-line {
+            font-family: 'Courier New', monospace;
+            color: #a5d6ff;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin: 0.2rem 0;
+        }
+
+        .comment {
+            color: #10b981;
+        }
+
+        .keyword {
+            color: #fbbf24;
+        }
+
+        .string {
+            color: #f472b6;
+        }
+
+        code {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #a5d6ff;
+            font-size: 0.9em;
+        }
+
+        .note {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid #3b82f6;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .tip {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .warning {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .visual-desc {
+            background: rgba(16, 185, 129, 0.05);
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin: 0.75rem 0;
+            font-size: 0.9rem;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 116, 139, 0.3);
+            color: #8b95a5;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📦 Data Structures</h1>
+        <p class="subtitle">Essential data structures with operations and complexity analysis</p>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">📊 Array</div>
+                <div class="ds-name">Contiguous Memory Collection</div>
+                
+                <div class="visual-desc">
+                    <strong>Structure:</strong> [0][1][2][3][4] - Fixed or dynamic size, elements stored in contiguous memory locations
+                </div>
+
+                <div class="complexity">
+                    <div class="complexity-label">Access:</div>
+                    <div class="complexity-value">O(1)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Search:</div>
+                    <div class="complexity-value">O(n)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Insert (end):</div>
+                    <div class="complexity-value">O(1) amortized</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Insert (middle):</div>
+                    <div class="complexity-value">O(n)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Delete:</div>
+                    <div class="complexity-value">O(n)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Space:</div>
+                    <div class="complexity-value">O(n)</div>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Best for:</strong> Random access, cache-friendly operations, when size is known or grows predictably.
+                </div>
+
+                <div class="note">
+                    <strong>Key Operations:</strong> arr[i] for access, push/pop for end operations, splice for insertion/deletion.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔗 Linked List</div>
+                <div class="ds-name">Node-Based Sequential Collection</div>
+                
+                <div class="visual-desc">
+                    <strong>Structure:</strong> [data|next] → [data|next] → [data|next] → null<br>
+                    Each node contains data and pointer to next node
+                </div>
+
+                <div class="complexity">
+                    <div class="complexity-label">Access:</div>
+                    <div class="complexity-value">O(n)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Search:</div>
+                    <div class="complexity-value">O(n)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Insert (head):</div>
+                    <div class="complexity-value">O(1)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Insert (middle):</div>
+                    <div class="complexity-value">O(n)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Delete:</div>
+                    <div class="complexity-value">O(n)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Space:</div>
+                    <div class="complexity-value">O(n)</div>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Best for:</strong> Frequent insertions/deletions at beginning, when size is unknown, implementing stacks/queues.
+                </div>
+
+                <div class="note">
+                    <strong>Variants:</strong> Singly linked (one pointer), doubly linked (prev/next pointers), circular linked.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📚 Stack</div>
+                <div class="ds-name">LIFO (Last In, First Out)</div>
+                
+                <div class="visual-desc">
+                    <strong>Structure:</strong> [bottom] [item] [item] [top] ← push/pop here<br>
+                    Like a stack of plates - add and remove from top only
+                </div>
+
+                <div class="complexity">
+                    <div class="complexity-label">Push:</div>
+                    <div class="complexity-value">O(1)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Pop:</div>
+                    <div class="complexity-value">O(1)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Peek/Top:</div>
+                    <div class="complexity-value">O(1)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Search:</div>
+                    <div class="complexity-value">O(n)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Space:</div>
+                    <div class="complexity-value">O(n)</div>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Best for:</strong> Function call management, undo operations, expression evaluation, backtracking algorithms.
+                </div>
+
+                <div class="note">
+                    <strong>Common Operations:</strong> push(item), pop(), peek(), isEmpty(), size()
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🎫 Queue</div>
+                <div class="ds-name">FIFO (First In, First Out)</div>
+                
+                <div class="visual-desc">
+                    <strong>Structure:</strong> [front] → [item] → [item] → [rear]<br>
+                    enqueue at rear ← | → dequeue from front<br>
+                    Like a line at a store - first come, first served
+                </div>
+
+                <div class="complexity">
+                    <div class="complexity-label">Enqueue:</div>
+                    <div class="complexity-value">O(1)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Dequeue:</div>
+                    <div class="complexity-value">O(1)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Peek/Front:</div>
+                    <div class="complexity-value">O(1)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Search:</div>
+                    <div class="complexity-value">O(n)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Space:</div>
+                    <div class="complexity-value">O(n)</div>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Best for:</strong> BFS traversal, task scheduling, buffering, handling requests in order.
+                </div>
+
+                <div class="note">
+                    <strong>Variants:</strong> Simple queue, circular queue, priority queue, deque (double-ended queue)
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🌳 Binary Tree</div>
+                <div class="ds-name">Hierarchical Structure</div>
+                
+                <div class="visual-desc">
+                    <strong>Structure:</strong><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;root<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;\<br>
+                    &nbsp;&nbsp;&nbsp;left&nbsp;&nbsp;right<br>
+                    &nbsp;&nbsp;/&nbsp;&nbsp;\&nbsp;&nbsp;/&nbsp;&nbsp;\<br>
+                    Each node has at most 2 children
+                </div>
+
+                <div class="complexity">
+                    <div class="complexity-label">Access:</div>
+                    <div class="complexity-value">O(log n) balanced, O(n) worst</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Search:</div>
+                    <div class="complexity-value">O(log n) balanced, O(n) worst</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Insert:</div>
+                    <div class="complexity-value">O(log n) balanced, O(n) worst</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Delete:</div>
+                    <div class="complexity-value">O(log n) balanced, O(n) worst</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Space:</div>
+                    <div class="complexity-value">O(n)</div>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Best for:</strong> Hierarchical data, expression parsing, decision trees, file systems.
+                </div>
+
+                <div class="note">
+                    <strong>Traversals:</strong> In-order (left, root, right), Pre-order (root, left, right), Post-order (left, right, root), Level-order (BFS)
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔍 Binary Search Tree (BST)</div>
+                <div class="ds-name">Ordered Binary Tree</div>
+                
+                <div class="visual-desc">
+                    <strong>Structure:</strong> For each node: left children &lt; node &lt; right children<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;\<br>
+                    &nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;10<br>
+                    &nbsp;&nbsp;/&nbsp;\&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\<br>
+                    &nbsp;1&nbsp;&nbsp;6&nbsp;&nbsp;&nbsp;&nbsp;14
+                </div>
+
+                <div class="complexity">
+                    <div class="complexity-label">Search:</div>
+                    <div class="complexity-value">O(log n) avg, O(n) worst</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Insert:</div>
+                    <div class="complexity-value">O(log n) avg, O(n) worst</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Delete:</div>
+                    <div class="complexity-value">O(log n) avg, O(n) worst</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Space:</div>
+                    <div class="complexity-value">O(n)</div>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Best for:</strong> Maintaining sorted data, range queries, finding closest values.
+                </div>
+
+                <div class="warning">
+                    ⚠️ <strong>Caution:</strong> Can degrade to O(n) if unbalanced. Use AVL or Red-Black trees for guaranteed balance.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🏔️ Heap</div>
+                <div class="ds-name">Complete Binary Tree (Priority Queue)</div>
+                
+                <div class="visual-desc">
+                    <strong>Max Heap:</strong> Parent ≥ children<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;100<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;\<br>
+                    &nbsp;&nbsp;&nbsp;19&nbsp;&nbsp;&nbsp;36<br>
+                    &nbsp;&nbsp;/&nbsp;\&nbsp;&nbsp;/&nbsp;\<br>
+                    &nbsp;17&nbsp;3&nbsp;25&nbsp;1<br>
+                    <strong>Min Heap:</strong> Parent ≤ children
+                </div>
+
+                <div class="complexity">
+                    <div class="complexity-label">Find Min/Max:</div>
+                    <div class="complexity-value">O(1)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Insert:</div>
+                    <div class="complexity-value">O(log n)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Delete Min/Max:</div>
+                    <div class="complexity-value">O(log n)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Heapify:</div>
+                    <div class="complexity-value">O(n)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Space:</div>
+                    <div class="complexity-value">O(n)</div>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Best for:</strong> Priority queues, finding k largest/smallest elements, heap sort, median maintenance.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🕸️ Graph</div>
+                <div class="ds-name">Network of Vertices and Edges</div>
+                
+                <div class="visual-desc">
+                    <strong>Structure:</strong> Vertices (nodes) connected by edges<br>
+                    &nbsp;&nbsp;A --- B<br>
+                    &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;|<br>
+                    &nbsp;&nbsp;|&nbsp;&nbsp;/&nbsp;&nbsp;|<br>
+                    &nbsp;&nbsp;C --- D<br>
+                    Can be directed or undirected, weighted or unweighted
+                </div>
+
+                <div class="complexity">
+                    <div class="complexity-label">Add Vertex:</div>
+                    <div class="complexity-value">O(1)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Add Edge:</div>
+                    <div class="complexity-value">O(1)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Remove Vertex:</div>
+                    <div class="complexity-value">O(V + E)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Remove Edge:</div>
+                    <div class="complexity-value">O(E)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Query Edge:</div>
+                    <div class="complexity-value">O(1) adj matrix, O(V) adj list</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Space:</div>
+                    <div class="complexity-value">O(V²) matrix, O(V+E) list</div>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Best for:</strong> Social networks, maps/navigation, dependency resolution, network flow.
+                </div>
+
+                <div class="note">
+                    <strong>Representations:</strong> Adjacency matrix (dense graphs), adjacency list (sparse graphs), edge list
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🗂️ Hash Table</div>
+                <div class="ds-name">Key-Value Mapping with Hashing</div>
+                
+                <div class="visual-desc">
+                    <strong>Structure:</strong> Array with hash function<br>
+                    hash("key") → index → [key: value]<br>
+                    Handles collisions via chaining or open addressing
+                </div>
+
+                <div class="complexity">
+                    <div class="complexity-label">Search:</div>
+                    <div class="complexity-value">O(1) avg, O(n) worst</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Insert:</div>
+                    <div class="complexity-value">O(1) avg, O(n) worst</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Delete:</div>
+                    <div class="complexity-value">O(1) avg, O(n) worst</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Space:</div>
+                    <div class="complexity-value">O(n)</div>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Best for:</strong> Fast lookups, caching, counting frequencies, detecting duplicates.
+                </div>
+
+                <div class="note">
+                    <strong>Collision Resolution:</strong> Chaining (linked lists), open addressing (linear/quadratic probing), double hashing
+                </div>
+
+                <div class="warning">
+                    ⚠️ <strong>Important:</strong> Performance depends on good hash function and load factor. Resize when load factor exceeds threshold.
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">📊 Complexity Comparison Table</div>
+            
+            <div class="ds-name">Time Complexity Overview</div>
+            <div class="code-block">
+                <div class="code-line">Data Structure | Access  | Search  | Insert  | Delete  | Space</div>
+                <div class="code-line">---------------|---------|---------|---------|---------|-------</div>
+                <div class="code-line">Array          | O(1)    | O(n)    | O(n)    | O(n)    | O(n)</div>
+                <div class="code-line">Linked List    | O(n)    | O(n)    | O(1)*   | O(1)*   | O(n)</div>
+                <div class="code-line">Stack          | O(n)    | O(n)    | O(1)    | O(1)    | O(n)</div>
+                <div class="code-line">Queue          | O(n)    | O(n)    | O(1)    | O(1)    | O(n)</div>
+                <div class="code-line">Hash Table     | N/A     | O(1)†   | O(1)†   | O(1)†   | O(n)</div>
+                <div class="code-line">Binary Tree    | O(n)    | O(n)    | O(n)    | O(n)    | O(n)</div>
+                <div class="code-line">BST            | O(log n)| O(log n)| O(log n)| O(log n)| O(n)</div>
+                <div class="code-line">Heap           | O(n)    | O(n)    | O(log n)| O(log n)| O(n)</div>
+                <div class="code-line">Graph (List)   | N/A     | O(V+E)  | O(1)    | O(V+E)  | O(V+E)</div>
+                <div class="code-line">Graph (Matrix) | N/A     | O(1)    | O(1)    | O(V²)   | O(V²)</div>
+            </div>
+
+            <div class="note">
+                <strong>Notes:</strong><br>
+                * Insert/Delete at head for linked list. Middle operations are O(n).<br>
+                † Average case. Worst case is O(n) with poor hash function or many collisions.<br>
+                BST complexities assume balanced tree. Worst case is O(n) for unbalanced.
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">💡 Data Structure Selection Guide</div>
+            
+            <div class="ds-name">When to Use Each Structure</div>
+            
+            <div class="tip">
+                <strong>Array:</strong> When you need fast random access by index, data size is known or predictable, and memory locality matters for performance.
+            </div>
+
+            <div class="tip">
+                <strong>Linked List:</strong> When you need frequent insertions/deletions at the beginning, size is unknown, or you're implementing other structures (stacks, queues).
+            </div>
+
+            <div class="tip">
+                <strong>Stack:</strong> For function calls, undo/redo operations, expression evaluation, backtracking (DFS), parsing, browser history.
+            </div>
+
+            <div class="tip">
+                <strong>Queue:</strong> For BFS traversal, task scheduling, buffering, handling requests in order, breadth-first processing.
+            </div>
+
+            <div class="tip">
+                <strong>Hash Table:</strong> When you need fast lookups by key, counting frequencies, caching, detecting duplicates, or implementing sets/maps.
+            </div>
+
+            <div class="tip">
+                <strong>Binary Tree:</strong> For hierarchical data, expression trees, decision trees, or when you need multiple traversal orders.
+            </div>
+
+            <div class="tip">
+                <strong>BST:</strong> When you need sorted data with efficient search/insert/delete, range queries, or finding closest values. Use balanced variants (AVL, Red-Black) for guaranteed performance.
+            </div>
+
+            <div class="tip">
+                <strong>Heap:</strong> For priority queues, finding k largest/smallest elements, heap sort, scheduling, or maintaining running median.
+            </div>
+
+            <div class="tip">
+                <strong>Graph:</strong> For networks, social connections, maps/navigation, dependency resolution, state machines, or any relationship-based data.
+            </div>
+
+            <div class="warning">
+                ⚠️ <strong>Remember:</strong> Choose based on your specific use case. Consider access patterns, operation frequencies, memory constraints, and whether you need ordering.
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Data Structures Reference with Complexity Analysis</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">💡 The right data structure can make the difference between O(1) and O(n) operations</p>
+        </div>
+    </div>
+</body>
+</html>

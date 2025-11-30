@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Go programming language reference with syntax, concurrency, packages, and best practices.">
+    <title>Go Language Cheatsheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e6ed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #00d4ff 0%, #00a896 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #8b95a5;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(0, 212, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 212, 255, 0.15);
+        }
+
+        .card-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #00d4ff;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 0.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+
+        .code-line {
+            color: #a5d6ff;
+            line-height: 1.5;
+        }
+
+        .comment {
+            color: #6a9955;
+        }
+
+        .keyword {
+            color: #dcdcaa;
+        }
+
+        .string {
+            color: #ce9178;
+        }
+
+        .cmd-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+
+        .cmd-row:hover {
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .cmd-name {
+            color: #00d4ff;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+        }
+
+        .cmd-desc {
+            color: #cbd5e1;
+            padding-left: 1rem;
+            font-size: 0.9rem;
+        }
+
+        code {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #a5d6ff;
+            font-size: 0.9em;
+        }
+
+        .note {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid #3b82f6;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .tip {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .warning {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 116, 139, 0.3);
+            color: #8b95a5;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐹 Go Language</h1>
+        <p class="subtitle">Essential Go syntax, concurrency patterns, and best practices</p>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">🎯 Basic Syntax</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Hello World</span></div>
+                    <div class="code-line"><span class="keyword">package</span> main</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="keyword">import</span> <span class="string">"fmt"</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="keyword">func</span> main() {</div>
+                    <div class="code-line">    fmt.Println(<span class="string">"Hello, World!"</span>)</div>
+                    <div class="code-line">}</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">go run main.go</div>
+                    <div class="cmd-desc">Run Go program directly</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">go build main.go</div>
+                    <div class="cmd-desc">Compile to executable</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">go mod init module-name</div>
+                    <div class="cmd-desc">Initialize Go module</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📝 Variables & Types</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Variable declarations</span></div>
+                    <div class="code-line"><span class="keyword">var</span> name <span class="keyword">string</span> = <span class="string">"Alice"</span></div>
+                    <div class="code-line"><span class="keyword">var</span> age <span class="keyword">int</span> = 25</div>
+                    <div class="code-line"><span class="keyword">var</span> isActive <span class="keyword">bool</span> = <span class="keyword">true</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Short declaration (inside functions)</span></div>
+                    <div class="code-line">count := 42</div>
+                    <div class="code-line">price := 19.99</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Multiple declarations</span></div>
+                    <div class="code-line"><span class="keyword">var</span> (</div>
+                    <div class="code-line">    x <span class="keyword">int</span> = 10</div>
+                    <div class="code-line">    y <span class="keyword">int</span> = 20</div>
+                    <div class="code-line">)</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Constants</span></div>
+                    <div class="code-line"><span class="keyword">const</span> Pi = 3.14159</div>
+                    <div class="code-line"><span class="keyword">const</span> MaxUsers = 100</div>
+                </div>
+                <div class="note">
+                    <strong>Basic Types:</strong> <code>bool</code>, <code>string</code>, <code>int</code>, <code>int8/16/32/64</code>, <code>uint</code>, <code>uint8/16/32/64</code>, <code>byte</code>, <code>rune</code>, <code>float32/64</code>, <code>complex64/128</code>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔧 Functions</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Basic function</span></div>
+                    <div class="code-line"><span class="keyword">func</span> add(a <span class="keyword">int</span>, b <span class="keyword">int</span>) <span class="keyword">int</span> {</div>
+                    <div class="code-line">    <span class="keyword">return</span> a + b</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Multiple return values</span></div>
+                    <div class="code-line"><span class="keyword">func</span> divide(a, b <span class="keyword">int</span>) (<span class="keyword">int</span>, <span class="keyword">error</span>) {</div>
+                    <div class="code-line">    <span class="keyword">if</span> b == 0 {</div>
+                    <div class="code-line">        <span class="keyword">return</span> 0, fmt.Errorf(<span class="string">"division by zero"</span>)</div>
+                    <div class="code-line">    }</div>
+                    <div class="code-line">    <span class="keyword">return</span> a / b, <span class="keyword">nil</span></div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Named return values</span></div>
+                    <div class="code-line"><span class="keyword">func</span> split(sum <span class="keyword">int</span>) (x, y <span class="keyword">int</span>) {</div>
+                    <div class="code-line">    x = sum * 4 / 9</div>
+                    <div class="code-line">    y = sum - x</div>
+                    <div class="code-line">    <span class="keyword">return</span>  <span class="comment">// naked return</span></div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Variadic function</span></div>
+                    <div class="code-line"><span class="keyword">func</span> sum(nums ...<span class="keyword">int</span>) <span class="keyword">int</span> {</div>
+                    <div class="code-line">    total := 0</div>
+                    <div class="code-line">    <span class="keyword">for</span> _, num := <span class="keyword">range</span> nums {</div>
+                    <div class="code-line">        total += num</div>
+                    <div class="code-line">    }</div>
+                    <div class="code-line">    <span class="keyword">return</span> total</div>
+                    <div class="code-line">}</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔄 Control Flow</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// If statement (no parentheses needed)</span></div>
+                    <div class="code-line"><span class="keyword">if</span> x > 10 {</div>
+                    <div class="code-line">    fmt.Println(<span class="string">"x is large"</span>)</div>
+                    <div class="code-line">} <span class="keyword">else if</span> x > 5 {</div>
+                    <div class="code-line">    fmt.Println(<span class="string">"x is medium"</span>)</div>
+                    <div class="code-line">} <span class="keyword">else</span> {</div>
+                    <div class="code-line">    fmt.Println(<span class="string">"x is small"</span>)</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// If with initialization</span></div>
+                    <div class="code-line"><span class="keyword">if</span> val := compute(); val > 0 {</div>
+                    <div class="code-line">    fmt.Println(val)</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Switch</span></div>
+                    <div class="code-line"><span class="keyword">switch</span> day {</div>
+                    <div class="code-line"><span class="keyword">case</span> <span class="string">"Monday"</span>:</div>
+                    <div class="code-line">    fmt.Println(<span class="string">"Start of week"</span>)</div>
+                    <div class="code-line"><span class="keyword">case</span> <span class="string">"Friday"</span>:</div>
+                    <div class="code-line">    fmt.Println(<span class="string">"End of week"</span>)</div>
+                    <div class="code-line"><span class="keyword">default</span>:</div>
+                    <div class="code-line">    fmt.Println(<span class="string">"Midweek"</span>)</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Switch without condition (like if-else)</span></div>
+                    <div class="code-line"><span class="keyword">switch</span> {</div>
+                    <div class="code-line"><span class="keyword">case</span> x < 0:</div>
+                    <div class="code-line">    fmt.Println(<span class="string">"negative"</span>)</div>
+                    <div class="code-line"><span class="keyword">case</span> x == 0:</div>
+                    <div class="code-line">    fmt.Println(<span class="string">"zero"</span>)</div>
+                    <div class="code-line"><span class="keyword">default</span>:</div>
+                    <div class="code-line">    fmt.Println(<span class="string">"positive"</span>)</div>
+                    <div class="code-line">}</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔁 Loops</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// For loop (only loop in Go)</span></div>
+                    <div class="code-line"><span class="keyword">for</span> i := 0; i < 10; i++ {</div>
+                    <div class="code-line">    fmt.Println(i)</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// While-style loop</span></div>
+                    <div class="code-line"><span class="keyword">for</span> count < 100 {</div>
+                    <div class="code-line">    count++</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Infinite loop</span></div>
+                    <div class="code-line"><span class="keyword">for</span> {</div>
+                    <div class="code-line">    <span class="comment">// break to exit</span></div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Range over slice</span></div>
+                    <div class="code-line"><span class="keyword">for</span> index, value := <span class="keyword">range</span> slice {</div>
+                    <div class="code-line">    fmt.Println(index, value)</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Range over map</span></div>
+                    <div class="code-line"><span class="keyword">for</span> key, value := <span class="keyword">range</span> myMap {</div>
+                    <div class="code-line">    fmt.Println(key, value)</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Ignore index/key with _</span></div>
+                    <div class="code-line"><span class="keyword">for</span> _, value := <span class="keyword">range</span> slice {</div>
+                    <div class="code-line">    fmt.Println(value)</div>
+                    <div class="code-line">}</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📦 Data Structures</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Arrays (fixed size)</span></div>
+                    <div class="code-line"><span class="keyword">var</span> arr [5]<span class="keyword">int</span></div>
+                    <div class="code-line">arr[0] = 1</div>
+                    <div class="code-line">arr2 := [3]<span class="keyword">string</span>{<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Slices (dynamic arrays)</span></div>
+                    <div class="code-line">slice := []<span class="keyword">int</span>{1, 2, 3}</div>
+                    <div class="code-line">slice = <span class="keyword">append</span>(slice, 4, 5)</div>
+                    <div class="code-line">slice2 := <span class="keyword">make</span>([]<span class="keyword">int</span>, 5)      <span class="comment">// length 5</span></div>
+                    <div class="code-line">slice3 := <span class="keyword">make</span>([]<span class="keyword">int</span>, 0, 10)  <span class="comment">// len 0, cap 10</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Maps</span></div>
+                    <div class="code-line">m := <span class="keyword">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>)</div>
+                    <div class="code-line">m[<span class="string">"age"</span>] = 25</div>
+                    <div class="code-line">value, exists := m[<span class="string">"age"</span>]  <span class="comment">// check existence</span></div>
+                    <div class="code-line"><span class="keyword">delete</span>(m, <span class="string">"age"</span>)           <span class="comment">// delete key</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Map literal</span></div>
+                    <div class="code-line">scores := <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>{</div>
+                    <div class="code-line">    <span class="string">"Alice"</span>: 90,</div>
+                    <div class="code-line">    <span class="string">"Bob"</span>:   85,</div>
+                    <div class="code-line">}</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🏗️ Structs</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Define struct</span></div>
+                    <div class="code-line"><span class="keyword">type</span> Person <span class="keyword">struct</span> {</div>
+                    <div class="code-line">    Name <span class="keyword">string</span></div>
+                    <div class="code-line">    Age  <span class="keyword">int</span></div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Create instance</span></div>
+                    <div class="code-line">p1 := Person{Name: <span class="string">"Alice"</span>, Age: 25}</div>
+                    <div class="code-line">p2 := Person{<span class="string">"Bob"</span>, 30}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Pointer to struct</span></div>
+                    <div class="code-line">p3 := &Person{<span class="string">"Charlie"</span>, 35}</div>
+                    <div class="code-line">p3.Age = 36  <span class="comment">// auto-dereference</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Method on struct</span></div>
+                    <div class="code-line"><span class="keyword">func</span> (p Person) Greet() <span class="keyword">string</span> {</div>
+                    <div class="code-line">    <span class="keyword">return</span> <span class="string">"Hello, "</span> + p.Name</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Pointer receiver (can modify)</span></div>
+                    <div class="code-line"><span class="keyword">func</span> (p *Person) Birthday() {</div>
+                    <div class="code-line">    p.Age++</div>
+                    <div class="code-line">}</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📋 Interfaces</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Define interface</span></div>
+                    <div class="code-line"><span class="keyword">type</span> Shape <span class="keyword">interface</span> {</div>
+                    <div class="code-line">    Area() <span class="keyword">float64</span></div>
+                    <div class="code-line">    Perimeter() <span class="keyword">float64</span></div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Implement interface (implicit)</span></div>
+                    <div class="code-line"><span class="keyword">type</span> Rectangle <span class="keyword">struct</span> {</div>
+                    <div class="code-line">    Width, Height <span class="keyword">float64</span></div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="keyword">func</span> (r Rectangle) Area() <span class="keyword">float64</span> {</div>
+                    <div class="code-line">    <span class="keyword">return</span> r.Width * r.Height</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="keyword">func</span> (r Rectangle) Perimeter() <span class="keyword">float64</span> {</div>
+                    <div class="code-line">    <span class="keyword">return</span> 2 * (r.Width + r.Height)</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Empty interface (any type)</span></div>
+                    <div class="code-line"><span class="keyword">var</span> anything <span class="keyword">interface</span>{}</div>
+                    <div class="code-line">anything = 42</div>
+                    <div class="code-line">anything = <span class="string">"hello"</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Type assertion</span></div>
+                    <div class="code-line">str, ok := anything.(<span class="keyword">string</span>)</div>
+                    <div class="code-line"><span class="keyword">if</span> ok {</div>
+                    <div class="code-line">    fmt.Println(str)</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Type switch</span></div>
+                    <div class="code-line"><span class="keyword">switch</span> v := anything.(<span class="keyword">type</span>) {</div>
+                    <div class="code-line"><span class="keyword">case</span> <span class="keyword">int</span>:</div>
+                    <div class="code-line">    fmt.Println(<span class="string">"int:"</span>, v)</div>
+                    <div class="code-line"><span class="keyword">case</span> <span class="keyword">string</span>:</div>
+                    <div class="code-line">    fmt.Println(<span class="string">"string:"</span>, v)</div>
+                    <div class="code-line">}</div>
+                </div>
+                <div class="tip">
+                    💡 Interfaces are satisfied implicitly - no "implements" keyword needed
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">⚠️ Error Handling</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Functions return errors</span></div>
+                    <div class="code-line"><span class="keyword">func</span> readFile(path <span class="keyword">string</span>) ([]<span class="keyword">byte</span>, <span class="keyword">error</span>) {</div>
+                    <div class="code-line">    data, err := os.ReadFile(path)</div>
+                    <div class="code-line">    <span class="keyword">if</span> err != <span class="keyword">nil</span> {</div>
+                    <div class="code-line">        <span class="keyword">return</span> <span class="keyword">nil</span>, err</div>
+                    <div class="code-line">    }</div>
+                    <div class="code-line">    <span class="keyword">return</span> data, <span class="keyword">nil</span></div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Create custom error</span></div>
+                    <div class="code-line"><span class="keyword">import</span> <span class="string">"errors"</span></div>
+                    <div class="code-line">err := errors.New(<span class="string">"something went wrong"</span>)</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Formatted error</span></div>
+                    <div class="code-line">err := fmt.Errorf(<span class="string">"failed to open %s: %w"</span>, path, err)</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Custom error type</span></div>
+                    <div class="code-line"><span class="keyword">type</span> MyError <span class="keyword">struct</span> {</div>
+                    <div class="code-line">    Code    <span class="keyword">int</span></div>
+                    <div class="code-line">    Message <span class="keyword">string</span></div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="keyword">func</span> (e *MyError) Error() <span class="keyword">string</span> {</div>
+                    <div class="code-line">    <span class="keyword">return</span> fmt.Sprintf(<span class="string">"error %d: %s"</span>, e.Code, e.Message)</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Check error type</span></div>
+                    <div class="code-line"><span class="keyword">if</span> errors.Is(err, os.ErrNotExist) {</div>
+                    <div class="code-line">    fmt.Println(<span class="string">"file not found"</span>)</div>
+                    <div class="code-line">}</div>
+                </div>
+                <div class="warning">
+                    ⚠️ Always check errors! Go doesn't have exceptions - errors are values
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🚀 Goroutines</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Start goroutine with go keyword</span></div>
+                    <div class="code-line"><span class="keyword">go</span> doSomething()</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Anonymous goroutine</span></div>
+                    <div class="code-line"><span class="keyword">go func</span>() {</div>
+                    <div class="code-line">    fmt.Println(<span class="string">"Running in goroutine"</span>)</div>
+                    <div class="code-line">}()</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Goroutine with parameters</span></div>
+                    <div class="code-line"><span class="keyword">go func</span>(msg <span class="keyword">string</span>) {</div>
+                    <div class="code-line">    fmt.Println(msg)</div>
+                    <div class="code-line">}(<span class="string">"Hello from goroutine"</span>)</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Wait for goroutines with WaitGroup</span></div>
+                    <div class="code-line"><span class="keyword">var</span> wg sync.WaitGroup</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="keyword">for</span> i := 0; i < 5; i++ {</div>
+                    <div class="code-line">    wg.Add(1)</div>
+                    <div class="code-line">    <span class="keyword">go func</span>(id <span class="keyword">int</span>) {</div>
+                    <div class="code-line">        <span class="keyword">defer</span> wg.Done()</div>
+                    <div class="code-line">        fmt.Println(<span class="string">"Worker"</span>, id)</div>
+                    <div class="code-line">    }(i)</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line">wg.Wait()  <span class="comment">// Wait for all goroutines</span></div>
+                </div>
+                <div class="tip">
+                    💡 Goroutines are lightweight threads managed by Go runtime
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📡 Channels</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Create channel</span></div>
+                    <div class="code-line">ch := <span class="keyword">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Send to channel</span></div>
+                    <div class="code-line">ch <- 42</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Receive from channel</span></div>
+                    <div class="code-line">value := <-ch</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Buffered channel</span></div>
+                    <div class="code-line">ch := <span class="keyword">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, 10)  <span class="comment">// buffer size 10</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Close channel</span></div>
+                    <div class="code-line"><span class="keyword">close</span>(ch)</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Check if channel is closed</span></div>
+                    <div class="code-line">value, ok := <-ch</div>
+                    <div class="code-line"><span class="keyword">if</span> !ok {</div>
+                    <div class="code-line">    fmt.Println(<span class="string">"Channel closed"</span>)</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Range over channel</span></div>
+                    <div class="code-line"><span class="keyword">for</span> value := <span class="keyword">range</span> ch {</div>
+                    <div class="code-line">    fmt.Println(value)</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Directional channels</span></div>
+                    <div class="code-line"><span class="keyword">func</span> send(ch <span class="keyword">chan</span><- <span class="keyword">int</span>) {  <span class="comment">// send-only</span></div>
+                    <div class="code-line">    ch <- 42</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="keyword">func</span> receive(ch <-<span class="keyword">chan</span> <span class="keyword">int</span>) {  <span class="comment">// receive-only</span></div>
+                    <div class="code-line">    value := <-ch</div>
+                    <div class="code-line">}</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔀 Select Statement</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Select waits on multiple channels</span></div>
+                    <div class="code-line"><span class="keyword">select</span> {</div>
+                    <div class="code-line"><span class="keyword">case</span> msg1 := <-ch1:</div>
+                    <div class="code-line">    fmt.Println(<span class="string">"Received from ch1:"</span>, msg1)</div>
+                    <div class="code-line"><span class="keyword">case</span> msg2 := <-ch2:</div>
+                    <div class="code-line">    fmt.Println(<span class="string">"Received from ch2:"</span>, msg2)</div>
+                    <div class="code-line"><span class="keyword">case</span> ch3 <- 42:</div>
+                    <div class="code-line">    fmt.Println(<span class="string">"Sent to ch3"</span>)</div>
+                    <div class="code-line"><span class="keyword">default</span>:</div>
+                    <div class="code-line">    fmt.Println(<span class="string">"No channel ready"</span>)</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Timeout pattern</span></div>
+                    <div class="code-line"><span class="keyword">select</span> {</div>
+                    <div class="code-line"><span class="keyword">case</span> result := <-ch:</div>
+                    <div class="code-line">    fmt.Println(result)</div>
+                    <div class="code-line"><span class="keyword">case</span> <-time.After(5 * time.Second):</div>
+                    <div class="code-line">    fmt.Println(<span class="string">"Timeout!"</span>)</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Non-blocking receive</span></div>
+                    <div class="code-line"><span class="keyword">select</span> {</div>
+                    <div class="code-line"><span class="keyword">case</span> msg := <-ch:</div>
+                    <div class="code-line">    fmt.Println(msg)</div>
+                    <div class="code-line"><span class="keyword">default</span>:</div>
+                    <div class="code-line">    fmt.Println(<span class="string">"No message"</span>)</div>
+                    <div class="code-line">}</div>
+                </div>
+                <div class="note">
+                    <strong>Select behavior:</strong> If multiple cases are ready, one is chosen randomly
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔒 Mutex & Synchronization</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="keyword">import</span> <span class="string">"sync"</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Mutex for safe concurrent access</span></div>
+                    <div class="code-line"><span class="keyword">type</span> SafeCounter <span class="keyword">struct</span> {</div>
+                    <div class="code-line">    mu    sync.Mutex</div>
+                    <div class="code-line">    count <span class="keyword">int</span></div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="keyword">func</span> (c *SafeCounter) Inc() {</div>
+                    <div class="code-line">    c.mu.Lock()</div>
+                    <div class="code-line">    <span class="keyword">defer</span> c.mu.Unlock()</div>
+                    <div class="code-line">    c.count++</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="keyword">func</span> (c *SafeCounter) Value() <span class="keyword">int</span> {</div>
+                    <div class="code-line">    c.mu.Lock()</div>
+                    <div class="code-line">    <span class="keyword">defer</span> c.mu.Unlock()</div>
+                    <div class="code-line">    <span class="keyword">return</span> c.count</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// RWMutex for read-heavy workloads</span></div>
+                    <div class="code-line"><span class="keyword">var</span> rwMutex sync.RWMutex</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Multiple readers allowed</span></div>
+                    <div class="code-line">rwMutex.RLock()</div>
+                    <div class="code-line"><span class="keyword">defer</span> rwMutex.RUnlock()</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Exclusive writer</span></div>
+                    <div class="code-line">rwMutex.Lock()</div>
+                    <div class="code-line"><span class="keyword">defer</span> rwMutex.Unlock()</div>
+                </div>
+                <div class="tip">
+                    💡 Use <code>defer</code> to ensure mutex is always unlocked
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🎯 Concurrency Patterns</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Worker Pool Pattern</span></div>
+                    <div class="code-line"><span class="keyword">func</span> worker(id <span class="keyword">int</span>, jobs <-<span class="keyword">chan</span> <span class="keyword">int</span>, results <span class="keyword">chan</span><- <span class="keyword">int</span>) {</div>
+                    <div class="code-line">    <span class="keyword">for</span> job := <span class="keyword">range</span> jobs {</div>
+                    <div class="code-line">        results <- job * 2</div>
+                    <div class="code-line">    }</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line">jobs := <span class="keyword">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, 100)</div>
+                    <div class="code-line">results := <span class="keyword">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, 100)</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Start workers</span></div>
+                    <div class="code-line"><span class="keyword">for</span> w := 1; w <= 3; w++ {</div>
+                    <div class="code-line">    <span class="keyword">go</span> worker(w, jobs, results)</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Pipeline Pattern</span></div>
+                    <div class="code-line"><span class="keyword">func</span> gen(nums ...<span class="keyword">int</span>) <-<span class="keyword">chan</span> <span class="keyword">int</span> {</div>
+                    <div class="code-line">    out := <span class="keyword">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</div>
+                    <div class="code-line">    <span class="keyword">go func</span>() {</div>
+                    <div class="code-line">        <span class="keyword">for</span> _, n := <span class="keyword">range</span> nums {</div>
+                    <div class="code-line">            out <- n</div>
+                    <div class="code-line">        }</div>
+                    <div class="code-line">        <span class="keyword">close</span>(out)</div>
+                    <div class="code-line">    }()</div>
+                    <div class="code-line">    <span class="keyword">return</span> out</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="keyword">func</span> square(in <-<span class="keyword">chan</span> <span class="keyword">int</span>) <-<span class="keyword">chan</span> <span class="keyword">int</span> {</div>
+                    <div class="code-line">    out := <span class="keyword">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>)</div>
+                    <div class="code-line">    <span class="keyword">go func</span>() {</div>
+                    <div class="code-line">        <span class="keyword">for</span> n := <span class="keyword">range</span> in {</div>
+                    <div class="code-line">            out <- n * n</div>
+                    <div class="code-line">        }</div>
+                    <div class="code-line">        <span class="keyword">close</span>(out)</div>
+                    <div class="code-line">    }()</div>
+                    <div class="code-line">    <span class="keyword">return</span> out</div>
+                    <div class="code-line">}</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📚 Standard Library Highlights</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">fmt</div>
+                    <div class="cmd-desc">Formatted I/O (Printf, Sprintf, Scanf)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">io / ioutil</div>
+                    <div class="cmd-desc">I/O primitives and utilities</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">os</div>
+                    <div class="cmd-desc">Operating system functionality (files, env vars)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">strings</div>
+                    <div class="cmd-desc">String manipulation (Split, Join, Contains, Replace)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">strconv</div>
+                    <div class="cmd-desc">String conversions (Atoi, Itoa, ParseInt, FormatFloat)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">time</div>
+                    <div class="cmd-desc">Time and duration operations</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">encoding/json</div>
+                    <div class="cmd-desc">JSON encoding and decoding</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">net/http</div>
+                    <div class="cmd-desc">HTTP client and server</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">sync</div>
+                    <div class="cmd-desc">Synchronization primitives (Mutex, WaitGroup, Once)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">context</div>
+                    <div class="cmd-desc">Request-scoped values, cancellation, deadlines</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">regexp</div>
+                    <div class="cmd-desc">Regular expressions</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">sort</div>
+                    <div class="cmd-desc">Sorting slices and user-defined collections</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🌐 HTTP Server Example</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="keyword">package</span> main</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="keyword">import</span> (</div>
+                    <div class="code-line">    <span class="string">"fmt"</span></div>
+                    <div class="code-line">    <span class="string">"net/http"</span></div>
+                    <div class="code-line">)</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="keyword">func</span> handler(w http.ResponseWriter, r *http.Request) {</div>
+                    <div class="code-line">    fmt.Fprintf(w, <span class="string">"Hello, %s!"</span>, r.URL.Path[1:])</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="keyword">func</span> main() {</div>
+                    <div class="code-line">    http.HandleFunc(<span class="string">"/"</span>, handler)</div>
+                    <div class="code-line">    http.ListenAndServe(<span class="string">":8080"</span>, <span class="keyword">nil</span>)</div>
+                    <div class="code-line">}</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📄 JSON Handling</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="keyword">import</span> <span class="string">"encoding/json"</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="keyword">type</span> User <span class="keyword">struct</span> {</div>
+                    <div class="code-line">    Name  <span class="keyword">string</span> `json:<span class="string">"name"</span>`</div>
+                    <div class="code-line">    Email <span class="keyword">string</span> `json:<span class="string">"email"</span>`</div>
+                    <div class="code-line">    Age   <span class="keyword">int</span>    `json:<span class="string">"age,omitempty"</span>`</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Marshal (struct to JSON)</span></div>
+                    <div class="code-line">user := User{<span class="string">"Alice"</span>, <span class="string">"alice@example.com"</span>, 25}</div>
+                    <div class="code-line">jsonData, err := json.Marshal(user)</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Unmarshal (JSON to struct)</span></div>
+                    <div class="code-line"><span class="keyword">var</span> user2 User</div>
+                    <div class="code-line">err = json.Unmarshal(jsonData, &user2)</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Pretty print</span></div>
+                    <div class="code-line">jsonData, err = json.MarshalIndent(user, <span class="string">""</span>, <span class="string">"  "</span>)</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">⏰ Context Package</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="keyword">import</span> <span class="string">"context"</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Background context</span></div>
+                    <div class="code-line">ctx := context.Background()</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// With timeout</span></div>
+                    <div class="code-line">ctx, cancel := context.WithTimeout(</div>
+                    <div class="code-line">    context.Background(),</div>
+                    <div class="code-line">    5*time.Second,</div>
+                    <div class="code-line">)</div>
+                    <div class="code-line"><span class="keyword">defer</span> cancel()</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// With cancellation</span></div>
+                    <div class="code-line">ctx, cancel := context.WithCancel(context.Background())</div>
+                    <div class="code-line"><span class="keyword">go func</span>() {</div>
+                    <div class="code-line">    <-time.After(2 * time.Second)</div>
+                    <div class="code-line">    cancel()  <span class="comment">// Cancel after 2 seconds</span></div>
+                    <div class="code-line">}()</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// With value</span></div>
+                    <div class="code-line">ctx = context.WithValue(ctx, <span class="string">"userID"</span>, 123)</div>
+                    <div class="code-line">userID := ctx.Value(<span class="string">"userID"</span>).(<span class="keyword">int</span>)</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Check cancellation</span></div>
+                    <div class="code-line"><span class="keyword">select</span> {</div>
+                    <div class="code-line"><span class="keyword">case</span> <-ctx.Done():</div>
+                    <div class="code-line">    fmt.Println(<span class="string">"Context cancelled"</span>)</div>
+                    <div class="code-line">    <span class="keyword">return</span></div>
+                    <div class="code-line"><span class="keyword">default</span>:</div>
+                    <div class="code-line">    <span class="comment">// Continue work</span></div>
+                    <div class="code-line">}</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔍 Testing</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// File: math_test.go</span></div>
+                    <div class="code-line"><span class="keyword">package</span> math</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="keyword">import</span> <span class="string">"testing"</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="keyword">func</span> TestAdd(t *testing.T) {</div>
+                    <div class="code-line">    result := Add(2, 3)</div>
+                    <div class="code-line">    <span class="keyword">if</span> result != 5 {</div>
+                    <div class="code-line">        t.Errorf(<span class="string">"Expected 5, got %d"</span>, result)</div>
+                    <div class="code-line">    }</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Table-driven tests</span></div>
+                    <div class="code-line"><span class="keyword">func</span> TestAddTable(t *testing.T) {</div>
+                    <div class="code-line">    tests := []<span class="keyword">struct</span> {</div>
+                    <div class="code-line">        a, b, want <span class="keyword">int</span></div>
+                    <div class="code-line">    }{</div>
+                    <div class="code-line">        {1, 2, 3},</div>
+                    <div class="code-line">        {0, 0, 0},</div>
+                    <div class="code-line">        {-1, 1, 0},</div>
+                    <div class="code-line">    }</div>
+                    <div class="code-line"></div>
+                    <div class="code-line">    <span class="keyword">for</span> _, tt := <span class="keyword">range</span> tests {</div>
+                    <div class="code-line">        got := Add(tt.a, tt.b)</div>
+                    <div class="code-line">        <span class="keyword">if</span> got != tt.want {</div>
+                    <div class="code-line">            t.Errorf(<span class="string">"Add(%d, %d) = %d; want %d"</span>,</div>
+                    <div class="code-line">                tt.a, tt.b, got, tt.want)</div>
+                    <div class="code-line">        }</div>
+                    <div class="code-line">    }</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Benchmark</span></div>
+                    <div class="code-line"><span class="keyword">func</span> BenchmarkAdd(b *testing.B) {</div>
+                    <div class="code-line">    <span class="keyword">for</span> i := 0; i < b.N; i++ {</div>
+                    <div class="code-line">        Add(2, 3)</div>
+                    <div class="code-line">    }</div>
+                    <div class="code-line">}</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">go test</div>
+                    <div class="cmd-desc">Run tests in current package</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">go test -v</div>
+                    <div class="cmd-desc">Run tests with verbose output</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">go test -bench=.</div>
+                    <div class="cmd-desc">Run benchmarks</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🛠️ Common Commands</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">go run main.go</div>
+                    <div class="cmd-desc">Compile and run program</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">go build</div>
+                    <div class="cmd-desc">Compile packages and dependencies</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">go install</div>
+                    <div class="cmd-desc">Compile and install packages</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">go get package-url</div>
+                    <div class="cmd-desc">Download and install packages</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">go mod init module-name</div>
+                    <div class="cmd-desc">Initialize new module</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">go mod tidy</div>
+                    <div class="cmd-desc">Add missing and remove unused modules</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">go fmt</div>
+                    <div class="cmd-desc">Format Go source code</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">go vet</div>
+                    <div class="cmd-desc">Report suspicious constructs</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">go doc package</div>
+                    <div class="cmd-desc">Show documentation for package</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">go test ./...</div>
+                    <div class="cmd-desc">Run all tests recursively</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">💡 Best Practices</div>
+            <div class="tip">
+                <strong>Naming Conventions:</strong><br>
+                • Exported names start with uppercase (e.g., <code>PublicFunc</code>)<br>
+                • Unexported names start with lowercase (e.g., <code>privateFunc</code>)<br>
+                • Use camelCase for multi-word names<br>
+                • Keep names short and meaningful<br>
+                • Interface names often end in -er (e.g., <code>Reader</code>, <code>Writer</code>)
+            </div>
+            <div class="tip" style="margin-top: 1rem;">
+                <strong>Concurrency:</strong><br>
+                • Don't communicate by sharing memory; share memory by communicating<br>
+                • Use channels to pass ownership of data<br>
+                • Use mutexes to protect shared state<br>
+                • Always close channels when done sending<br>
+                • Use <code>select</code> for multiplexing channels<br>
+                • Use <code>context</code> for cancellation and timeouts
+            </div>
+            <div class="tip" style="margin-top: 1rem;">
+                <strong>Error Handling:</strong><br>
+                • Check errors immediately after they occur<br>
+                • Don't ignore errors (use <code>_</code> only when intentional)<br>
+                • Wrap errors with context using <code>fmt.Errorf</code> with <code>%w</code><br>
+                • Return errors as the last return value<br>
+                • Use custom error types for complex error handling
+            </div>
+            <div class="tip" style="margin-top: 1rem;">
+                <strong>Code Organization:</strong><br>
+                • Keep packages focused and cohesive<br>
+                • Use <code>internal/</code> for private packages<br>
+                • Run <code>go fmt</code> before committing<br>
+                • Use <code>go vet</code> to catch common mistakes<br>
+                • Write tests alongside your code<br>
+                • Document exported functions and types
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Go Language Quick Reference</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">🐹 Master concurrent programming with Go</p>
+        </div>
+    </div>
+</body>
+</html>

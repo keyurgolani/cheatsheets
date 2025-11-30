@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Material Design tokens including colors, typography, spacing, and component specifications.">
+    <title>Material Design Tokens Cheatsheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e6ed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #6200ea 0%, #b388ff 50%, #03dac6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #8b95a5;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(98, 0, 234, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(98, 0, 234, 0.15);
+        }
+
+        .card-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #b388ff;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(179, 136, 255, 0.3);
+        }
+
+        .card-header h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: inherit;
+            margin: 0;
+        }
+
+        .cmd-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+
+        .cmd-row:hover {
+            background: rgba(98, 0, 234, 0.1);
+        }
+
+        .cmd-name {
+            color: #b388ff;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+        }
+
+        .cmd-desc {
+            color: #cbd5e1;
+            padding-left: 1rem;
+            font-size: 0.9rem;
+        }
+
+        code {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #a5d6ff;
+            font-size: 0.9em;
+        }
+
+        .color-swatch {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+        }
+
+        .color-box {
+            width: 50px;
+            height: 50px;
+            border-radius: 6px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            flex-shrink: 0;
+        }
+
+        .color-info {
+            flex: 1;
+        }
+
+        .color-name {
+            color: #b388ff;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .color-value {
+            color: #cbd5e1;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+        }
+
+        .elevation-demo {
+            background: rgba(98, 0, 234, 0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            text-align: center;
+            color: #e0e6ed;
+        }
+
+        .note {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid #3b82f6;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .tip {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 116, 139, 0.3);
+            color: #8b95a5;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Material Design Tokens</h1>
+        <p class="subtitle">Design tokens for building consistent Material Design interfaces</p>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-header"><h2>🎨 Primary Colors</h2></div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #6200ea;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Primary</div>
+                        <div class="color-value">#6200ea / rgb(98, 0, 234)</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #3700b3;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Primary Variant</div>
+                        <div class="color-value">#3700b3 / rgb(55, 0, 179)</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #03dac6;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Secondary</div>
+                        <div class="color-value">#03dac6 / rgb(3, 218, 198)</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #018786;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Secondary Variant</div>
+                        <div class="color-value">#018786 / rgb(1, 135, 134)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header"><h2>⚠️ Status Colors</h2></div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #b00020;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Error</div>
+                        <div class="color-value">#b00020 / rgb(176, 0, 32)</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #4caf50;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Success</div>
+                        <div class="color-value">#4caf50 / rgb(76, 175, 80)</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #ff9800;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Warning</div>
+                        <div class="color-value">#ff9800 / rgb(255, 152, 0)</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #2196f3;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Info</div>
+                        <div class="color-value">#2196f3 / rgb(33, 150, 243)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header"><h2>🌓 Surface Colors</h2></div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #ffffff; border-color: #000;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Surface (Light)</div>
+                        <div class="color-value">#ffffff / rgb(255, 255, 255)</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #121212;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Surface (Dark)</div>
+                        <div class="color-value">#121212 / rgb(18, 18, 18)</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #fafafa; border-color: #000;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Background (Light)</div>
+                        <div class="color-value">#fafafa / rgb(250, 250, 250)</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #000000;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Background (Dark)</div>
+                        <div class="color-value">#000000 / rgb(0, 0, 0)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header"><h2>📝 Text Colors</h2></div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: rgba(0, 0, 0, 0.87); border-color: #fff;"></div>
+                    <div class="color-info">
+                        <div class="color-name">High Emphasis (Light)</div>
+                        <div class="color-value">rgba(0, 0, 0, 0.87) / 87% opacity</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: rgba(0, 0, 0, 0.60); border-color: #fff;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Medium Emphasis (Light)</div>
+                        <div class="color-value">rgba(0, 0, 0, 0.60) / 60% opacity</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: rgba(255, 255, 255, 0.87);"></div>
+                    <div class="color-info">
+                        <div class="color-name">High Emphasis (Dark)</div>
+                        <div class="color-value">rgba(255, 255, 255, 0.87) / 87% opacity</div>
+                    </div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: rgba(255, 255, 255, 0.60);"></div>
+                    <div class="color-info">
+                        <div class="color-name">Medium Emphasis (Dark)</div>
+                        <div class="color-value">rgba(255, 255, 255, 0.60) / 60% opacity</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header"><h2>📏 Typography Scale</h2></div>
+                <div class="cmd-row">
+                    <div class="cmd-name">H1 - 96px / 6rem</div>
+                    <div class="cmd-desc">Light weight (-1.5px letter spacing)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">H2 - 60px / 3.75rem</div>
+                    <div class="cmd-desc">Light weight (-0.5px letter spacing)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">H3 - 48px / 3rem</div>
+                    <div class="cmd-desc">Regular weight (0px letter spacing)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">H4 - 34px / 2.125rem</div>
+                    <div class="cmd-desc">Regular weight (0.25px letter spacing)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">H5 - 24px / 1.5rem</div>
+                    <div class="cmd-desc">Regular weight (0px letter spacing)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">H6 - 20px / 1.25rem</div>
+                    <div class="cmd-desc">Medium weight (0.15px letter spacing)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Subtitle 1 - 16px / 1rem</div>
+                    <div class="cmd-desc">Regular weight (0.15px letter spacing)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Subtitle 2 - 14px / 0.875rem</div>
+                    <div class="cmd-desc">Medium weight (0.1px letter spacing)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Body 1 - 16px / 1rem</div>
+                    <div class="cmd-desc">Regular weight (0.5px letter spacing)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Body 2 - 14px / 0.875rem</div>
+                    <div class="cmd-desc">Regular weight (0.25px letter spacing)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Button - 14px / 0.875rem</div>
+                    <div class="cmd-desc">Medium weight (1.25px letter spacing, uppercase)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Caption - 12px / 0.75rem</div>
+                    <div class="cmd-desc">Regular weight (0.4px letter spacing)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Overline - 10px / 0.625rem</div>
+                    <div class="cmd-desc">Regular weight (1.5px letter spacing, uppercase)</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header"><h2>📐 Spacing System</h2></div>
+                <div class="cmd-row">
+                    <div class="cmd-name">4px / 0.25rem</div>
+                    <div class="cmd-desc">Base unit (1x) - Minimal spacing</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">8px / 0.5rem</div>
+                    <div class="cmd-desc">2x - Small spacing, icon padding</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">12px / 0.75rem</div>
+                    <div class="cmd-desc">3x - Compact spacing</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">16px / 1rem</div>
+                    <div class="cmd-desc">4x - Standard spacing, default padding</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">24px / 1.5rem</div>
+                    <div class="cmd-desc">6x - Medium spacing, card padding</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">32px / 2rem</div>
+                    <div class="cmd-desc">8x - Large spacing, section gaps</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">48px / 3rem</div>
+                    <div class="cmd-desc">12x - Extra large spacing</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">64px / 4rem</div>
+                    <div class="cmd-desc">16x - Major section spacing</div>
+                </div>
+                <div class="tip">
+                    💡 All spacing should be multiples of 4px for consistency across the design system.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header"><h2>🏔️ Elevation Levels</h2></div>
+                <div class="elevation-demo" style="box-shadow: none;">
+                    <strong>Level 0</strong> - No elevation
+                </div>
+                <div class="elevation-demo" style="box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);">
+                    <strong>Level 1</strong> - Cards, switches
+                </div>
+                <div class="elevation-demo" style="box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12);">
+                    <strong>Level 2</strong> - Raised buttons (resting)
+                </div>
+                <div class="elevation-demo" style="box-shadow: 0px 3px 3px -2px rgba(0,0,0,0.2), 0px 3px 4px 0px rgba(0,0,0,0.14), 0px 1px 8px 0px rgba(0,0,0,0.12);">
+                    <strong>Level 3</strong> - Refresh indicator, search bar
+                </div>
+                <div class="elevation-demo" style="box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);">
+                    <strong>Level 4</strong> - App bar
+                </div>
+                <div class="elevation-demo" style="box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2), 0px 6px 10px 0px rgba(0,0,0,0.14), 0px 1px 18px 0px rgba(0,0,0,0.12);">
+                    <strong>Level 6</strong> - Snackbar
+                </div>
+                <div class="elevation-demo" style="box-shadow: 0px 4px 5px -2px rgba(0,0,0,0.2), 0px 7px 10px 1px rgba(0,0,0,0.14), 0px 2px 16px 1px rgba(0,0,0,0.12);">
+                    <strong>Level 8</strong> - Bottom navigation, menu
+                </div>
+                <div class="elevation-demo" style="box-shadow: 0px 6px 6px -3px rgba(0,0,0,0.2), 0px 10px 14px 1px rgba(0,0,0,0.14), 0px 4px 18px 3px rgba(0,0,0,0.12);">
+                    <strong>Level 12</strong> - FAB (resting)
+                </div>
+                <div class="elevation-demo" style="box-shadow: 0px 8px 10px -5px rgba(0,0,0,0.2), 0px 16px 24px 2px rgba(0,0,0,0.14), 0px 6px 30px 5px rgba(0,0,0,0.12);">
+                    <strong>Level 16</strong> - Navigation drawer
+                </div>
+                <div class="elevation-demo" style="box-shadow: 0px 11px 15px -7px rgba(0,0,0,0.2), 0px 24px 38px 3px rgba(0,0,0,0.14), 0px 9px 46px 8px rgba(0,0,0,0.12);">
+                    <strong>Level 24</strong> - Dialog, modal
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header"><h2>🔘 Button Tokens</h2></div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Height: 36px</div>
+                    <div class="cmd-desc">Standard button height</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Min Width: 64px</div>
+                    <div class="cmd-desc">Minimum button width</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Padding: 16px horizontal</div>
+                    <div class="cmd-desc">Left and right padding</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Border Radius: 4px</div>
+                    <div class="cmd-desc">Corner rounding</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Text Transform: Uppercase</div>
+                    <div class="cmd-desc">Button text styling</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Letter Spacing: 1.25px</div>
+                    <div class="cmd-desc">Text letter spacing</div>
+                </div>
+                <div class="note">
+                    <strong>Variants:</strong> Contained (filled), Outlined (border), Text (flat)
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header"><h2>📄 Card Tokens</h2></div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Border Radius: 4px</div>
+                    <div class="cmd-desc">Standard card corner radius</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Elevation: 1-8</div>
+                    <div class="cmd-desc">Default elevation level 1, can go up to 8</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Padding: 16px</div>
+                    <div class="cmd-desc">Internal content padding</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Gap: 8px</div>
+                    <div class="cmd-desc">Spacing between card elements</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header"><h2>📱 App Bar Tokens</h2></div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Height: 56px (mobile) / 64px (desktop)</div>
+                    <div class="cmd-desc">Standard app bar height</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Elevation: 4</div>
+                    <div class="cmd-desc">Default elevation level</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Padding: 16px horizontal</div>
+                    <div class="cmd-desc">Left and right padding</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Title Size: 20px</div>
+                    <div class="cmd-desc">App bar title font size</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header"><h2>📋 List Item Tokens</h2></div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Height: 48px (single line)</div>
+                    <div class="cmd-desc">Standard list item height</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Height: 64px (two line)</div>
+                    <div class="cmd-desc">Two-line list item height</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Height: 88px (three line)</div>
+                    <div class="cmd-desc">Three-line list item height</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Padding: 16px horizontal</div>
+                    <div class="cmd-desc">Left and right padding</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Icon Size: 24px</div>
+                    <div class="cmd-desc">Standard icon size in lists</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Avatar Size: 40px</div>
+                    <div class="cmd-desc">Standard avatar size in lists</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header"><h2>🎯 Icon Sizes</h2></div>
+                <div class="cmd-row">
+                    <div class="cmd-name">18px / 1.125rem</div>
+                    <div class="cmd-desc">Small icons (inline with text)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">24px / 1.5rem</div>
+                    <div class="cmd-desc">Standard icons (default size)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">36px / 2.25rem</div>
+                    <div class="cmd-desc">Medium icons</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">48px / 3rem</div>
+                    <div class="cmd-desc">Large icons (app bar, FAB)</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header"><h2>⏱️ Motion Tokens</h2></div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Duration: 100ms</div>
+                    <div class="cmd-desc">Simple transitions (hover, focus)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Duration: 200ms</div>
+                    <div class="cmd-desc">Standard transitions (expand, collapse)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Duration: 300ms</div>
+                    <div class="cmd-desc">Complex transitions (page transitions)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Easing: cubic-bezier(0.4, 0.0, 0.2, 1)</div>
+                    <div class="cmd-desc">Standard easing (acceleration/deceleration)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Easing: cubic-bezier(0.0, 0.0, 0.2, 1)</div>
+                    <div class="cmd-desc">Deceleration easing (entering)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Easing: cubic-bezier(0.4, 0.0, 1, 1)</div>
+                    <div class="cmd-desc">Acceleration easing (exiting)</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header"><h2>📏 Border Radius Tokens</h2></div>
+                <div class="cmd-row">
+                    <div class="cmd-name">0px</div>
+                    <div class="cmd-desc">No rounding (sharp corners)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">4px / 0.25rem</div>
+                    <div class="cmd-desc">Small radius (buttons, cards, chips)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">8px / 0.5rem</div>
+                    <div class="cmd-desc">Medium radius (dialogs, sheets)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">16px / 1rem</div>
+                    <div class="cmd-desc">Large radius (FAB, large cards)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">50% / 9999px</div>
+                    <div class="cmd-desc">Circular (avatars, icon buttons)</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header"><h2>📐 Grid System</h2></div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Columns: 4 (mobile)</div>
+                    <div class="cmd-desc">Grid columns for small screens</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Columns: 8 (tablet)</div>
+                    <div class="cmd-desc">Grid columns for medium screens</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Columns: 12 (desktop)</div>
+                    <div class="cmd-desc">Grid columns for large screens</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Gutter: 16px (mobile)</div>
+                    <div class="cmd-desc">Space between columns on mobile</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Gutter: 24px (tablet/desktop)</div>
+                    <div class="cmd-desc">Space between columns on larger screens</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Margin: 16px (mobile)</div>
+                    <div class="cmd-desc">Screen edge margins on mobile</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Margin: 24px (tablet/desktop)</div>
+                    <div class="cmd-desc">Screen edge margins on larger screens</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header"><h2>🎨 Opacity Levels</h2></div>
+                <div class="cmd-row">
+                    <div class="cmd-name">100% / 1.0</div>
+                    <div class="cmd-desc">Fully opaque (primary content)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">87% / 0.87</div>
+                    <div class="cmd-desc">High emphasis text</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">60% / 0.60</div>
+                    <div class="cmd-desc">Medium emphasis text</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">38% / 0.38</div>
+                    <div class="cmd-desc">Disabled text and icons</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">12% / 0.12</div>
+                    <div class="cmd-desc">Dividers and borders</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">8% / 0.08</div>
+                    <div class="cmd-desc">Hover state overlay</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">4% / 0.04</div>
+                    <div class="cmd-desc">Subtle backgrounds</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header"><h2>🔲 Input Field Tokens</h2></div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Height: 56px</div>
+                    <div class="cmd-desc">Standard text field height</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Height: 40px</div>
+                    <div class="cmd-desc">Dense text field height</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Border Width: 1px (default)</div>
+                    <div class="cmd-desc">Outlined variant border</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Border Width: 2px (focused)</div>
+                    <div class="cmd-desc">Focused state border</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Border Radius: 4px</div>
+                    <div class="cmd-desc">Corner rounding</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Padding: 16px horizontal</div>
+                    <div class="cmd-desc">Internal padding</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header"><h2>💡 Design Token Best Practices</h2></div>
+            <div class="tip">
+                💡 <strong>Use Semantic Names:</strong> Name tokens based on their purpose (primary, secondary) rather than their appearance (blue, red).
+            </div>
+            <div class="tip">
+                💡 <strong>Maintain Consistency:</strong> Use tokens consistently across all components to ensure a cohesive design system.
+            </div>
+            <div class="tip">
+                💡 <strong>Theme Support:</strong> Design tokens should support both light and dark themes with appropriate color adjustments.
+            </div>
+            <div class="tip">
+                💡 <strong>Accessibility:</strong> Ensure color contrast ratios meet WCAG standards (4.5:1 for normal text, 3:1 for large text).
+            </div>
+            <div class="tip">
+                💡 <strong>Responsive Spacing:</strong> Use relative units (rem, em) for spacing to support different screen sizes and user preferences.
+            </div>
+            <div class="note">
+                <strong>Note:</strong> Material Design 3 (Material You) introduces dynamic color theming and updated token values. Check the official Material Design documentation for the latest specifications.
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Material Design Tokens Cheatsheet</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">🎨 Based on Material Design 2 & 3 specifications - Visit material.io for complete guidelines</p>
+        </div>
+    </div>
+</body>
+</html>

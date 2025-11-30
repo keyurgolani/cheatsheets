@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="JavaScript DOM manipulation reference for web development and browser APIs.">
+    <title>JavaScript DOM Manipulation Cheatsheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e6ed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #8b95a5;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(251, 191, 36, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(251, 191, 36, 0.15);
+        }
+
+        .card-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #fbbf24;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(251, 191, 36, 0.3);
+        }
+
+        .cmd-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+
+        .cmd-row:hover {
+            background: rgba(251, 191, 36, 0.1);
+        }
+
+        .cmd-name {
+            color: #f59e0b;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+        }
+
+        .cmd-desc {
+            color: #cbd5e1;
+            padding-left: 1rem;
+            font-size: 0.9rem;
+        }
+
+        code {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #a5d6ff;
+            font-size: 0.9em;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 0.75rem 0;
+            overflow-x: auto;
+        }
+
+        .code-line {
+            font-family: 'Courier New', monospace;
+            color: #e0e6ed;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .comment {
+            color: #10b981;
+        }
+
+        .keyword {
+            color: #fbbf24;
+        }
+
+        .string {
+            color: #ec4899;
+        }
+
+        .note {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid #3b82f6;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .tip {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .warning {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 116, 139, 0.3);
+            color: #8b95a5;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📄 JavaScript DOM Manipulation</h1>
+        <p class="subtitle">Essential methods for interacting with the Document Object Model</p>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">🔍 Element Selection</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">document.getElementById('id')</div>
+                    <div class="cmd-desc">Select element by ID</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">document.querySelector('.class')</div>
+                    <div class="cmd-desc">Select first matching element (CSS selector)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">document.querySelectorAll('div')</div>
+                    <div class="cmd-desc">Select all matching elements (returns NodeList)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">document.getElementsByClassName('class')</div>
+                    <div class="cmd-desc">Select elements by class name (returns HTMLCollection)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">document.getElementsByTagName('div')</div>
+                    <div class="cmd-desc">Select elements by tag name</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">document.getElementsByName('name')</div>
+                    <div class="cmd-desc">Select elements by name attribute</div>
+                </div>
+                <div class="tip">
+                    💡 <code>querySelector</code> and <code>querySelectorAll</code> are more flexible and use CSS selector syntax!
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">✏️ Content Manipulation</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.textContent = 'text'</div>
+                    <div class="cmd-desc">Set or get text content (no HTML parsing)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.innerHTML = '&lt;p&gt;HTML&lt;/p&gt;'</div>
+                    <div class="cmd-desc">Set or get HTML content (parses HTML)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.innerText = 'text'</div>
+                    <div class="cmd-desc">Set or get visible text (respects CSS)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.value</div>
+                    <div class="cmd-desc">Get or set value of input elements</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.outerHTML</div>
+                    <div class="cmd-desc">Get or replace element including its tags</div>
+                </div>
+                <div class="warning">
+                    ⚠️ <strong>Security:</strong> Be careful with <code>innerHTML</code> - it can execute scripts. Use <code>textContent</code> for user input!
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🎨 Attribute Manipulation</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.getAttribute('attr')</div>
+                    <div class="cmd-desc">Get attribute value</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.setAttribute('attr', 'value')</div>
+                    <div class="cmd-desc">Set attribute value</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.removeAttribute('attr')</div>
+                    <div class="cmd-desc">Remove attribute</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.hasAttribute('attr')</div>
+                    <div class="cmd-desc">Check if attribute exists</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.id = 'newId'</div>
+                    <div class="cmd-desc">Set ID directly</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.className = 'class1 class2'</div>
+                    <div class="cmd-desc">Set class attribute (overwrites)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.dataset.key = 'value'</div>
+                    <div class="cmd-desc">Access data-* attributes</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🎭 Class Manipulation</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.classList.add('class')</div>
+                    <div class="cmd-desc">Add one or more classes</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.classList.remove('class')</div>
+                    <div class="cmd-desc">Remove one or more classes</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.classList.toggle('class')</div>
+                    <div class="cmd-desc">Toggle class on/off</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.classList.contains('class')</div>
+                    <div class="cmd-desc">Check if class exists</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.classList.replace('old', 'new')</div>
+                    <div class="cmd-desc">Replace one class with another</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Example: Toggle active state</span></div>
+                    <div class="code-line"><span class="keyword">const</span> btn = document.querySelector(<span class="string">'.btn'</span>);</div>
+                    <div class="code-line">btn.classList.toggle(<span class="string">'active'</span>);</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">💅 Style Manipulation</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.style.property = 'value'</div>
+                    <div class="cmd-desc">Set inline style (camelCase)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.style.cssText = 'color: red;'</div>
+                    <div class="cmd-desc">Set multiple styles at once</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">getComputedStyle(element).property</div>
+                    <div class="cmd-desc">Get computed style value</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.style.removeProperty('color')</div>
+                    <div class="cmd-desc">Remove specific style property</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Example: Change background color</span></div>
+                    <div class="code-line">element.style.backgroundColor = <span class="string">'#3b82f6'</span>;</div>
+                    <div class="code-line">element.style.padding = <span class="string">'20px'</span>;</div>
+                </div>
+                <div class="note">
+                    <strong>Note:</strong> CSS properties use camelCase in JavaScript (e.g., <code>backgroundColor</code> instead of <code>background-color</code>)
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">➕ Creating Elements</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">document.createElement('div')</div>
+                    <div class="cmd-desc">Create new element</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">document.createTextNode('text')</div>
+                    <div class="cmd-desc">Create text node</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.cloneNode(deep)</div>
+                    <div class="cmd-desc">Clone element (true = deep copy)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">document.createDocumentFragment()</div>
+                    <div class="cmd-desc">Create document fragment (performance)</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Example: Create and append element</span></div>
+                    <div class="code-line"><span class="keyword">const</span> div = document.createElement(<span class="string">'div'</span>);</div>
+                    <div class="code-line">div.textContent = <span class="string">'Hello World'</span>;</div>
+                    <div class="code-line">div.className = <span class="string">'message'</span>;</div>
+                    <div class="code-line">document.body.appendChild(div);</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔗 Adding/Removing Elements</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">parent.appendChild(child)</div>
+                    <div class="cmd-desc">Add child to end of parent</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">parent.insertBefore(new, ref)</div>
+                    <div class="cmd-desc">Insert before reference element</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">parent.removeChild(child)</div>
+                    <div class="cmd-desc">Remove child element</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.remove()</div>
+                    <div class="cmd-desc">Remove element from DOM</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">parent.replaceChild(new, old)</div>
+                    <div class="cmd-desc">Replace child element</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.replaceWith(newElement)</div>
+                    <div class="cmd-desc">Replace element (modern)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.append(...nodes)</div>
+                    <div class="cmd-desc">Add multiple nodes/strings to end</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.prepend(...nodes)</div>
+                    <div class="cmd-desc">Add multiple nodes/strings to beginning</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.before(...nodes)</div>
+                    <div class="cmd-desc">Insert before element</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.after(...nodes)</div>
+                    <div class="cmd-desc">Insert after element</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🧭 DOM Traversal</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.parentNode</div>
+                    <div class="cmd-desc">Get parent node</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.parentElement</div>
+                    <div class="cmd-desc">Get parent element</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.children</div>
+                    <div class="cmd-desc">Get child elements (HTMLCollection)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.childNodes</div>
+                    <div class="cmd-desc">Get all child nodes (includes text nodes)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.firstChild</div>
+                    <div class="cmd-desc">Get first child node</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.firstElementChild</div>
+                    <div class="cmd-desc">Get first child element</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.lastChild</div>
+                    <div class="cmd-desc">Get last child node</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.lastElementChild</div>
+                    <div class="cmd-desc">Get last child element</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.nextSibling</div>
+                    <div class="cmd-desc">Get next sibling node</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.nextElementSibling</div>
+                    <div class="cmd-desc">Get next sibling element</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.previousSibling</div>
+                    <div class="cmd-desc">Get previous sibling node</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.previousElementSibling</div>
+                    <div class="cmd-desc">Get previous sibling element</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.closest('selector')</div>
+                    <div class="cmd-desc">Find nearest ancestor matching selector</div>
+                </div>
+                <div class="tip">
+                    💡 Use <code>Element</code> versions to skip text nodes and only get element nodes!
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🎯 Event Handling</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.addEventListener('click', fn)</div>
+                    <div class="cmd-desc">Add event listener (recommended)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.removeEventListener('click', fn)</div>
+                    <div class="cmd-desc">Remove event listener</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.onclick = function() {}</div>
+                    <div class="cmd-desc">Set event handler (old way, overwrites)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">event.preventDefault()</div>
+                    <div class="cmd-desc">Prevent default action</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">event.stopPropagation()</div>
+                    <div class="cmd-desc">Stop event bubbling</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">event.target</div>
+                    <div class="cmd-desc">Element that triggered event</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">event.currentTarget</div>
+                    <div class="cmd-desc">Element with event listener</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Example: Event delegation</span></div>
+                    <div class="code-line">document.querySelector(<span class="string">'.list'</span>).addEventListener(<span class="string">'click'</span>, (e) => {</div>
+                    <div class="code-line">  <span class="keyword">if</span> (e.target.matches(<span class="string">'.item'</span>)) {</div>
+                    <div class="code-line">    console.log(<span class="string">'Item clicked:'</span>, e.target);</div>
+                    <div class="code-line">  }</div>
+                    <div class="code-line">});</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📏 Element Dimensions</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.offsetWidth</div>
+                    <div class="cmd-desc">Width including padding and border</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.offsetHeight</div>
+                    <div class="cmd-desc">Height including padding and border</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.clientWidth</div>
+                    <div class="cmd-desc">Width including padding (no border/scrollbar)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.clientHeight</div>
+                    <div class="cmd-desc">Height including padding (no border/scrollbar)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.scrollWidth</div>
+                    <div class="cmd-desc">Full content width (including overflow)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.scrollHeight</div>
+                    <div class="cmd-desc">Full content height (including overflow)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.getBoundingClientRect()</div>
+                    <div class="cmd-desc">Get size and position relative to viewport</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.offsetTop / offsetLeft</div>
+                    <div class="cmd-desc">Position relative to offset parent</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📜 Scrolling</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.scrollTop</div>
+                    <div class="cmd-desc">Get/set vertical scroll position</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.scrollLeft</div>
+                    <div class="cmd-desc">Get/set horizontal scroll position</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.scrollIntoView()</div>
+                    <div class="cmd-desc">Scroll element into visible area</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.scrollIntoView({behavior: 'smooth'})</div>
+                    <div class="cmd-desc">Smooth scroll into view</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">window.scrollTo(x, y)</div>
+                    <div class="cmd-desc">Scroll to specific coordinates</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">window.scrollBy(x, y)</div>
+                    <div class="cmd-desc">Scroll by relative amount</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔎 Element Queries</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.matches('selector')</div>
+                    <div class="cmd-desc">Check if element matches selector</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.contains(otherElement)</div>
+                    <div class="cmd-desc">Check if element contains another</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.hasChildNodes()</div>
+                    <div class="cmd-desc">Check if element has child nodes</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.isEqualNode(otherElement)</div>
+                    <div class="cmd-desc">Check if nodes are equal</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element.isSameNode(otherElement)</div>
+                    <div class="cmd-desc">Check if nodes are the same</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📋 Form Elements</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">input.value</div>
+                    <div class="cmd-desc">Get/set input value</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">input.checked</div>
+                    <div class="cmd-desc">Get/set checkbox/radio state</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">select.selectedIndex</div>
+                    <div class="cmd-desc">Get/set selected option index</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">select.options</div>
+                    <div class="cmd-desc">Get all option elements</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">form.elements</div>
+                    <div class="cmd-desc">Get all form controls</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">form.submit()</div>
+                    <div class="cmd-desc">Submit form programmatically</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">form.reset()</div>
+                    <div class="cmd-desc">Reset form to default values</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Example: Get form data</span></div>
+                    <div class="code-line"><span class="keyword">const</span> formData = <span class="keyword">new</span> FormData(form);</div>
+                    <div class="code-line"><span class="keyword">const</span> data = Object.fromEntries(formData);</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">💡 Common Patterns</div>
+            
+            <div class="code-block">
+                <div class="code-line"><span class="comment">// Pattern 1: Create and append multiple elements</span></div>
+                <div class="code-line"><span class="keyword">const</span> fragment = document.createDocumentFragment();</div>
+                <div class="code-line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="string">0</span>; i &lt; <span class="string">100</span>; i++) {</div>
+                <div class="code-line">  <span class="keyword">const</span> li = document.createElement(<span class="string">'li'</span>);</div>
+                <div class="code-line">  li.textContent = <span class="string">`Item ${i}`</span>;</div>
+                <div class="code-line">  fragment.appendChild(li);</div>
+                <div class="code-line">}</div>
+                <div class="code-line">list.appendChild(fragment); <span class="comment">// Single reflow!</span></div>
+            </div>
+
+            <div class="code-block">
+                <div class="code-line"><span class="comment">// Pattern 2: Event delegation for dynamic content</span></div>
+                <div class="code-line">document.querySelector(<span class="string">'.container'</span>).addEventListener(<span class="string">'click'</span>, (e) => {</div>
+                <div class="code-line">  <span class="keyword">if</span> (e.target.classList.contains(<span class="string">'delete-btn'</span>)) {</div>
+                <div class="code-line">    e.target.closest(<span class="string">'.item'</span>).remove();</div>
+                <div class="code-line">  }</div>
+                <div class="code-line">});</div>
+            </div>
+
+            <div class="code-block">
+                <div class="code-line"><span class="comment">// Pattern 3: Toggle visibility</span></div>
+                <div class="code-line"><span class="keyword">const</span> toggle = (element) => {</div>
+                <div class="code-line">  element.style.display = element.style.display === <span class="string">'none'</span> ? <span class="string">'block'</span> : <span class="string">'none'</span>;</div>
+                <div class="code-line">};</div>
+            </div>
+
+            <div class="code-block">
+                <div class="code-line"><span class="comment">// Pattern 4: Wait for DOM to load</span></div>
+                <div class="code-line">document.addEventListener(<span class="string">'DOMContentLoaded'</span>, () => {</div>
+                <div class="code-line">  <span class="comment">// DOM is ready, safe to manipulate</span></div>
+                <div class="code-line">  console.log(<span class="string">'DOM loaded'</span>);</div>
+                <div class="code-line">});</div>
+            </div>
+
+            <div class="code-block">
+                <div class="code-line"><span class="comment">// Pattern 5: Debounce scroll/resize events</span></div>
+                <div class="code-line"><span class="keyword">let</span> timeout;</div>
+                <div class="code-line">window.addEventListener(<span class="string">'resize'</span>, () => {</div>
+                <div class="code-line">  clearTimeout(timeout);</div>
+                <div class="code-line">  timeout = setTimeout(() => {</div>
+                <div class="code-line">    console.log(<span class="string">'Resize ended'</span>);</div>
+                <div class="code-line">  }, <span class="string">250</span>);</div>
+                <div class="code-line">});</div>
+            </div>
+
+            <div class="code-block">
+                <div class="code-line"><span class="comment">// Pattern 6: Check if element is in viewport</span></div>
+                <div class="code-line"><span class="keyword">const</span> isInViewport = (element) => {</div>
+                <div class="code-line">  <span class="keyword">const</span> rect = element.getBoundingClientRect();</div>
+                <div class="code-line">  <span class="keyword">return</span> (</div>
+                <div class="code-line">    rect.top &gt;= <span class="string">0</span> &&</div>
+                <div class="code-line">    rect.left &gt;= <span class="string">0</span> &&</div>
+                <div class="code-line">    rect.bottom &lt;= window.innerHeight &&</div>
+                <div class="code-line">    rect.right &lt;= window.innerWidth</div>
+                <div class="code-line">  );</div>
+                <div class="code-line">};</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">⚡ Performance Tips</div>
+            <div class="tip">
+                💡 <strong>Minimize Reflows:</strong> Batch DOM changes using DocumentFragment or by modifying elements before adding them to the DOM.
+            </div>
+            <div class="tip">
+                💡 <strong>Event Delegation:</strong> Attach event listeners to parent elements instead of individual children for better performance with dynamic content.
+            </div>
+            <div class="tip">
+                💡 <strong>Cache Selectors:</strong> Store frequently accessed elements in variables instead of querying the DOM repeatedly.
+            </div>
+            <div class="tip">
+                💡 <strong>Use classList:</strong> Prefer <code>classList</code> methods over direct <code>className</code> manipulation for better readability and performance.
+            </div>
+            <div class="warning">
+                ⚠️ <strong>Avoid innerHTML for User Input:</strong> Use <code>textContent</code> or <code>createElement</code> to prevent XSS attacks.
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">🎪 Common Events</div>
+            <div class="cmd-row">
+                <div class="cmd-name">click, dblclick</div>
+                <div class="cmd-desc">Mouse click events</div>
+            </div>
+            <div class="cmd-row">
+                <div class="cmd-name">mouseenter, mouseleave</div>
+                <div class="cmd-desc">Mouse hover events (no bubbling)</div>
+            </div>
+            <div class="cmd-row">
+                <div class="cmd-name">mouseover, mouseout</div>
+                <div class="cmd-desc">Mouse hover events (with bubbling)</div>
+            </div>
+            <div class="cmd-row">
+                <div class="cmd-name">keydown, keyup, keypress</div>
+                <div class="cmd-desc">Keyboard events</div>
+            </div>
+            <div class="cmd-row">
+                <div class="cmd-name">input, change</div>
+                <div class="cmd-desc">Form input events</div>
+            </div>
+            <div class="cmd-row">
+                <div class="cmd-name">submit</div>
+                <div class="cmd-desc">Form submission event</div>
+            </div>
+            <div class="cmd-row">
+                <div class="cmd-name">focus, blur</div>
+                <div class="cmd-desc">Element focus events</div>
+            </div>
+            <div class="cmd-row">
+                <div class="cmd-name">scroll</div>
+                <div class="cmd-desc">Scroll event</div>
+            </div>
+            <div class="cmd-row">
+                <div class="cmd-name">resize</div>
+                <div class="cmd-desc">Window resize event</div>
+            </div>
+            <div class="cmd-row">
+                <div class="cmd-name">load, DOMContentLoaded</div>
+                <div class="cmd-desc">Page load events</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>JavaScript DOM Manipulation Reference</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">💡 Modern browsers support all these methods - check MDN for detailed documentation</p>
+        </div>
+    </div>
+</body>
+</html>

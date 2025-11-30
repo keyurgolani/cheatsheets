@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Database design patterns, normalization, indexing strategies, and schema optimization.">
+    <title>Database Design Patterns Cheatsheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e6ed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #8b95a5;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(16, 185, 129, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.15);
+        }
+
+        .card-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #10b981;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .cmd-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+
+        .cmd-row:hover {
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .cmd-name {
+            color: #3b82f6;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+        }
+
+        .cmd-title {
+            color: #3b82f6;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .cmd-desc {
+            color: #cbd5e1;
+            padding-left: 1rem;
+            font-size: 0.9rem;
+        }
+
+        code {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #a5d6ff;
+            font-size: 0.9em;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 0.75rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+
+        .code-line {
+            color: #a5d6ff;
+            line-height: 1.5;
+        }
+
+        .comment {
+            color: #10b981;
+        }
+
+        .keyword {
+            color: #fbbf24;
+        }
+
+        .string {
+            color: #f472b6;
+        }
+
+        .note {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid #3b82f6;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .tip {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .warning {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 116, 139, 0.3);
+            color: #8b95a5;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🗄️ Database Design Patterns</h1>
+        <p class="subtitle">Schema design, normalization, indexing strategies, and optimization techniques</p>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">📊 Normalization Forms</div>
+                <div class="cmd-row">
+                    <div class="cmd-title">First Normal Form (1NF)</div>
+                    <div class="cmd-desc">Each column contains atomic values; no repeating groups</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">Second Normal Form (2NF)</div>
+                    <div class="cmd-desc">1NF + all non-key attributes fully dependent on primary key</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">Third Normal Form (3NF)</div>
+                    <div class="cmd-desc">2NF + no transitive dependencies (non-key → non-key)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">Boyce-Codd Normal Form (BCNF)</div>
+                    <div class="cmd-desc">3NF + every determinant is a candidate key</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">Fourth Normal Form (4NF)</div>
+                    <div class="cmd-desc">BCNF + no multi-valued dependencies</div>
+                </div>
+                <div class="tip">
+                    💡 Most applications aim for 3NF as a balance between normalization and performance
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔑 Primary Key Strategies</div>
+                <div class="cmd-row">
+                    <div class="cmd-title">Auto-Increment Integer</div>
+                    <div class="cmd-desc">Simple, sequential, efficient for joins; predictable</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">UUID/GUID</div>
+                    <div class="cmd-desc">Globally unique, distributed-friendly; larger storage</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">Natural Key</div>
+                    <div class="cmd-desc">Business-meaningful (email, SSN); can change over time</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">Composite Key</div>
+                    <div class="cmd-desc">Multiple columns; useful for junction tables</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">ULID (Sortable UUID)</div>
+                    <div class="cmd-desc">Time-ordered, unique; better index performance than UUID</div>
+                </div>
+                <div class="note">
+                    <strong>Trade-offs:</strong> Auto-increment is fastest but not distributed-safe. UUIDs work across systems but impact index performance.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔗 Relationship Patterns</div>
+                <div class="cmd-row">
+                    <div class="cmd-title">One-to-Many</div>
+                    <div class="cmd-desc">Foreign key in "many" table pointing to "one" table</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line"><span class="keyword">CREATE TABLE</span> users (id <span class="keyword">INT PRIMARY KEY</span>);</div>
+                    <div class="code-line"><span class="keyword">CREATE TABLE</span> posts (</div>
+                    <div class="code-line">  id <span class="keyword">INT PRIMARY KEY</span>,</div>
+                    <div class="code-line">  user_id <span class="keyword">INT</span>,</div>
+                    <div class="code-line">  <span class="keyword">FOREIGN KEY</span> (user_id) <span class="keyword">REFERENCES</span> users(id)</div>
+                    <div class="code-line">);</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">Many-to-Many</div>
+                    <div class="cmd-desc">Junction/bridge table with foreign keys to both tables</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line"><span class="keyword">CREATE TABLE</span> students_courses (</div>
+                    <div class="code-line">  student_id <span class="keyword">INT</span>,</div>
+                    <div class="code-line">  course_id <span class="keyword">INT</span>,</div>
+                    <div class="code-line">  <span class="keyword">PRIMARY KEY</span> (student_id, course_id),</div>
+                    <div class="code-line">  <span class="keyword">FOREIGN KEY</span> (student_id) <span class="keyword">REFERENCES</span> students(id),</div>
+                    <div class="code-line">  <span class="keyword">FOREIGN KEY</span> (course_id) <span class="keyword">REFERENCES</span> courses(id)</div>
+                    <div class="code-line">);</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">One-to-One</div>
+                    <div class="cmd-desc">Foreign key with UNIQUE constraint; or shared primary key</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📇 Index Types & Strategies</div>
+                <div class="cmd-row">
+                    <div class="cmd-title">B-Tree Index (Default)</div>
+                    <div class="cmd-desc">Best for equality and range queries; most common</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">Hash Index</div>
+                    <div class="cmd-desc">Fast equality lookups; no range queries</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">Full-Text Index</div>
+                    <div class="cmd-desc">Text search with relevance ranking</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">Composite Index</div>
+                    <div class="cmd-desc">Multiple columns; order matters (leftmost prefix rule)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">Covering Index</div>
+                    <div class="cmd-desc">Includes all columns needed by query; no table lookup</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">Partial Index</div>
+                    <div class="cmd-desc">Index subset of rows (WHERE clause); saves space</div>
+                </div>
+                <div class="tip">
+                    💡 Index foreign keys, WHERE clause columns, and JOIN columns. Avoid over-indexing (slows writes).
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🎯 Indexing Best Practices</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Index Selectivity</div>
+                    <div class="cmd-desc">High cardinality columns benefit most (unique values)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Composite Index Order</div>
+                    <div class="cmd-desc">Most selective column first; match query patterns</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Avoid Function-Based Queries</div>
+                    <div class="cmd-desc">WHERE YEAR(date) = 2024 prevents index use</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Use Covering Indexes</div>
+                    <div class="cmd-desc">Include SELECT columns in index to avoid table access</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Monitor Index Usage</div>
+                    <div class="cmd-desc">Remove unused indexes; they slow down writes</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">-- Good: Index can be used</span></div>
+                    <div class="code-line"><span class="keyword">WHERE</span> created_at >= <span class="string">'2024-01-01'</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">-- Bad: Function prevents index use</span></div>
+                    <div class="code-line"><span class="keyword">WHERE</span> <span class="keyword">DATE</span>(created_at) = <span class="string">'2024-01-01'</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🏗️ Common Schema Patterns</div>
+                <div class="cmd-row">
+                    <div class="cmd-title">Soft Delete Pattern</div>
+                    <div class="cmd-desc">Add deleted_at timestamp; filter in queries</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line">deleted_at <span class="keyword">TIMESTAMP NULL</span></div>
+                    <div class="code-line"><span class="keyword">WHERE</span> deleted_at <span class="keyword">IS NULL</span></div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">Audit Trail Pattern</div>
+                    <div class="cmd-desc">Track created_at, updated_at, created_by, updated_by</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">Polymorphic Association</div>
+                    <div class="cmd-desc">Generic foreign key with type column (commentable_id, commentable_type)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">Single Table Inheritance</div>
+                    <div class="cmd-desc">One table for class hierarchy with type discriminator</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">Class Table Inheritance</div>
+                    <div class="cmd-desc">Separate tables for each subclass; join for full data</div>
+                </div>
+                <div class="warning">
+                    ⚠️ Polymorphic associations prevent foreign key constraints; use with caution
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📈 Denormalization Patterns</div>
+                <div class="cmd-row">
+                    <div class="cmd-title">Computed Columns</div>
+                    <div class="cmd-desc">Store calculated values (total_price = quantity * unit_price)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">Counter Cache</div>
+                    <div class="cmd-desc">Store count in parent table (user.posts_count)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">Materialized Views</div>
+                    <div class="cmd-desc">Pre-computed query results; refresh periodically</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">Duplicate Data</div>
+                    <div class="cmd-desc">Copy frequently accessed data to avoid joins</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">Summary Tables</div>
+                    <div class="cmd-desc">Aggregate data for reporting (daily_sales)</div>
+                </div>
+                <div class="note">
+                    <strong>Trade-off:</strong> Denormalization improves read performance but requires maintaining data consistency
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">⚡ Query Optimization Techniques</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Use EXPLAIN/EXPLAIN ANALYZE</div>
+                    <div class="cmd-desc">Analyze query execution plan and performance</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Avoid SELECT *</div>
+                    <div class="cmd-desc">Specify only needed columns; reduces I/O</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Use LIMIT for Pagination</div>
+                    <div class="cmd-desc">Fetch only needed rows; use cursor-based for large offsets</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Batch Operations</div>
+                    <div class="cmd-desc">INSERT/UPDATE multiple rows in single query</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Use EXISTS vs IN</div>
+                    <div class="cmd-desc">EXISTS stops at first match; better for large subqueries</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Avoid N+1 Queries</div>
+                    <div class="cmd-desc">Use JOINs or eager loading instead of loops</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">-- Good: Single query with JOIN</span></div>
+                    <div class="code-line"><span class="keyword">SELECT</span> u.name, p.title</div>
+                    <div class="code-line"><span class="keyword">FROM</span> users u</div>
+                    <div class="code-line"><span class="keyword">JOIN</span> posts p <span class="keyword">ON</span> u.id = p.user_id;</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔄 Partitioning Strategies</div>
+                <div class="cmd-row">
+                    <div class="cmd-title">Range Partitioning</div>
+                    <div class="cmd-desc">Split by value ranges (dates, IDs); good for time-series</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">List Partitioning</div>
+                    <div class="cmd-desc">Split by discrete values (regions, categories)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">Hash Partitioning</div>
+                    <div class="cmd-desc">Distribute evenly using hash function; good for load balancing</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">Composite Partitioning</div>
+                    <div class="cmd-desc">Combine strategies (range + hash)</div>
+                </div>
+                <div class="tip">
+                    💡 Partition large tables (>100GB) to improve query performance and maintenance operations
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🎨 Design Anti-Patterns to Avoid</div>
+                <div class="cmd-row">
+                    <div class="cmd-title">EAV (Entity-Attribute-Value)</div>
+                    <div class="cmd-desc">Flexible but kills performance; hard to query and validate</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">Storing Arrays/JSON in Columns</div>
+                    <div class="cmd-desc">Violates 1NF; difficult to query and index</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">Using VARCHAR for Everything</div>
+                    <div class="cmd-desc">Use appropriate types (INT, DATE, BOOLEAN) for validation and performance</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">No Foreign Key Constraints</div>
+                    <div class="cmd-desc">Leads to orphaned records and data integrity issues</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-title">Generic Tables</div>
+                    <div class="cmd-desc">One table for multiple entity types; maintenance nightmare</div>
+                </div>
+                <div class="warning">
+                    ⚠️ These patterns seem flexible initially but create long-term maintenance and performance problems
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📊 Data Types Best Practices</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Use Smallest Appropriate Type</div>
+                    <div class="cmd-desc">TINYINT vs INT; VARCHAR(50) vs VARCHAR(255)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">CHAR vs VARCHAR</div>
+                    <div class="cmd-desc">CHAR for fixed-length (country codes); VARCHAR for variable</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">DECIMAL for Money</div>
+                    <div class="cmd-desc">Never use FLOAT/DOUBLE for currency (precision issues)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">TIMESTAMP vs DATETIME</div>
+                    <div class="cmd-desc">TIMESTAMP for UTC; DATETIME for local time</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">ENUM vs Lookup Table</div>
+                    <div class="cmd-desc">ENUM for static values; table for dynamic/growing lists</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">TEXT vs VARCHAR</div>
+                    <div class="cmd-desc">TEXT for large content; VARCHAR for bounded strings</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔐 Security Patterns</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Principle of Least Privilege</div>
+                    <div class="cmd-desc">Grant minimum necessary permissions to database users</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Parameterized Queries</div>
+                    <div class="cmd-desc">Always use prepared statements to prevent SQL injection</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Encrypt Sensitive Data</div>
+                    <div class="cmd-desc">Hash passwords (bcrypt); encrypt PII at rest</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Row-Level Security</div>
+                    <div class="cmd-desc">Filter data based on user context (multi-tenant apps)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Audit Logging</div>
+                    <div class="cmd-desc">Track who accessed/modified sensitive data</div>
+                </div>
+                <div class="warning">
+                    ⚠️ Never store passwords in plain text or use MD5/SHA1 for password hashing
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">🎯 Schema Design Workflow</div>
+            <div class="code-block">
+                <div class="code-line"><span class="comment">1. Identify Entities</span></div>
+                <div class="code-line">   List all nouns in requirements (User, Order, Product)</div>
+                <div class="code-line"></div>
+                <div class="code-line"><span class="comment">2. Define Relationships</span></div>
+                <div class="code-line">   Determine cardinality (1:1, 1:N, M:N)</div>
+                <div class="code-line"></div>
+                <div class="code-line"><span class="comment">3. Identify Attributes</span></div>
+                <div class="code-line">   List properties for each entity</div>
+                <div class="code-line"></div>
+                <div class="code-line"><span class="comment">4. Choose Primary Keys</span></div>
+                <div class="code-line">   Select appropriate key strategy</div>
+                <div class="code-line"></div>
+                <div class="code-line"><span class="comment">5. Normalize to 3NF</span></div>
+                <div class="code-line">   Eliminate redundancy and dependencies</div>
+                <div class="code-line"></div>
+                <div class="code-line"><span class="comment">6. Add Constraints</span></div>
+                <div class="code-line">   Foreign keys, unique, not null, check constraints</div>
+                <div class="code-line"></div>
+                <div class="code-line"><span class="comment">7. Plan Indexes</span></div>
+                <div class="code-line">   Index foreign keys and query columns</div>
+                <div class="code-line"></div>
+                <div class="code-line"><span class="comment">8. Consider Denormalization</span></div>
+                <div class="code-line">   Optimize for read-heavy patterns if needed</div>
+                <div class="code-line"></div>
+                <div class="code-line"><span class="comment">9. Review and Test</span></div>
+                <div class="code-line">   Validate with sample queries and data</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">💡 Performance Optimization Checklist</div>
+            <div class="code-block">
+                <div class="code-line">✓ Index foreign keys and WHERE/JOIN columns</div>
+                <div class="code-line">✓ Use EXPLAIN to analyze slow queries</div>
+                <div class="code-line">✓ Avoid SELECT * in production code</div>
+                <div class="code-line">✓ Use appropriate data types (smallest that fits)</div>
+                <div class="code-line">✓ Implement pagination for large result sets</div>
+                <div class="code-line">✓ Use connection pooling</div>
+                <div class="code-line">✓ Cache frequently accessed data</div>
+                <div class="code-line">✓ Batch INSERT/UPDATE operations</div>
+                <div class="code-line">✓ Monitor and remove unused indexes</div>
+                <div class="code-line">✓ Consider read replicas for read-heavy workloads</div>
+                <div class="code-line">✓ Partition very large tables (>100GB)</div>
+                <div class="code-line">✓ Use covering indexes for common queries</div>
+                <div class="code-line">✓ Avoid N+1 query problems</div>
+                <div class="code-line">✓ Set appropriate timeout values</div>
+                <div class="code-line">✓ Regular VACUUM/ANALYZE (PostgreSQL) or OPTIMIZE (MySQL)</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Database Design Patterns & Best Practices Reference</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">💡 Good schema design prevents future performance problems</p>
+        </div>
+    </div>
+</body>
+</html>

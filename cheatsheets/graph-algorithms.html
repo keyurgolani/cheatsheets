@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Graph algorithms including BFS, DFS, shortest path, and minimum spanning tree.">
+    <title>Graph Algorithms Cheatsheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e6ed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #8b95a5;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(239, 68, 68, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(239, 68, 68, 0.15);
+        }
+
+        .card-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ef4444;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .algo-name {
+            color: #f97316;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .algo-name:first-child {
+            margin-top: 0;
+        }
+
+        .complexity {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .complexity-label {
+            color: #8b95a5;
+            font-weight: 500;
+        }
+
+        .complexity-value {
+            color: #cbd5e1;
+            font-family: 'Courier New', monospace;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 0.75rem 0;
+            border-left: 3px solid #ef4444;
+        }
+
+        .code-line {
+            font-family: 'Courier New', monospace;
+            color: #a5d6ff;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin: 0.2rem 0;
+        }
+
+        .comment {
+            color: #48bb78;
+        }
+
+        .keyword {
+            color: #fbbf24;
+        }
+
+        .string {
+            color: #f472b6;
+        }
+
+        code {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #a5d6ff;
+            font-size: 0.9em;
+        }
+
+        .note {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid #3b82f6;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .tip {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .warning {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 116, 139, 0.3);
+            color: #8b95a5;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🕸️ Graph Algorithms</h1>
+        <p class="subtitle">Essential graph traversal and shortest path algorithms with complexity analysis</p>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">🌳 Depth-First Search (DFS)</div>
+                <div class="algo-name">Recursive Graph Traversal</div>
+                
+                <div class="complexity">
+                    <div class="complexity-label">Time:</div>
+                    <div class="complexity-value">O(V + E)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Space:</div>
+                    <div class="complexity-value">O(V)</div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Recursive approach</span></div>
+                    <div class="code-line"><span class="keyword">function</span> dfs(graph, node, visited):</div>
+                    <div class="code-line">    <span class="keyword">if</span> node in visited:</div>
+                    <div class="code-line">        <span class="keyword">return</span></div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    add node to visited</div>
+                    <div class="code-line">    process(node)</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">for each</span> neighbor in graph[node]:</div>
+                    <div class="code-line">        dfs(graph, neighbor, visited)</div>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Best for:</strong> Cycle detection, topological sorting, pathfinding, maze solving, connected components.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📊 Breadth-First Search (BFS)</div>
+                <div class="algo-name">Level-Order Graph Traversal</div>
+                
+                <div class="complexity">
+                    <div class="complexity-label">Time:</div>
+                    <div class="complexity-value">O(V + E)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Space:</div>
+                    <div class="complexity-value">O(V)</div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-line"><span class="keyword">function</span> bfs(graph, start):</div>
+                    <div class="code-line">    queue = [start]</div>
+                    <div class="code-line">    visited = set([start])</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">while</span> queue not empty:</div>
+                    <div class="code-line">        node = queue.dequeue()</div>
+                    <div class="code-line">        process(node)</div>
+                    <div class="code-line">        </div>
+                    <div class="code-line">        <span class="keyword">for each</span> neighbor in graph[node]:</div>
+                    <div class="code-line">            <span class="keyword">if</span> neighbor not in visited:</div>
+                    <div class="code-line">                add neighbor to visited</div>
+                    <div class="code-line">                queue.enqueue(neighbor)</div>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Best for:</strong> Shortest path in unweighted graphs, level-order traversal, finding nearest neighbors.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🎯 Dijkstra's Algorithm</div>
+                <div class="algo-name">Shortest Path (Non-Negative Weights)</div>
+                
+                <div class="complexity">
+                    <div class="complexity-label">Time:</div>
+                    <div class="complexity-value">O((V + E) log V) with min-heap</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Space:</div>
+                    <div class="complexity-value">O(V)</div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-line"><span class="keyword">function</span> dijkstra(graph, start):</div>
+                    <div class="code-line">    dist = array of size V, initialized to ∞</div>
+                    <div class="code-line">    dist[start] = 0</div>
+                    <div class="code-line">    pq = min-heap with (0, start)</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">while</span> pq not empty:</div>
+                    <div class="code-line">        d, u = pq.extractMin()</div>
+                    <div class="code-line">        </div>
+                    <div class="code-line">        <span class="keyword">if</span> d &gt; dist[u]:</div>
+                    <div class="code-line">            <span class="keyword">continue</span></div>
+                    <div class="code-line">        </div>
+                    <div class="code-line">        <span class="keyword">for each</span> (v, weight) in graph[u]:</div>
+                    <div class="code-line">            <span class="keyword">if</span> dist[u] + weight &lt; dist[v]:</div>
+                    <div class="code-line">                dist[v] = dist[u] + weight</div>
+                    <div class="code-line">                pq.insert((dist[v], v))</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> dist</div>
+                </div>
+
+                <div class="warning">
+                    ⚠️ <strong>Requirement:</strong> All edge weights must be non-negative. Use Bellman-Ford for negative weights.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">⚡ Bellman-Ford Algorithm</div>
+                <div class="algo-name">Shortest Path (Handles Negative Weights)</div>
+                
+                <div class="complexity">
+                    <div class="complexity-label">Time:</div>
+                    <div class="complexity-value">O(V × E)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Space:</div>
+                    <div class="complexity-value">O(V)</div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-line"><span class="keyword">function</span> bellmanFord(graph, start, V, E):</div>
+                    <div class="code-line">    dist = array of size V, initialized to ∞</div>
+                    <div class="code-line">    dist[start] = 0</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// Relax edges V-1 times</span></div>
+                    <div class="code-line">    <span class="keyword">for</span> i = 1 <span class="keyword">to</span> V - 1:</div>
+                    <div class="code-line">        <span class="keyword">for each</span> edge (u, v, weight) in E:</div>
+                    <div class="code-line">            <span class="keyword">if</span> dist[u] != ∞ and dist[u] + weight &lt; dist[v]:</div>
+                    <div class="code-line">                dist[v] = dist[u] + weight</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// Check for negative cycles</span></div>
+                    <div class="code-line">    <span class="keyword">for each</span> edge (u, v, weight) in E:</div>
+                    <div class="code-line">        <span class="keyword">if</span> dist[u] != ∞ and dist[u] + weight &lt; dist[v]:</div>
+                    <div class="code-line">            <span class="keyword">return</span> <span class="string">"Negative cycle detected"</span></div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> dist</div>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Best for:</strong> Graphs with negative weights, detecting negative cycles, distributed systems.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🌐 Floyd-Warshall Algorithm</div>
+                <div class="algo-name">All-Pairs Shortest Paths</div>
+                
+                <div class="complexity">
+                    <div class="complexity-label">Time:</div>
+                    <div class="complexity-value">O(V³)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Space:</div>
+                    <div class="complexity-value">O(V²)</div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-line"><span class="keyword">function</span> floydWarshall(graph, V):</div>
+                    <div class="code-line">    <span class="comment">// Initialize distance matrix</span></div>
+                    <div class="code-line">    dist = V × V matrix, initialized to ∞</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">for</span> i = 0 <span class="keyword">to</span> V - 1:</div>
+                    <div class="code-line">        dist[i][i] = 0</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">for each</span> edge (u, v, weight):</div>
+                    <div class="code-line">        dist[u][v] = weight</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// Dynamic programming</span></div>
+                    <div class="code-line">    <span class="keyword">for</span> k = 0 <span class="keyword">to</span> V - 1:</div>
+                    <div class="code-line">        <span class="keyword">for</span> i = 0 <span class="keyword">to</span> V - 1:</div>
+                    <div class="code-line">            <span class="keyword">for</span> j = 0 <span class="keyword">to</span> V - 1:</div>
+                    <div class="code-line">                <span class="keyword">if</span> dist[i][k] + dist[k][j] &lt; dist[i][j]:</div>
+                    <div class="code-line">                    dist[i][j] = dist[i][k] + dist[k][j]</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> dist</div>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Best for:</strong> Dense graphs, finding shortest paths between all pairs, transitive closure.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🌲 Kruskal's Algorithm</div>
+                <div class="algo-name">Minimum Spanning Tree (Edge-Based)</div>
+                
+                <div class="complexity">
+                    <div class="complexity-label">Time:</div>
+                    <div class="complexity-value">O(E log E) or O(E log V)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Space:</div>
+                    <div class="complexity-value">O(V)</div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-line"><span class="keyword">function</span> kruskal(graph, V, E):</div>
+                    <div class="code-line">    result = []  <span class="comment">// MST edges</span></div>
+                    <div class="code-line">    uf = UnionFind(V)</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// Sort edges by weight</span></div>
+                    <div class="code-line">    edges = sort(E by weight)</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">for each</span> edge (u, v, weight) in edges:</div>
+                    <div class="code-line">        <span class="keyword">if</span> uf.find(u) != uf.find(v):</div>
+                    <div class="code-line">            uf.union(u, v)</div>
+                    <div class="code-line">            add edge to result</div>
+                    <div class="code-line">            </div>
+                    <div class="code-line">            <span class="keyword">if</span> length(result) == V - 1:</div>
+                    <div class="code-line">                <span class="keyword">break</span></div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> result</div>
+                </div>
+
+                <div class="note">
+                    <strong>Requires:</strong> Union-Find (Disjoint Set Union) data structure for efficient cycle detection.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🌿 Prim's Algorithm</div>
+                <div class="algo-name">Minimum Spanning Tree (Vertex-Based)</div>
+                
+                <div class="complexity">
+                    <div class="complexity-label">Time:</div>
+                    <div class="complexity-value">O((V + E) log V) with min-heap</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Space:</div>
+                    <div class="complexity-value">O(V)</div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-line"><span class="keyword">function</span> prim(graph, start, V):</div>
+                    <div class="code-line">    inMST = array of size V, initialized to false</div>
+                    <div class="code-line">    key = array of size V, initialized to ∞</div>
+                    <div class="code-line">    parent = array of size V, initialized to -1</div>
+                    <div class="code-line">    pq = min-heap with (0, start)</div>
+                    <div class="code-line">    key[start] = 0</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">while</span> pq not empty:</div>
+                    <div class="code-line">        weight, u = pq.extractMin()</div>
+                    <div class="code-line">        </div>
+                    <div class="code-line">        <span class="keyword">if</span> inMST[u]:</div>
+                    <div class="code-line">            <span class="keyword">continue</span></div>
+                    <div class="code-line">        </div>
+                    <div class="code-line">        inMST[u] = true</div>
+                    <div class="code-line">        </div>
+                    <div class="code-line">        <span class="keyword">for each</span> (v, w) in graph[u]:</div>
+                    <div class="code-line">            <span class="keyword">if</span> not inMST[v] and w &lt; key[v]:</div>
+                    <div class="code-line">                key[v] = w</div>
+                    <div class="code-line">                parent[v] = u</div>
+                    <div class="code-line">                pq.insert((w, v))</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> parent  <span class="comment">// MST structure</span></div>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Best for:</strong> Dense graphs, when starting from a specific vertex, adjacency matrix representation.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📋 Topological Sort</div>
+                <div class="algo-name">Linear Ordering of DAG Vertices</div>
+                
+                <div class="complexity">
+                    <div class="complexity-label">Time:</div>
+                    <div class="complexity-value">O(V + E)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Space:</div>
+                    <div class="complexity-value">O(V)</div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// DFS-based approach</span></div>
+                    <div class="code-line"><span class="keyword">function</span> topologicalSort(graph, V):</div>
+                    <div class="code-line">    visited = set()</div>
+                    <div class="code-line">    stack = []</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">function</span> dfs(node):</div>
+                    <div class="code-line">        add node to visited</div>
+                    <div class="code-line">        </div>
+                    <div class="code-line">        <span class="keyword">for each</span> neighbor in graph[node]:</div>
+                    <div class="code-line">            <span class="keyword">if</span> neighbor not in visited:</div>
+                    <div class="code-line">                dfs(neighbor)</div>
+                    <div class="code-line">        </div>
+                    <div class="code-line">        stack.push(node)</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">for each</span> vertex v in V:</div>
+                    <div class="code-line">        <span class="keyword">if</span> v not in visited:</div>
+                    <div class="code-line">            dfs(v)</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> reverse(stack)</div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Kahn's algorithm (BFS-based)</span></div>
+                    <div class="code-line"><span class="keyword">function</span> topologicalSortKahn(graph, V):</div>
+                    <div class="code-line">    inDegree = array of size V, initialized to 0</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// Calculate in-degrees</span></div>
+                    <div class="code-line">    <span class="keyword">for each</span> vertex u in V:</div>
+                    <div class="code-line">        <span class="keyword">for each</span> neighbor v in graph[u]:</div>
+                    <div class="code-line">            inDegree[v]++</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// Add vertices with 0 in-degree</span></div>
+                    <div class="code-line">    queue = [v for v in V if inDegree[v] == 0]</div>
+                    <div class="code-line">    result = []</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">while</span> queue not empty:</div>
+                    <div class="code-line">        u = queue.dequeue()</div>
+                    <div class="code-line">        add u to result</div>
+                    <div class="code-line">        </div>
+                    <div class="code-line">        <span class="keyword">for each</span> neighbor v in graph[u]:</div>
+                    <div class="code-line">            inDegree[v]--</div>
+                    <div class="code-line">            <span class="keyword">if</span> inDegree[v] == 0:</div>
+                    <div class="code-line">                queue.enqueue(v)</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">if</span> length(result) != V:</div>
+                    <div class="code-line">        <span class="keyword">return</span> <span class="string">"Graph has a cycle"</span></div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> result</div>
+                </div>
+
+                <div class="warning">
+                    ⚠️ <strong>Requirement:</strong> Graph must be a Directed Acyclic Graph (DAG). Cycles make topological sort impossible.
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">📈 Algorithm Comparison</div>
+            
+            <div class="algo-name">Shortest Path Algorithms</div>
+            <div class="code-block">
+                <div class="code-line">Algorithm      | Time Complexity    | Space  | Negative Weights | Use Case</div>
+                <div class="code-line">---------------|-------------------|--------|------------------|---------------------------</div>
+                <div class="code-line">BFS            | O(V + E)          | O(V)   | No               | Unweighted graphs</div>
+                <div class="code-line">Dijkstra       | O((V+E) log V)    | O(V)   | No               | Non-negative weights</div>
+                <div class="code-line">Bellman-Ford   | O(V × E)          | O(V)   | Yes              | Negative weights, cycles</div>
+                <div class="code-line">Floyd-Warshall | O(V³)             | O(V²)  | Yes              | All-pairs shortest path</div>
+            </div>
+
+            <div class="algo-name">Minimum Spanning Tree Algorithms</div>
+            <div class="code-block">
+                <div class="code-line">Algorithm | Time Complexity    | Space  | Approach    | Best For</div>
+                <div class="code-line">----------|-------------------|--------|-------------|---------------------------</div>
+                <div class="code-line">Kruskal   | O(E log E)        | O(V)   | Edge-based  | Sparse graphs</div>
+                <div class="code-line">Prim      | O((V+E) log V)    | O(V)   | Vertex-based| Dense graphs</div>
+            </div>
+
+            <div class="algo-name">Graph Traversal</div>
+            <div class="code-block">
+                <div class="code-line">Algorithm | Time      | Space  | Data Structure | Properties</div>
+                <div class="code-line">----------|-----------|--------|----------------|---------------------------</div>
+                <div class="code-line">DFS       | O(V + E)  | O(V)   | Stack/Recursion| Backtracking, cycles</div>
+                <div class="code-line">BFS       | O(V + E)  | O(V)   | Queue          | Shortest path, levels</div>
+                <div class="code-line">Topo Sort | O(V + E)  | O(V)   | Stack/Queue    | DAG ordering</div>
+            </div>
+
+            <div class="note">
+                <strong>Legend:</strong> V = vertices, E = edges, DAG = Directed Acyclic Graph
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">💡 Algorithm Selection Guide</div>
+            
+            <div class="algo-name">When to Use Each Algorithm</div>
+            
+            <div class="tip">
+                <strong>DFS:</strong> Cycle detection, topological sorting, finding connected components, maze solving, backtracking problems. Uses less memory than BFS for deep graphs.
+            </div>
+
+            <div class="tip">
+                <strong>BFS:</strong> Finding shortest path in unweighted graphs, level-order traversal, finding all nodes within k distance, testing bipartiteness.
+            </div>
+
+            <div class="tip">
+                <strong>Dijkstra:</strong> Single-source shortest path with non-negative weights, GPS navigation, network routing. Faster than Bellman-Ford when weights are non-negative.
+            </div>
+
+            <div class="tip">
+                <strong>Bellman-Ford:</strong> Graphs with negative edge weights, detecting negative cycles, distributed systems (can be parallelized), when simplicity matters over speed.
+            </div>
+
+            <div class="tip">
+                <strong>Floyd-Warshall:</strong> Finding shortest paths between all pairs of vertices, transitive closure, detecting negative cycles, small dense graphs.
+            </div>
+
+            <div class="tip">
+                <strong>Kruskal:</strong> Finding MST in sparse graphs, when edges are already sorted or easy to sort, union-find data structure is available.
+            </div>
+
+            <div class="tip">
+                <strong>Prim:</strong> Finding MST in dense graphs, when starting from a specific vertex, adjacency matrix representation, real-time MST construction.
+            </div>
+
+            <div class="tip">
+                <strong>Topological Sort:</strong> Task scheduling with dependencies, build systems, course prerequisites, resolving symbol dependencies in linkers.
+            </div>
+
+            <div class="warning">
+                ⚠️ <strong>Important:</strong> Always verify graph properties (directed/undirected, weighted/unweighted, cyclic/acyclic) before choosing an algorithm. Some algorithms have strict requirements.
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Graph Algorithms Reference with Complexity Analysis</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">🕸️ Master these algorithms to solve complex graph problems efficiently</p>
+        </div>
+    </div>
+</body>
+</html>

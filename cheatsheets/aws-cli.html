@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AWS CLI command reference for managing cloud resources, EC2, S3, Lambda, and more.">
+    <title>AWS CLI Cheatsheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff9900 0%, #cc7a00 100%);
+            color: #e0e6ed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 0.5rem;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            color: #1a202c;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ff9900;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #ff9900;
+        }
+
+        .cmd-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            padding: 0.5rem;
+            background: rgba(255, 153, 0, 0.05);
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+
+        .cmd-row:hover {
+            background: rgba(255, 153, 0, 0.1);
+        }
+
+        .cmd-name {
+            color: #ff9900;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+        }
+
+        .cmd-desc {
+            color: #4a5568;
+            padding-left: 1rem;
+            font-size: 0.9rem;
+        }
+
+        code {
+            background: rgba(255, 153, 0, 0.1);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #ff9900;
+            font-size: 0.9em;
+        }
+
+        .code-block {
+            background: rgba(26, 32, 44, 0.95);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            color: #e0e6ed;
+            overflow-x: auto;
+        }
+
+        .code-line {
+            margin: 0.3rem 0;
+        }
+
+        .keyword {
+            color: #ff9900;
+            font-weight: 600;
+        }
+
+        .comment {
+            color: #68d391;
+        }
+
+        .note {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid #3b82f6;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+            color: #1a202c;
+        }
+
+        .tip {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+            color: #1a202c;
+        }
+
+        .warning {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+            color: #1a202c;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>☁️ AWS CLI</h1>
+        <p class="subtitle">Essential AWS Command Line Interface commands for cloud management</p>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">🚀 Getting Started</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws --version</div>
+                    <div class="cmd-desc">Show AWS CLI version</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws configure</div>
+                    <div class="cmd-desc">Configure AWS credentials and settings</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws configure list</div>
+                    <div class="cmd-desc">Show current configuration</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws configure --profile [name]</div>
+                    <div class="cmd-desc">Configure named profile</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws sts get-caller-identity</div>
+                    <div class="cmd-desc">Show current IAM identity</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws help</div>
+                    <div class="cmd-desc">Show AWS CLI help</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws [service] help</div>
+                    <div class="cmd-desc">Show help for specific service</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🖥️ EC2 Instances</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws ec2 describe-instances</div>
+                    <div class="cmd-desc">List all EC2 instances</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws ec2 describe-instances --instance-ids [id]</div>
+                    <div class="cmd-desc">Describe specific instance</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws ec2 run-instances --image-id [ami] --instance-type [type]</div>
+                    <div class="cmd-desc">Launch new instance</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws ec2 start-instances --instance-ids [id]</div>
+                    <div class="cmd-desc">Start stopped instance</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws ec2 stop-instances --instance-ids [id]</div>
+                    <div class="cmd-desc">Stop running instance</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws ec2 terminate-instances --instance-ids [id]</div>
+                    <div class="cmd-desc">Terminate instance</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws ec2 reboot-instances --instance-ids [id]</div>
+                    <div class="cmd-desc">Reboot instance</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔐 EC2 Security & Networking</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws ec2 describe-security-groups</div>
+                    <div class="cmd-desc">List security groups</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws ec2 create-security-group --group-name [name] --description [desc]</div>
+                    <div class="cmd-desc">Create security group</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws ec2 authorize-security-group-ingress --group-id [id] --protocol tcp --port 22 --cidr 0.0.0.0/0</div>
+                    <div class="cmd-desc">Add inbound rule</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws ec2 describe-key-pairs</div>
+                    <div class="cmd-desc">List SSH key pairs</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws ec2 create-key-pair --key-name [name]</div>
+                    <div class="cmd-desc">Create new key pair</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws ec2 describe-vpcs</div>
+                    <div class="cmd-desc">List VPCs</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws ec2 describe-subnets</div>
+                    <div class="cmd-desc">List subnets</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📦 S3 Buckets</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws s3 ls</div>
+                    <div class="cmd-desc">List all S3 buckets</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws s3 ls s3://[bucket]</div>
+                    <div class="cmd-desc">List contents of bucket</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws s3 mb s3://[bucket]</div>
+                    <div class="cmd-desc">Create new bucket</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws s3 rb s3://[bucket]</div>
+                    <div class="cmd-desc">Remove empty bucket</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws s3 rb s3://[bucket] --force</div>
+                    <div class="cmd-desc">Remove bucket and all contents</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws s3 cp [file] s3://[bucket]/[key]</div>
+                    <div class="cmd-desc">Upload file to S3</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws s3 cp s3://[bucket]/[key] [file]</div>
+                    <div class="cmd-desc">Download file from S3</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws s3 sync [dir] s3://[bucket]</div>
+                    <div class="cmd-desc">Sync directory to S3</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws s3 rm s3://[bucket]/[key]</div>
+                    <div class="cmd-desc">Delete object from S3</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔑 IAM Users & Roles</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws iam list-users</div>
+                    <div class="cmd-desc">List all IAM users</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws iam get-user --user-name [name]</div>
+                    <div class="cmd-desc">Get user details</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws iam create-user --user-name [name]</div>
+                    <div class="cmd-desc">Create new IAM user</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws iam delete-user --user-name [name]</div>
+                    <div class="cmd-desc">Delete IAM user</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws iam list-roles</div>
+                    <div class="cmd-desc">List all IAM roles</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws iam list-attached-user-policies --user-name [name]</div>
+                    <div class="cmd-desc">List user's attached policies</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws iam attach-user-policy --user-name [name] --policy-arn [arn]</div>
+                    <div class="cmd-desc">Attach policy to user</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws iam create-access-key --user-name [name]</div>
+                    <div class="cmd-desc">Create access key for user</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">⚡ Lambda Functions</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws lambda list-functions</div>
+                    <div class="cmd-desc">List all Lambda functions</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws lambda get-function --function-name [name]</div>
+                    <div class="cmd-desc">Get function details</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws lambda create-function --function-name [name] --runtime [runtime] --role [arn] --handler [handler] --zip-file fileb://[file]</div>
+                    <div class="cmd-desc">Create Lambda function</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws lambda invoke --function-name [name] output.txt</div>
+                    <div class="cmd-desc">Invoke Lambda function</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws lambda update-function-code --function-name [name] --zip-file fileb://[file]</div>
+                    <div class="cmd-desc">Update function code</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws lambda delete-function --function-name [name]</div>
+                    <div class="cmd-desc">Delete Lambda function</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws lambda list-event-source-mappings --function-name [name]</div>
+                    <div class="cmd-desc">List function triggers</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📚 CloudFormation Stacks</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws cloudformation list-stacks</div>
+                    <div class="cmd-desc">List all CloudFormation stacks</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws cloudformation describe-stacks --stack-name [name]</div>
+                    <div class="cmd-desc">Describe stack details</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws cloudformation create-stack --stack-name [name] --template-body file://[file]</div>
+                    <div class="cmd-desc">Create new stack</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws cloudformation update-stack --stack-name [name] --template-body file://[file]</div>
+                    <div class="cmd-desc">Update existing stack</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws cloudformation delete-stack --stack-name [name]</div>
+                    <div class="cmd-desc">Delete stack</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws cloudformation describe-stack-events --stack-name [name]</div>
+                    <div class="cmd-desc">View stack events</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws cloudformation validate-template --template-body file://[file]</div>
+                    <div class="cmd-desc">Validate template syntax</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔍 CloudWatch Logs</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws logs describe-log-groups</div>
+                    <div class="cmd-desc">List all log groups</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws logs describe-log-streams --log-group-name [name]</div>
+                    <div class="cmd-desc">List log streams in group</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws logs tail [log-group] --follow</div>
+                    <div class="cmd-desc">Tail log group (follow mode)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws logs filter-log-events --log-group-name [name] --filter-pattern [pattern]</div>
+                    <div class="cmd-desc">Filter log events</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws logs create-log-group --log-group-name [name]</div>
+                    <div class="cmd-desc">Create log group</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws logs delete-log-group --log-group-name [name]</div>
+                    <div class="cmd-desc">Delete log group</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🗄️ RDS Databases</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws rds describe-db-instances</div>
+                    <div class="cmd-desc">List all RDS instances</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws rds describe-db-instances --db-instance-identifier [id]</div>
+                    <div class="cmd-desc">Describe specific instance</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws rds create-db-instance --db-instance-identifier [id] --db-instance-class [class] --engine [engine]</div>
+                    <div class="cmd-desc">Create RDS instance</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws rds start-db-instance --db-instance-identifier [id]</div>
+                    <div class="cmd-desc">Start stopped instance</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws rds stop-db-instance --db-instance-identifier [id]</div>
+                    <div class="cmd-desc">Stop running instance</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws rds delete-db-instance --db-instance-identifier [id]</div>
+                    <div class="cmd-desc">Delete RDS instance</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🌐 Route 53 DNS</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws route53 list-hosted-zones</div>
+                    <div class="cmd-desc">List all hosted zones</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws route53 list-resource-record-sets --hosted-zone-id [id]</div>
+                    <div class="cmd-desc">List DNS records in zone</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws route53 create-hosted-zone --name [domain] --caller-reference [ref]</div>
+                    <div class="cmd-desc">Create hosted zone</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws route53 change-resource-record-sets --hosted-zone-id [id] --change-batch file://[file]</div>
+                    <div class="cmd-desc">Update DNS records</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">⚙️ Common Options</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">--profile [name]</div>
+                    <div class="cmd-desc">Use specific AWS profile</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">--region [region]</div>
+                    <div class="cmd-desc">Specify AWS region</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">--output [json|text|table]</div>
+                    <div class="cmd-desc">Set output format</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">--query '[jmespath]'</div>
+                    <div class="cmd-desc">Filter output with JMESPath</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">--dry-run</div>
+                    <div class="cmd-desc">Check permissions without executing</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">--no-paginate</div>
+                    <div class="cmd-desc">Disable pagination</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">--debug</div>
+                    <div class="cmd-desc">Enable debug logging</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📊 ECS & ECR</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws ecs list-clusters</div>
+                    <div class="cmd-desc">List ECS clusters</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws ecs list-services --cluster [name]</div>
+                    <div class="cmd-desc">List services in cluster</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws ecs list-tasks --cluster [name]</div>
+                    <div class="cmd-desc">List tasks in cluster</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws ecr get-login-password --region [region] | docker login --username AWS --password-stdin [account].dkr.ecr.[region].amazonaws.com</div>
+                    <div class="cmd-desc">Login to ECR</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws ecr describe-repositories</div>
+                    <div class="cmd-desc">List ECR repositories</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">aws ecr create-repository --repository-name [name]</div>
+                    <div class="cmd-desc">Create ECR repository</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">📝 Example: Launch EC2 Instance</div>
+            <div class="code-block">
+                <div class="code-line"><span class="comment"># Launch t2.micro instance with Amazon Linux 2</span></div>
+                <div class="code-line"><span class="keyword">aws ec2 run-instances</span> \</div>
+                <div class="code-line">  --image-id ami-0c55b159cbfafe1f0 \</div>
+                <div class="code-line">  --instance-type t2.micro \</div>
+                <div class="code-line">  --key-name my-key-pair \</div>
+                <div class="code-line">  --security-group-ids sg-0123456789abcdef0 \</div>
+                <div class="code-line">  --subnet-id subnet-0123456789abcdef0 \</div>
+                <div class="code-line">  --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=MyInstance}]'</div>
+                <div class="code-line"></div>
+                <div class="code-line"><span class="comment"># Get instance public IP</span></div>
+                <div class="code-line"><span class="keyword">aws ec2 describe-instances</span> \</div>
+                <div class="code-line">  --instance-ids i-0123456789abcdef0 \</div>
+                <div class="code-line">  --query 'Reservations[0].Instances[0].PublicIpAddress'</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">📦 Example: S3 Operations</div>
+            <div class="code-block">
+                <div class="code-line"><span class="comment"># Create bucket with versioning</span></div>
+                <div class="code-line"><span class="keyword">aws s3api create-bucket</span> \</div>
+                <div class="code-line">  --bucket my-bucket \</div>
+                <div class="code-line">  --region us-west-2 \</div>
+                <div class="code-line">  --create-bucket-configuration LocationConstraint=us-west-2</div>
+                <div class="code-line"></div>
+                <div class="code-line"><span class="keyword">aws s3api put-bucket-versioning</span> \</div>
+                <div class="code-line">  --bucket my-bucket \</div>
+                <div class="code-line">  --versioning-configuration Status=Enabled</div>
+                <div class="code-line"></div>
+                <div class="code-line"><span class="comment"># Sync local directory to S3</span></div>
+                <div class="code-line"><span class="keyword">aws s3 sync</span> ./local-dir s3://my-bucket/path/ \</div>
+                <div class="code-line">  --exclude "*.tmp" \</div>
+                <div class="code-line">  --delete</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">⚡ Example: Lambda Deployment</div>
+            <div class="code-block">
+                <div class="code-line"><span class="comment"># Create Lambda function</span></div>
+                <div class="code-line"><span class="keyword">aws lambda create-function</span> \</div>
+                <div class="code-line">  --function-name my-function \</div>
+                <div class="code-line">  --runtime python3.9 \</div>
+                <div class="code-line">  --role arn:aws:iam::123456789012:role/lambda-role \</div>
+                <div class="code-line">  --handler lambda_function.lambda_handler \</div>
+                <div class="code-line">  --zip-file fileb://function.zip \</div>
+                <div class="code-line">  --timeout 30 \</div>
+                <div class="code-line">  --memory-size 256</div>
+                <div class="code-line"></div>
+                <div class="code-line"><span class="comment"># Invoke function</span></div>
+                <div class="code-line"><span class="keyword">aws lambda invoke</span> \</div>
+                <div class="code-line">  --function-name my-function \</div>
+                <div class="code-line">  --payload '{"key":"value"}' \</div>
+                <div class="code-line">  response.json</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">📚 Example: CloudFormation Stack</div>
+            <div class="code-block">
+                <div class="code-line"><span class="comment"># Create stack with parameters</span></div>
+                <div class="code-line"><span class="keyword">aws cloudformation create-stack</span> \</div>
+                <div class="code-line">  --stack-name my-stack \</div>
+                <div class="code-line">  --template-body file://template.yaml \</div>
+                <div class="code-line">  --parameters ParameterKey=KeyName,ParameterValue=my-key \</div>
+                <div class="code-line">  --capabilities CAPABILITY_IAM</div>
+                <div class="code-line"></div>
+                <div class="code-line"><span class="comment"># Wait for stack creation</span></div>
+                <div class="code-line"><span class="keyword">aws cloudformation wait</span> stack-create-complete \</div>
+                <div class="code-line">  --stack-name my-stack</div>
+                <div class="code-line"></div>
+                <div class="code-line"><span class="comment"># Get stack outputs</span></div>
+                <div class="code-line"><span class="keyword">aws cloudformation describe-stacks</span> \</div>
+                <div class="code-line">  --stack-name my-stack \</div>
+                <div class="code-line">  --query 'Stacks[0].Outputs'</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">🔍 Example: JMESPath Queries</div>
+            <div class="code-block">
+                <div class="code-line"><span class="comment"># Get all running instance IDs</span></div>
+                <div class="code-line"><span class="keyword">aws ec2 describe-instances</span> \</div>
+                <div class="code-line">  --query 'Reservations[*].Instances[?State.Name==`running`].InstanceId' \</div>
+                <div class="code-line">  --output text</div>
+                <div class="code-line"></div>
+                <div class="code-line"><span class="comment"># Get instance names and IPs</span></div>
+                <div class="code-line"><span class="keyword">aws ec2 describe-instances</span> \</div>
+                <div class="code-line">  --query 'Reservations[*].Instances[*].[Tags[?Key==`Name`].Value|[0],PublicIpAddress]' \</div>
+                <div class="code-line">  --output table</div>
+                <div class="code-line"></div>
+                <div class="code-line"><span class="comment"># List S3 buckets created after date</span></div>
+                <div class="code-line"><span class="keyword">aws s3api list-buckets</span> \</div>
+                <div class="code-line">  --query "Buckets[?CreationDate>=`2024-01-01`].Name"</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">💡 Useful Tips</div>
+            <div class="tip">
+                <strong>Profiles:</strong> Manage multiple AWS accounts<br>
+                • Configure: <code>aws configure --profile prod</code><br>
+                • Use: <code>aws s3 ls --profile prod</code><br>
+                • Set default: <code>export AWS_PROFILE=prod</code>
+            </div>
+            <div class="tip" style="margin-top: 0.75rem;">
+                <strong>Output Formats:</strong> Choose the right format<br>
+                • JSON (default): <code>--output json</code><br>
+                • Table: <code>--output table</code> (human-readable)<br>
+                • Text: <code>--output text</code> (scripting)<br>
+                • YAML: <code>--output yaml</code>
+            </div>
+            <div class="tip" style="margin-top: 0.75rem;">
+                <strong>Pagination:</strong> Handle large result sets<br>
+                • Auto-pagination is enabled by default<br>
+                • Disable: <code>--no-paginate</code><br>
+                • Manual: <code>--max-items 100 --starting-token [token]</code>
+            </div>
+            <div class="note" style="margin-top: 0.75rem;">
+                <strong>Autocomplete:</strong> Enable CLI autocomplete<br>
+                • Bash: <code>complete -C aws_completer aws</code><br>
+                • Zsh: Add to <code>~/.zshrc</code>
+            </div>
+            <div class="warning" style="margin-top: 0.75rem;">
+                ⚠️ <strong>Warning:</strong> Always use <code>--dry-run</code> to test destructive commands before execution. Check your region and profile settings!
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">🔐 IAM Best Practices</div>
+            <div class="note">
+                <strong>Security Recommendations:</strong><br>
+                • Never use root account credentials<br>
+                • Enable MFA for all users<br>
+                • Use IAM roles for EC2 instances<br>
+                • Rotate access keys regularly<br>
+                • Follow principle of least privilege<br>
+                • Use AWS Organizations for multi-account management
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Essential AWS CLI Commands Reference</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">☁️ Master your cloud infrastructure!</p>
+        </div>
+    </div>
+</body>
+</html>

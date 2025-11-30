@@ -45,6 +45,22 @@ main {
     min-height: 300px;
 }
 
+.category {
+    margin-bottom: 40px;
+}
+
+.category:last-child {
+    margin-bottom: 0;
+}
+
+.category h2 {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e9ecef;
+}
+
 .cheatsheets {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -85,4 +101,39 @@ footer {
     padding: 20px 0;
     margin-top: 30px;
     color: #7f8c8d;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    header {
+        padding: 20px 10px;
+    }
+    
+    header h1 {
+        font-size: 1.8rem;
+    }
+    
+    header p {
+        font-size: 1rem;
+    }
+    
+    main {
+        padding: 20px;
+    }
+    
+    .category h2 {
+        font-size: 1.3rem;
+    }
+    
+    .cheatsheets {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .cheatsheet-card {
+        padding: 15px;
+    }
 }

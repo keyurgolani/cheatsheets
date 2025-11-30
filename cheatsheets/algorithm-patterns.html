@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Common algorithm patterns and problem-solving techniques for coding interviews and competitive programming.">
+    <title>Algorithm Patterns Cheatsheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e6ed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #a78bfa 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #8b95a5;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(167, 139, 250, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(167, 139, 250, 0.15);
+        }
+
+        .card-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #a78bfa;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(167, 139, 250, 0.3);
+        }
+
+        .pattern-name {
+            color: #3b82f6;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pattern-name:first-child {
+            margin-top: 0;
+        }
+
+        .complexity {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .complexity-label {
+            color: #8b95a5;
+            font-weight: 500;
+        }
+
+        .complexity-value {
+            color: #cbd5e1;
+            font-family: 'Courier New', monospace;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 0.75rem 0;
+            border-left: 3px solid #a78bfa;
+        }
+
+        .code-line {
+            font-family: 'Courier New', monospace;
+            color: #a5d6ff;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin: 0.2rem 0;
+        }
+
+        .comment {
+            color: #48bb78;
+        }
+
+        .keyword {
+            color: #fbbf24;
+        }
+
+        .string {
+            color: #f472b6;
+        }
+
+        code {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #a5d6ff;
+            font-size: 0.9em;
+        }
+
+        .note {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid #3b82f6;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .tip {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .warning {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .recognition-box {
+            background: rgba(167, 139, 250, 0.1);
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+        }
+
+        .recognition-title {
+            color: #a78bfa;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .example-list {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .example-list li {
+            margin: 0.3rem 0;
+            color: #cbd5e1;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 116, 139, 0.3);
+            color: #8b95a5;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Algorithm Patterns</h1>
+        <p class="subtitle">Common problem-solving patterns for coding interviews and competitive programming</p>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">🪟 Sliding Window</div>
+                <div class="pattern-name">Fixed and Variable Window Sizes</div>
+                
+                <div class="complexity">
+                    <div class="complexity-label">Time:</div>
+                    <div class="complexity-value">O(n)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Space:</div>
+                    <div class="complexity-value">O(1) to O(k)</div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Fixed window size</span></div>
+                    <div class="code-line"><span class="keyword">function</span> maxSumSubarray(arr, k):</div>
+                    <div class="code-line">    windowSum = sum(arr[0:k])</div>
+                    <div class="code-line">    maxSum = windowSum</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">for</span> i = k <span class="keyword">to</span> length(arr) - 1:</div>
+                    <div class="code-line">        windowSum = windowSum - arr[i - k] + arr[i]</div>
+                    <div class="code-line">        maxSum = max(maxSum, windowSum)</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> maxSum</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Variable window size</span></div>
+                    <div class="code-line"><span class="keyword">function</span> longestSubstringKDistinct(s, k):</div>
+                    <div class="code-line">    left = 0, maxLen = 0</div>
+                    <div class="code-line">    charCount = {}</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">for</span> right = 0 <span class="keyword">to</span> length(s) - 1:</div>
+                    <div class="code-line">        charCount[s[right]]++</div>
+                    <div class="code-line">        </div>
+                    <div class="code-line">        <span class="keyword">while</span> size(charCount) &gt; k:</div>
+                    <div class="code-line">            charCount[s[left]]--</div>
+                    <div class="code-line">            <span class="keyword">if</span> charCount[s[left]] == 0:</div>
+                    <div class="code-line">                remove s[left] from charCount</div>
+                    <div class="code-line">            left++</div>
+                    <div class="code-line">        </div>
+                    <div class="code-line">        maxLen = max(maxLen, right - left + 1)</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> maxLen</div>
+                </div>
+
+                <div class="recognition-box">
+                    <div class="recognition-title">🔍 When to Use:</div>
+                    <ul class="example-list">
+                        <li>Problems involving contiguous subarrays or substrings</li>
+                        <li>Finding max/min sum of k consecutive elements</li>
+                        <li>Longest/shortest substring with certain properties</li>
+                        <li>Keywords: "contiguous", "subarray", "substring", "window"</li>
+                    </ul>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Example Problems:</strong> Maximum sum subarray of size k, longest substring without repeating characters, minimum window substring
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">👉👈 Two Pointers</div>
+                <div class="pattern-name">Opposite or Same Direction Pointers</div>
+                
+                <div class="complexity">
+                    <div class="complexity-label">Time:</div>
+                    <div class="complexity-value">O(n)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Space:</div>
+                    <div class="complexity-value">O(1)</div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Opposite direction (converging)</span></div>
+                    <div class="code-line"><span class="keyword">function</span> twoSum(arr, target):</div>
+                    <div class="code-line">    left = 0</div>
+                    <div class="code-line">    right = length(arr) - 1</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">while</span> left &lt; right:</div>
+                    <div class="code-line">        sum = arr[left] + arr[right]</div>
+                    <div class="code-line">        </div>
+                    <div class="code-line">        <span class="keyword">if</span> sum == target:</div>
+                    <div class="code-line">            <span class="keyword">return</span> [left, right]</div>
+                    <div class="code-line">        <span class="keyword">else if</span> sum &lt; target:</div>
+                    <div class="code-line">            left++</div>
+                    <div class="code-line">        <span class="keyword">else</span>:</div>
+                    <div class="code-line">            right--</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> null</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Same direction (chasing)</span></div>
+                    <div class="code-line"><span class="keyword">function</span> removeDuplicates(arr):</div>
+                    <div class="code-line">    <span class="keyword">if</span> length(arr) == 0:</div>
+                    <div class="code-line">        <span class="keyword">return</span> 0</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    slow = 0</div>
+                    <div class="code-line">    <span class="keyword">for</span> fast = 1 <span class="keyword">to</span> length(arr) - 1:</div>
+                    <div class="code-line">        <span class="keyword">if</span> arr[fast] != arr[slow]:</div>
+                    <div class="code-line">            slow++</div>
+                    <div class="code-line">            arr[slow] = arr[fast]</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> slow + 1</div>
+                </div>
+
+                <div class="recognition-box">
+                    <div class="recognition-title">🔍 When to Use:</div>
+                    <ul class="example-list">
+                        <li>Sorted arrays or linked lists</li>
+                        <li>Finding pairs with specific sum/difference</li>
+                        <li>Removing duplicates in-place</li>
+                        <li>Palindrome checking</li>
+                        <li>Keywords: "sorted", "pair", "triplet", "palindrome"</li>
+                    </ul>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Example Problems:</strong> Two sum (sorted), three sum, remove duplicates, valid palindrome, container with most water
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🐢🐇 Fast & Slow Pointers</div>
+                <div class="pattern-name">Floyd's Cycle Detection (Tortoise and Hare)</div>
+                
+                <div class="complexity">
+                    <div class="complexity-label">Time:</div>
+                    <div class="complexity-value">O(n)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Space:</div>
+                    <div class="complexity-value">O(1)</div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Cycle detection</span></div>
+                    <div class="code-line"><span class="keyword">function</span> hasCycle(head):</div>
+                    <div class="code-line">    slow = head</div>
+                    <div class="code-line">    fast = head</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">while</span> fast != null and fast.next != null:</div>
+                    <div class="code-line">        slow = slow.next</div>
+                    <div class="code-line">        fast = fast.next.next</div>
+                    <div class="code-line">        </div>
+                    <div class="code-line">        <span class="keyword">if</span> slow == fast:</div>
+                    <div class="code-line">            <span class="keyword">return</span> true</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> false</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Find middle of linked list</span></div>
+                    <div class="code-line"><span class="keyword">function</span> findMiddle(head):</div>
+                    <div class="code-line">    slow = head</div>
+                    <div class="code-line">    fast = head</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">while</span> fast != null and fast.next != null:</div>
+                    <div class="code-line">        slow = slow.next</div>
+                    <div class="code-line">        fast = fast.next.next</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> slow  <span class="comment">// Middle node</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Find cycle start</span></div>
+                    <div class="code-line"><span class="keyword">function</span> findCycleStart(head):</div>
+                    <div class="code-line">    slow = fast = head</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// Find meeting point</span></div>
+                    <div class="code-line">    <span class="keyword">while</span> fast and fast.next:</div>
+                    <div class="code-line">        slow = slow.next</div>
+                    <div class="code-line">        fast = fast.next.next</div>
+                    <div class="code-line">        <span class="keyword">if</span> slow == fast:</div>
+                    <div class="code-line">            <span class="keyword">break</span></div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// Find cycle start</span></div>
+                    <div class="code-line">    slow = head</div>
+                    <div class="code-line">    <span class="keyword">while</span> slow != fast:</div>
+                    <div class="code-line">        slow = slow.next</div>
+                    <div class="code-line">        fast = fast.next</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> slow</div>
+                </div>
+
+                <div class="recognition-box">
+                    <div class="recognition-title">🔍 When to Use:</div>
+                    <ul class="example-list">
+                        <li>Linked list cycle detection</li>
+                        <li>Finding middle of linked list</li>
+                        <li>Finding nth node from end</li>
+                        <li>Happy number problem</li>
+                        <li>Keywords: "cycle", "middle", "linked list"</li>
+                    </ul>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Example Problems:</strong> Linked list cycle, find cycle start, middle of linked list, happy number, palindrome linked list
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📅 Merge Intervals</div>
+                <div class="pattern-name">Overlapping and Non-overlapping Intervals</div>
+                
+                <div class="complexity">
+                    <div class="complexity-label">Time:</div>
+                    <div class="complexity-value">O(n log n) for sorting + O(n) for merging</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Space:</div>
+                    <div class="complexity-value">O(n)</div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Merge overlapping intervals</span></div>
+                    <div class="code-line"><span class="keyword">function</span> mergeIntervals(intervals):</div>
+                    <div class="code-line">    <span class="keyword">if</span> length(intervals) &lt;= 1:</div>
+                    <div class="code-line">        <span class="keyword">return</span> intervals</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// Sort by start time</span></div>
+                    <div class="code-line">    sort(intervals, key=start)</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    merged = [intervals[0]]</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">for</span> i = 1 <span class="keyword">to</span> length(intervals) - 1:</div>
+                    <div class="code-line">        current = intervals[i]</div>
+                    <div class="code-line">        last = merged[length(merged) - 1]</div>
+                    <div class="code-line">        </div>
+                    <div class="code-line">        <span class="keyword">if</span> current.start &lt;= last.end:</div>
+                    <div class="code-line">            <span class="comment">// Overlapping, merge them</span></div>
+                    <div class="code-line">            last.end = max(last.end, current.end)</div>
+                    <div class="code-line">        <span class="keyword">else</span>:</div>
+                    <div class="code-line">            <span class="comment">// Non-overlapping, add to result</span></div>
+                    <div class="code-line">            merged.append(current)</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> merged</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Insert interval</span></div>
+                    <div class="code-line"><span class="keyword">function</span> insertInterval(intervals, newInterval):</div>
+                    <div class="code-line">    result = []</div>
+                    <div class="code-line">    i = 0</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// Add all intervals before newInterval</span></div>
+                    <div class="code-line">    <span class="keyword">while</span> i &lt; length(intervals) and intervals[i].end &lt; newInterval.start:</div>
+                    <div class="code-line">        result.append(intervals[i])</div>
+                    <div class="code-line">        i++</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// Merge overlapping intervals</span></div>
+                    <div class="code-line">    <span class="keyword">while</span> i &lt; length(intervals) and intervals[i].start &lt;= newInterval.end:</div>
+                    <div class="code-line">        newInterval.start = min(newInterval.start, intervals[i].start)</div>
+                    <div class="code-line">        newInterval.end = max(newInterval.end, intervals[i].end)</div>
+                    <div class="code-line">        i++</div>
+                    <div class="code-line">    result.append(newInterval)</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// Add remaining intervals</span></div>
+                    <div class="code-line">    <span class="keyword">while</span> i &lt; length(intervals):</div>
+                    <div class="code-line">        result.append(intervals[i])</div>
+                    <div class="code-line">        i++</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> result</div>
+                </div>
+
+                <div class="recognition-box">
+                    <div class="recognition-title">🔍 When to Use:</div>
+                    <ul class="example-list">
+                        <li>Problems with time intervals or ranges</li>
+                        <li>Scheduling conflicts</li>
+                        <li>Meeting rooms problems</li>
+                        <li>Keywords: "intervals", "overlapping", "merge", "schedule"</li>
+                    </ul>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Example Problems:</strong> Merge intervals, insert interval, meeting rooms, non-overlapping intervals, interval list intersections
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔄 Cyclic Sort</div>
+                <div class="pattern-name">Sorting Numbers in Range [1, n]</div>
+                
+                <div class="complexity">
+                    <div class="complexity-label">Time:</div>
+                    <div class="complexity-value">O(n)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Space:</div>
+                    <div class="complexity-value">O(1)</div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Cyclic sort - place each number at its correct index</span></div>
+                    <div class="code-line"><span class="keyword">function</span> cyclicSort(arr):</div>
+                    <div class="code-line">    i = 0</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">while</span> i &lt; length(arr):</div>
+                    <div class="code-line">        correctIndex = arr[i] - 1</div>
+                    <div class="code-line">        </div>
+                    <div class="code-line">        <span class="keyword">if</span> arr[i] != arr[correctIndex]:</div>
+                    <div class="code-line">            swap(arr[i], arr[correctIndex])</div>
+                    <div class="code-line">        <span class="keyword">else</span>:</div>
+                    <div class="code-line">            i++</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> arr</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Find missing number</span></div>
+                    <div class="code-line"><span class="keyword">function</span> findMissingNumber(arr):</div>
+                    <div class="code-line">    i = 0</div>
+                    <div class="code-line">    n = length(arr)</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// Place each number at index equal to its value</span></div>
+                    <div class="code-line">    <span class="keyword">while</span> i &lt; n:</div>
+                    <div class="code-line">        correctIndex = arr[i]</div>
+                    <div class="code-line">        <span class="keyword">if</span> arr[i] &lt; n and arr[i] != arr[correctIndex]:</div>
+                    <div class="code-line">            swap(arr[i], arr[correctIndex])</div>
+                    <div class="code-line">        <span class="keyword">else</span>:</div>
+                    <div class="code-line">            i++</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// Find the first index where number doesn't match</span></div>
+                    <div class="code-line">    <span class="keyword">for</span> i = 0 <span class="keyword">to</span> n - 1:</div>
+                    <div class="code-line">        <span class="keyword">if</span> arr[i] != i:</div>
+                    <div class="code-line">            <span class="keyword">return</span> i</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> n</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Find all duplicates</span></div>
+                    <div class="code-line"><span class="keyword">function</span> findDuplicates(arr):</div>
+                    <div class="code-line">    i = 0</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">while</span> i &lt; length(arr):</div>
+                    <div class="code-line">        correctIndex = arr[i] - 1</div>
+                    <div class="code-line">        <span class="keyword">if</span> arr[i] != arr[correctIndex]:</div>
+                    <div class="code-line">            swap(arr[i], arr[correctIndex])</div>
+                    <div class="code-line">        <span class="keyword">else</span>:</div>
+                    <div class="code-line">            i++</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    duplicates = []</div>
+                    <div class="code-line">    <span class="keyword">for</span> i = 0 <span class="keyword">to</span> length(arr) - 1:</div>
+                    <div class="code-line">        <span class="keyword">if</span> arr[i] != i + 1:</div>
+                    <div class="code-line">            duplicates.append(arr[i])</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> duplicates</div>
+                </div>
+
+                <div class="recognition-box">
+                    <div class="recognition-title">🔍 When to Use:</div>
+                    <ul class="example-list">
+                        <li>Array contains numbers in range [1, n] or [0, n]</li>
+                        <li>Finding missing/duplicate numbers</li>
+                        <li>Problems requiring O(1) space sorting</li>
+                        <li>Keywords: "missing number", "duplicate", "range [1, n]"</li>
+                    </ul>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Example Problems:</strong> Missing number, find all duplicates, find duplicate number, first missing positive, find corrupt pair
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">↩️ In-Place Reversal</div>
+                <div class="pattern-name">Reversing Linked List Segments</div>
+                
+                <div class="complexity">
+                    <div class="complexity-label">Time:</div>
+                    <div class="complexity-value">O(n)</div>
+                </div>
+                <div class="complexity">
+                    <div class="complexity-label">Space:</div>
+                    <div class="complexity-value">O(1)</div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Reverse entire linked list</span></div>
+                    <div class="code-line"><span class="keyword">function</span> reverseList(head):</div>
+                    <div class="code-line">    prev = null</div>
+                    <div class="code-line">    current = head</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">while</span> current != null:</div>
+                    <div class="code-line">        next = current.next</div>
+                    <div class="code-line">        current.next = prev</div>
+                    <div class="code-line">        prev = current</div>
+                    <div class="code-line">        current = next</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> prev  <span class="comment">// New head</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Reverse sublist from position m to n</span></div>
+                    <div class="code-line"><span class="keyword">function</span> reverseBetween(head, m, n):</div>
+                    <div class="code-line">    <span class="keyword">if</span> m == n:</div>
+                    <div class="code-line">        <span class="keyword">return</span> head</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// Skip to position m-1</span></div>
+                    <div class="code-line">    current = head</div>
+                    <div class="code-line">    prev = null</div>
+                    <div class="code-line">    <span class="keyword">for</span> i = 0 <span class="keyword">to</span> m - 1:</div>
+                    <div class="code-line">        prev = current</div>
+                    <div class="code-line">        current = current.next</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// Reverse from m to n</span></div>
+                    <div class="code-line">    lastNodeBeforeReverse = prev</div>
+                    <div class="code-line">    lastNodeOfReverse = current</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">for</span> i = 0 <span class="keyword">to</span> n - m:</div>
+                    <div class="code-line">        next = current.next</div>
+                    <div class="code-line">        current.next = prev</div>
+                    <div class="code-line">        prev = current</div>
+                    <div class="code-line">        current = next</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="comment">// Connect with remaining list</span></div>
+                    <div class="code-line">    <span class="keyword">if</span> lastNodeBeforeReverse != null:</div>
+                    <div class="code-line">        lastNodeBeforeReverse.next = prev</div>
+                    <div class="code-line">    <span class="keyword">else</span>:</div>
+                    <div class="code-line">        head = prev</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    lastNodeOfReverse.next = current</div>
+                    <div class="code-line">    <span class="keyword">return</span> head</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Reverse every k nodes</span></div>
+                    <div class="code-line"><span class="keyword">function</span> reverseKGroup(head, k):</div>
+                    <div class="code-line">    <span class="keyword">if</span> k &lt;= 1 or head == null:</div>
+                    <div class="code-line">        <span class="keyword">return</span> head</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    current = head</div>
+                    <div class="code-line">    prev = null</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">while</span> true:</div>
+                    <div class="code-line">        lastNodeBeforeReverse = prev</div>
+                    <div class="code-line">        lastNodeOfReverse = current</div>
+                    <div class="code-line">        </div>
+                    <div class="code-line">        <span class="comment">// Reverse k nodes</span></div>
+                    <div class="code-line">        <span class="keyword">for</span> i = 0 <span class="keyword">to</span> k - 1 and current != null:</div>
+                    <div class="code-line">            next = current.next</div>
+                    <div class="code-line">            current.next = prev</div>
+                    <div class="code-line">            prev = current</div>
+                    <div class="code-line">            current = next</div>
+                    <div class="code-line">        </div>
+                    <div class="code-line">        <span class="comment">// Connect with previous part</span></div>
+                    <div class="code-line">        <span class="keyword">if</span> lastNodeBeforeReverse != null:</div>
+                    <div class="code-line">            lastNodeBeforeReverse.next = prev</div>
+                    <div class="code-line">        <span class="keyword">else</span>:</div>
+                    <div class="code-line">            head = prev</div>
+                    <div class="code-line">        </div>
+                    <div class="code-line">        lastNodeOfReverse.next = current</div>
+                    <div class="code-line">        </div>
+                    <div class="code-line">        <span class="keyword">if</span> current == null:</div>
+                    <div class="code-line">            <span class="keyword">break</span></div>
+                    <div class="code-line">        </div>
+                    <div class="code-line">        prev = lastNodeOfReverse</div>
+                    <div class="code-line">    </div>
+                    <div class="code-line">    <span class="keyword">return</span> head</div>
+                </div>
+
+                <div class="recognition-box">
+                    <div class="recognition-title">🔍 When to Use:</div>
+                    <ul class="example-list">
+                        <li>Reversing linked list or parts of it</li>
+                        <li>Problems requiring in-place list manipulation</li>
+                        <li>Reversing groups of nodes</li>
+                        <li>Keywords: "reverse", "linked list", "in-place"</li>
+                    </ul>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Example Problems:</strong> Reverse linked list, reverse sublist, reverse every k nodes, rotate list, swap nodes in pairs
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">🎓 Pattern Recognition Guide</div>
+            
+            <div class="pattern-name">How to Identify the Right Pattern</div>
+            
+            <div class="recognition-box">
+                <div class="recognition-title">🪟 Sliding Window Indicators:</div>
+                <ul class="example-list">
+                    <li>Problem involves contiguous sequence (subarray/substring)</li>
+                    <li>Looking for max/min/average of k consecutive elements</li>
+                    <li>Finding longest/shortest substring with certain property</li>
+                    <li>Keywords: "contiguous", "subarray", "substring", "consecutive"</li>
+                </ul>
+            </div>
+
+            <div class="recognition-box">
+                <div class="recognition-title">👉👈 Two Pointers Indicators:</div>
+                <ul class="example-list">
+                    <li>Input is sorted array or linked list</li>
+                    <li>Need to find pair/triplet with specific sum</li>
+                    <li>Comparing elements from both ends</li>
+                    <li>Keywords: "sorted", "pair", "palindrome", "remove duplicates"</li>
+                </ul>
+            </div>
+
+            <div class="recognition-box">
+                <div class="recognition-title">🐢🐇 Fast & Slow Pointers Indicators:</div>
+                <ul class="example-list">
+                    <li>Linked list problems involving cycles</li>
+                    <li>Finding middle element</li>
+                    <li>Detecting patterns in sequences</li>
+                    <li>Keywords: "cycle", "middle", "linked list", "circular"</li>
+                </ul>
+            </div>
+
+            <div class="recognition-box">
+                <div class="recognition-title">📅 Merge Intervals Indicators:</div>
+                <ul class="example-list">
+                    <li>Dealing with time intervals or ranges</li>
+                    <li>Overlapping or non-overlapping intervals</li>
+                    <li>Scheduling or calendar problems</li>
+                    <li>Keywords: "intervals", "overlapping", "merge", "schedule", "meeting"</li>
+                </ul>
+            </div>
+
+            <div class="recognition-box">
+                <div class="recognition-title">🔄 Cyclic Sort Indicators:</div>
+                <ul class="example-list">
+                    <li>Array contains numbers in range [1, n] or [0, n]</li>
+                    <li>Finding missing or duplicate numbers</li>
+                    <li>Need O(1) space complexity</li>
+                    <li>Keywords: "missing number", "duplicate", "range", "1 to n"</li>
+                </ul>
+            </div>
+
+            <div class="recognition-box">
+                <div class="recognition-title">↩️ In-Place Reversal Indicators:</div>
+                <ul class="example-list">
+                    <li>Reversing linked list or parts of it</li>
+                    <li>Need to reverse in groups or segments</li>
+                    <li>In-place manipulation required</li>
+                    <li>Keywords: "reverse", "linked list", "in-place", "rotate"</li>
+                </ul>
+            </div>
+
+            <div class="note">
+                <strong>Pro Tip:</strong> Many problems can be solved using multiple patterns. Practice recognizing which pattern leads to the most efficient solution. Start by identifying the data structure and constraints, then match them to pattern indicators.
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">💡 Pattern Complexity Summary</div>
+            
+            <div class="code-block">
+                <div class="code-line">Pattern              | Time       | Space      | Best Use Case</div>
+                <div class="code-line">---------------------|------------|------------|--------------------------------</div>
+                <div class="code-line">Sliding Window       | O(n)       | O(1)-O(k)  | Contiguous subarrays/substrings</div>
+                <div class="code-line">Two Pointers         | O(n)       | O(1)       | Sorted arrays, pairs/triplets</div>
+                <div class="code-line">Fast & Slow Pointers | O(n)       | O(1)       | Linked list cycles, middle</div>
+                <div class="code-line">Merge Intervals      | O(n log n) | O(n)       | Overlapping intervals</div>
+                <div class="code-line">Cyclic Sort          | O(n)       | O(1)       | Numbers in range [1, n]</div>
+                <div class="code-line">In-Place Reversal    | O(n)       | O(1)       | Reversing linked lists</div>
+            </div>
+
+            <div class="tip">
+                💡 <strong>Interview Strategy:</strong> When you see a problem, spend 1-2 minutes identifying which pattern applies before jumping into code. This will save time and lead to cleaner solutions.
+            </div>
+
+            <div class="warning">
+                ⚠️ <strong>Common Mistake:</strong> Don't force a pattern if it doesn't fit naturally. Some problems require combining multiple patterns or using a completely different approach.
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Algorithm Patterns Reference for Problem Solving</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">🎯 Master these patterns to solve 80% of coding interview problems efficiently</p>
+        </div>
+    </div>
+</body>
+</html>

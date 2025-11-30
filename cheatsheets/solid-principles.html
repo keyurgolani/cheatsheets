@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SOLID principles for object-oriented design and clean code architecture.">
+    <title>SOLID Principles Cheatsheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e6ed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #8b95a5;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(59, 130, 246, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+        }
+
+        .card-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #3b82f6;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .principle-name {
+            color: #10b981;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .principle-desc {
+            color: #cbd5e1;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 0.75rem 0;
+            overflow-x: auto;
+        }
+
+        .code-line {
+            display: block;
+            line-height: 1.5;
+        }
+
+        .comment {
+            color: #10b981;
+        }
+
+        .keyword {
+            color: #fbbf24;
+        }
+
+        .string {
+            color: #ec4899;
+        }
+
+        code {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #a5d6ff;
+            font-size: 0.9em;
+        }
+
+        .good {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .bad {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .note {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid #3b82f6;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .tip {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .benefit {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid #3b82f6;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 116, 139, 0.3);
+            color: #8b95a5;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏛️ SOLID Principles</h1>
+        <p class="subtitle">Five fundamental principles for maintainable object-oriented design</p>
+
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">S - Single Responsibility Principle</div>
+                <div class="principle-desc">A class should have one, and only one, reason to change. Each class should have a single, well-defined responsibility.</div>
+                
+                <div class="principle-name">❌ Violation Example</div>
+                <div class="code-block"><span class="code-line"><span class="keyword">class</span> User {</span>
+<span class="code-line">  <span class="keyword">constructor</span>(<span class="keyword">public</span> name: <span class="keyword">string</span>, <span class="keyword">public</span> email: <span class="keyword">string</span>) {}</span>
+<span class="code-line">  </span>
+<span class="code-line">  <span class="comment">// Responsibility 1: User data</span></span>
+<span class="code-line">  getName(): <span class="keyword">string</span> {</span>
+<span class="code-line">    <span class="keyword">return this</span>.name;</span>
+<span class="code-line">  }</span>
+<span class="code-line">  </span>
+<span class="code-line">  <span class="comment">// Responsibility 2: Database operations</span></span>
+<span class="code-line">  save(): <span class="keyword">void</span> {</span>
+<span class="code-line">    <span class="comment">// Save to database</span></span>
+<span class="code-line">  }</span>
+<span class="code-line">  </span>
+<span class="code-line">  <span class="comment">// Responsibility 3: Email notifications</span></span>
+<span class="code-line">  sendEmail(message: <span class="keyword">string</span>): <span class="keyword">void</span> {</span>
+<span class="code-line">    <span class="comment">// Send email</span></span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span></div>
+
+                <div class="principle-name">✅ Correct Implementation</div>
+                <div class="code-block"><span class="code-line"><span class="keyword">class</span> User {</span>
+<span class="code-line">  <span class="keyword">constructor</span>(<span class="keyword">public</span> name: <span class="keyword">string</span>, <span class="keyword">public</span> email: <span class="keyword">string</span>) {}</span>
+<span class="code-line">  getName(): <span class="keyword">string</span> { <span class="keyword">return this</span>.name; }</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="keyword">class</span> UserRepository {</span>
+<span class="code-line">  save(user: User): <span class="keyword">void</span> { <span class="comment">/* DB logic */</span> }</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="keyword">class</span> EmailService {</span>
+<span class="code-line">  send(email: <span class="keyword">string</span>, message: <span class="keyword">string</span>): <span class="keyword">void</span> { <span class="comment">/* Email logic */</span> }</span>
+<span class="code-line">}</span></div>
+
+                <div class="benefit">
+                    <strong>Benefits:</strong><br>
+                    • Easier to understand and maintain<br>
+                    • Changes to one responsibility don't affect others<br>
+                    • Better testability<br>
+                    • Improved code reusability
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-header">O - Open/Closed Principle</div>
+                <div class="principle-desc">Software entities should be open for extension but closed for modification. You should be able to add new functionality without changing existing code.</div>
+                
+                <div class="principle-name">❌ Violation Example</div>
+                <div class="code-block"><span class="code-line"><span class="keyword">class</span> AreaCalculator {</span>
+<span class="code-line">  calculate(shape: <span class="keyword">any</span>): <span class="keyword">number</span> {</span>
+<span class="code-line">    <span class="keyword">if</span> (shape.type === <span class="string">'circle'</span>) {</span>
+<span class="code-line">      <span class="keyword">return</span> Math.PI * shape.radius ** 2;</span>
+<span class="code-line">    } <span class="keyword">else if</span> (shape.type === <span class="string">'rectangle'</span>) {</span>
+<span class="code-line">      <span class="keyword">return</span> shape.width * shape.height;</span>
+<span class="code-line">    }</span>
+<span class="code-line">    <span class="comment">// Adding new shape requires modifying this class</span></span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span></div>
+
+                <div class="principle-name">✅ Correct Implementation</div>
+                <div class="code-block"><span class="code-line"><span class="keyword">interface</span> Shape {</span>
+<span class="code-line">  area(): <span class="keyword">number</span>;</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="keyword">class</span> Circle <span class="keyword">implements</span> Shape {</span>
+<span class="code-line">  <span class="keyword">constructor</span>(<span class="keyword">private</span> radius: <span class="keyword">number</span>) {}</span>
+<span class="code-line">  area(): <span class="keyword">number</span> { <span class="keyword">return</span> Math.PI * <span class="keyword">this</span>.radius ** 2; }</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="keyword">class</span> Rectangle <span class="keyword">implements</span> Shape {</span>
+<span class="code-line">  <span class="keyword">constructor</span>(<span class="keyword">private</span> width: <span class="keyword">number</span>, <span class="keyword">private</span> height: <span class="keyword">number</span>) {}</span>
+<span class="code-line">  area(): <span class="keyword">number</span> { <span class="keyword">return this</span>.width * <span class="keyword">this</span>.height; }</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="keyword">class</span> AreaCalculator {</span>
+<span class="code-line">  calculate(shape: Shape): <span class="keyword">number</span> {</span>
+<span class="code-line">    <span class="keyword">return</span> shape.area(); <span class="comment">// No modification needed for new shapes</span></span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span></div>
+
+                <div class="benefit">
+                    <strong>Benefits:</strong><br>
+                    • Reduces risk of breaking existing functionality<br>
+                    • Promotes code reusability through inheritance/composition<br>
+                    • Makes code more flexible and maintainable<br>
+                    • Easier to add new features
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-header">L - Liskov Substitution Principle</div>
+                <div class="principle-desc">Objects of a superclass should be replaceable with objects of a subclass without breaking the application. Subtypes must be substitutable for their base types.</div>
+                
+                <div class="principle-name">❌ Violation Example</div>
+                <div class="code-block"><span class="code-line"><span class="keyword">class</span> Bird {</span>
+<span class="code-line">  fly(): <span class="keyword">void</span> {</span>
+<span class="code-line">    console.log(<span class="string">'Flying...'</span>);</span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="keyword">class</span> Penguin <span class="keyword">extends</span> Bird {</span>
+<span class="code-line">  fly(): <span class="keyword">void</span> {</span>
+<span class="code-line">    <span class="keyword">throw new</span> Error(<span class="string">'Penguins cannot fly!'</span>);</span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="comment">// This breaks when using Penguin as Bird</span></span>
+<span class="code-line"><span class="keyword">function</span> makeBirdFly(bird: Bird) {</span>
+<span class="code-line">  bird.fly(); <span class="comment">// Throws error for Penguin!</span></span>
+<span class="code-line">}</span></div>
+
+                <div class="principle-name">✅ Correct Implementation</div>
+                <div class="code-block"><span class="code-line"><span class="keyword">class</span> Bird {</span>
+<span class="code-line">  move(): <span class="keyword">void</span> {</span>
+<span class="code-line">    console.log(<span class="string">'Moving...'</span>);</span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="keyword">class</span> FlyingBird <span class="keyword">extends</span> Bird {</span>
+<span class="code-line">  fly(): <span class="keyword">void</span> {</span>
+<span class="code-line">    console.log(<span class="string">'Flying...'</span>);</span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="keyword">class</span> Penguin <span class="keyword">extends</span> Bird {</span>
+<span class="code-line">  swim(): <span class="keyword">void</span> {</span>
+<span class="code-line">    console.log(<span class="string">'Swimming...'</span>);</span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="comment">// Now all birds can be used interchangeably</span></span>
+<span class="code-line"><span class="keyword">function</span> makeBirdMove(bird: Bird) {</span>
+<span class="code-line">  bird.move(); <span class="comment">// Works for all birds</span></span>
+<span class="code-line">}</span></div>
+
+                <div class="benefit">
+                    <strong>Benefits:</strong><br>
+                    • Ensures correct inheritance hierarchies<br>
+                    • Prevents unexpected behavior in polymorphic code<br>
+                    • Makes code more predictable and reliable<br>
+                    • Improves code reusability
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-header">I - Interface Segregation Principle</div>
+                <div class="principle-desc">Clients should not be forced to depend on interfaces they don't use. Many specific interfaces are better than one general-purpose interface.</div>
+                
+                <div class="principle-name">❌ Violation Example</div>
+                <div class="code-block"><span class="code-line"><span class="keyword">interface</span> Worker {</span>
+<span class="code-line">  work(): <span class="keyword">void</span>;</span>
+<span class="code-line">  eat(): <span class="keyword">void</span>;</span>
+<span class="code-line">  sleep(): <span class="keyword">void</span>;</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="keyword">class</span> HumanWorker <span class="keyword">implements</span> Worker {</span>
+<span class="code-line">  work(): <span class="keyword">void</span> { console.log(<span class="string">'Working...'</span>); }</span>
+<span class="code-line">  eat(): <span class="keyword">void</span> { console.log(<span class="string">'Eating...'</span>); }</span>
+<span class="code-line">  sleep(): <span class="keyword">void</span> { console.log(<span class="string">'Sleeping...'</span>); }</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="keyword">class</span> RobotWorker <span class="keyword">implements</span> Worker {</span>
+<span class="code-line">  work(): <span class="keyword">void</span> { console.log(<span class="string">'Working...'</span>); }</span>
+<span class="code-line">  eat(): <span class="keyword">void</span> { <span class="comment">// Robots don't eat!</span> }</span>
+<span class="code-line">  sleep(): <span class="keyword">void</span> { <span class="comment">// Robots don't sleep!</span> }</span>
+<span class="code-line">}</span></div>
+
+                <div class="principle-name">✅ Correct Implementation</div>
+                <div class="code-block"><span class="code-line"><span class="keyword">interface</span> Workable {</span>
+<span class="code-line">  work(): <span class="keyword">void</span>;</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="keyword">interface</span> Eatable {</span>
+<span class="code-line">  eat(): <span class="keyword">void</span>;</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="keyword">interface</span> Sleepable {</span>
+<span class="code-line">  sleep(): <span class="keyword">void</span>;</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="keyword">class</span> HumanWorker <span class="keyword">implements</span> Workable, Eatable, Sleepable {</span>
+<span class="code-line">  work(): <span class="keyword">void</span> { console.log(<span class="string">'Working...'</span>); }</span>
+<span class="code-line">  eat(): <span class="keyword">void</span> { console.log(<span class="string">'Eating...'</span>); }</span>
+<span class="code-line">  sleep(): <span class="keyword">void</span> { console.log(<span class="string">'Sleeping...'</span>); }</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="keyword">class</span> RobotWorker <span class="keyword">implements</span> Workable {</span>
+<span class="code-line">  work(): <span class="keyword">void</span> { console.log(<span class="string">'Working...'</span>); }</span>
+<span class="code-line">}</span></div>
+
+                <div class="benefit">
+                    <strong>Benefits:</strong><br>
+                    • Reduces coupling between classes<br>
+                    • Prevents "fat" interfaces with unused methods<br>
+                    • Makes code more flexible and maintainable<br>
+                    • Easier to implement and test
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-header">D - Dependency Inversion Principle</div>
+                <div class="principle-desc">High-level modules should not depend on low-level modules. Both should depend on abstractions. Abstractions should not depend on details; details should depend on abstractions.</div>
+                
+                <div class="principle-name">❌ Violation Example</div>
+                <div class="code-block"><span class="code-line"><span class="keyword">class</span> MySQLDatabase {</span>
+<span class="code-line">  save(data: <span class="keyword">string</span>): <span class="keyword">void</span> {</span>
+<span class="code-line">    console.log(<span class="string">'Saving to MySQL...'</span>);</span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="keyword">class</span> UserService {</span>
+<span class="code-line">  <span class="keyword">private</span> database = <span class="keyword">new</span> MySQLDatabase();</span>
+<span class="code-line">  </span>
+<span class="code-line">  saveUser(user: <span class="keyword">string</span>): <span class="keyword">void</span> {</span>
+<span class="code-line">    <span class="comment">// Tightly coupled to MySQLDatabase</span></span>
+<span class="code-line">    <span class="keyword">this</span>.database.save(user);</span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span></div>
+
+                <div class="principle-name">✅ Correct Implementation</div>
+                <div class="code-block"><span class="code-line"><span class="keyword">interface</span> Database {</span>
+<span class="code-line">  save(data: <span class="keyword">string</span>): <span class="keyword">void</span>;</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="keyword">class</span> MySQLDatabase <span class="keyword">implements</span> Database {</span>
+<span class="code-line">  save(data: <span class="keyword">string</span>): <span class="keyword">void</span> {</span>
+<span class="code-line">    console.log(<span class="string">'Saving to MySQL...'</span>);</span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="keyword">class</span> MongoDatabase <span class="keyword">implements</span> Database {</span>
+<span class="code-line">  save(data: <span class="keyword">string</span>): <span class="keyword">void</span> {</span>
+<span class="code-line">    console.log(<span class="string">'Saving to MongoDB...'</span>);</span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="keyword">class</span> UserService {</span>
+<span class="code-line">  <span class="keyword">constructor</span>(<span class="keyword">private</span> database: Database) {}</span>
+<span class="code-line">  </span>
+<span class="code-line">  saveUser(user: <span class="keyword">string</span>): <span class="keyword">void</span> {</span>
+<span class="code-line">    <span class="comment">// Depends on abstraction, not concrete implementation</span></span>
+<span class="code-line">    <span class="keyword">this</span>.database.save(user);</span>
+<span class="code-line">  }</span>
+<span class="code-line">}</span></div>
+
+                <div class="benefit">
+                    <strong>Benefits:</strong><br>
+                    • Reduces coupling between modules<br>
+                    • Makes code more testable (easy to mock dependencies)<br>
+                    • Allows easy swapping of implementations<br>
+                    • Promotes flexibility and maintainability
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">🎯 Quick Reference Guide</div>
+            
+            <div class="principle-name">S - Single Responsibility</div>
+            <div class="principle-desc">One class = One job. If you can describe a class with "AND", it's doing too much.</div>
+
+            <div class="principle-name">O - Open/Closed</div>
+            <div class="principle-desc">Add new features by extending, not modifying. Use interfaces and abstract classes.</div>
+
+            <div class="principle-name">L - Liskov Substitution</div>
+            <div class="principle-desc">Subclasses should enhance, not replace, parent behavior. Don't break contracts.</div>
+
+            <div class="principle-name">I - Interface Segregation</div>
+            <div class="principle-desc">Many small interfaces > One large interface. Don't force implementations of unused methods.</div>
+
+            <div class="principle-name">D - Dependency Inversion</div>
+            <div class="principle-desc">Depend on abstractions, not concrete classes. Use dependency injection.</div>
+        </div>
+
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">💡 Practical Application Tips</div>
+            
+            <div class="tip">
+                <strong>Start with Single Responsibility:</strong><br>
+                This is the foundation. If you get this right, other principles become easier to follow.
+            </div>
+
+            <div class="tip">
+                <strong>Use Dependency Injection:</strong><br>
+                Pass dependencies through constructors or setters rather than creating them inside classes. This naturally leads to better adherence to multiple SOLID principles.
+            </div>
+
+            <div class="tip">
+                <strong>Favor Composition Over Inheritance:</strong><br>
+                When in doubt, use composition. It's more flexible and helps avoid Liskov Substitution violations.
+            </div>
+
+            <div class="tip">
+                <strong>Design Interfaces Carefully:</strong><br>
+                Keep interfaces small and focused. It's easier to combine multiple interfaces than to split a large one later.
+            </div>
+
+            <div class="tip">
+                <strong>Refactor Gradually:</strong><br>
+                Don't try to apply all principles at once. Refactor incrementally as you identify code smells.
+            </div>
+        </div>
+
+
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">🚨 Common Violations & Code Smells</div>
+            
+            <div class="bad">
+                <strong>God Classes:</strong> Classes that do everything. Usually violate Single Responsibility.
+            </div>
+
+            <div class="bad">
+                <strong>Switch/If-Else Chains:</strong> Type checking and branching logic. Often violate Open/Closed.
+            </div>
+
+            <div class="bad">
+                <strong>Refused Bequest:</strong> Subclasses that don't use inherited methods. Violates Liskov Substitution.
+            </div>
+
+            <div class="bad">
+                <strong>Fat Interfaces:</strong> Interfaces with many methods that clients don't need. Violates Interface Segregation.
+            </div>
+
+            <div class="bad">
+                <strong>Tight Coupling:</strong> Classes that directly instantiate their dependencies. Violates Dependency Inversion.
+            </div>
+
+            <div class="note">
+                <strong>Remember:</strong> SOLID principles are guidelines, not strict rules. Apply them pragmatically based on your specific context and requirements.
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">📚 Benefits of Following SOLID</div>
+            
+            <div class="good">
+                <strong>Maintainability:</strong> Code is easier to understand, modify, and extend over time.
+            </div>
+
+            <div class="good">
+                <strong>Testability:</strong> Loosely coupled code with clear responsibilities is easier to test.
+            </div>
+
+            <div class="good">
+                <strong>Flexibility:</strong> Changes in requirements can be accommodated with minimal code changes.
+            </div>
+
+            <div class="good">
+                <strong>Reusability:</strong> Well-designed components can be reused across different parts of the application.
+            </div>
+
+            <div class="good">
+                <strong>Scalability:</strong> Systems built on SOLID principles scale better as complexity grows.
+            </div>
+
+            <div class="tip">
+                <strong>The Bottom Line:</strong> SOLID principles help you write code that's easier to understand, maintain, and extend. They reduce technical debt and make your codebase more resilient to change.
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>SOLID Principles for Object-Oriented Design</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">🎓 Introduced by Robert C. Martin (Uncle Bob)</p>
+        </div>
+    </div>
+</body>
+</html>

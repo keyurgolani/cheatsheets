@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CSS cheatsheet covering selectors, flexbox, grid, animations, and modern styling techniques.">
+    <title>CSS Cheatsheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e6ed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #8b95a5;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(102, 126, 234, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.15);
+        }
+
+        .card-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .cmd-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+
+        .cmd-row:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .cmd-name {
+            color: #a78bfa;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+        }
+
+        .cmd-desc {
+            color: #cbd5e1;
+            padding-left: 1rem;
+            font-size: 0.9rem;
+        }
+
+        code {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #a5d6ff;
+            font-size: 0.9em;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 0.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+
+        .code-line {
+            color: #a5d6ff;
+            line-height: 1.5;
+        }
+
+        .visual-example {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 2px dashed rgba(102, 126, 234, 0.3);
+            margin: 0.75rem 0;
+            text-align: center;
+        }
+
+        .note {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid #3b82f6;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .tip {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 116, 139, 0.3);
+            color: #8b95a5;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 CSS Cheatsheet</h1>
+        <p class="subtitle">Essential CSS properties, selectors, and modern layout techniques</p>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">🎯 Selectors</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element</div>
+                    <div class="cmd-desc">Select all elements of type</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">.class</div>
+                    <div class="cmd-desc">Select by class name</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">#id</div>
+                    <div class="cmd-desc">Select by ID</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">*</div>
+                    <div class="cmd-desc">Universal selector (all elements)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">parent child</div>
+                    <div class="cmd-desc">Descendant selector</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">parent > child</div>
+                    <div class="cmd-desc">Direct child selector</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element + sibling</div>
+                    <div class="cmd-desc">Adjacent sibling selector</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element ~ siblings</div>
+                    <div class="cmd-desc">General sibling selector</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element:hover</div>
+                    <div class="cmd-desc">Pseudo-class (hover state)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">element::before</div>
+                    <div class="cmd-desc">Pseudo-element (insert before)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">[attribute]</div>
+                    <div class="cmd-desc">Attribute selector</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">[attr="value"]</div>
+                    <div class="cmd-desc">Attribute with exact value</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">:nth-child(n)</div>
+                    <div class="cmd-desc">Select nth child element</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📦 Box Model</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">width / height</div>
+                    <div class="cmd-desc">Element dimensions</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">padding</div>
+                    <div class="cmd-desc">Inner spacing (top right bottom left)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">margin</div>
+                    <div class="cmd-desc">Outer spacing (top right bottom left)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">border</div>
+                    <div class="cmd-desc">Border (width style color)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">box-sizing: border-box</div>
+                    <div class="cmd-desc">Include padding/border in width</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">box-sizing: content-box</div>
+                    <div class="cmd-desc">Default (padding/border add to width)</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line">/* Shorthand examples */</div>
+                    <div class="code-line">padding: 10px; /* all sides */</div>
+                    <div class="code-line">padding: 10px 20px; /* vertical horizontal */</div>
+                    <div class="code-line">padding: 10px 20px 15px 25px; /* T R B L */</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📍 Positioning</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">position: static</div>
+                    <div class="cmd-desc">Default (normal flow)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">position: relative</div>
+                    <div class="cmd-desc">Relative to normal position</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">position: absolute</div>
+                    <div class="cmd-desc">Relative to positioned ancestor</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">position: fixed</div>
+                    <div class="cmd-desc">Relative to viewport</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">position: sticky</div>
+                    <div class="cmd-desc">Hybrid relative/fixed</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">top / right / bottom / left</div>
+                    <div class="cmd-desc">Position offsets</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">z-index</div>
+                    <div class="cmd-desc">Stacking order (higher = front)</div>
+                </div>
+                <div class="tip">
+                    💡 <code>position: absolute</code> elements are positioned relative to the nearest positioned ancestor (not static).
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔲 Flexbox Container</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">display: flex</div>
+                    <div class="cmd-desc">Enable flexbox layout</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">flex-direction: row</div>
+                    <div class="cmd-desc">Horizontal layout (default)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">flex-direction: column</div>
+                    <div class="cmd-desc">Vertical layout</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">justify-content: flex-start</div>
+                    <div class="cmd-desc">Align main axis (start)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">justify-content: center</div>
+                    <div class="cmd-desc">Center on main axis</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">justify-content: space-between</div>
+                    <div class="cmd-desc">Space between items</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">align-items: stretch</div>
+                    <div class="cmd-desc">Align cross axis (stretch)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">align-items: center</div>
+                    <div class="cmd-desc">Center on cross axis</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">flex-wrap: wrap</div>
+                    <div class="cmd-desc">Allow items to wrap</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">gap</div>
+                    <div class="cmd-desc">Space between flex items</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📐 Flexbox Items</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">flex-grow: 1</div>
+                    <div class="cmd-desc">Allow item to grow</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">flex-shrink: 1</div>
+                    <div class="cmd-desc">Allow item to shrink</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">flex-basis: auto</div>
+                    <div class="cmd-desc">Initial size before grow/shrink</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">flex: 1</div>
+                    <div class="cmd-desc">Shorthand (grow shrink basis)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">align-self: center</div>
+                    <div class="cmd-desc">Override align-items for item</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">order: 1</div>
+                    <div class="cmd-desc">Change visual order</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line">/* Common centering pattern */</div>
+                    <div class="code-line">.container {</div>
+                    <div class="code-line">  display: flex;</div>
+                    <div class="code-line">  justify-content: center;</div>
+                    <div class="code-line">  align-items: center;</div>
+                    <div class="code-line">}</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🎛️ Grid Container</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">display: grid</div>
+                    <div class="cmd-desc">Enable grid layout</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">grid-template-columns</div>
+                    <div class="cmd-desc">Define column tracks</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">grid-template-rows</div>
+                    <div class="cmd-desc">Define row tracks</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">gap / grid-gap</div>
+                    <div class="cmd-desc">Space between grid items</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">justify-items</div>
+                    <div class="cmd-desc">Align items horizontally</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">align-items</div>
+                    <div class="cmd-desc">Align items vertically</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">justify-content</div>
+                    <div class="cmd-desc">Align grid horizontally</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">align-content</div>
+                    <div class="cmd-desc">Align grid vertically</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line">/* Common grid patterns */</div>
+                    <div class="code-line">grid-template-columns: 1fr 2fr 1fr;</div>
+                    <div class="code-line">grid-template-columns: repeat(3, 1fr);</div>
+                    <div class="code-line">grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔢 Grid Items</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">grid-column: 1 / 3</div>
+                    <div class="cmd-desc">Span columns (start / end)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">grid-row: 1 / 3</div>
+                    <div class="cmd-desc">Span rows (start / end)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">grid-column: span 2</div>
+                    <div class="cmd-desc">Span 2 columns</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">grid-area</div>
+                    <div class="cmd-desc">Shorthand for row/column placement</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">justify-self</div>
+                    <div class="cmd-desc">Align item horizontally</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">align-self</div>
+                    <div class="cmd-desc">Align item vertically</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line">/* Named grid areas */</div>
+                    <div class="code-line">grid-template-areas:</div>
+                    <div class="code-line">  "header header header"</div>
+                    <div class="code-line">  "sidebar main main"</div>
+                    <div class="code-line">  "footer footer footer";</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🎭 Transitions</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">transition-property</div>
+                    <div class="cmd-desc">Which property to animate</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">transition-duration</div>
+                    <div class="cmd-desc">How long (e.g., 0.3s, 300ms)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">transition-timing-function</div>
+                    <div class="cmd-desc">Easing (ease, linear, ease-in-out)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">transition-delay</div>
+                    <div class="cmd-desc">Delay before starting</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">transition: all 0.3s ease</div>
+                    <div class="cmd-desc">Shorthand (property duration timing delay)</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line">/* Transition example */</div>
+                    <div class="code-line">.button {</div>
+                    <div class="code-line">  background: blue;</div>
+                    <div class="code-line">  transition: background 0.3s ease;</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line">.button:hover {</div>
+                    <div class="code-line">  background: darkblue;</div>
+                    <div class="code-line">}</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🎬 Animations</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">animation-name</div>
+                    <div class="cmd-desc">Name of @keyframes</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">animation-duration</div>
+                    <div class="cmd-desc">How long (e.g., 2s)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">animation-timing-function</div>
+                    <div class="cmd-desc">Easing function</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">animation-delay</div>
+                    <div class="cmd-desc">Delay before starting</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">animation-iteration-count</div>
+                    <div class="cmd-desc">How many times (number or infinite)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">animation-direction</div>
+                    <div class="cmd-desc">normal, reverse, alternate</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">animation-fill-mode</div>
+                    <div class="cmd-desc">forwards, backwards, both</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line">@keyframes slide {</div>
+                    <div class="code-line">  from { transform: translateX(0); }</div>
+                    <div class="code-line">  to { transform: translateX(100px); }</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line">.element {</div>
+                    <div class="code-line">  animation: slide 1s ease infinite;</div>
+                    <div class="code-line">}</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🎨 Colors & Backgrounds</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">color</div>
+                    <div class="cmd-desc">Text color</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">background-color</div>
+                    <div class="cmd-desc">Background color</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">background-image</div>
+                    <div class="cmd-desc">Background image or gradient</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">background-size</div>
+                    <div class="cmd-desc">cover, contain, or dimensions</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">background-position</div>
+                    <div class="cmd-desc">Position of background</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">background-repeat</div>
+                    <div class="cmd-desc">repeat, no-repeat, repeat-x/y</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">opacity</div>
+                    <div class="cmd-desc">Transparency (0 to 1)</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line">/* Color formats */</div>
+                    <div class="code-line">color: #ff0000; /* Hex */</div>
+                    <div class="code-line">color: rgb(255, 0, 0); /* RGB */</div>
+                    <div class="code-line">color: rgba(255, 0, 0, 0.5); /* RGBA */</div>
+                    <div class="code-line">color: hsl(0, 100%, 50%); /* HSL */</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">✍️ Typography</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">font-family</div>
+                    <div class="cmd-desc">Font stack</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">font-size</div>
+                    <div class="cmd-desc">Size (px, em, rem, %)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">font-weight</div>
+                    <div class="cmd-desc">100-900, normal, bold</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">font-style</div>
+                    <div class="cmd-desc">normal, italic, oblique</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">line-height</div>
+                    <div class="cmd-desc">Line spacing (unitless or units)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">text-align</div>
+                    <div class="cmd-desc">left, center, right, justify</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">text-decoration</div>
+                    <div class="cmd-desc">underline, line-through, none</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">text-transform</div>
+                    <div class="cmd-desc">uppercase, lowercase, capitalize</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">letter-spacing</div>
+                    <div class="cmd-desc">Space between characters</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">word-spacing</div>
+                    <div class="cmd-desc">Space between words</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🖼️ Display & Visibility</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">display: block</div>
+                    <div class="cmd-desc">Block-level element</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">display: inline</div>
+                    <div class="cmd-desc">Inline element</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">display: inline-block</div>
+                    <div class="cmd-desc">Inline with block properties</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">display: none</div>
+                    <div class="cmd-desc">Hide element (no space)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">visibility: hidden</div>
+                    <div class="cmd-desc">Hide element (keeps space)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">overflow: visible</div>
+                    <div class="cmd-desc">Content overflows (default)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">overflow: hidden</div>
+                    <div class="cmd-desc">Hide overflow content</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">overflow: scroll</div>
+                    <div class="cmd-desc">Always show scrollbars</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">overflow: auto</div>
+                    <div class="cmd-desc">Scrollbars when needed</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🎯 Pseudo-classes</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">:hover</div>
+                    <div class="cmd-desc">Mouse over element</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">:active</div>
+                    <div class="cmd-desc">Element being clicked</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">:focus</div>
+                    <div class="cmd-desc">Element has focus</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">:first-child</div>
+                    <div class="cmd-desc">First child of parent</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">:last-child</div>
+                    <div class="cmd-desc">Last child of parent</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">:nth-child(n)</div>
+                    <div class="cmd-desc">Nth child (1-indexed)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">:nth-child(odd)</div>
+                    <div class="cmd-desc">Odd children</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">:nth-child(even)</div>
+                    <div class="cmd-desc">Even children</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">:not(selector)</div>
+                    <div class="cmd-desc">Elements not matching selector</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">:disabled</div>
+                    <div class="cmd-desc">Disabled form elements</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">✨ Transforms</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">transform: translate(x, y)</div>
+                    <div class="cmd-desc">Move element</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">transform: scale(x, y)</div>
+                    <div class="cmd-desc">Scale element</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">transform: rotate(deg)</div>
+                    <div class="cmd-desc">Rotate element</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">transform: skew(x, y)</div>
+                    <div class="cmd-desc">Skew element</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">transform-origin</div>
+                    <div class="cmd-desc">Transform origin point</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line">/* Multiple transforms */</div>
+                    <div class="code-line">transform: translateX(50px) rotate(45deg) scale(1.2);</div>
+                    <div class="code-line"></div>
+                    <div class="code-line">/* 3D transforms */</div>
+                    <div class="code-line">transform: rotateX(45deg) rotateY(45deg);</div>
+                    <div class="code-line">transform: perspective(500px) translateZ(100px);</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🌈 Gradients</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">linear-gradient()</div>
+                    <div class="cmd-desc">Linear gradient</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">radial-gradient()</div>
+                    <div class="cmd-desc">Radial gradient</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">conic-gradient()</div>
+                    <div class="cmd-desc">Conic gradient</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line">/* Linear gradients */</div>
+                    <div class="code-line">background: linear-gradient(to right, red, blue);</div>
+                    <div class="code-line">background: linear-gradient(45deg, red, blue);</div>
+                    <div class="code-line">background: linear-gradient(red 0%, blue 100%);</div>
+                    <div class="code-line"></div>
+                    <div class="code-line">/* Radial gradient */</div>
+                    <div class="code-line">background: radial-gradient(circle, red, blue);</div>
+                    <div class="code-line"></div>
+                    <div class="code-line">/* Multiple backgrounds */</div>
+                    <div class="code-line">background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),</div>
+                    <div class="code-line">            url('image.jpg');</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🎪 Filters & Effects</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">filter: blur(5px)</div>
+                    <div class="cmd-desc">Blur effect</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">filter: brightness(150%)</div>
+                    <div class="cmd-desc">Adjust brightness</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">filter: contrast(200%)</div>
+                    <div class="cmd-desc">Adjust contrast</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">filter: grayscale(100%)</div>
+                    <div class="cmd-desc">Convert to grayscale</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">filter: saturate(200%)</div>
+                    <div class="cmd-desc">Adjust saturation</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">box-shadow</div>
+                    <div class="cmd-desc">Drop shadow (x y blur spread color)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">text-shadow</div>
+                    <div class="cmd-desc">Text shadow (x y blur color)</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line">/* Shadow examples */</div>
+                    <div class="code-line">box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);</div>
+                    <div class="code-line">box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) inset;</div>
+                    <div class="code-line">text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📱 Responsive Design</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">@media (max-width: 768px)</div>
+                    <div class="cmd-desc">Mobile breakpoint</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">@media (min-width: 769px)</div>
+                    <div class="cmd-desc">Tablet and up</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">@media (min-width: 1024px)</div>
+                    <div class="cmd-desc">Desktop breakpoint</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">@media (orientation: portrait)</div>
+                    <div class="cmd-desc">Portrait orientation</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">@media (prefers-color-scheme: dark)</div>
+                    <div class="cmd-desc">Dark mode preference</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line">/* Mobile-first approach */</div>
+                    <div class="code-line">.container { width: 100%; }</div>
+                    <div class="code-line"></div>
+                    <div class="code-line">@media (min-width: 768px) {</div>
+                    <div class="code-line">  .container { width: 750px; }</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line">@media (min-width: 1024px) {</div>
+                    <div class="code-line">  .container { width: 960px; }</div>
+                    <div class="code-line">}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">💡 CSS Variables (Custom Properties)</div>
+            <div class="code-block">
+                <div class="code-line">/* Define variables */</div>
+                <div class="code-line">:root {</div>
+                <div class="code-line">  --primary-color: #667eea;</div>
+                <div class="code-line">  --spacing: 1rem;</div>
+                <div class="code-line">  --border-radius: 8px;</div>
+                <div class="code-line">}</div>
+                <div class="code-line"></div>
+                <div class="code-line">/* Use variables */</div>
+                <div class="code-line">.button {</div>
+                <div class="code-line">  background: var(--primary-color);</div>
+                <div class="code-line">  padding: var(--spacing);</div>
+                <div class="code-line">  border-radius: var(--border-radius);</div>
+                <div class="code-line">}</div>
+                <div class="code-line"></div>
+                <div class="code-line">/* Fallback values */</div>
+                <div class="code-line">color: var(--text-color, #333);</div>
+            </div>
+            <div class="tip">
+                💡 CSS variables can be updated dynamically with JavaScript and cascade through the DOM!
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">🎯 Common Patterns</div>
+            
+            <div class="visual-example">
+                <strong>Perfect Centering</strong>
+                <div class="code-block" style="margin-top: 0.5rem;">
+                    <div class="code-line">.center {</div>
+                    <div class="code-line">  display: flex;</div>
+                    <div class="code-line">  justify-content: center;</div>
+                    <div class="code-line">  align-items: center;</div>
+                    <div class="code-line">}</div>
+                </div>
+            </div>
+
+            <div class="visual-example">
+                <strong>Responsive Grid</strong>
+                <div class="code-block" style="margin-top: 0.5rem;">
+                    <div class="code-line">.grid {</div>
+                    <div class="code-line">  display: grid;</div>
+                    <div class="code-line">  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));</div>
+                    <div class="code-line">  gap: 1rem;</div>
+                    <div class="code-line">}</div>
+                </div>
+            </div>
+
+            <div class="visual-example">
+                <strong>Truncate Text</strong>
+                <div class="code-block" style="margin-top: 0.5rem;">
+                    <div class="code-line">.truncate {</div>
+                    <div class="code-line">  white-space: nowrap;</div>
+                    <div class="code-line">  overflow: hidden;</div>
+                    <div class="code-line">  text-overflow: ellipsis;</div>
+                    <div class="code-line">}</div>
+                </div>
+            </div>
+
+            <div class="visual-example">
+                <strong>Smooth Scrolling</strong>
+                <div class="code-block" style="margin-top: 0.5rem;">
+                    <div class="code-line">html {</div>
+                    <div class="code-line">  scroll-behavior: smooth;</div>
+                    <div class="code-line">}</div>
+                </div>
+            </div>
+
+            <div class="visual-example">
+                <strong>Aspect Ratio Box</strong>
+                <div class="code-block" style="margin-top: 0.5rem;">
+                    <div class="code-line">.aspect-ratio {</div>
+                    <div class="code-line">  aspect-ratio: 16 / 9;</div>
+                    <div class="code-line">}</div>
+                </div>
+            </div>
+
+            <div class="visual-example">
+                <strong>Sticky Footer</strong>
+                <div class="code-block" style="margin-top: 0.5rem;">
+                    <div class="code-line">body {</div>
+                    <div class="code-line">  display: flex;</div>
+                    <div class="code-line">  flex-direction: column;</div>
+                    <div class="code-line">  min-height: 100vh;</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line">main { flex: 1; }</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Essential CSS Reference Guide</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">💡 Modern CSS makes layout and styling more powerful than ever</p>
+        </div>
+    </div>
+</body>
+</html>

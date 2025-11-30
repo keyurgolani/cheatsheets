@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Java programming language reference with syntax, collections, streams, and OOP concepts.">
+    <title>Java Fundamentals Cheatsheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e6ed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #f89820 0%, #e74c3c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #8b95a5;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(248, 152, 32, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(248, 152, 32, 0.15);
+        }
+
+        .card-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #f89820;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(248, 152, 32, 0.3);
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 0.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+
+        .code-line {
+            color: #a5d6ff;
+            line-height: 1.5;
+        }
+
+        .comment {
+            color: #6a9955;
+        }
+
+        .keyword {
+            color: #dcdcaa;
+        }
+
+        .string {
+            color: #ce9178;
+        }
+
+        .cmd-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+
+        .cmd-row:hover {
+            background: rgba(248, 152, 32, 0.1);
+        }
+
+        .cmd-name {
+            color: #f89820;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+        }
+
+        .cmd-desc {
+            color: #cbd5e1;
+            padding-left: 1rem;
+            font-size: 0.9rem;
+        }
+
+        code {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #a5d6ff;
+            font-size: 0.9em;
+        }
+
+        .note {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid #3b82f6;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .tip {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .warning {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 116, 139, 0.3);
+            color: #8b95a5;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>☕ Java Fundamentals</h1>
+        <p class="subtitle">Essential Java syntax, patterns, and best practices</p>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">🎯 Basic Syntax</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Hello World</span></div>
+                    <div class="code-line"><span class="keyword">public class</span> HelloWorld {</div>
+                    <div class="code-line">    <span class="keyword">public static void</span> main(String[] args) {</div>
+                    <div class="code-line">        System.out.println(<span class="string">"Hello, World!"</span>);</div>
+                    <div class="code-line">    }</div>
+                    <div class="code-line">}</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">javac HelloWorld.java</div>
+                    <div class="cmd-desc">Compile Java source file</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">java HelloWorld</div>
+                    <div class="cmd-desc">Run compiled class</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📝 Data Types & Variables</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Primitive types</span></div>
+                    <div class="code-line"><span class="keyword">byte</span> b = 127;           <span class="comment">// 8-bit</span></div>
+                    <div class="code-line"><span class="keyword">short</span> s = 32000;        <span class="comment">// 16-bit</span></div>
+                    <div class="code-line"><span class="keyword">int</span> i = 100000;         <span class="comment">// 32-bit</span></div>
+                    <div class="code-line"><span class="keyword">long</span> l = 100000L;       <span class="comment">// 64-bit</span></div>
+                    <div class="code-line"><span class="keyword">float</span> f = 3.14f;        <span class="comment">// 32-bit</span></div>
+                    <div class="code-line"><span class="keyword">double</span> d = 3.14159;     <span class="comment">// 64-bit</span></div>
+                    <div class="code-line"><span class="keyword">boolean</span> bool = <span class="keyword">true</span>;   <span class="comment">// true/false</span></div>
+                    <div class="code-line"><span class="keyword">char</span> c = <span class="string">'A'</span>;          <span class="comment">// 16-bit Unicode</span></div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Reference types</span></div>
+                    <div class="code-line">String str = <span class="string">"Hello"</span>;</div>
+                    <div class="code-line">Integer num = 42;        <span class="comment">// Wrapper class</span></div>
+                    <div class="code-line"><span class="keyword">final</span> <span class="keyword">int</span> CONSTANT = 100; <span class="comment">// Constant</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔧 Operators</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">+ - * / %</div>
+                    <div class="cmd-desc">Arithmetic operators</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">== != < > <= >=</div>
+                    <div class="cmd-desc">Comparison operators</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">&& || !</div>
+                    <div class="cmd-desc">Logical operators</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">& | ^ ~ << >> >>></div>
+                    <div class="cmd-desc">Bitwise operators</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">= += -= *= /= %=</div>
+                    <div class="cmd-desc">Assignment operators</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">++ --</div>
+                    <div class="cmd-desc">Increment/decrement</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">condition ? true : false</div>
+                    <div class="cmd-desc">Ternary operator</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">instanceof</div>
+                    <div class="cmd-desc">Type checking</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔄 Control Flow</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// If-else</span></div>
+                    <div class="code-line"><span class="keyword">if</span> (condition) {</div>
+                    <div class="code-line">    <span class="comment">// code</span></div>
+                    <div class="code-line">} <span class="keyword">else if</span> (condition2) {</div>
+                    <div class="code-line">    <span class="comment">// code</span></div>
+                    <div class="code-line">} <span class="keyword">else</span> {</div>
+                    <div class="code-line">    <span class="comment">// code</span></div>
+                    <div class="code-line">}</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Switch</span></div>
+                    <div class="code-line"><span class="keyword">switch</span> (value) {</div>
+                    <div class="code-line">    <span class="keyword">case</span> 1:</div>
+                    <div class="code-line">        <span class="comment">// code</span></div>
+                    <div class="code-line">        <span class="keyword">break</span>;</div>
+                    <div class="code-line">    <span class="keyword">case</span> 2:</div>
+                    <div class="code-line">        <span class="comment">// code</span></div>
+                    <div class="code-line">        <span class="keyword">break</span>;</div>
+                    <div class="code-line">    <span class="keyword">default</span>:</div>
+                    <div class="code-line">        <span class="comment">// code</span></div>
+                    <div class="code-line">}</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔁 Loops</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// For loop</span></div>
+                    <div class="code-line"><span class="keyword">for</span> (<span class="keyword">int</span> i = 0; i < 10; i++) {</div>
+                    <div class="code-line">    System.out.println(i);</div>
+                    <div class="code-line">}</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Enhanced for loop</span></div>
+                    <div class="code-line"><span class="keyword">for</span> (String item : items) {</div>
+                    <div class="code-line">    System.out.println(item);</div>
+                    <div class="code-line">}</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// While loop</span></div>
+                    <div class="code-line"><span class="keyword">while</span> (condition) {</div>
+                    <div class="code-line">    <span class="comment">// code</span></div>
+                    <div class="code-line">}</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Do-while loop</span></div>
+                    <div class="code-line"><span class="keyword">do</span> {</div>
+                    <div class="code-line">    <span class="comment">// code</span></div>
+                    <div class="code-line">} <span class="keyword">while</span> (condition);</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🏗️ Classes & Objects</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="keyword">public class</span> Person {</div>
+                    <div class="code-line">    <span class="comment">// Fields</span></div>
+                    <div class="code-line">    <span class="keyword">private</span> String name;</div>
+                    <div class="code-line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</div>
+                    <div class="code-line"></div>
+                    <div class="code-line">    <span class="comment">// Constructor</span></div>
+                    <div class="code-line">    <span class="keyword">public</span> Person(String name, <span class="keyword">int</span> age) {</div>
+                    <div class="code-line">        <span class="keyword">this</span>.name = name;</div>
+                    <div class="code-line">        <span class="keyword">this</span>.age = age;</div>
+                    <div class="code-line">    }</div>
+                    <div class="code-line"></div>
+                    <div class="code-line">    <span class="comment">// Getter</span></div>
+                    <div class="code-line">    <span class="keyword">public</span> String getName() {</div>
+                    <div class="code-line">        <span class="keyword">return</span> name;</div>
+                    <div class="code-line">    }</div>
+                    <div class="code-line"></div>
+                    <div class="code-line">    <span class="comment">// Setter</span></div>
+                    <div class="code-line">    <span class="keyword">public void</span> setName(String name) {</div>
+                    <div class="code-line">        <span class="keyword">this</span>.name = name;</div>
+                    <div class="code-line">    }</div>
+                    <div class="code-line">}</div>
+                </div>
+                <div class="tip">
+                    💡 Use <code>private</code> fields with <code>public</code> getters/setters for encapsulation
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔗 Inheritance</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="keyword">public class</span> Employee <span class="keyword">extends</span> Person {</div>
+                    <div class="code-line">    <span class="keyword">private</span> String employeeId;</div>
+                    <div class="code-line"></div>
+                    <div class="code-line">    <span class="keyword">public</span> Employee(String name, <span class="keyword">int</span> age, String id) {</div>
+                    <div class="code-line">        <span class="keyword">super</span>(name, age);  <span class="comment">// Call parent constructor</span></div>
+                    <div class="code-line">        <span class="keyword">this</span>.employeeId = id;</div>
+                    <div class="code-line">    }</div>
+                    <div class="code-line"></div>
+                    <div class="code-line">    <span class="comment">// Override method</span></div>
+                    <div class="code-line">    @Override</div>
+                    <div class="code-line">    <span class="keyword">public</span> String toString() {</div>
+                    <div class="code-line">        <span class="keyword">return</span> <span class="string">"Employee: "</span> + getName();</div>
+                    <div class="code-line">    }</div>
+                    <div class="code-line">}</div>
+                </div>
+                <div class="note">
+                    <strong>Access Modifiers:</strong><br>
+                    <code>public</code> - accessible everywhere<br>
+                    <code>protected</code> - accessible in package & subclasses<br>
+                    <code>default</code> - accessible in package only<br>
+                    <code>private</code> - accessible in class only
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📋 Interfaces</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="keyword">public interface</span> Drawable {</div>
+                    <div class="code-line">    <span class="comment">// Abstract method</span></div>
+                    <div class="code-line">    <span class="keyword">void</span> draw();</div>
+                    <div class="code-line"></div>
+                    <div class="code-line">    <span class="comment">// Default method (Java 8+)</span></div>
+                    <div class="code-line">    <span class="keyword">default void</span> display() {</div>
+                    <div class="code-line">        System.out.println(<span class="string">"Displaying..."</span>);</div>
+                    <div class="code-line">    }</div>
+                    <div class="code-line"></div>
+                    <div class="code-line">    <span class="comment">// Static method (Java 8+)</span></div>
+                    <div class="code-line">    <span class="keyword">static void</span> info() {</div>
+                    <div class="code-line">        System.out.println(<span class="string">"Drawable interface"</span>);</div>
+                    <div class="code-line">    }</div>
+                    <div class="code-line">}</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Implementing interface</span></div>
+                    <div class="code-line"><span class="keyword">public class</span> Circle <span class="keyword">implements</span> Drawable {</div>
+                    <div class="code-line">    @Override</div>
+                    <div class="code-line">    <span class="keyword">public void</span> draw() {</div>
+                    <div class="code-line">        System.out.println(<span class="string">"Drawing circle"</span>);</div>
+                    <div class="code-line">    }</div>
+                    <div class="code-line">}</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🎭 Abstract Classes</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="keyword">public abstract class</span> Animal {</div>
+                    <div class="code-line">    <span class="keyword">protected</span> String name;</div>
+                    <div class="code-line"></div>
+                    <div class="code-line">    <span class="keyword">public</span> Animal(String name) {</div>
+                    <div class="code-line">        <span class="keyword">this</span>.name = name;</div>
+                    <div class="code-line">    }</div>
+                    <div class="code-line"></div>
+                    <div class="code-line">    <span class="comment">// Abstract method</span></div>
+                    <div class="code-line">    <span class="keyword">public abstract void</span> makeSound();</div>
+                    <div class="code-line"></div>
+                    <div class="code-line">    <span class="comment">// Concrete method</span></div>
+                    <div class="code-line">    <span class="keyword">public void</span> sleep() {</div>
+                    <div class="code-line">        System.out.println(name + <span class="string">" is sleeping"</span>);</div>
+                    <div class="code-line">    }</div>
+                    <div class="code-line">}</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line"><span class="keyword">public class</span> Dog <span class="keyword">extends</span> Animal {</div>
+                    <div class="code-line">    <span class="keyword">public</span> Dog(String name) {</div>
+                    <div class="code-line">        <span class="keyword">super</span>(name);</div>
+                    <div class="code-line">    }</div>
+                    <div class="code-line"></div>
+                    <div class="code-line">    @Override</div>
+                    <div class="code-line">    <span class="keyword">public void</span> makeSound() {</div>
+                    <div class="code-line">        System.out.println(<span class="string">"Woof!"</span>);</div>
+                    <div class="code-line">    }</div>
+                    <div class="code-line">}</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📦 Collections Framework</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="keyword">import</span> java.util.*;</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// List - ordered, allows duplicates</span></div>
+                    <div class="code-line">List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</div>
+                    <div class="code-line">list.add(<span class="string">"Apple"</span>);</div>
+                    <div class="code-line">list.add(<span class="string">"Banana"</span>);</div>
+                    <div class="code-line">list.get(0);  <span class="comment">// Access by index</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Set - no duplicates</span></div>
+                    <div class="code-line">Set&lt;Integer&gt; set = <span class="keyword">new</span> HashSet&lt;&gt;();</div>
+                    <div class="code-line">set.add(1);</div>
+                    <div class="code-line">set.add(2);</div>
+                    <div class="code-line">set.contains(1);  <span class="comment">// true</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Map - key-value pairs</span></div>
+                    <div class="code-line">Map&lt;String, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</div>
+                    <div class="code-line">map.put(<span class="string">"Alice"</span>, 25);</div>
+                    <div class="code-line">map.put(<span class="string">"Bob"</span>, 30);</div>
+                    <div class="code-line">map.get(<span class="string">"Alice"</span>);  <span class="comment">// 25</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Queue - FIFO</span></div>
+                    <div class="code-line">Queue&lt;String&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</div>
+                    <div class="code-line">queue.offer(<span class="string">"First"</span>);</div>
+                    <div class="code-line">queue.poll();  <span class="comment">// Remove and return head</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔄 Collection Operations</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">list.add(element)</div>
+                    <div class="cmd-desc">Add element to list</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">list.remove(index)</div>
+                    <div class="cmd-desc">Remove element at index</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">list.size()</div>
+                    <div class="cmd-desc">Get collection size</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">list.isEmpty()</div>
+                    <div class="cmd-desc">Check if empty</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">list.clear()</div>
+                    <div class="cmd-desc">Remove all elements</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Collections.sort(list)</div>
+                    <div class="cmd-desc">Sort list</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Collections.reverse(list)</div>
+                    <div class="cmd-desc">Reverse list order</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">Collections.shuffle(list)</div>
+                    <div class="cmd-desc">Randomly shuffle list</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🌊 Streams API (Java 8+)</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="keyword">import</span> java.util.stream.*;</div>
+                    <div class="code-line"></div>
+                    <div class="code-line">List&lt;Integer&gt; numbers = Arrays.asList(1, 2, 3, 4, 5);</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Filter and map</span></div>
+                    <div class="code-line">List&lt;Integer&gt; result = numbers.stream()</div>
+                    <div class="code-line">    .filter(n -&gt; n % 2 == 0)  <span class="comment">// Keep even numbers</span></div>
+                    <div class="code-line">    .map(n -&gt; n * 2)          <span class="comment">// Double each</span></div>
+                    <div class="code-line">    .collect(Collectors.toList());</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Reduce</span></div>
+                    <div class="code-line"><span class="keyword">int</span> sum = numbers.stream()</div>
+                    <div class="code-line">    .reduce(0, (a, b) -&gt; a + b);</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Find operations</span></div>
+                    <div class="code-line">Optional&lt;Integer&gt; first = numbers.stream()</div>
+                    <div class="code-line">    .filter(n -&gt; n &gt; 3)</div>
+                    <div class="code-line">    .findFirst();</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Count</span></div>
+                    <div class="code-line"><span class="keyword">long</span> count = numbers.stream()</div>
+                    <div class="code-line">    .filter(n -&gt; n &gt; 2)</div>
+                    <div class="code-line">    .count();</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔍 Stream Operations</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">filter(predicate)</div>
+                    <div class="cmd-desc">Keep elements matching condition</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">map(function)</div>
+                    <div class="cmd-desc">Transform each element</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">flatMap(function)</div>
+                    <div class="cmd-desc">Flatten nested streams</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">distinct()</div>
+                    <div class="cmd-desc">Remove duplicates</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">sorted()</div>
+                    <div class="cmd-desc">Sort elements</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">limit(n)</div>
+                    <div class="cmd-desc">Take first n elements</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">skip(n)</div>
+                    <div class="cmd-desc">Skip first n elements</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">forEach(action)</div>
+                    <div class="cmd-desc">Perform action on each element</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">collect(collector)</div>
+                    <div class="cmd-desc">Collect to collection</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">reduce(identity, accumulator)</div>
+                    <div class="cmd-desc">Combine elements to single result</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">⚠️ Exception Handling</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="keyword">try</span> {</div>
+                    <div class="code-line">    <span class="comment">// Code that may throw exception</span></div>
+                    <div class="code-line">    <span class="keyword">int</span> result = 10 / 0;</div>
+                    <div class="code-line">} <span class="keyword">catch</span> (ArithmeticException e) {</div>
+                    <div class="code-line">    <span class="comment">// Handle specific exception</span></div>
+                    <div class="code-line">    System.err.println(<span class="string">"Division by zero!"</span>);</div>
+                    <div class="code-line">} <span class="keyword">catch</span> (Exception e) {</div>
+                    <div class="code-line">    <span class="comment">// Handle general exception</span></div>
+                    <div class="code-line">    e.printStackTrace();</div>
+                    <div class="code-line">} <span class="keyword">finally</span> {</div>
+                    <div class="code-line">    <span class="comment">// Always executes</span></div>
+                    <div class="code-line">    System.out.println(<span class="string">"Cleanup"</span>);</div>
+                    <div class="code-line">}</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Try-with-resources (Java 7+)</span></div>
+                    <div class="code-line"><span class="keyword">try</span> (BufferedReader br = <span class="keyword">new</span> BufferedReader(</div>
+                    <div class="code-line">        <span class="keyword">new</span> FileReader(<span class="string">"file.txt"</span>))) {</div>
+                    <div class="code-line">    String line = br.readLine();</div>
+                    <div class="code-line">} <span class="keyword">catch</span> (IOException e) {</div>
+                    <div class="code-line">    e.printStackTrace();</div>
+                    <div class="code-line">}</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🎯 Common Exceptions</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">NullPointerException</div>
+                    <div class="cmd-desc">Accessing null object reference</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">ArrayIndexOutOfBoundsException</div>
+                    <div class="cmd-desc">Invalid array index</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">ClassCastException</div>
+                    <div class="cmd-desc">Invalid type casting</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">IllegalArgumentException</div>
+                    <div class="cmd-desc">Invalid method argument</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">IOException</div>
+                    <div class="cmd-desc">Input/output operation failed</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">NumberFormatException</div>
+                    <div class="cmd-desc">String to number conversion failed</div>
+                </div>
+                <div class="warning">
+                    ⚠️ <strong>Checked vs Unchecked:</strong> Checked exceptions must be caught or declared. Unchecked exceptions (RuntimeException) don't require explicit handling.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔒 String Methods</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">str.length()</div>
+                    <div class="cmd-desc">Get string length</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">str.charAt(index)</div>
+                    <div class="cmd-desc">Get character at index</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">str.substring(start, end)</div>
+                    <div class="cmd-desc">Extract substring</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">str.toLowerCase() / toUpperCase()</div>
+                    <div class="cmd-desc">Convert case</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">str.trim()</div>
+                    <div class="cmd-desc">Remove leading/trailing whitespace</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">str.replace(old, new)</div>
+                    <div class="cmd-desc">Replace characters/strings</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">str.split(regex)</div>
+                    <div class="cmd-desc">Split into array</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">str.contains(substring)</div>
+                    <div class="cmd-desc">Check if contains substring</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">str.startsWith(prefix)</div>
+                    <div class="cmd-desc">Check if starts with prefix</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">str.equals(other)</div>
+                    <div class="cmd-desc">Compare strings (content)</div>
+                </div>
+                <div class="tip">
+                    💡 Use <code>StringBuilder</code> for efficient string concatenation in loops
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🧵 Lambda Expressions (Java 8+)</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Basic syntax: (parameters) -&gt; expression</span></div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// No parameters</span></div>
+                    <div class="code-line">() -&gt; System.out.println(<span class="string">"Hello"</span>)</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// One parameter</span></div>
+                    <div class="code-line">x -&gt; x * x</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Multiple parameters</span></div>
+                    <div class="code-line">(a, b) -&gt; a + b</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// With block</span></div>
+                    <div class="code-line">(x, y) -&gt; {</div>
+                    <div class="code-line">    <span class="keyword">int</span> sum = x + y;</div>
+                    <div class="code-line">    <span class="keyword">return</span> sum;</div>
+                    <div class="code-line">}</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Using lambdas with collections</span></div>
+                    <div class="code-line">List&lt;String&gt; names = Arrays.asList(<span class="string">"Alice"</span>, <span class="string">"Bob"</span>);</div>
+                    <div class="code-line">names.forEach(name -&gt; System.out.println(name));</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Method reference</span></div>
+                    <div class="code-line">names.forEach(System.out::println);</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📌 Common Patterns</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Singleton Pattern</span></div>
+                    <div class="code-line"><span class="keyword">public class</span> Singleton {</div>
+                    <div class="code-line">    <span class="keyword">private static</span> Singleton instance;</div>
+                    <div class="code-line"></div>
+                    <div class="code-line">    <span class="keyword">private</span> Singleton() {}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line">    <span class="keyword">public static</span> Singleton getInstance() {</div>
+                    <div class="code-line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) {</div>
+                    <div class="code-line">            instance = <span class="keyword">new</span> Singleton();</div>
+                    <div class="code-line">        }</div>
+                    <div class="code-line">        <span class="keyword">return</span> instance;</div>
+                    <div class="code-line">    }</div>
+                    <div class="code-line">}</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Builder Pattern</span></div>
+                    <div class="code-line"><span class="keyword">public class</span> User {</div>
+                    <div class="code-line">    <span class="keyword">private</span> String name;</div>
+                    <div class="code-line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</div>
+                    <div class="code-line"></div>
+                    <div class="code-line">    <span class="keyword">private</span> User(Builder builder) {</div>
+                    <div class="code-line">        <span class="keyword">this</span>.name = builder.name;</div>
+                    <div class="code-line">        <span class="keyword">this</span>.age = builder.age;</div>
+                    <div class="code-line">    }</div>
+                    <div class="code-line"></div>
+                    <div class="code-line">    <span class="keyword">public static class</span> Builder {</div>
+                    <div class="code-line">        <span class="keyword">private</span> String name;</div>
+                    <div class="code-line">        <span class="keyword">private</span> <span class="keyword">int</span> age;</div>
+                    <div class="code-line"></div>
+                    <div class="code-line">        <span class="keyword">public</span> Builder name(String name) {</div>
+                    <div class="code-line">            <span class="keyword">this</span>.name = name;</div>
+                    <div class="code-line">            <span class="keyword">return this</span>;</div>
+                    <div class="code-line">        }</div>
+                    <div class="code-line"></div>
+                    <div class="code-line">        <span class="keyword">public</span> Builder age(<span class="keyword">int</span> age) {</div>
+                    <div class="code-line">            <span class="keyword">this</span>.age = age;</div>
+                    <div class="code-line">            <span class="keyword">return this</span>;</div>
+                    <div class="code-line">        }</div>
+                    <div class="code-line"></div>
+                    <div class="code-line">        <span class="keyword">public</span> User build() {</div>
+                    <div class="code-line">            <span class="keyword">return new</span> User(<span class="keyword">this</span>);</div>
+                    <div class="code-line">        }</div>
+                    <div class="code-line">    }</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Usage</span></div>
+                    <div class="code-line">User user = <span class="keyword">new</span> User.Builder()</div>
+                    <div class="code-line">    .name(<span class="string">"Alice"</span>)</div>
+                    <div class="code-line">    .age(25)</div>
+                    <div class="code-line">    .build();</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔢 Generics</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Generic class</span></div>
+                    <div class="code-line"><span class="keyword">public class</span> Box&lt;T&gt; {</div>
+                    <div class="code-line">    <span class="keyword">private</span> T content;</div>
+                    <div class="code-line"></div>
+                    <div class="code-line">    <span class="keyword">public void</span> set(T content) {</div>
+                    <div class="code-line">        <span class="keyword">this</span>.content = content;</div>
+                    <div class="code-line">    }</div>
+                    <div class="code-line"></div>
+                    <div class="code-line">    <span class="keyword">public</span> T get() {</div>
+                    <div class="code-line">        <span class="keyword">return</span> content;</div>
+                    <div class="code-line">    }</div>
+                    <div class="code-line">}</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Usage</span></div>
+                    <div class="code-line">Box&lt;String&gt; stringBox = <span class="keyword">new</span> Box&lt;&gt;();</div>
+                    <div class="code-line">stringBox.set(<span class="string">"Hello"</span>);</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Generic method</span></div>
+                    <div class="code-line"><span class="keyword">public static</span> &lt;T&gt; <span class="keyword">void</span> printArray(T[] array) {</div>
+                    <div class="code-line">    <span class="keyword">for</span> (T element : array) {</div>
+                    <div class="code-line">        System.out.println(element);</div>
+                    <div class="code-line">    }</div>
+                    <div class="code-line">}</div>
+                </div>
+                <div class="note">
+                    <strong>Bounded Type Parameters:</strong><br>
+                    <code>&lt;T extends Number&gt;</code> - T must be Number or subclass<br>
+                    <code>&lt;? extends Type&gt;</code> - Upper bounded wildcard<br>
+                    <code>&lt;? super Type&gt;</code> - Lower bounded wildcard
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📂 File I/O</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="keyword">import</span> java.io.*;</div>
+                    <div class="code-line"><span class="keyword">import</span> java.nio.file.*;</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Read file (Java 11+)</span></div>
+                    <div class="code-line">String content = Files.readString(</div>
+                    <div class="code-line">    Paths.get(<span class="string">"file.txt"</span>));</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Write file</span></div>
+                    <div class="code-line">Files.writeString(</div>
+                    <div class="code-line">    Paths.get(<span class="string">"file.txt"</span>),</div>
+                    <div class="code-line">    <span class="string">"Hello, World!"</span>);</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Read lines</span></div>
+                    <div class="code-line">List&lt;String&gt; lines = Files.readAllLines(</div>
+                    <div class="code-line">    Paths.get(<span class="string">"file.txt"</span>));</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"><span class="comment">// Stream lines</span></div>
+                    <div class="code-line"><span class="keyword">try</span> (Stream&lt;String&gt; stream = </div>
+                    <div class="code-line">        Files.lines(Paths.get(<span class="string">"file.txt"</span>))) {</div>
+                    <div class="code-line">    stream.forEach(System.out::println);</div>
+                    <div class="code-line">}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">💡 Best Practices</div>
+            <div class="tip">
+                <strong>Naming Conventions:</strong><br>
+                • Classes: PascalCase (e.g., <code>MyClass</code>)<br>
+                • Methods/Variables: camelCase (e.g., <code>myMethod</code>)<br>
+                • Constants: UPPER_SNAKE_CASE (e.g., <code>MAX_VALUE</code>)<br>
+                • Packages: lowercase (e.g., <code>com.example.project</code>)
+            </div>
+            <div class="tip" style="margin-top: 1rem;">
+                <strong>Code Quality:</strong><br>
+                • Use meaningful variable names<br>
+                • Keep methods short and focused<br>
+                • Follow SOLID principles<br>
+                • Write unit tests<br>
+                • Handle exceptions appropriately<br>
+                • Use interfaces for abstraction<br>
+                • Prefer composition over inheritance
+            </div>
+            <div class="tip" style="margin-top: 1rem;">
+                <strong>Modern Java Features:</strong><br>
+                • Use <code>var</code> for local variable type inference (Java 10+)<br>
+                • Use text blocks for multi-line strings (Java 15+)<br>
+                • Use records for immutable data classes (Java 14+)<br>
+                • Use switch expressions (Java 14+)<br>
+                • Use pattern matching (Java 16+)
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Java Fundamentals Quick Reference</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">☕ Master the essentials of Java programming</p>
+        </div>
+    </div>
+</body>
+</html>

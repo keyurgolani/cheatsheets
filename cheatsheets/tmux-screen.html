@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tmux and Screen terminal multiplexer commands for session management.">
+    <title>tmux & screen Cheatsheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e6ed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #9333ea 0%, #c026d3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #8b95a5;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(147, 51, 234, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(147, 51, 234, 0.15);
+        }
+
+        .card-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #9333ea;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(147, 51, 234, 0.3);
+        }
+
+        .cmd-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+
+        .cmd-row:hover {
+            background: rgba(147, 51, 234, 0.1);
+        }
+
+        .cmd-name {
+            color: #c026d3;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+        }
+
+        .cmd-desc {
+            color: #cbd5e1;
+            padding-left: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+        }
+
+        .comparison-row:hover {
+            background: rgba(147, 51, 234, 0.1);
+        }
+
+        .tmux-cmd, .screen-cmd {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .tmux-cmd {
+            color: #c026d3;
+            font-weight: 600;
+        }
+
+        .screen-cmd {
+            color: #a78bfa;
+            font-weight: 600;
+        }
+
+        .comparison-desc {
+            grid-column: 1 / -1;
+            color: #cbd5e1;
+            padding-left: 1rem;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        code {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #a5d6ff;
+            font-size: 0.9em;
+        }
+
+        .note {
+            background: rgba(147, 51, 234, 0.1);
+            border-left: 4px solid #9333ea;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .tip {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .warning {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 0.75rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+
+        .code-line {
+            color: #a5d6ff;
+            margin: 0.25rem 0;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(100, 116, 139, 0.3);
+            color: #8b95a5;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .comparison-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🖥️ tmux & screen Commands</h1>
+        <p class="subtitle">Terminal multiplexer essentials for session management</p>
+
+        <div class="card" style="margin-bottom: 2rem;">
+            <div class="card-header">📋 Quick Reference</div>
+            <div class="note">
+                <strong>Default Prefix Keys:</strong><br>
+                • tmux: <code>Ctrl+b</code> (can be changed to <code>Ctrl+a</code>)<br>
+                • screen: <code>Ctrl+a</code><br><br>
+                <strong>Notation:</strong> <code>C-b</code> means Ctrl+b, then release and press the next key
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">🚀 Starting Sessions</div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">tmux</div>
+                    <div class="screen-cmd">screen</div>
+                    <div class="comparison-desc">Start new session</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">tmux new -s mysession</div>
+                    <div class="screen-cmd">screen -S mysession</div>
+                    <div class="comparison-desc">Start named session</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">tmux new -s mysession -n mywindow</div>
+                    <div class="screen-cmd">screen -S mysession -t mywindow</div>
+                    <div class="comparison-desc">Start session with named window</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">tmux new -A -s mysession</div>
+                    <div class="cmd-desc">Attach to session or create if doesn't exist (tmux only)</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔌 Attaching & Detaching</div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">tmux attach</div>
+                    <div class="screen-cmd">screen -r</div>
+                    <div class="comparison-desc">Attach to last session</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">tmux attach -t mysession</div>
+                    <div class="screen-cmd">screen -r mysession</div>
+                    <div class="comparison-desc">Attach to named session</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">C-b d</div>
+                    <div class="screen-cmd">C-a d</div>
+                    <div class="comparison-desc">Detach from session</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">tmux attach -d -t mysession</div>
+                    <div class="screen-cmd">screen -d -r mysession</div>
+                    <div class="comparison-desc">Detach others and attach</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">C-b D</div>
+                    <div class="screen-cmd">C-a D D</div>
+                    <div class="comparison-desc">Choose client to detach</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📊 Session Management</div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">tmux ls</div>
+                    <div class="screen-cmd">screen -ls</div>
+                    <div class="comparison-desc">List all sessions</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">tmux kill-session -t mysession</div>
+                    <div class="screen-cmd">screen -X -S mysession quit</div>
+                    <div class="comparison-desc">Kill named session</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">C-b s</div>
+                    <div class="screen-cmd">C-a "</div>
+                    <div class="comparison-desc">List and switch sessions/windows</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">C-b $</div>
+                    <div class="screen-cmd">C-a :sessionname name</div>
+                    <div class="comparison-desc">Rename session</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">tmux kill-server</div>
+                    <div class="cmd-desc">Kill all sessions and server (tmux only)</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🪟 Window Management</div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">C-b c</div>
+                    <div class="screen-cmd">C-a c</div>
+                    <div class="comparison-desc">Create new window</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">C-b ,</div>
+                    <div class="screen-cmd">C-a A</div>
+                    <div class="comparison-desc">Rename current window</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">C-b &</div>
+                    <div class="screen-cmd">C-a k</div>
+                    <div class="comparison-desc">Kill current window</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">C-b n</div>
+                    <div class="screen-cmd">C-a n</div>
+                    <div class="comparison-desc">Next window</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">C-b p</div>
+                    <div class="screen-cmd">C-a p</div>
+                    <div class="comparison-desc">Previous window</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">C-b 0-9</div>
+                    <div class="screen-cmd">C-a 0-9</div>
+                    <div class="comparison-desc">Switch to window by number</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">C-b w</div>
+                    <div class="screen-cmd">C-a "</div>
+                    <div class="comparison-desc">List windows</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">C-b l</div>
+                    <div class="screen-cmd">C-a C-a</div>
+                    <div class="comparison-desc">Toggle last window</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">C-b f</div>
+                    <div class="screen-cmd">C-a ' (then name)</div>
+                    <div class="comparison-desc">Find window by name</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔲 Pane Splitting (tmux)</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">C-b %</div>
+                    <div class="cmd-desc">Split pane vertically (left/right)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">C-b "</div>
+                    <div class="cmd-desc">Split pane horizontally (top/bottom)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">C-b arrow key</div>
+                    <div class="cmd-desc">Navigate between panes</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">C-b o</div>
+                    <div class="cmd-desc">Cycle through panes</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">C-b x</div>
+                    <div class="cmd-desc">Kill current pane</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">C-b z</div>
+                    <div class="cmd-desc">Toggle pane zoom (fullscreen)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">C-b ;</div>
+                    <div class="cmd-desc">Toggle between last two panes</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">C-b q</div>
+                    <div class="cmd-desc">Show pane numbers (type number to switch)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">C-b {</div>
+                    <div class="cmd-desc">Move pane left</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">C-b }</div>
+                    <div class="cmd-desc">Move pane right</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">C-b space</div>
+                    <div class="cmd-desc">Cycle through pane layouts</div>
+                </div>
+                <div class="note">
+                    💡 <strong>Tip:</strong> Hold Ctrl and press arrow keys to resize panes: <code>C-b C-arrow</code>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔲 Region Splitting (screen)</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">C-a S</div>
+                    <div class="cmd-desc">Split horizontally (create region)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">C-a |</div>
+                    <div class="cmd-desc">Split vertically (if enabled)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">C-a Tab</div>
+                    <div class="cmd-desc">Switch to next region</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">C-a X</div>
+                    <div class="cmd-desc">Remove current region</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">C-a Q</div>
+                    <div class="cmd-desc">Remove all regions except current</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">C-a :resize +N</div>
+                    <div class="cmd-desc">Increase region size by N lines</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">C-a :resize -N</div>
+                    <div class="cmd-desc">Decrease region size by N lines</div>
+                </div>
+                <div class="note">
+                    💡 <strong>Note:</strong> After splitting, use <code>C-a c</code> or <code>C-a n</code> to create/switch windows in the new region
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">📋 Copy Mode & Scrollback</div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">C-b [</div>
+                    <div class="screen-cmd">C-a [</div>
+                    <div class="comparison-desc">Enter copy mode / scrollback</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">q (in copy mode)</div>
+                    <div class="screen-cmd">Esc (in copy mode)</div>
+                    <div class="comparison-desc">Exit copy mode</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">Space (start), Enter (copy)</div>
+                    <div class="screen-cmd">Space (start), Space (end)</div>
+                    <div class="comparison-desc">Select and copy text</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">C-b ]</div>
+                    <div class="screen-cmd">C-a ]</div>
+                    <div class="comparison-desc">Paste buffer</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">C-b = (tmux)</div>
+                    <div class="cmd-desc">List all paste buffers</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">C-b PgUp (tmux)</div>
+                    <div class="cmd-desc">Enter copy mode and scroll up</div>
+                </div>
+                <div class="tip">
+                    💡 In copy mode, use arrow keys or vi keys (h,j,k,l) to navigate
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">⌨️ Command Mode</div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">C-b :</div>
+                    <div class="screen-cmd">C-a :</div>
+                    <div class="comparison-desc">Enter command mode</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">:new-window -n name (tmux)</div>
+                    <div class="cmd-desc">Create named window from command mode</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">:split-window (tmux)</div>
+                    <div class="cmd-desc">Split window from command mode</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">:resize-pane -D 10 (tmux)</div>
+                    <div class="cmd-desc">Resize pane down by 10 lines</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">:setw synchronize-panes on (tmux)</div>
+                    <div class="cmd-desc">Send commands to all panes simultaneously</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">ℹ️ Information & Help</div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">C-b ?</div>
+                    <div class="screen-cmd">C-a ?</div>
+                    <div class="comparison-desc">Show all key bindings</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">C-b t</div>
+                    <div class="screen-cmd">C-a t</div>
+                    <div class="comparison-desc">Show time</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">C-b i</div>
+                    <div class="screen-cmd">C-a v</div>
+                    <div class="comparison-desc">Show window info / version</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">tmux info</div>
+                    <div class="cmd-desc">Show server information (tmux only)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">tmux list-keys</div>
+                    <div class="cmd-desc">List all key bindings (tmux only)</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🔄 Miscellaneous Commands</div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">C-b r</div>
+                    <div class="screen-cmd">C-a C-l</div>
+                    <div class="comparison-desc">Reload config / Refresh screen</div>
+                </div>
+                <div class="comparison-row">
+                    <div class="tmux-cmd">C-b m</div>
+                    <div class="screen-cmd">C-a M</div>
+                    <div class="comparison-desc">Monitor window for activity</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">C-b ~ (tmux)</div>
+                    <div class="cmd-desc">Show messages</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">C-a H (screen)</div>
+                    <div class="cmd-desc">Log session to file</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">C-a x (screen)</div>
+                    <div class="cmd-desc">Lock screen session</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">⚙️ Configuration Files</div>
+                <div class="code-block">
+                    <div class="code-line"># ~/.tmux.conf</div>
+                    <div class="code-line"># Change prefix to Ctrl+a</div>
+                    <div class="code-line">unbind C-b</div>
+                    <div class="code-line">set -g prefix C-a</div>
+                    <div class="code-line">bind C-a send-prefix</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"># Enable mouse support</div>
+                    <div class="code-line">set -g mouse on</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"># Start windows at 1</div>
+                    <div class="code-line">set -g base-index 1</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"># Split panes with | and -</div>
+                    <div class="code-line">bind | split-window -h</div>
+                    <div class="code-line">bind - split-window -v</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"># Reload config</div>
+                    <div class="code-line">bind r source-file ~/.tmux.conf</div>
+                </div>
+                <div class="code-block">
+                    <div class="code-line"># ~/.screenrc</div>
+                    <div class="code-line"># Disable startup message</div>
+                    <div class="code-line">startup_message off</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"># Set scrollback buffer</div>
+                    <div class="code-line">defscrollback 10000</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"># Enable 256 colors</div>
+                    <div class="code-line">term screen-256color</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"># Status line</div>
+                    <div class="code-line">hardstatus alwayslastline</div>
+                    <div class="code-line">hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %m-%d %{W}%c %{g}]'</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🎨 Customization Examples (tmux)</div>
+                <div class="code-block">
+                    <div class="code-line"># Status bar styling</div>
+                    <div class="code-line">set -g status-bg black</div>
+                    <div class="code-line">set -g status-fg white</div>
+                    <div class="code-line">set -g status-left '#[fg=green]#S '</div>
+                    <div class="code-line">set -g status-right '#[fg=yellow]%H:%M'</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"># Pane border colors</div>
+                    <div class="code-line">set -g pane-border-style fg=magenta</div>
+                    <div class="code-line">set -g pane-active-border-style fg=green</div>
+                    <div class="code-line"></div>
+                    <div class="code-line"># Vi mode for copy</div>
+                    <div class="code-line">setw -g mode-keys vi</div>
+                    <div class="code-line">bind-key -T copy-mode-vi v send -X begin-selection</div>
+                    <div class="code-line">bind-key -T copy-mode-vi y send -X copy-selection</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🚀 Advanced tmux Features</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">tmux capture-pane -p > output.txt</div>
+                    <div class="cmd-desc">Save pane contents to file</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">tmux pipe-pane -o 'cat >> ~/output.log'</div>
+                    <div class="cmd-desc">Log all pane output to file</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">tmux send-keys -t mysession:1 'ls' Enter</div>
+                    <div class="cmd-desc">Send commands to specific window</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">tmux respawn-pane -k</div>
+                    <div class="cmd-desc">Restart pane (kill and respawn)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">tmux swap-window -s 1 -t 2</div>
+                    <div class="cmd-desc">Swap window positions</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">tmux move-window -t 0</div>
+                    <div class="cmd-desc">Move window to position 0</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">🚀 Advanced screen Features</div>
+                <div class="cmd-row">
+                    <div class="cmd-name">screen -X -S mysession stuff 'command^M'</div>
+                    <div class="cmd-desc">Send command to session (^M is Enter)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">screen -L</div>
+                    <div class="cmd-desc">Start with logging enabled</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">screen -wipe</div>
+                    <div class="cmd-desc">Clean up dead sessions</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">screen -x</div>
+                    <div class="cmd-desc">Multi-display mode (share session)</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">C-a :hardcopy</div>
+                    <div class="cmd-desc">Save screen contents to file</div>
+                </div>
+                <div class="cmd-row">
+                    <div class="cmd-name">C-a :fit</div>
+                    <div class="cmd-desc">Fit screen to current terminal size</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">💡 Tips & Best Practices</div>
+            <div class="note">
+                <strong>When to use tmux vs screen:</strong><br>
+                • <strong>tmux:</strong> More modern, better pane management, active development, easier configuration<br>
+                • <strong>screen:</strong> More widely available by default, simpler for basic use, better for serial console access<br><br>
+                <strong>Common workflows:</strong><br>
+                • Remote development: Start session, detach, reconnect from anywhere<br>
+                • Long-running processes: Keep processes running after disconnect<br>
+                • Multiple terminals: Split screen for monitoring multiple tasks<br>
+                • Pair programming: Share session with <code>tmux attach -t session</code> or <code>screen -x</code>
+            </div>
+            <div class="tip">
+                💡 <strong>Pro Tips:</strong><br>
+                • Create a <code>~/.tmux.conf</code> or <code>~/.screenrc</code> for persistent settings<br>
+                • Use named sessions for different projects<br>
+                • Combine with SSH for powerful remote workflows<br>
+                • Learn copy mode for efficient text selection without mouse<br>
+                • Use <code>tmux resurrect</code> plugin to save/restore sessions
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">🔧 Quick Setup Commands</div>
+            <div class="code-block">
+                <div class="code-line"># Install tmux</div>
+                <div class="code-line">sudo apt install tmux          # Debian/Ubuntu</div>
+                <div class="code-line">brew install tmux              # macOS</div>
+                <div class="code-line">sudo yum install tmux          # RHEL/CentOS</div>
+                <div class="code-line"></div>
+                <div class="code-line"># Install screen</div>
+                <div class="code-line">sudo apt install screen        # Debian/Ubuntu</div>
+                <div class="code-line">brew install screen            # macOS</div>
+                <div class="code-line">sudo yum install screen        # RHEL/CentOS</div>
+                <div class="code-line"></div>
+                <div class="code-line"># Create basic tmux config</div>
+                <div class="code-line">cat > ~/.tmux.conf << 'EOF'</div>
+                <div class="code-line">set -g mouse on</div>
+                <div class="code-line">set -g base-index 1</div>
+                <div class="code-line">bind | split-window -h</div>
+                <div class="code-line">bind - split-window -v</div>
+                <div class="code-line">EOF</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>tmux & screen Terminal Multiplexer Reference</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">💡 Use <code>man tmux</code> and <code>man screen</code> for detailed documentation</p>
+        </div>
+    </div>
+</body>
+</html>
