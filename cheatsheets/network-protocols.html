@@ -3,697 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Network protocols reference including OSI model, TCP/IP, HTTP, and common port numbers.">
     <title>Network Protocols Cheatsheet</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #e0e6ed;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 2rem;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            font-size: 3rem;
-            background: linear-gradient(135deg, #9333ea 0%, #c084fc 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #8b95a5;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .card {
-            background: rgba(30, 41, 59, 0.6);
-            border: 1px solid rgba(100, 116, 139, 0.3);
-            border-radius: 12px;
-            padding: 1.5rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: rgba(147, 51, 234, 0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(147, 51, 234, 0.15);
-        }
-
-        .card-header {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #9333ea;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid rgba(147, 51, 234, 0.3);
-        }
-
-        .card-header h2 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: inherit;
-            margin: 0;
-        }
-
-        .cmd-row {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.5rem;
-            margin-bottom: 0.75rem;
-            padding: 0.5rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 6px;
-            transition: background 0.2s ease;
-        }
-
-        .cmd-row:hover {
-            background: rgba(147, 51, 234, 0.1);
-        }
-
-        .cmd-name {
-            color: #c084fc;
-            font-weight: 600;
-            font-family: 'Courier New', monospace;
-            font-size: 0.95rem;
-        }
-
-        .cmd-desc {
-            color: #cbd5e1;
-            padding-left: 1rem;
-            font-size: 0.9rem;
-        }
-
-        code {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            color: #a5d6ff;
-            font-size: 0.9em;
-        }
-
-        .note {
-            background: rgba(59, 130, 246, 0.1);
-            border-left: 4px solid #3b82f6;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .tip {
-            background: rgba(16, 185, 129, 0.1);
-            border-left: 4px solid #10b981;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .layer-box {
-            background: rgba(147, 51, 234, 0.1);
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin: 0.5rem 0;
-            border-left: 4px solid #9333ea;
-        }
-
-        .layer-title {
-            color: #c084fc;
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-        }
-
-        .layer-desc {
-            color: #cbd5e1;
-            font-size: 0.9rem;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(100, 116, 139, 0.3);
-            color: #8b95a5;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../script.js" defer></script>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-brand">
+                <i class="ph ph-books"></i> Cheatsheets
+            </a>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="btn-icon" aria-label="Toggle theme">
+                    <i class="ph ph-moon"></i>
+                </button>
+                <button id="download-btn" class="btn-icon" aria-label="Download PDF">
+                    <i class="ph ph-download-simple"></i>
+                </button>
+                <a href="https://github.com/keyurgolani/Cheatsheets" class="btn-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                    <i class="ph ph-github-logo"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
-        <h1>🌐 Network Protocols</h1>
-        <p class="subtitle">OSI model, TCP/IP stack, and essential networking protocols</p>
-
-        <div class="grid">
-            <div class="card">
-                <div class="card-header"><h2>📚 OSI Model (7 Layers)</h2></div>
-                <div class="layer-box">
-                    <div class="layer-title">Layer 7 - Application</div>
-                    <div class="layer-desc">User interface, network services (HTTP, FTP, SMTP, DNS)</div>
-                </div>
-                <div class="layer-box">
-                    <div class="layer-title">Layer 6 - Presentation</div>
-                    <div class="layer-desc">Data translation, encryption, compression (SSL/TLS, JPEG)</div>
-                </div>
-                <div class="layer-box">
-                    <div class="layer-title">Layer 5 - Session</div>
-                    <div class="layer-desc">Session management, authentication (NetBIOS, RPC)</div>
-                </div>
-                <div class="layer-box">
-                    <div class="layer-title">Layer 4 - Transport</div>
-                    <div class="layer-desc">End-to-end connections, reliability (TCP, UDP)</div>
-                </div>
-                <div class="layer-box">
-                    <div class="layer-title">Layer 3 - Network</div>
-                    <div class="layer-desc">Routing, logical addressing (IP, ICMP, ARP)</div>
-                </div>
-                <div class="layer-box">
-                    <div class="layer-title">Layer 2 - Data Link</div>
-                    <div class="layer-desc">Physical addressing, error detection (Ethernet, MAC)</div>
-                </div>
-                <div class="layer-box">
-                    <div class="layer-title">Layer 1 - Physical</div>
-                    <div class="layer-desc">Hardware, cables, signals (Cables, hubs, NICs)</div>
-                </div>
+        <header class="cheatsheet-header">
+            <h1>🌐 Network Protocols</h1>
+            <p>OSI model, TCP/IP stack, and essential networking protocols</p>
+            <div class="search-container" style="margin-top: 1.5rem; margin-bottom: 0;">
+                <span class="search-icon"><i class="ph ph-magnifying-glass"></i></span>
+                <input type="text" class="search-input" id="cheatsheet-search" placeholder="Filter this cheatsheet..." aria-label="Filter cheatsheet">
             </div>
+        </header>
 
-            <div class="card">
-                <div class="card-header"><h2>🔗 TCP/IP Model (4 Layers)</h2></div>
-                <div class="layer-box">
-                    <div class="layer-title">Layer 4 - Application</div>
-                    <div class="layer-desc">Combines OSI layers 5-7: HTTP, FTP, SMTP, DNS, SSH</div>
-                </div>
-                <div class="layer-box">
-                    <div class="layer-title">Layer 3 - Transport</div>
-                    <div class="layer-desc">Same as OSI Layer 4: TCP, UDP</div>
-                </div>
-                <div class="layer-box">
-                    <div class="layer-title">Layer 2 - Internet</div>
-                    <div class="layer-desc">Same as OSI Layer 3: IP, ICMP, ARP</div>
-                </div>
-                <div class="layer-box">
-                    <div class="layer-title">Layer 1 - Network Access</div>
-                    <div class="layer-desc">Combines OSI layers 1-2: Ethernet, Wi-Fi</div>
-                </div>
-                <div class="note">
-                    <strong>Mnemonic:</strong> "All People Seem To Need Data Processing" (OSI top-down)
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header"><h2>🌍 Application Layer Protocols</h2></div>
-                <div class="cmd-row">
-                    <div class="cmd-name">HTTP/HTTPS (80/443)</div>
-                    <div class="cmd-desc">Web browsing and data transfer</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">FTP (20/21)</div>
-                    <div class="cmd-desc">File Transfer Protocol</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">SFTP (22)</div>
-                    <div class="cmd-desc">Secure File Transfer Protocol</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">SSH (22)</div>
-                    <div class="cmd-desc">Secure Shell for remote access</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Telnet (23)</div>
-                    <div class="cmd-desc">Unencrypted remote access (deprecated)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">SMTP (25/587)</div>
-                    <div class="cmd-desc">Simple Mail Transfer Protocol (sending email)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">POP3 (110)</div>
-                    <div class="cmd-desc">Post Office Protocol (receiving email)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">IMAP (143)</div>
-                    <div class="cmd-desc">Internet Message Access Protocol (email sync)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">DNS (53)</div>
-                    <div class="cmd-desc">Domain Name System (name resolution)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">DHCP (67/68)</div>
-                    <div class="cmd-desc">Dynamic Host Configuration Protocol</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">SNMP (161/162)</div>
-                    <div class="cmd-desc">Simple Network Management Protocol</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">LDAP (389)</div>
-                    <div class="cmd-desc">Lightweight Directory Access Protocol</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header"><h2>🚚 Transport Layer Protocols</h2></div>
-                <div class="layer-box">
-                    <div class="layer-title">TCP (Transmission Control Protocol)</div>
-                    <div class="layer-desc">
-                        • Connection-oriented, reliable<br>
-                        • Guarantees delivery and order<br>
-                        • Error checking and flow control<br>
-                        • Used by: HTTP, FTP, SSH, SMTP<br>
-                        • Slower but reliable
-                    </div>
-                </div>
-                <div class="layer-box">
-                    <div class="layer-title">UDP (User Datagram Protocol)</div>
-                    <div class="layer-desc">
-                        • Connectionless, unreliable<br>
-                        • No delivery guarantee<br>
-                        • No error checking or flow control<br>
-                        • Used by: DNS, DHCP, VoIP, streaming<br>
-                        • Faster but less reliable
-                    </div>
-                </div>
-                <div class="tip">
-                    💡 <strong>When to use:</strong> TCP for accuracy (file transfers), UDP for speed (gaming, video calls)
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header"><h2>🔀 Network Layer Protocols</h2></div>
-                <div class="cmd-row">
-                    <div class="cmd-name">IP (Internet Protocol)</div>
-                    <div class="cmd-desc">Addressing and routing packets (IPv4, IPv6)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ICMP (Internet Control Message Protocol)</div>
-                    <div class="cmd-desc">Error reporting and diagnostics (ping, traceroute)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ARP (Address Resolution Protocol)</div>
-                    <div class="cmd-desc">Maps IP addresses to MAC addresses</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">IGMP (Internet Group Management Protocol)</div>
-                    <div class="cmd-desc">Manages multicast group memberships</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">IPsec</div>
-                    <div class="cmd-desc">Secure IP communications (VPNs)</div>
-                </div>
-                <div class="note">
-                    <strong>IPv4 vs IPv6:</strong><br>
-                    IPv4: 32-bit (4.3 billion addresses) - 192.168.1.1<br>
-                    IPv6: 128-bit (340 undecillion addresses) - 2001:0db8::1
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header"><h2>🔒 Security Protocols</h2></div>
-                <div class="cmd-row">
-                    <div class="cmd-name">SSL/TLS</div>
-                    <div class="cmd-desc">Secure Sockets Layer / Transport Layer Security</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">HTTPS (443)</div>
-                    <div class="cmd-desc">HTTP over TLS/SSL</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">SSH (22)</div>
-                    <div class="cmd-desc">Secure Shell for encrypted remote access</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">IPsec</div>
-                    <div class="cmd-desc">IP Security for VPNs</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">WPA/WPA2/WPA3</div>
-                    <div class="cmd-desc">Wi-Fi Protected Access</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Kerberos (88)</div>
-                    <div class="cmd-desc">Network authentication protocol</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header"><h2>📡 Data Link Layer Protocols</h2></div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Ethernet (IEEE 802.3)</div>
-                    <div class="cmd-desc">Wired LAN technology</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Wi-Fi (IEEE 802.11)</div>
-                    <div class="cmd-desc">Wireless LAN technology</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">PPP (Point-to-Point Protocol)</div>
-                    <div class="cmd-desc">Direct connection between two nodes</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">MAC (Media Access Control)</div>
-                    <div class="cmd-desc">Physical addressing on network interfaces</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">VLAN (Virtual LAN)</div>
-                    <div class="cmd-desc">Logical network segmentation</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header"><h2>🎯 Common Port Numbers</h2></div>
-                <div class="cmd-row">
-                    <div class="cmd-name">20/21 - FTP</div>
-                    <div class="cmd-desc">File Transfer Protocol (data/control)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">22 - SSH/SFTP</div>
-                    <div class="cmd-desc">Secure Shell and Secure FTP</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">23 - Telnet</div>
-                    <div class="cmd-desc">Unencrypted remote access</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">25 - SMTP</div>
-                    <div class="cmd-desc">Email sending</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">53 - DNS</div>
-                    <div class="cmd-desc">Domain Name System</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">67/68 - DHCP</div>
-                    <div class="cmd-desc">Dynamic IP assignment</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">80 - HTTP</div>
-                    <div class="cmd-desc">Web traffic (unencrypted)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">110 - POP3</div>
-                    <div class="cmd-desc">Email retrieval</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">143 - IMAP</div>
-                    <div class="cmd-desc">Email synchronization</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">443 - HTTPS</div>
-                    <div class="cmd-desc">Secure web traffic</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">587 - SMTP (TLS)</div>
-                    <div class="cmd-desc">Secure email submission</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">3306 - MySQL</div>
-                    <div class="cmd-desc">MySQL database</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">3389 - RDP</div>
-                    <div class="cmd-desc">Remote Desktop Protocol</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">5432 - PostgreSQL</div>
-                    <div class="cmd-desc">PostgreSQL database</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">6379 - Redis</div>
-                    <div class="cmd-desc">Redis cache</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">8080 - HTTP Alt</div>
-                    <div class="cmd-desc">Alternative HTTP port</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header"><h2>🎮 Real-Time Protocols</h2></div>
-                <div class="cmd-row">
-                    <div class="cmd-name">RTP (Real-time Transport Protocol)</div>
-                    <div class="cmd-desc">Audio and video streaming</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">RTSP (Real Time Streaming Protocol)</div>
-                    <div class="cmd-desc">Control streaming media servers</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">SIP (Session Initiation Protocol)</div>
-                    <div class="cmd-desc">VoIP call setup and management</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">WebRTC</div>
-                    <div class="cmd-desc">Browser-based real-time communication</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">MQTT</div>
-                    <div class="cmd-desc">Lightweight messaging for IoT</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header"><h2>🔄 Routing Protocols</h2></div>
-                <div class="cmd-row">
-                    <div class="cmd-name">RIP (Routing Information Protocol)</div>
-                    <div class="cmd-desc">Distance-vector routing (hop count)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">OSPF (Open Shortest Path First)</div>
-                    <div class="cmd-desc">Link-state routing protocol</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">BGP (Border Gateway Protocol)</div>
-                    <div class="cmd-desc">Internet backbone routing</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">EIGRP (Enhanced Interior Gateway Routing)</div>
-                    <div class="cmd-desc">Cisco proprietary advanced routing</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header"><h2>📦 Modern Web Protocols</h2></div>
-                <div class="cmd-row">
-                    <div class="cmd-name">HTTP/1.1</div>
-                    <div class="cmd-desc">Traditional web protocol (persistent connections)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">HTTP/2</div>
-                    <div class="cmd-desc">Multiplexing, server push, header compression</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">HTTP/3 (QUIC)</div>
-                    <div class="cmd-desc">UDP-based, faster connection establishment</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">WebSocket</div>
-                    <div class="cmd-desc">Full-duplex communication over TCP</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">gRPC</div>
-                    <div class="cmd-desc">High-performance RPC framework</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">GraphQL</div>
-                    <div class="cmd-desc">Query language for APIs</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header"><h2>🏢 Enterprise Protocols</h2></div>
-                <div class="cmd-row">
-                    <div class="cmd-name">SMB/CIFS (445)</div>
-                    <div class="cmd-desc">Windows file sharing</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">NFS (2049)</div>
-                    <div class="cmd-desc">Network File System (Unix/Linux)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">LDAP (389/636)</div>
-                    <div class="cmd-desc">Directory services (Active Directory)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">SNMP (161/162)</div>
-                    <div class="cmd-desc">Network device management</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Syslog (514)</div>
-                    <div class="cmd-desc">System logging</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header"><h2>🔍 Protocol Selection Guide</h2></div>
+        <div class="masonry-grid" id="cheatsheet-grid">
             
-            <div class="layer-box">
-                <div class="layer-title">File Transfer</div>
-                <div class="layer-desc">
-                    <strong>Secure:</strong> SFTP (22), SCP, HTTPS<br>
-                    <strong>Legacy:</strong> FTP (20/21)<br>
-                    <strong>Enterprise:</strong> SMB/CIFS, NFS
+            <div class="card" id="osi-model-7-layers">
+                <div class="card-header">📚 OSI Model (7 Layers)</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="layer-box">
-                <div class="layer-title">Remote Access</div>
-                <div class="layer-desc">
-                    <strong>Secure:</strong> SSH (22), RDP (3389)<br>
-                    <strong>Insecure:</strong> Telnet (23) - avoid!
+            <div class="card" id="tcpip-model-4-layers">
+                <div class="card-header">🔗 TCP/IP Model (4 Layers)</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="layer-box">
-                <div class="layer-title">Web Services</div>
-                <div class="layer-desc">
-                    <strong>Standard:</strong> HTTP/HTTPS<br>
-                    <strong>Real-time:</strong> WebSocket, WebRTC<br>
-                    <strong>APIs:</strong> REST (HTTP), gRPC, GraphQL
+            <div class="card" id="application-layer-protocols">
+                <div class="card-header">🌍 Application Layer Protocols</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="layer-box">
-                <div class="layer-title">Email</div>
-                <div class="layer-desc">
-                    <strong>Sending:</strong> SMTP (25/587)<br>
-                    <strong>Receiving:</strong> POP3 (110), IMAP (143)<br>
-                    <strong>Secure:</strong> Use TLS/SSL versions
+            <div class="card" id="transport-layer-protocols">
+                <div class="card-header">🚚 Transport Layer Protocols</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="layer-box">
-                <div class="layer-title">Streaming & Real-Time</div>
-                <div class="layer-desc">
-                    <strong>Video/Audio:</strong> RTP, RTSP<br>
-                    <strong>VoIP:</strong> SIP<br>
-                    <strong>IoT:</strong> MQTT, CoAP
+            <div class="card" id="network-layer-protocols">
+                <div class="card-header">🔀 Network Layer Protocols</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="layer-box">
-                <div class="layer-title">Network Management</div>
-                <div class="layer-desc">
-                    <strong>Monitoring:</strong> SNMP<br>
-                    <strong>Logging:</strong> Syslog<br>
-                    <strong>Configuration:</strong> DHCP, DNS
+            <div class="card" id="security-protocols">
+                <div class="card-header">🔒 Security Protocols</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header"><h2>💡 Protocol Comparison</h2></div>
-            
-            <div class="layer-box">
-                <div class="layer-title">TCP vs UDP</div>
-                <div class="layer-desc">
-                    <strong>TCP:</strong> Reliable, ordered, connection-oriented, slower<br>
-                    <strong>UDP:</strong> Unreliable, unordered, connectionless, faster<br>
-                    <strong>Use TCP for:</strong> File transfers, web browsing, email<br>
-                    <strong>Use UDP for:</strong> Streaming, gaming, DNS queries
+            <div class="card" id="data-link-layer-protocols">
+                <div class="card-header">📡 Data Link Layer Protocols</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="layer-box">
-                <div class="layer-title">IPv4 vs IPv6</div>
-                <div class="layer-desc">
-                    <strong>IPv4:</strong> 32-bit, 4.3B addresses, widely deployed<br>
-                    <strong>IPv6:</strong> 128-bit, 340 undecillion addresses, future-proof<br>
-                    <strong>Transition:</strong> Dual-stack, tunneling, translation
+            <div class="card" id="common-port-numbers">
+                <div class="card-header">🎯 Common Port Numbers</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="layer-box">
-                <div class="layer-title">HTTP Versions</div>
-                <div class="layer-desc">
-                    <strong>HTTP/1.1:</strong> One request per connection<br>
-                    <strong>HTTP/2:</strong> Multiplexing, binary protocol<br>
-                    <strong>HTTP/3:</strong> QUIC-based, UDP transport, faster
+            <div class="card" id="real-time-protocols">
+                <div class="card-header">🎮 Real-Time Protocols</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="layer-box">
-                <div class="layer-title">Email Protocols</div>
-                <div class="layer-desc">
-                    <strong>SMTP:</strong> Sending only<br>
-                    <strong>POP3:</strong> Download and delete from server<br>
-                    <strong>IMAP:</strong> Sync across devices, keeps on server
+            <div class="card" id="routing-protocols">
+                <div class="card-header">🔄 Routing Protocols</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="modern-web-protocols">
+                <div class="card-header">📦 Modern Web Protocols</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="enterprise-protocols">
+                <div class="card-header">🏢 Enterprise Protocols</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="protocol-selection-guide">
+                <div class="card-header">🔍 Protocol Selection Guide</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="protocol-comparison">
+                <div class="card-header">💡 Protocol Comparison</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="security-considerations">
+                <div class="card-header">⚠️ Security Considerations</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header"><h2>⚠️ Security Considerations</h2></div>
-            
-            <div class="layer-box">
-                <div class="layer-title">Always Use Encryption</div>
-                <div class="layer-desc">
-                    ✅ HTTPS instead of HTTP<br>
-                    ✅ SSH instead of Telnet<br>
-                    ✅ SFTP instead of FTP<br>
-                    ✅ IMAPS/POP3S instead of IMAP/POP3
-                </div>
-            </div>
-
-            <div class="layer-box">
-                <div class="layer-title">Port Security</div>
-                <div class="layer-desc">
-                    • Close unused ports<br>
-                    • Use firewalls to restrict access<br>
-                    • Change default ports for services<br>
-                    • Monitor for unusual traffic
-                </div>
-            </div>
-
-            <div class="layer-box">
-                <div class="layer-title">Protocol Vulnerabilities</div>
-                <div class="layer-desc">
-                    • Keep protocols updated (TLS 1.3+)<br>
-                    • Disable legacy protocols (SSLv3, TLS 1.0)<br>
-                    • Use strong cipher suites<br>
-                    • Implement certificate validation
-                </div>
-            </div>
-        </div>
-
-        <div class="footer">
-            <p>Network Protocols Reference Guide</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">🌐 Understanding protocols is key to network troubleshooting and design</p>
-        </div>
+        <footer>
+            <p>&copy; 2025 Cheatsheets Collection. Open source and community driven.</p>
+        </footer>
     </div>
 </body>
 </html>

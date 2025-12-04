@@ -3,570 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Grep command reference for text search and pattern matching in Unix/Linux.">
     <title>Linux grep Cheatsheet</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: linear-gradient(135deg, #0f1419 0%, #1a2332 100%);
-            color: #e0e6ed;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 2rem;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            font-size: 3rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #8b95a5;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .card {
-            background: rgba(30, 41, 59, 0.6);
-            border: 1px solid rgba(100, 116, 139, 0.3);
-            border-radius: 12px;
-            padding: 1.5rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: rgba(102, 126, 234, 0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.15);
-        }
-
-        .card-header {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #667eea;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid rgba(102, 126, 234, 0.3);
-        }
-
-        .card-content {
-            font-size: 0.95rem;
-        }
-
-        code {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            color: #a5d6ff;
-            font-size: 0.9em;
-        }
-
-        .option-row {
-            display: grid;
-            grid-template-columns: 100px 1fr;
-            gap: 1rem;
-            margin-bottom: 0.75rem;
-            padding: 0.5rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 6px;
-            transition: background 0.2s ease;
-        }
-
-        .option-row:hover {
-            background: rgba(102, 126, 234, 0.1);
-        }
-
-        .option-flag {
-            color: #fbbf24;
-            font-weight: 600;
-            font-family: 'Courier New', monospace;
-        }
-
-        .option-desc {
-            color: #cbd5e1;
-        }
-
-        .table-row {
-            display: grid;
-            grid-template-columns: 120px 1fr;
-            gap: 1rem;
-            margin-bottom: 0.6rem;
-            padding: 0.4rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 4px;
-        }
-
-        .table-key {
-            color: #a5d6ff;
-            font-weight: 600;
-            font-family: 'Courier New', monospace;
-        }
-
-        .table-value {
-            color: #cbd5e1;
-        }
-
-        .usage-box {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 1rem;
-            border-radius: 8px;
-            border-left: 4px solid #667eea;
-            margin-bottom: 1rem;
-        }
-
-        .usage-syntax {
-            color: #fbbf24;
-            font-family: 'Courier New', monospace;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .mnemonic {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 2rem;
-            border-radius: 12px;
-            text-align: center;
-            margin: 2rem 0;
-            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
-        }
-
-        .mnemonic-title {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .mnemonic-title .highlight {
-            font-weight: bold;
-            font-size: 3rem;
-        }
-
-        .mnemonic-subtitle {
-            font-size: 1.3rem;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 300;
-        }
-
-        .example-cmd {
-            background: rgba(0, 0, 0, 0.6);
-            padding: 0.75rem;
-            border-radius: 6px;
-            font-family: 'Courier New', monospace;
-            color: #a5d6ff;
-            margin: 0.5rem 0;
-            border-left: 3px solid #10b981;
-        }
-
-        .note {
-            background: rgba(251, 191, 36, 0.1);
-            border-left: 4px solid #fbbf24;
-            padding: 1rem;
-            border-radius: 6px;
-            margin-top: 1rem;
-            font-size: 0.9rem;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(100, 116, 139, 0.3);
-            color: #8b95a5;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            .grid {
-                grid-template-columns: 1fr;
-            }
-            .option-row {
-                grid-template-columns: 80px 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../script.js" defer></script>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-brand">
+                <i class="ph ph-books"></i> Cheatsheets
+            </a>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="btn-icon" aria-label="Toggle theme">
+                    <i class="ph ph-moon"></i>
+                </button>
+                <button id="download-btn" class="btn-icon" aria-label="Download PDF">
+                    <i class="ph ph-download-simple"></i>
+                </button>
+                <a href="https://github.com/keyurgolani/Cheatsheets" class="btn-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                    <i class="ph ph-github-logo"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
-        <h1>Linux grep Cheatsheet</h1>
-        <p class="subtitle">Master text pattern searching in Unix/Linux</p>
+        <header class="cheatsheet-header">
+            <h1>Linux grep Cheatsheet</h1>
+            <p>Master text pattern searching in Unix/Linux</p>
+            <div class="search-container" style="margin-top: 1.5rem; margin-bottom: 0;">
+                <span class="search-icon"><i class="ph ph-magnifying-glass"></i></span>
+                <input type="text" class="search-input" id="cheatsheet-search" placeholder="Filter this cheatsheet..." aria-label="Filter cheatsheet">
+            </div>
+        </header>
 
-        <div class="card" style="margin-bottom: 2rem;">
-            <div class="card-header">📖 Basic Usage</div>
-            <div class="card-content">
-                <div class="usage-box">
-                    <div class="usage-syntax">$ grep [OPTIONS] PATTERN [FILE...]</div>
-                    <p style="color: #cbd5e1; margin-top: 0.5rem;">Search each FILE for lines matching PATTERN. Without FILE, or when FILE is <code>-</code>, grep reads standard input.</p>
+        <div class="masonry-grid" id="cheatsheet-grid">
+            
+            <div class="card" id="basic-usage">
+                <div class="card-header">📖 Basic Usage</div>
+                <div class="code-block">
+                    
                 </div>
-                <div class="example-cmd">$ grep "error" logfile.txt</div>
-                <p style="color: #8b95a5; font-size: 0.9rem; margin-top: 0.5rem;">Find all lines containing "error" in logfile.txt</p>
             </div>
-        </div>
-
-        <div class="mnemonic">
-            <div class="mnemonic-title">
-                grep ⇒ <span class="highlight" style="color: #ff6b6b;">g</span>/<span class="highlight" style="color: #4ecdc4;">re</span>/<span class="highlight" style="color: #ffe66d;">p</span>
-            </div>
-            <div class="mnemonic-subtitle">
-                <span style="color: #ff6b6b;">G</span>lobal / <span style="color: #4ecdc4;">R</span>egular <span style="color: #4ecdc4;">E</span>xpression / and <span style="color: #ffe66d;">P</span>rint
-            </div>
-        </div>
-
-        <div class="grid">
-            <div class="card">
+            <div class="card" id="essential-options">
                 <div class="card-header">🔧 Essential Options</div>
-                <div class="card-content">
-                    <div class="option-row">
-                        <div class="option-flag">-i</div>
-                        <div class="option-desc">Ignore case distinctions</div>
-                    </div>
-                    <div class="option-row">
-                        <div class="option-flag">-v</div>
-                        <div class="option-desc">Invert match (select non-matching lines)</div>
-                    </div>
-                    <div class="option-row">
-                        <div class="option-flag">-r, -R</div>
-                        <div class="option-desc">Recursive search in directories</div>
-                    </div>
-                    <div class="option-row">
-                        <div class="option-flag">-n</div>
-                        <div class="option-desc">Print line numbers with matches</div>
-                    </div>
-                    <div class="option-row">
-                        <div class="option-flag">-c</div>
-                        <div class="option-desc">Count matching lines</div>
-                    </div>
-                    <div class="option-row">
-                        <div class="option-flag">-l</div>
-                        <div class="option-desc">Print only filenames with matches</div>
-                    </div>
-                    <div class="option-row">
-                        <div class="option-flag">-L</div>
-                        <div class="option-desc">Print only filenames without matches</div>
-                    </div>
-                    <div class="option-row">
-                        <div class="option-flag">-w</div>
-                        <div class="option-desc">Match whole words only</div>
-                    </div>
-                    <div class="option-row">
-                        <div class="option-flag">-x</div>
-                        <div class="option-desc">Match whole lines only</div>
-                    </div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="context-options">
                 <div class="card-header">🎯 Context Options</div>
-                <div class="card-content">
-                    <div class="option-row">
-                        <div class="option-flag">-A n</div>
-                        <div class="option-desc">Print n lines <strong>After</strong> match</div>
-                    </div>
-                    <div class="option-row">
-                        <div class="option-flag">-B n</div>
-                        <div class="option-desc">Print n lines <strong>Before</strong> match</div>
-                    </div>
-                    <div class="option-row">
-                        <div class="option-flag">-C n</div>
-                        <div class="option-desc">Print n lines of <strong>Context</strong> (before & after)</div>
-                    </div>
-                    <div class="example-cmd">$ grep -A 3 "error" log.txt</div>
-                    <p style="color: #8b95a5; font-size: 0.85rem; margin-top: 0.5rem;">Show error line plus 3 lines after</p>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="advanced-options">
                 <div class="card-header">🚀 Advanced Options</div>
-                <div class="card-content">
-                    <div class="option-row">
-                        <div class="option-flag">-E</div>
-                        <div class="option-desc">Extended regex (same as <code>egrep</code>)</div>
-                    </div>
-                    <div class="option-row">
-                        <div class="option-flag">-F</div>
-                        <div class="option-desc">Fixed strings (same as <code>fgrep</code>)</div>
-                    </div>
-                    <div class="option-row">
-                        <div class="option-flag">-P</div>
-                        <div class="option-desc">Perl-compatible regex (PCRE)</div>
-                    </div>
-                    <div class="option-row">
-                        <div class="option-flag">-o</div>
-                        <div class="option-desc">Print only matched parts</div>
-                    </div>
-                    <div class="option-row">
-                        <div class="option-flag">-q</div>
-                        <div class="option-desc">Quiet mode (exit status only)</div>
-                    </div>
-                    <div class="option-row">
-                        <div class="option-flag">-s</div>
-                        <div class="option-desc">Suppress error messages</div>
-                    </div>
-                    <div class="option-row">
-                        <div class="option-flag">-H</div>
-                        <div class="option-desc">Print filename with matches</div>
-                    </div>
-                    <div class="option-row">
-                        <div class="option-flag">-h</div>
-                        <div class="option-desc">Suppress filename in output</div>
-                    </div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="quantifiers">
                 <div class="card-header">🔢 Quantifiers</div>
-                <div class="card-content">
-                    <div class="table-row">
-                        <div class="table-key">{n}</div>
-                        <div class="table-value">Exactly n occurrences</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">{n,}</div>
-                        <div class="table-value">n or more occurrences</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">{,m}</div>
-                        <div class="table-value">Up to m occurrences</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">{n,m}</div>
-                        <div class="table-value">Between n and m occurrences</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">*</div>
-                        <div class="table-value">0 or more (same as {0,})</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">+</div>
-                        <div class="table-value">1 or more (same as {1,})</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">?</div>
-                        <div class="table-value">0 or 1 (same as {0,1})</div>
-                    </div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="wildcards-anchors">
                 <div class="card-header">🎭 Wildcards & Anchors</div>
-                <div class="card-content">
-                    <div class="table-row">
-                        <div class="table-key">.</div>
-                        <div class="table-value">Any single character (except newline)</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">^</div>
-                        <div class="table-value">Start of line</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">$</div>
-                        <div class="table-value">End of line</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">\&lt;</div>
-                        <div class="table-value">Start of word</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">\&gt;</div>
-                        <div class="table-value">End of word</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">\b</div>
-                        <div class="table-value">Word boundary</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">\B</div>
-                        <div class="table-value">Not a word boundary</div>
-                    </div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="character-classes">
                 <div class="card-header">📝 Character Classes</div>
-                <div class="card-content">
-                    <div class="table-row">
-                        <div class="table-key">[abc]</div>
-                        <div class="table-value">Match a, b, or c</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">[^abc]</div>
-                        <div class="table-value">Match any except a, b, c</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">[a-z]</div>
-                        <div class="table-value">Lowercase letters</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">[A-Z]</div>
-                        <div class="table-value">Uppercase letters</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">[0-9]</div>
-                        <div class="table-value">Digits</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">[a-zA-Z]</div>
-                        <div class="table-value">All letters</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">[a-zA-Z0-9]</div>
-                        <div class="table-value">Alphanumeric</div>
-                    </div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="posix-character-classes">
                 <div class="card-header">🔤 POSIX Character Classes</div>
-                <div class="card-content">
-                    <div class="table-row">
-                        <div class="table-key">[:alpha:]</div>
-                        <div class="table-value">Alphabetic characters</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">[:alnum:]</div>
-                        <div class="table-value">Alphanumeric characters</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">[:digit:]</div>
-                        <div class="table-value">Digits 0-9</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">[:lower:]</div>
-                        <div class="table-value">Lowercase letters</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">[:upper:]</div>
-                        <div class="table-value">Uppercase letters</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">[:space:]</div>
-                        <div class="table-value">Whitespace characters</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">[:punct:]</div>
-                        <div class="table-value">Punctuation</div>
-                    </div>
-                    <div class="note">
-                        <strong>Usage:</strong> <code>grep '[[:digit:]]' file.txt</code> (note double brackets)
-                    </div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="special-escape-sequences">
                 <div class="card-header">✨ Special Escape Sequences</div>
-                <div class="card-content">
-                    <div class="table-row">
-                        <div class="table-key">\s</div>
-                        <div class="table-value">Whitespace character</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">\S</div>
-                        <div class="table-value">Non-whitespace character</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">\d</div>
-                        <div class="table-value">Digit (requires -P)</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">\D</div>
-                        <div class="table-value">Non-digit (requires -P)</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">\w</div>
-                        <div class="table-value">Word character (requires -P)</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">\W</div>
-                        <div class="table-value">Non-word character (requires -P)</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">\\</div>
-                        <div class="table-value">Literal backslash</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="table-key">\.</div>
-                        <div class="table-value">Literal period</div>
-                    </div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="practical-examples">
+                <div class="card-header">💡 Practical Examples</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header">💡 Practical Examples</div>
-            <div class="card-content">
-                <div style="margin-bottom: 1rem;">
-                    <div class="example-cmd">$ grep -i "error" logfile.txt</div>
-                    <p style="color: #8b95a5; font-size: 0.85rem; margin: 0.3rem 0 0 0.5rem;">Case-insensitive search for "error"</p>
-                </div>
-                <div style="margin-bottom: 1rem;">
-                    <div class="example-cmd">$ grep -r "TODO" ~/projects/</div>
-                    <p style="color: #8b95a5; font-size: 0.85rem; margin: 0.3rem 0 0 0.5rem;">Recursively find all TODO comments in project</p>
-                </div>
-                <div style="margin-bottom: 1rem;">
-                    <div class="example-cmd">$ grep -n "function" script.js</div>
-                    <p style="color: #8b95a5; font-size: 0.85rem; margin: 0.3rem 0 0 0.5rem;">Show line numbers for each match</p>
-                </div>
-                <div style="margin-bottom: 1rem;">
-                    <div class="example-cmd">$ grep -v "^#" config.txt</div>
-                    <p style="color: #8b95a5; font-size: 0.85rem; margin: 0.3rem 0 0 0.5rem;">Show all lines that don't start with #</p>
-                </div>
-                <div style="margin-bottom: 1rem;">
-                    <div class="example-cmd">$ grep -E "cat|dog" animals.txt</div>
-                    <p style="color: #8b95a5; font-size: 0.85rem; margin: 0.3rem 0 0 0.5rem;">Extended regex: match "cat" OR "dog"</p>
-                </div>
-                <div style="margin-bottom: 1rem;">
-                    <div class="example-cmd">$ grep -w "test" *.py</div>
-                    <p style="color: #8b95a5; font-size: 0.85rem; margin: 0.3rem 0 0 0.5rem;">Match whole word "test" in Python files</p>
-                </div>
-                <div style="margin-bottom: 1rem;">
-                    <div class="example-cmd">$ grep -o "[0-9]\{3\}-[0-9]\{4\}" contacts.txt</div>
-                    <p style="color: #8b95a5; font-size: 0.85rem; margin: 0.3rem 0 0 0.5rem;">Extract phone numbers (format: 123-4567)</p>
-                </div>
-                <div style="margin-bottom: 1rem;">
-                    <div class="example-cmd">$ grep -c "error" *.log</div>
-                    <p style="color: #8b95a5; font-size: 0.85rem; margin: 0.3rem 0 0 0.5rem;">Count errors in each log file</p>
-                </div>
-                <div style="margin-bottom: 1rem;">
-                    <div class="example-cmd">$ ps aux | grep python</div>
-                    <p style="color: #8b95a5; font-size: 0.85rem; margin: 0.3rem 0 0 0.5rem;">Filter process list for Python processes</p>
-                </div>
-                <div>
-                    <div class="example-cmd">$ grep -P '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}' access.log</div>
-                    <p style="color: #8b95a5; font-size: 0.85rem; margin: 0.3rem 0 0 0.5rem;">Find IP addresses using Perl regex</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer">
-            <p>Enhanced grep cheatsheet for Linux/Unix systems</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">💡 Pro tip: Combine grep with pipes (|) for powerful text processing workflows</p>
-        </div>
+        <footer>
+            <p>&copy; 2025 Cheatsheets Collection. Open source and community driven.</p>
+        </footer>
     </div>
 </body>
 </html>

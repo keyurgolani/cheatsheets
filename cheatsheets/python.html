@@ -3,524 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Python programming language reference with syntax, data structures, and standard library.">
     <title>Python Syntax & Standard Library Cheatsheet</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: linear-gradient(135deg, #306998 0%, #FFD43B 100%);
-            color: #1a202c;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 2rem;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            font-size: 3rem;
-            color: white;
-            margin-bottom: 0.5rem;
-            text-align: center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .subtitle {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.95);
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.95);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-        }
-
-        .card-header {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #306998;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #306998;
-        }
-
-        .code-block {
-            background: rgba(26, 32, 44, 0.95);
-            padding: 1rem;
-            border-radius: 6px;
-            font-family: 'Courier New', monospace;
-            color: #a5d6ff;
-            margin: 0.5rem 0;
-            border-left: 3px solid #FFD43B;
-            overflow-x: auto;
-            font-size: 0.9rem;
-        }
-
-        .code-line {
-            margin: 0.2rem 0;
-        }
-
-        .comment {
-            color: #68d391;
-        }
-
-        .keyword {
-            color: #fbbf24;
-        }
-
-        .string {
-            color: #f687b3;
-        }
-
-        code {
-            background: rgba(48, 105, 152, 0.1);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            color: #306998;
-            font-size: 0.9em;
-        }
-
-        .note {
-            background: rgba(59, 130, 246, 0.1);
-            border-left: 4px solid #3b82f6;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .tip {
-            background: rgba(16, 185, 129, 0.1);
-            border-left: 4px solid #10b981;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 2px solid rgba(255, 255, 255, 0.5);
-            color: white;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../script.js" defer></script>
 </head>
 <body>
-    <div class="container">
-        <h1>🐍 Python Syntax & Standard Library</h1>
-        <p class="subtitle">Comprehensive Python reference for everyday coding</p>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-brand">
+                <i class="ph ph-books"></i> Cheatsheets
+            </a>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="btn-icon" aria-label="Toggle theme">
+                    <i class="ph ph-moon"></i>
+                </button>
+                <button id="download-btn" class="btn-icon" aria-label="Download PDF">
+                    <i class="ph ph-download-simple"></i>
+                </button>
+                <a href="https://github.com/keyurgolani/Cheatsheets" class="btn-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                    <i class="ph ph-github-logo"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
 
-        <div class="grid">
-            <div class="card">
+    <div class="container">
+        <header class="cheatsheet-header">
+            <h1>Python Syntax & Standard Library</h1>
+            <p>Comprehensive Python reference for everyday coding</p>
+            <div class="search-container" style="margin-top: 1.5rem; margin-bottom: 0;">
+                <span class="search-icon"><i class="ph ph-magnifying-glass"></i></span>
+                <input type="text" class="search-input" id="cheatsheet-search" placeholder="Filter this cheatsheet..." aria-label="Filter cheatsheet">
+            </div>
+        </header>
+
+        <div class="masonry-grid" id="cheatsheet-grid">
+            
+            <div class="card" id="basic-syntax">
                 <div class="card-header">📝 Basic Syntax</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment"># Variables (no declaration needed)</span></div>
-                    <div class="code-line">name = <span class="string">"Alice"</span></div>
-                    <div class="code-line">age = 30</div>
-                    <div class="code-line">height = 5.6</div>
-                    <div class="code-line">is_student = <span class="keyword">True</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Multiple assignment</span></div>
-                    <div class="code-line">x, y, z = 1, 2, 3</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Print output</span></div>
-                    <div class="code-line">print(<span class="string">"Hello, World!"</span>)</div>
-                    <div class="code-line">print(<span class="string">f"My name is {name}"</span>)</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Comments and docstrings</span></div>
-                    <div class="code-line"><span class="string">"""Multi-line comment</span></div>
-                    <div class="code-line"><span class="string">or docstring"""</span></div>
+                    <div class="code-line"><span class="comment"># Variables (no declaration needed)</span></div><div class="code-line">name = <span class="string">"Alice"</span></div><div class="code-line">age = 30</div><div class="code-line">height = 5.6</div><div class="code-line">is_student = <span class="keyword">True</span></div><div class="code-line"></div><div class="code-line"><span class="comment"># Multiple assignment</span></div><div class="code-line">x, y, z = 1, 2, 3</div><div class="code-line"></div><div class="code-line"><span class="comment"># Print output</span></div><div class="code-line">print(<span class="string">"Hello, World!"</span>)</div><div class="code-line">print(<span class="string">f"My name is {name}"</span>)</div><div class="code-line"></div><div class="code-line"><span class="comment"># Comments and docstrings</span></div><div class="code-line"><span class="string">"""Multi-line comment</span></div><div class="code-line"><span class="string">or docstring"""</span></div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="data-types">
                 <div class="card-header">🔢 Data Types</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment"># Numbers</span></div>
-                    <div class="code-line">integer = 42</div>
-                    <div class="code-line">floating = 3.14</div>
-                    <div class="code-line">complex_num = 3 + 4j</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Strings</span></div>
-                    <div class="code-line">text = <span class="string">"Hello"</span></div>
-                    <div class="code-line">multiline = <span class="string">"""Multiple</span></div>
-                    <div class="code-line"><span class="string">lines"""</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Boolean</span></div>
-                    <div class="code-line">flag = <span class="keyword">True</span>  <span class="comment"># or False</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># None (null)</span></div>
-                    <div class="code-line">value = <span class="keyword">None</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Type conversion</span></div>
-                    <div class="code-line">int(<span class="string">"42"</span>), float(<span class="string">"3.14"</span>), str(42)</div>
+                    <div class="code-line"><span class="comment"># Numbers</span></div><div class="code-line">integer = 42</div><div class="code-line">floating = 3.14</div><div class="code-line">complex_num = 3 + 4j</div><div class="code-line"></div><div class="code-line"><span class="comment"># Strings</span></div><div class="code-line">text = <span class="string">"Hello"</span></div><div class="code-line">multiline = <span class="string">"""Multiple</span></div><div class="code-line"><span class="string">lines"""</span></div><div class="code-line"></div><div class="code-line"><span class="comment"># Boolean</span></div><div class="code-line">flag = <span class="keyword">True</span> <span class="comment"># or False</span></div><div class="code-line"></div><div class="code-line"><span class="comment"># None (null)</span></div><div class="code-line">value = <span class="keyword">None</span></div><div class="code-line"></div><div class="code-line"><span class="comment"># Type conversion</span></div><div class="code-line">int(<span class="string">"42"</span>), float(<span class="string">"3.14"</span>), str(42)</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="lists-arrays">
                 <div class="card-header">📊 Lists (Arrays)</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment"># Create list</span></div>
-                    <div class="code-line">fruits = [<span class="string">"apple"</span>, <span class="string">"banana"</span>, <span class="string">"cherry"</span>]</div>
-                    <div class="code-line">numbers = [1, 2, 3, 4, 5]</div>
-                    <div class="code-line">mixed = [1, <span class="string">"two"</span>, 3.0, <span class="keyword">True</span>]</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Access elements</span></div>
-                    <div class="code-line">fruits[0]  <span class="comment"># "apple"</span></div>
-                    <div class="code-line">fruits[-1]  <span class="comment"># last item</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Slicing</span></div>
-                    <div class="code-line">fruits[1:3]  <span class="comment"># ["banana", "cherry"]</span></div>
-                    <div class="code-line">fruits[:2]  <span class="comment"># first 2</span></div>
-                    <div class="code-line">fruits[2:]  <span class="comment"># from index 2</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Methods</span></div>
-                    <div class="code-line">fruits.append(<span class="string">"orange"</span>)</div>
-                    <div class="code-line">fruits.insert(1, <span class="string">"mango"</span>)</div>
-                    <div class="code-line">fruits.remove(<span class="string">"banana"</span>)</div>
-                    <div class="code-line">fruits.pop()  <span class="comment"># remove last</span></div>
-                    <div class="code-line">len(fruits)  <span class="comment"># length</span></div>
-                    <div class="code-line">sorted(numbers)  <span class="comment"># sort</span></div>
+                    <div class="code-line"><span class="comment"># Create list</span></div><div class="code-line">fruits = [<span class="string">"apple"</span>, <span class="string">"banana"</span>, <span class="string">"cherry"</span>]</div><div class="code-line">numbers = [1, 2, 3, 4, 5]</div><div class="code-line">mixed = [1, <span class="string">"two"</span>, 3.0, <span class="keyword">True</span>]</div><div class="code-line"></div><div class="code-line"><span class="comment"># Access elements</span></div><div class="code-line">fruits[0]  <span class="comment"># "apple"</span></div><div class="code-line">fruits[-1]  <span class="comment"># last item</span></div><div class="code-line"></div><div class="code-line"><span class="comment"># Slicing</span></div><div class="code-line">fruits[1:3]  <span class="comment"># ["banana", "cherry"]</span></div><div class="code-line">fruits[:2]  <span class="comment"># first 2</span></div><div class="code-line">fruits[2:]  <span class="comment"># from index 2</span></div><div class="code-line"></div><div class="code-line"><span class="comment"># Methods</span></div><div class="code-line">fruits.append(<span class="string">"orange"</span>)</div><div class="code-line">fruits.insert(1, <span class="string">"mango"</span>)</div><div class="code-line">fruits.remove(<span class="string">"banana"</span>)</div><div class="code-line">fruits.pop()  <span class="comment"># remove last</span></div><div class="code-line">len(fruits)  <span class="comment"># length</span></div><div class="code-line">sorted(numbers)  <span class="comment"># sort</span></div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="tuples-immutable">
                 <div class="card-header">📚 Tuples (Immutable)</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment"># Create tuple</span></div>
-                    <div class="code-line">coordinates = (10, 20)</div>
-                    <div class="code-line">single = (42,)  <span class="comment"># comma needed</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Unpacking</span></div>
-                    <div class="code-line">x, y = coordinates</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Can't modify tuples!</span></div>
-                    <div class="code-line"><span class="comment"># coordinates[0] = 15  # Error</span></div>
+                    <div class="code-line"><span class="comment"># Create tuple</span></div><div class="code-line">coordinates = (10, 20)</div><div class="code-line">single = (42,)  <span class="comment"># comma needed</span></div><div class="code-line"></div><div class="code-line"><span class="comment"># Unpacking</span></div><div class="code-line">x, y = coordinates</div><div class="code-line"></div><div class="code-line"><span class="comment"># Can't modify tuples!</span></div><div class="code-line"><span class="comment"># coordinates[0] = 15  # Error</span></div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="sets-unique-items">
                 <div class="card-header">🗂️ Sets (Unique Items)</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment"># Create set</span></div>
-                    <div class="code-line">unique = {1, 2, 3, 3}  <span class="comment"># {1, 2, 3}</span></div>
-                    <div class="code-line">empty_set = set()</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Operations</span></div>
-                    <div class="code-line">unique.add(4)</div>
-                    <div class="code-line">unique.remove(2)</div>
-                    <div class="code-line">unique.discard(5)  <span class="comment"># no error if missing</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Set operations</span></div>
-                    <div class="code-line">a = {1, 2, 3}</div>
-                    <div class="code-line">b = {3, 4, 5}</div>
-                    <div class="code-line">a | b  <span class="comment"># union</span></div>
-                    <div class="code-line">a & b  <span class="comment"># intersection</span></div>
-                    <div class="code-line">a - b  <span class="comment"># difference</span></div>
+                    <div class="code-line"><span class="comment"># Create set</span></div><div class="code-line">unique = {1, 2, 3, 3}  <span class="comment"># {1, 2, 3}</span></div><div class="code-line">empty_set = set()</div><div class="code-line"></div><div class="code-line"><span class="comment"># Operations</span></div><div class="code-line">unique.add(4)</div><div class="code-line">unique.remove(2)</div><div class="code-line">unique.discard(5)  <span class="comment"># no error if missing</span></div><div class="code-line"></div><div class="code-line"><span class="comment"># Set operations</span></div><div class="code-line">a = {1, 2, 3}</div><div class="code-line">b = {3, 4, 5}</div><div class="code-line">a | b  <span class="comment"># union</span></div><div class="code-line">a &amp; b  <span class="comment"># intersection</span></div><div class="code-line">a - b  <span class="comment"># difference</span></div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="dictionaries-key-value">
                 <div class="card-header">📖 Dictionaries (Key-Value)</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment"># Create dictionary</span></div>
-                    <div class="code-line">person = {</div>
-                    <div class="code-line">    <span class="string">"name"</span>: <span class="string">"Alice"</span>,</div>
-                    <div class="code-line">    <span class="string">"age"</span>: 30,</div>
-                    <div class="code-line">    <span class="string">"city"</span>: <span class="string">"NYC"</span></div>
-                    <div class="code-line">}</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Access values</span></div>
-                    <div class="code-line">person[<span class="string">"name"</span>]</div>
-                    <div class="code-line">person.get(<span class="string">"age"</span>)</div>
-                    <div class="code-line">person.get(<span class="string">"email"</span>, <span class="string">"N/A"</span>)  <span class="comment"># default</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Modify</span></div>
-                    <div class="code-line">person[<span class="string">"age"</span>] = 31</div>
-                    <div class="code-line">person[<span class="string">"email"</span>] = <span class="string">"a@ex.com"</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Methods</span></div>
-                    <div class="code-line">person.keys()  <span class="comment"># all keys</span></div>
-                    <div class="code-line">person.values()  <span class="comment"># all values</span></div>
-                    <div class="code-line">person.items()  <span class="comment"># key-value pairs</span></div>
+                    <div class="code-line"><span class="comment"># Create dictionary</span></div><div class="code-line">person = {</div><div class="code-line"> <span class="string">"name"</span>: <span class="string">"Alice"</span>,</div><div class="code-line"> <span class="string">"age"</span>: 30,</div><div class="code-line"> <span class="string">"city"</span>: <span class="string">"NYC"</span></div><div class="code-line">}</div><div class="code-line"></div><div class="code-line"><span class="comment"># Access values</span></div><div class="code-line">person[<span class="string">"name"</span>]</div><div class="code-line">person.get(<span class="string">"age"</span>)</div><div class="code-line">person.get(<span class="string">"email"</span>, <span class="string">"N/A"</span>)  <span class="comment"># default</span></div><div class="code-line"></div><div class="code-line"><span class="comment"># Modify</span></div><div class="code-line">person[<span class="string">"age"</span>] = 31</div><div class="code-line">person[<span class="string">"email"</span>] = <span class="string">"a@ex.com"</span></div><div class="code-line"></div><div class="code-line"><span class="comment"># Methods</span></div><div class="code-line">person.keys()  <span class="comment"># all keys</span></div><div class="code-line">person.values()  <span class="comment"># all values</span></div><div class="code-line">person.items()  <span class="comment"># key-value pairs</span></div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="loops">
                 <div class="card-header">🔁 Loops</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment"># For loop</span></div>
-                    <div class="code-line"><span class="keyword">for</span> i <span class="keyword">in</span> range(5):</div>
-                    <div class="code-line">    print(i)  <span class="comment"># 0, 1, 2, 3, 4</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="keyword">for</span> fruit <span class="keyword">in</span> fruits:</div>
-                    <div class="code-line">    print(fruit)</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Enumerate (with index)</span></div>
-                    <div class="code-line"><span class="keyword">for</span> i, fruit <span class="keyword">in</span> enumerate(fruits):</div>
-                    <div class="code-line">    print(i, fruit)</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Dictionary loop</span></div>
-                    <div class="code-line"><span class="keyword">for</span> key, value <span class="keyword">in</span> person.items():</div>
-                    <div class="code-line">    print(key, value)</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># While loop</span></div>
-                    <div class="code-line">count = 0</div>
-                    <div class="code-line"><span class="keyword">while</span> count < 5:</div>
-                    <div class="code-line">    print(count)</div>
-                    <div class="code-line">    count += 1</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Break and continue</span></div>
-                    <div class="code-line"><span class="keyword">break</span>  <span class="comment"># exit loop</span></div>
-                    <div class="code-line"><span class="keyword">continue</span>  <span class="comment"># skip iteration</span></div>
+                    <div class="code-line"><span class="comment"># For loop</span></div><div class="code-line"><span class="keyword">for</span> i <span class="keyword">in</span> range(5):</div><div class="code-line">    print(i)  <span class="comment"># 0, 1, 2, 3, 4</span></div><div class="code-line"></div><div class="code-line"><span class="keyword">for</span> fruit <span class="keyword">in</span> fruits:</div><div class="code-line">    print(fruit)</div><div class="code-line"></div><div class="code-line"><span class="comment"># Enumerate (with index)</span></div><div class="code-line"><span class="keyword">for</span> i, fruit <span class="keyword">in</span> enumerate(fruits):</div><div class="code-line">    print(i, fruit)</div><div class="code-line"></div><div class="code-line"><span class="comment"># Dictionary loop</span></div><div class="code-line"><span class="keyword">for</span> key, value <span class="keyword">in</span> person.items():</div><div class="code-line">    print(key, value)</div><div class="code-line"></div><div class="code-line"><span class="comment"># While loop</span></div><div class="code-line">count = 0</div><div class="code-line"><span class="keyword">while</span> count &lt; 5:</div><div class="code-line">    print(count)</div><div class="code-line">    count += 1</div><div class="code-line"></div><div class="code-line"><span class="comment"># Break and continue</span></div><div class="code-line"><span class="keyword">break</span> <span class="comment"># exit loop</span></div><div class="code-line"><span class="keyword">continue</span> <span class="comment"># skip iteration</span></div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="conditionals">
                 <div class="card-header">🔀 Conditionals</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment"># If-elif-else</span></div>
-                    <div class="code-line"><span class="keyword">if</span> age < 18:</div>
-                    <div class="code-line">    print(<span class="string">"Minor"</span>)</div>
-                    <div class="code-line"><span class="keyword">elif</span> age < 65:</div>
-                    <div class="code-line">    print(<span class="string">"Adult"</span>)</div>
-                    <div class="code-line"><span class="keyword">else</span>:</div>
-                    <div class="code-line">    print(<span class="string">"Senior"</span>)</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Ternary operator</span></div>
-                    <div class="code-line">status = <span class="string">"Adult"</span> <span class="keyword">if</span> age >= 18 <span class="keyword">else</span> <span class="string">"Minor"</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Comparison operators</span></div>
-                    <div class="code-line"><span class="comment"># ==, !=, <, >, <=, >=</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Logical operators</span></div>
-                    <div class="code-line"><span class="keyword">and</span>, <span class="keyword">or</span>, <span class="keyword">not</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Membership</span></div>
-                    <div class="code-line"><span class="keyword">in</span>, <span class="keyword">not in</span></div>
+                    <div class="code-line"><span class="comment"># If-elif-else</span></div><div class="code-line"><span class="keyword">if</span> age &lt; 18:</div><div class="code-line">    print(<span class="string">"Minor"</span>)</div><div class="code-line"><span class="keyword">elif</span> age &lt; 65:</div><div class="code-line">    print(<span class="string">"Adult"</span>)</div><div class="code-line"><span class="keyword">else</span>:</div><div class="code-line">    print(<span class="string">"Senior"</span>)</div><div class="code-line"></div><div class="code-line"><span class="comment"># Ternary operator</span></div><div class="code-line">status = <span class="string">"Adult"</span> <span class="keyword">if</span> age &gt;= 18 <span class="keyword">else</span> <span class="string">"Minor"</span></div><div class="code-line"></div><div class="code-line"><span class="comment"># Comparison operators</span></div><div class="code-line"><span class="comment"># ==, !=, &lt;, &gt;, &lt;=, &gt;=</span></div><div class="code-line"></div><div class="code-line"><span class="comment"># Logical operators</span></div><div class="code-line"><span class="keyword">and</span>, <span class="keyword">or</span>, <span class="keyword">not</span></div><div class="code-line"></div><div class="code-line"><span class="comment"># Membership</span></div><div class="code-line"><span class="keyword">in</span>, <span class="keyword">not in</span></div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="functions">
                 <div class="card-header">🔧 Functions</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment"># Define function</span></div>
-                    <div class="code-line"><span class="keyword">def</span> greet(name):</div>
-                    <div class="code-line">    <span class="keyword">return</span> <span class="string">f"Hello, {name}!"</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Default arguments</span></div>
-                    <div class="code-line"><span class="keyword">def</span> power(base, exp=2):</div>
-                    <div class="code-line">    <span class="keyword">return</span> base ** exp</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Variable arguments</span></div>
-                    <div class="code-line"><span class="keyword">def</span> sum_all(*args):</div>
-                    <div class="code-line">    <span class="keyword">return</span> sum(args)</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Keyword arguments</span></div>
-                    <div class="code-line"><span class="keyword">def</span> info(**kwargs):</div>
-                    <div class="code-line">    <span class="keyword">for</span> k, v <span class="keyword">in</span> kwargs.items():</div>
-                    <div class="code-line">        print(<span class="string">f"{k}: {v}"</span>)</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Lambda functions</span></div>
-                    <div class="code-line">square = <span class="keyword">lambda</span> x: x ** 2</div>
-                    <div class="code-line">add = <span class="keyword">lambda</span> x, y: x + y</div>
+                    <div class="code-line"><span class="comment"># Define function</span></div><div class="code-line"><span class="keyword">def</span> greet(name):</div><div class="code-line"> <span class="keyword">return</span> <span class="string">f"Hello, {name}!"</span></div><div class="code-line"></div><div class="code-line"><span class="comment"># Default arguments</span></div><div class="code-line"><span class="keyword">def</span> power(base, exp=2):</div><div class="code-line"> <span class="keyword">return</span> base ** exp</div><div class="code-line"></div><div class="code-line"><span class="comment"># Variable arguments</span></div><div class="code-line"><span class="keyword">def</span> sum_all(*args):</div><div class="code-line"> <span class="keyword">return</span> sum(args)</div><div class="code-line"></div><div class="code-line"><span class="comment"># Keyword arguments</span></div><div class="code-line"><span class="keyword">def</span> info(**kwargs):</div><div class="code-line"> <span class="keyword">for</span> k, v <span class="keyword">in</span> kwargs.items():</div><div class="code-line">        print(<span class="string">f"{k}: {v}"</span>)</div><div class="code-line"></div><div class="code-line"><span class="comment"># Lambda functions</span></div><div class="code-line">square = <span class="keyword">lambda</span> x: x ** 2</div><div class="code-line">add = <span class="keyword">lambda</span> x, y: x + y</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="list-comprehensions">
                 <div class="card-header">🎯 List Comprehensions</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment"># Basic syntax</span></div>
-                    <div class="code-line">squares = [x**2 <span class="keyword">for</span> x <span class="keyword">in</span> range(10)]</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># With condition</span></div>
-                    <div class="code-line">evens = [x <span class="keyword">for</span> x <span class="keyword">in</span> range(10) <span class="keyword">if</span> x % 2 == 0]</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Dictionary comprehension</span></div>
-                    <div class="code-line">square_dict = {x: x**2 <span class="keyword">for</span> x <span class="keyword">in</span> range(5)}</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Set comprehension</span></div>
-                    <div class="code-line">unique = {x % 5 <span class="keyword">for</span> x <span class="keyword">in</span> range(20)}</div>
+                    <div class="code-line"><span class="comment"># Basic syntax</span></div><div class="code-line">squares = [x**2 <span class="keyword">for</span> x <span class="keyword">in</span> range(10)]</div><div class="code-line"></div><div class="code-line"><span class="comment"># With condition</span></div><div class="code-line">evens = [x <span class="keyword">for</span> x <span class="keyword">in</span> range(10) <span class="keyword">if</span> x % 2 == 0]</div><div class="code-line"></div><div class="code-line"><span class="comment"># Dictionary comprehension</span></div><div class="code-line">square_dict = {x: x**2 <span class="keyword">for</span> x <span class="keyword">in</span> range(5)}</div><div class="code-line"></div><div class="code-line"><span class="comment"># Set comprehension</span></div><div class="code-line">unique = {x % 5 <span class="keyword">for</span> x <span class="keyword">in</span> range(20)}</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="classes-objects">
                 <div class="card-header">📦 Classes & Objects</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="keyword">class</span> Dog:</div>
-                    <div class="code-line">    <span class="comment"># Class variable</span></div>
-                    <div class="code-line">    species = <span class="string">"Canis familiaris"</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line">    <span class="comment"># Constructor</span></div>
-                    <div class="code-line">    <span class="keyword">def</span> __init__(self, name, age):</div>
-                    <div class="code-line">        self.name = name</div>
-                    <div class="code-line">        self.age = age</div>
-                    <div class="code-line"></div>
-                    <div class="code-line">    <span class="comment"># Method</span></div>
-                    <div class="code-line">    <span class="keyword">def</span> bark(self):</div>
-                    <div class="code-line">        <span class="keyword">return</span> <span class="string">f"{self.name} says Woof!"</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line">    <span class="comment"># String representation</span></div>
-                    <div class="code-line">    <span class="keyword">def</span> __str__(self):</div>
-                    <div class="code-line">        <span class="keyword">return</span> <span class="string">f"{self.name} is {self.age}"</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Create instance</span></div>
-                    <div class="code-line">buddy = Dog(<span class="string">"Buddy"</span>, 3)</div>
-                    <div class="code-line">print(buddy.bark())</div>
+                    <div class="code-line"><span class="keyword">class</span> Dog:</div><div class="code-line"> <span class="comment"># Class variable</span></div><div class="code-line">    species = <span class="string">"Canis familiaris"</span></div><div class="code-line"></div><div class="code-line"> <span class="comment"># Constructor</span></div><div class="code-line"> <span class="keyword">def</span> __init__(self, name, age):</div><div class="code-line">        self.name = name</div><div class="code-line">        self.age = age</div><div class="code-line"></div><div class="code-line"> <span class="comment"># Method</span></div><div class="code-line"> <span class="keyword">def</span> bark(self):</div><div class="code-line"> <span class="keyword">return</span> <span class="string">f"{self.name} says Woof!"</span></div><div class="code-line"></div><div class="code-line"> <span class="comment"># String representation</span></div><div class="code-line"> <span class="keyword">def</span> __str__(self):</div><div class="code-line"> <span class="keyword">return</span> <span class="string">f"{self.name} is {self.age}"</span></div><div class="code-line"></div><div class="code-line"><span class="comment"># Create instance</span></div><div class="code-line">buddy = Dog(<span class="string">"Buddy"</span>, 3)</div><div class="code-line">print(buddy.bark())</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="exception-handling">
                 <div class="card-header">🔄 Exception Handling</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="keyword">try</span>:</div>
-                    <div class="code-line">    result = 10 / 0</div>
-                    <div class="code-line"><span class="keyword">except</span> ZeroDivisionError:</div>
-                    <div class="code-line">    print(<span class="string">"Cannot divide by zero!"</span>)</div>
-                    <div class="code-line"><span class="keyword">except</span> Exception <span class="keyword">as</span> e:</div>
-                    <div class="code-line">    print(<span class="string">f"Error: {e}"</span>)</div>
-                    <div class="code-line"><span class="keyword">else</span>:</div>
-                    <div class="code-line">    print(<span class="string">"Success!"</span>)</div>
-                    <div class="code-line"><span class="keyword">finally</span>:</div>
-                    <div class="code-line">    print(<span class="string">"Cleanup"</span>)</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment"># Raise exception</span></div>
-                    <div class="code-line"><span class="keyword">raise</span> ValueError(<span class="string">"Invalid value"</span>)</div>
+                    <div class="code-line"><span class="keyword">try</span>:</div><div class="code-line">    result = 10 / 0</div><div class="code-line"><span class="keyword">except</span> ZeroDivisionError:</div><div class="code-line">    print(<span class="string">"Cannot divide by zero!"</span>)</div><div class="code-line"><span class="keyword">except</span> Exception <span class="keyword">as</span> e:</div><div class="code-line">    print(<span class="string">f"Error: {e}"</span>)</div><div class="code-line"><span class="keyword">else</span>:</div><div class="code-line">    print(<span class="string">"Success!"</span>)</div><div class="code-line"><span class="keyword">finally</span>:</div><div class="code-line">    print(<span class="string">"Cleanup"</span>)</div><div class="code-line"></div><div class="code-line"><span class="comment"># Raise exception</span></div><div class="code-line"><span class="keyword">raise</span> ValueError(<span class="string">"Invalid value"</span>)</div>
+                </div>
+            </div>
+            <div class="card" id="standard-library-essentials">
+                <div class="card-header">📚 Standard Library Essentials</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment"># File I/O</span></div><div class="code-line"><span class="keyword">with</span> open(<span class="string">"file.txt"</span>, <span class="string">"r"</span>) <span class="keyword">as</span> f:</div><div class="code-line">    content = f.read()</div><div class="code-line"></div><div class="code-line"><span class="keyword">with</span> open(<span class="string">"file.txt"</span>, <span class="string">"w"</span>) <span class="keyword">as</span> f:</div><div class="code-line">    f.write(<span class="string">"Hello"</span>)</div><div class="code-line"></div><div class="code-line"><span class="comment"># JSON</span></div><div class="code-line"><span class="keyword">import</span> json</div><div class="code-line">data = json.loads(<span class="string">'{"name": "Alice"}'</span>)</div><div class="code-line">text = json.dumps(data)</div><div class="code-line"></div><div class="code-line"><span class="comment"># Datetime</span></div><div class="code-line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</div><div class="code-line">now = datetime.now()</div><div class="code-line">formatted = now.strftime(<span class="string">"%Y-%m-%d"</span>)</div><div class="code-line"></div><div class="code-line"><span class="comment"># Random</span></div><div class="code-line"><span class="keyword">import</span> random</div><div class="code-line">random.randint(1, 10)</div><div class="code-line">random.choice([1, 2, 3])</div><div class="code-line">random.shuffle(my_list)</div><div class="code-line"></div><div class="code-line"><span class="comment"># OS operations</span></div><div class="code-line"><span class="keyword">import</span> os</div><div class="code-line">os.listdir(<span class="string">"."</span>)</div><div class="code-line">os.path.exists(<span class="string">"file.txt"</span>)</div><div class="code-line">os.makedirs(<span class="string">"newdir"</span>)</div><div class="code-line"></div><div class="code-line"><span class="comment"># Regular expressions</span></div><div class="code-line"><span class="keyword">import</span> re</div><div class="code-line">re.match(pattern, string)</div><div class="code-line">re.search(pattern, string)</div><div class="code-line">re.findall(pattern, string)</div><div class="code-line">re.sub(pattern, replacement, string)</div><div class="code-line"></div><div class="code-line"><span class="comment"># Collections</span></div><div class="code-line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter, defaultdict</div><div class="code-line">counter = Counter([1, 1, 2, 3, 3, 3])</div><div class="code-line">dd = defaultdict(list)</div>
+                </div>
+            </div>
+            <div class="card" id="string-methods">
+                <div class="card-header">🎨 String Methods</div>
+                <div class="code-block">
+                    <div class="code-line">text = <span class="string">"  Hello World  "</span></div><div class="code-line"></div><div class="code-line">text.upper()  <span class="comment"># "  HELLO WORLD  "</span></div><div class="code-line">text.lower()  <span class="comment"># "  hello world  "</span></div><div class="code-line">text.strip()  <span class="comment"># "Hello World"</span></div><div class="code-line">text.replace(<span class="string">"World"</span>, <span class="string">"Python"</span>)</div><div class="code-line">text.split()  <span class="comment"># ["Hello", "World"]</span></div><div class="code-line"><span class="string">"-"</span>.join([<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>])  <span class="comment"># "a-b-c"</span></div><div class="code-line">text.startswith(<span class="string">"Hello"</span>)</div><div class="code-line">text.endswith(<span class="string">"World"</span>)</div><div class="code-line">text.find(<span class="string">"World"</span>)  <span class="comment"># index or -1</span></div><div class="code-line">text.count(<span class="string">"o"</span>)  <span class="comment"># occurrences</span></div>
+                </div>
+            </div>
+            <div class="card" id="built-in-functions">
+                <div class="card-header">⚡ Built-in Functions</div>
+                <div class="code-block">
+                    <div class="code-line">len([1, 2, 3])  <span class="comment"># 3</span></div><div class="code-line">sum([1, 2, 3])  <span class="comment"># 6</span></div><div class="code-line">min([1, 2, 3])  <span class="comment"># 1</span></div><div class="code-line">max([1, 2, 3])  <span class="comment"># 3</span></div><div class="code-line">abs(-5)  <span class="comment"># 5</span></div><div class="code-line">round(3.14159, 2)  <span class="comment"># 3.14</span></div><div class="code-line">pow(2, 3)  <span class="comment"># 8</span></div><div class="code-line"></div><div class="code-line">type(42)  <span class="comment"># <class 'int'=""></class></span></div><div class="code-line">isinstance(42, int)  <span class="comment"># True</span></div><div class="code-line"></div><div class="code-line">range(5)  <span class="comment"># 0, 1, 2, 3, 4</span></div><div class="code-line">range(1, 6)  <span class="comment"># 1, 2, 3, 4, 5</span></div><div class="code-line">range(0, 10, 2)  <span class="comment"># 0, 2, 4, 6, 8</span></div><div class="code-line"></div><div class="code-line">zip([1, 2], [<span class="string">"a"</span>, <span class="string">"b"</span>])  <span class="comment"># pairs</span></div><div class="code-line">map(<span class="keyword">lambda</span> x: x*2, [1, 2, 3])</div><div class="code-line">filter(<span class="keyword">lambda</span> x: x&gt;2, [1, 2, 3, 4])</div>
                 </div>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header">📚 Standard Library Essentials</div>
-            <div class="code-block">
-                <div class="code-line"><span class="comment"># File I/O</span></div>
-                <div class="code-line"><span class="keyword">with</span> open(<span class="string">"file.txt"</span>, <span class="string">"r"</span>) <span class="keyword">as</span> f:</div>
-                <div class="code-line">    content = f.read()</div>
-                <div class="code-line"></div>
-                <div class="code-line"><span class="keyword">with</span> open(<span class="string">"file.txt"</span>, <span class="string">"w"</span>) <span class="keyword">as</span> f:</div>
-                <div class="code-line">    f.write(<span class="string">"Hello"</span>)</div>
-                <div class="code-line"></div>
-                <div class="code-line"><span class="comment"># JSON</span></div>
-                <div class="code-line"><span class="keyword">import</span> json</div>
-                <div class="code-line">data = json.loads(<span class="string">'{"name": "Alice"}'</span>)</div>
-                <div class="code-line">text = json.dumps(data)</div>
-                <div class="code-line"></div>
-                <div class="code-line"><span class="comment"># Datetime</span></div>
-                <div class="code-line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</div>
-                <div class="code-line">now = datetime.now()</div>
-                <div class="code-line">formatted = now.strftime(<span class="string">"%Y-%m-%d"</span>)</div>
-                <div class="code-line"></div>
-                <div class="code-line"><span class="comment"># Random</span></div>
-                <div class="code-line"><span class="keyword">import</span> random</div>
-                <div class="code-line">random.randint(1, 10)</div>
-                <div class="code-line">random.choice([1, 2, 3])</div>
-                <div class="code-line">random.shuffle(my_list)</div>
-                <div class="code-line"></div>
-                <div class="code-line"><span class="comment"># OS operations</span></div>
-                <div class="code-line"><span class="keyword">import</span> os</div>
-                <div class="code-line">os.listdir(<span class="string">"."</span>)</div>
-                <div class="code-line">os.path.exists(<span class="string">"file.txt"</span>)</div>
-                <div class="code-line">os.makedirs(<span class="string">"newdir"</span>)</div>
-                <div class="code-line"></div>
-                <div class="code-line"><span class="comment"># Regular expressions</span></div>
-                <div class="code-line"><span class="keyword">import</span> re</div>
-                <div class="code-line">re.match(pattern, string)</div>
-                <div class="code-line">re.search(pattern, string)</div>
-                <div class="code-line">re.findall(pattern, string)</div>
-                <div class="code-line">re.sub(pattern, replacement, string)</div>
-                <div class="code-line"></div>
-                <div class="code-line"><span class="comment"># Collections</span></div>
-                <div class="code-line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter, defaultdict</div>
-                <div class="code-line">counter = Counter([1, 1, 2, 3, 3, 3])</div>
-                <div class="code-line">dd = defaultdict(list)</div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">🎨 String Methods</div>
-            <div class="code-block">
-                <div class="code-line">text = <span class="string">"  Hello World  "</span></div>
-                <div class="code-line"></div>
-                <div class="code-line">text.upper()  <span class="comment"># "  HELLO WORLD  "</span></div>
-                <div class="code-line">text.lower()  <span class="comment"># "  hello world  "</span></div>
-                <div class="code-line">text.strip()  <span class="comment"># "Hello World"</span></div>
-                <div class="code-line">text.replace(<span class="string">"World"</span>, <span class="string">"Python"</span>)</div>
-                <div class="code-line">text.split()  <span class="comment"># ["Hello", "World"]</span></div>
-                <div class="code-line"><span class="string">"-"</span>.join([<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>])  <span class="comment"># "a-b-c"</span></div>
-                <div class="code-line">text.startswith(<span class="string">"Hello"</span>)</div>
-                <div class="code-line">text.endswith(<span class="string">"World"</span>)</div>
-                <div class="code-line">text.find(<span class="string">"World"</span>)  <span class="comment"># index or -1</span></div>
-                <div class="code-line">text.count(<span class="string">"o"</span>)  <span class="comment"># occurrences</span></div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">⚡ Built-in Functions</div>
-            <div class="code-block">
-                <div class="code-line">len([1, 2, 3])  <span class="comment"># 3</span></div>
-                <div class="code-line">sum([1, 2, 3])  <span class="comment"># 6</span></div>
-                <div class="code-line">min([1, 2, 3])  <span class="comment"># 1</span></div>
-                <div class="code-line">max([1, 2, 3])  <span class="comment"># 3</span></div>
-                <div class="code-line">abs(-5)  <span class="comment"># 5</span></div>
-                <div class="code-line">round(3.14159, 2)  <span class="comment"># 3.14</span></div>
-                <div class="code-line">pow(2, 3)  <span class="comment"># 8</span></div>
-                <div class="code-line"></div>
-                <div class="code-line">type(42)  <span class="comment"># <class 'int'></span></div>
-                <div class="code-line">isinstance(42, int)  <span class="comment"># True</span></div>
-                <div class="code-line"></div>
-                <div class="code-line">range(5)  <span class="comment"># 0, 1, 2, 3, 4</span></div>
-                <div class="code-line">range(1, 6)  <span class="comment"># 1, 2, 3, 4, 5</span></div>
-                <div class="code-line">range(0, 10, 2)  <span class="comment"># 0, 2, 4, 6, 8</span></div>
-                <div class="code-line"></div>
-                <div class="code-line">zip([1, 2], [<span class="string">"a"</span>, <span class="string">"b"</span>])  <span class="comment"># pairs</span></div>
-                <div class="code-line">map(<span class="keyword">lambda</span> x: x*2, [1, 2, 3])</div>
-                <div class="code-line">filter(<span class="keyword">lambda</span> x: x>2, [1, 2, 3, 4])</div>
-            </div>
-        </div>
-
-        <div class="footer">
-            <p>Essential Python Syntax & Standard Library Reference</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">🐍 Python: Simple is better than complex</p>
-        </div>
+        <footer>
+            <p>&copy; 2025 Cheatsheets Collection. Open source and community driven.</p>
+        </footer>
     </div>
 </body>
 </html>

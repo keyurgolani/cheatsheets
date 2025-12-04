@@ -3,711 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="HTTP status codes, methods, headers, and protocol reference for web development.">
     <title>HTTP Status Codes & Methods Cheatsheet</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #e0e6ed;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 2rem;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            font-size: 3rem;
-            background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #8b95a5;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .card {
-            background: rgba(30, 41, 59, 0.6);
-            border: 1px solid rgba(100, 116, 139, 0.3);
-            border-radius: 12px;
-            padding: 1.5rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: rgba(16, 185, 129, 0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.15);
-        }
-
-        .card-header {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #10b981;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid rgba(16, 185, 129, 0.3);
-        }
-
-        .card-header h2 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: inherit;
-            margin: 0;
-        }
-
-        .cmd-row {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.5rem;
-            margin-bottom: 0.75rem;
-            padding: 0.5rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 6px;
-            transition: background 0.2s ease;
-        }
-
-        .cmd-row:hover {
-            background: rgba(16, 185, 129, 0.1);
-        }
-
-        .cmd-name {
-            color: #14b8a6;
-            font-weight: 600;
-            font-family: 'Courier New', monospace;
-            font-size: 0.95rem;
-        }
-
-        .cmd-desc {
-            color: #cbd5e1;
-            padding-left: 1rem;
-            font-size: 0.9rem;
-        }
-
-        code {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            color: #a5d6ff;
-            font-size: 0.9em;
-        }
-
-        .note {
-            background: rgba(59, 130, 246, 0.1);
-            border-left: 4px solid #3b82f6;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .tip {
-            background: rgba(16, 185, 129, 0.1);
-            border-left: 4px solid #10b981;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .warning {
-            background: rgba(239, 68, 68, 0.1);
-            border-left: 4px solid #ef4444;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(100, 116, 139, 0.3);
-            color: #8b95a5;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../script.js" defer></script>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-brand">
+                <i class="ph ph-books"></i> Cheatsheets
+            </a>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="btn-icon" aria-label="Toggle theme">
+                    <i class="ph ph-moon"></i>
+                </button>
+                <button id="download-btn" class="btn-icon" aria-label="Download PDF">
+                    <i class="ph ph-download-simple"></i>
+                </button>
+                <a href="https://github.com/keyurgolani/Cheatsheets" class="btn-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                    <i class="ph ph-github-logo"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
-        <h1>🌐 HTTP Status Codes & Methods</h1>
-        <p class="subtitle">Essential HTTP protocol reference for web development</p>
+        <header class="cheatsheet-header">
+            <h1>🌐 HTTP Status Codes & Methods</h1>
+            <p>Essential HTTP protocol reference for web development</p>
+            <div class="search-container" style="margin-top: 1.5rem; margin-bottom: 0;">
+                <span class="search-icon"><i class="ph ph-magnifying-glass"></i></span>
+                <input type="text" class="search-input" id="cheatsheet-search" placeholder="Filter this cheatsheet..." aria-label="Filter cheatsheet">
+            </div>
+        </header>
 
-        <div class="grid">
-            <div class="card">
-                <div class="card-header"><h2>🔵 1xx Informational</h2></div>
-                <div class="cmd-row">
-                    <div class="cmd-name">100 Continue</div>
-                    <div class="cmd-desc">Server received request headers, client should send body</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">101 Switching Protocols</div>
-                    <div class="cmd-desc">Server switching protocols as requested by client</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">102 Processing</div>
-                    <div class="cmd-desc">Server received and processing request (WebDAV)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">103 Early Hints</div>
-                    <div class="cmd-desc">Used to return headers before final response</div>
-                </div>
-                <div class="note">
-                    <strong>Use case:</strong> Informational responses indicate the request was received and is being processed.
+        <div class="masonry-grid" id="cheatsheet-grid">
+            
+            <div class="card" id="1xx-informational">
+                <div class="card-header">🔵 1xx Informational</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
-                <div class="card-header"><h2>✅ 2xx Success</h2></div>
-                <div class="cmd-row">
-                    <div class="cmd-name">200 OK</div>
-                    <div class="cmd-desc">Request succeeded, response contains requested data</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">201 Created</div>
-                    <div class="cmd-desc">Request succeeded, new resource created (POST/PUT)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">202 Accepted</div>
-                    <div class="cmd-desc">Request accepted for processing, not yet completed</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">204 No Content</div>
-                    <div class="cmd-desc">Request succeeded, no content to return (DELETE)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">206 Partial Content</div>
-                    <div class="cmd-desc">Partial GET request fulfilled (range requests)</div>
-                </div>
-                <div class="tip">
-                    💡 <strong>Best practice:</strong> Use 201 for resource creation and include Location header with new resource URI.
+            <div class="card" id="2xx-success">
+                <div class="card-header">✅ 2xx Success</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
-                <div class="card-header"><h2>🔀 3xx Redirection</h2></div>
-                <div class="cmd-row">
-                    <div class="cmd-name">301 Moved Permanently</div>
-                    <div class="cmd-desc">Resource permanently moved to new URL</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">302 Found</div>
-                    <div class="cmd-desc">Resource temporarily at different URL</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">303 See Other</div>
-                    <div class="cmd-desc">Response found at different URL using GET</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">304 Not Modified</div>
-                    <div class="cmd-desc">Cached version is still valid (conditional GET)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">307 Temporary Redirect</div>
-                    <div class="cmd-desc">Temporary redirect, preserve request method</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">308 Permanent Redirect</div>
-                    <div class="cmd-desc">Permanent redirect, preserve request method</div>
-                </div>
-                <div class="note">
-                    <strong>Difference:</strong> 301/302 may change POST to GET, 307/308 preserve the original method.
+            <div class="card" id="3xx-redirection">
+                <div class="card-header">🔀 3xx Redirection</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
-                <div class="card-header"><h2>❌ 4xx Client Errors</h2></div>
-                <div class="cmd-row">
-                    <div class="cmd-name">400 Bad Request</div>
-                    <div class="cmd-desc">Malformed request syntax or invalid parameters</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">401 Unauthorized</div>
-                    <div class="cmd-desc">Authentication required or failed</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">403 Forbidden</div>
-                    <div class="cmd-desc">Server understood but refuses to authorize</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">404 Not Found</div>
-                    <div class="cmd-desc">Requested resource does not exist</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">405 Method Not Allowed</div>
-                    <div class="cmd-desc">HTTP method not supported for this resource</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">408 Request Timeout</div>
-                    <div class="cmd-desc">Server timed out waiting for request</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">409 Conflict</div>
-                    <div class="cmd-desc">Request conflicts with current state (version mismatch)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">410 Gone</div>
-                    <div class="cmd-desc">Resource permanently deleted</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">413 Payload Too Large</div>
-                    <div class="cmd-desc">Request entity exceeds server limits</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">415 Unsupported Media Type</div>
-                    <div class="cmd-desc">Request payload format not supported</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">422 Unprocessable Entity</div>
-                    <div class="cmd-desc">Syntax correct but semantically invalid (validation)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">429 Too Many Requests</div>
-                    <div class="cmd-desc">Rate limit exceeded</div>
+            <div class="card" id="4xx-client-errors">
+                <div class="card-header">❌ 4xx Client Errors</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
-                <div class="card-header"><h2>⚠️ 5xx Server Errors</h2></div>
-                <div class="cmd-row">
-                    <div class="cmd-name">500 Internal Server Error</div>
-                    <div class="cmd-desc">Generic server error, something went wrong</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">501 Not Implemented</div>
-                    <div class="cmd-desc">Server doesn't support requested functionality</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">502 Bad Gateway</div>
-                    <div class="cmd-desc">Invalid response from upstream server</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">503 Service Unavailable</div>
-                    <div class="cmd-desc">Server temporarily unavailable (maintenance/overload)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">504 Gateway Timeout</div>
-                    <div class="cmd-desc">Upstream server failed to respond in time</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">505 HTTP Version Not Supported</div>
-                    <div class="cmd-desc">HTTP version in request not supported</div>
-                </div>
-                <div class="warning">
-                    ⚠️ <strong>Important:</strong> 5xx errors indicate server-side issues. Client should not retry without changes.
+            <div class="card" id="5xx-server-errors">
+                <div class="card-header">⚠️ 5xx Server Errors</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
-                <div class="card-header"><h2>📤 HTTP Request Methods</h2></div>
-                <div class="cmd-row">
-                    <div class="cmd-name">GET</div>
-                    <div class="cmd-desc">Retrieve resource, safe and idempotent</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">POST</div>
-                    <div class="cmd-desc">Create resource or submit data, not idempotent</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">PUT</div>
-                    <div class="cmd-desc">Replace entire resource, idempotent</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">PATCH</div>
-                    <div class="cmd-desc">Partially update resource, idempotent</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">DELETE</div>
-                    <div class="cmd-desc">Remove resource, idempotent</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">HEAD</div>
-                    <div class="cmd-desc">Same as GET but without response body</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">OPTIONS</div>
-                    <div class="cmd-desc">Describe communication options for resource</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">TRACE</div>
-                    <div class="cmd-desc">Echo request for debugging (rarely used)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">CONNECT</div>
-                    <div class="cmd-desc">Establish tunnel to server (for HTTPS proxies)</div>
-                </div>
-                <div class="note">
-                    <strong>Idempotent:</strong> Multiple identical requests have same effect as single request.
+            <div class="card" id="http-request-methods">
+                <div class="card-header">📤 HTTP Request Methods</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
-                <div class="card-header"><h2>📋 Common Request Headers</h2></div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Accept</div>
-                    <div class="cmd-desc">Media types client can process (e.g., application/json)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Authorization</div>
-                    <div class="cmd-desc">Credentials for authentication (Bearer token, Basic auth)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Content-Type</div>
-                    <div class="cmd-desc">Media type of request body (e.g., application/json)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Content-Length</div>
-                    <div class="cmd-desc">Size of request body in bytes</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">User-Agent</div>
-                    <div class="cmd-desc">Client application identifier</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Cookie</div>
-                    <div class="cmd-desc">HTTP cookies previously sent by server</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Referer</div>
-                    <div class="cmd-desc">URL of previous page that linked to current request</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">If-None-Match</div>
-                    <div class="cmd-desc">ETag for conditional requests (caching)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">If-Modified-Since</div>
-                    <div class="cmd-desc">Date for conditional requests (caching)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Origin</div>
-                    <div class="cmd-desc">Origin of request (for CORS)</div>
+            <div class="card" id="common-request-headers">
+                <div class="card-header">📋 Common Request Headers</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
-                <div class="card-header"><h2>📨 Common Response Headers</h2></div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Content-Type</div>
-                    <div class="cmd-desc">Media type of response body</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Content-Length</div>
-                    <div class="cmd-desc">Size of response body in bytes</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Cache-Control</div>
-                    <div class="cmd-desc">Caching directives (max-age, no-cache, public, private)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ETag</div>
-                    <div class="cmd-desc">Unique identifier for resource version</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Location</div>
-                    <div class="cmd-desc">URL for redirects or newly created resources</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Set-Cookie</div>
-                    <div class="cmd-desc">Send cookie to client</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Access-Control-Allow-Origin</div>
-                    <div class="cmd-desc">CORS: allowed origins</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Access-Control-Allow-Methods</div>
-                    <div class="cmd-desc">CORS: allowed HTTP methods</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Access-Control-Allow-Headers</div>
-                    <div class="cmd-desc">CORS: allowed request headers</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Retry-After</div>
-                    <div class="cmd-desc">When to retry after 503 or 429</div>
+            <div class="card" id="common-response-headers">
+                <div class="card-header">📨 Common Response Headers</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
-                <div class="card-header"><h2>🔒 Security Headers</h2></div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Strict-Transport-Security</div>
-                    <div class="cmd-desc">Force HTTPS (HSTS)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Content-Security-Policy</div>
-                    <div class="cmd-desc">Control resource loading to prevent XSS</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">X-Content-Type-Options</div>
-                    <div class="cmd-desc">Prevent MIME type sniffing (nosniff)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">X-Frame-Options</div>
-                    <div class="cmd-desc">Prevent clickjacking (DENY, SAMEORIGIN)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">X-XSS-Protection</div>
-                    <div class="cmd-desc">Enable browser XSS filtering</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Referrer-Policy</div>
-                    <div class="cmd-desc">Control referrer information</div>
-                </div>
-                <div class="tip">
-                    💡 <strong>Security best practice:</strong> Always implement security headers in production environments.
+            <div class="card" id="security-headers">
+                <div class="card-header">🔒 Security Headers</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
-                <div class="card-header"><h2>🔄 Caching Headers</h2></div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Cache-Control: no-cache</div>
-                    <div class="cmd-desc">Validate with server before using cached copy</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Cache-Control: no-store</div>
-                    <div class="cmd-desc">Never cache this response</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Cache-Control: public</div>
-                    <div class="cmd-desc">Can be cached by any cache</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Cache-Control: private</div>
-                    <div class="cmd-desc">Only browser cache, not shared caches</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Cache-Control: max-age=3600</div>
-                    <div class="cmd-desc">Cache for 3600 seconds (1 hour)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Cache-Control: must-revalidate</div>
-                    <div class="cmd-desc">Must validate stale cache with server</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Expires</div>
-                    <div class="cmd-desc">Absolute expiration date (legacy, use max-age)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Last-Modified</div>
-                    <div class="cmd-desc">When resource was last modified</div>
-                </div>
-                <div class="note">
-                    <strong>Caching strategy:</strong> Use ETag + If-None-Match for validation, max-age for freshness.
+            <div class="card" id="caching-headers">
+                <div class="card-header">🔄 Caching Headers</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
-                <div class="card-header"><h2>🎯 Content Negotiation</h2></div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Accept: application/json</div>
-                    <div class="cmd-desc">Request JSON response</div>
+            <div class="card" id="content-negotiation">
+                <div class="card-header">🎯 Content Negotiation</div>
+                <div class="code-block">
+                    
                 </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Accept: text/html</div>
-                    <div class="cmd-desc">Request HTML response</div>
+            </div>
+            <div class="card" id="rest-api-status-code-usage">
+                <div class="card-header">📊 REST API Status Code Usage</div>
+                <div class="code-block">
+                    
                 </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Accept: */*</div>
-                    <div class="cmd-desc">Accept any media type</div>
+            </div>
+            <div class="card" id="authentication-methods">
+                <div class="card-header">🔐 Authentication Methods</div>
+                <div class="code-block">
+                    
                 </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Accept-Encoding: gzip, deflate</div>
-                    <div class="cmd-desc">Supported compression algorithms</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Accept-Language: en-US, en;q=0.9</div>
-                    <div class="cmd-desc">Preferred languages with quality values</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Accept-Charset: utf-8</div>
-                    <div class="cmd-desc">Preferred character encoding</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Content-Encoding: gzip</div>
-                    <div class="cmd-desc">Response compression method used</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Content-Language: en-US</div>
-                    <div class="cmd-desc">Language of response content</div>
+            </div>
+            <div class="card" id="http-best-practices">
+                <div class="card-header">💡 HTTP Best Practices</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header"><h2>📊 REST API Status Code Usage</h2></div>
-            <div class="cmd-row">
-                <div class="cmd-name">GET /resources → 200 OK</div>
-                <div class="cmd-desc">Successfully retrieved list of resources</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">GET /resources/123 → 200 OK</div>
-                <div class="cmd-desc">Successfully retrieved specific resource</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">GET /resources/999 → 404 Not Found</div>
-                <div class="cmd-desc">Resource does not exist</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">POST /resources → 201 Created</div>
-                <div class="cmd-desc">New resource created, Location header with URI</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">POST /resources → 400 Bad Request</div>
-                <div class="cmd-desc">Invalid request data or missing required fields</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">POST /resources → 422 Unprocessable Entity</div>
-                <div class="cmd-desc">Valid syntax but failed validation rules</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">PUT /resources/123 → 200 OK</div>
-                <div class="cmd-desc">Resource updated successfully</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">PUT /resources/123 → 204 No Content</div>
-                <div class="cmd-desc">Resource updated, no response body needed</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">PATCH /resources/123 → 200 OK</div>
-                <div class="cmd-desc">Resource partially updated</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">DELETE /resources/123 → 204 No Content</div>
-                <div class="cmd-desc">Resource deleted successfully</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">DELETE /resources/123 → 404 Not Found</div>
-                <div class="cmd-desc">Resource already deleted or never existed</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Any request → 401 Unauthorized</div>
-                <div class="cmd-desc">Authentication required or credentials invalid</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Any request → 403 Forbidden</div>
-                <div class="cmd-desc">Authenticated but not authorized for this resource</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Any request → 429 Too Many Requests</div>
-                <div class="cmd-desc">Rate limit exceeded, include Retry-After header</div>
-            </div>
-            <div class="tip">
-                💡 <strong>Best practice:</strong> Return appropriate status codes with descriptive error messages in response body.
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header"><h2>🔐 Authentication Methods</h2></div>
-            <div class="cmd-row">
-                <div class="cmd-name">Basic Authentication</div>
-                <div class="cmd-desc">Authorization: Basic base64(username:password)</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Bearer Token</div>
-                <div class="cmd-desc">Authorization: Bearer &lt;token&gt; (JWT, OAuth)</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">API Key</div>
-                <div class="cmd-desc">X-API-Key: &lt;key&gt; or as query parameter</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Digest Authentication</div>
-                <div class="cmd-desc">Authorization: Digest (more secure than Basic)</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">OAuth 2.0</div>
-                <div class="cmd-desc">Authorization: Bearer &lt;access_token&gt;</div>
-            </div>
-            <div class="warning">
-                ⚠️ <strong>Security:</strong> Always use HTTPS when transmitting authentication credentials.
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header"><h2>💡 HTTP Best Practices</h2></div>
-            <div class="cmd-row">
-                <div class="cmd-name">Use appropriate status codes</div>
-                <div class="cmd-desc">Don't return 200 for errors or 500 for validation failures</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Implement proper caching</div>
-                <div class="cmd-desc">Use Cache-Control, ETag, and conditional requests</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Version your APIs</div>
-                <div class="cmd-desc">Use URL versioning (/v1/) or Accept header</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Use HTTPS everywhere</div>
-                <div class="cmd-desc">Encrypt all traffic, implement HSTS</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Implement rate limiting</div>
-                <div class="cmd-desc">Return 429 with Retry-After header</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Handle CORS properly</div>
-                <div class="cmd-desc">Set appropriate Access-Control-* headers</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Use compression</div>
-                <div class="cmd-desc">Enable gzip/brotli for text-based responses</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Provide meaningful error messages</div>
-                <div class="cmd-desc">Include error details in response body</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Use idempotent methods correctly</div>
-                <div class="cmd-desc">GET, PUT, DELETE should be idempotent</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Include Location header</div>
-                <div class="cmd-desc">For 201 Created and 3xx redirects</div>
-            </div>
-        </div>
-
-        <div class="footer">
-            <p>HTTP Status Codes, Methods & Headers Reference</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">🌐 Essential knowledge for web development and API design</p>
-        </div>
+        <footer>
+            <p>&copy; 2025 Cheatsheets Collection. Open source and community driven.</p>
+        </footer>
     </div>
 </body>
 </html>

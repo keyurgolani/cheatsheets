@@ -3,767 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Network troubleshooting commands and techniques for diagnosing connectivity issues.">
     <title>Network Troubleshooting Cheatsheet</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #e0e6ed;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 2rem;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            font-size: 3rem;
-            background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #8b95a5;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .card {
-            background: rgba(30, 41, 59, 0.6);
-            border: 1px solid rgba(100, 116, 139, 0.3);
-            border-radius: 12px;
-            padding: 1.5rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: rgba(239, 68, 68, 0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(239, 68, 68, 0.15);
-        }
-
-        .card-header {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #f97316;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid rgba(239, 68, 68, 0.3);
-        }
-
-        .cmd-row {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.5rem;
-            margin-bottom: 0.75rem;
-            padding: 0.5rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 6px;
-            transition: background 0.2s ease;
-        }
-
-        .cmd-row:hover {
-            background: rgba(239, 68, 68, 0.1);
-        }
-
-        .cmd-name {
-            color: #fb923c;
-            font-weight: 600;
-            font-family: 'Courier New', monospace;
-            font-size: 0.95rem;
-        }
-
-        .cmd-desc {
-            color: #cbd5e1;
-            padding-left: 1rem;
-            font-size: 0.9rem;
-        }
-
-        code {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            color: #a5d6ff;
-            font-size: 0.9em;
-        }
-
-        .note {
-            background: rgba(59, 130, 246, 0.1);
-            border-left: 4px solid #3b82f6;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .tip {
-            background: rgba(16, 185, 129, 0.1);
-            border-left: 4px solid #10b981;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .warning {
-            background: rgba(239, 68, 68, 0.1);
-            border-left: 4px solid #ef4444;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .workflow-box {
-            background: rgba(239, 68, 68, 0.05);
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-            border: 1px solid rgba(239, 68, 68, 0.2);
-        }
-
-        .workflow-title {
-            color: #fb923c;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            font-size: 1.05rem;
-        }
-
-        .workflow-step {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-            color: #cbd5e1;
-        }
-
-        .workflow-step:before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: #f97316;
-            font-weight: bold;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(100, 116, 139, 0.3);
-            color: #8b95a5;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../script.js" defer></script>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-brand">
+                <i class="ph ph-books"></i> Cheatsheets
+            </a>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="btn-icon" aria-label="Toggle theme">
+                    <i class="ph ph-moon"></i>
+                </button>
+                <button id="download-btn" class="btn-icon" aria-label="Download PDF">
+                    <i class="ph ph-download-simple"></i>
+                </button>
+                <a href="https://github.com/keyurgolani/Cheatsheets" class="btn-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                    <i class="ph ph-github-logo"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
-        <h1>🔧 Network Troubleshooting</h1>
-        <p class="subtitle">Essential commands and workflows for diagnosing network issues</p>
+        <header class="cheatsheet-header">
+            <h1>🔧 Network Troubleshooting</h1>
+            <p>Essential commands and workflows for diagnosing network issues</p>
+            <div class="search-container" style="margin-top: 1.5rem; margin-bottom: 0;">
+                <span class="search-icon"><i class="ph ph-magnifying-glass"></i></span>
+                <input type="text" class="search-input" id="cheatsheet-search" placeholder="Filter this cheatsheet..." aria-label="Filter cheatsheet">
+            </div>
+        </header>
 
-        <div class="grid">
-            <div class="card">
+        <div class="masonry-grid" id="cheatsheet-grid">
+            
+            <div class="card" id="ping-test-connectivity">
                 <div class="card-header">📡 ping - Test Connectivity</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ping example.com</div>
-                    <div class="cmd-desc">Test basic connectivity to host</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ping -c 4 example.com</div>
-                    <div class="cmd-desc">Send 4 packets then stop (Linux/Mac)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ping -n 4 example.com</div>
-                    <div class="cmd-desc">Send 4 packets then stop (Windows)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ping -i 2 example.com</div>
-                    <div class="cmd-desc">Set interval to 2 seconds between packets</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ping -s 1000 example.com</div>
-                    <div class="cmd-desc">Set packet size to 1000 bytes</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ping -f example.com</div>
-                    <div class="cmd-desc">Flood ping (requires root, use carefully)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ping -t example.com</div>
-                    <div class="cmd-desc">Ping continuously until stopped (Windows)</div>
-                </div>
-                <div class="tip">
-                    💡 <strong>Tip:</strong> Check packet loss % and RTT (round-trip time) to diagnose network quality
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="traceroute-trace-network-path">
                 <div class="card-header">🗺️ traceroute - Trace Network Path</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">traceroute example.com</div>
-                    <div class="cmd-desc">Trace route to destination (Linux/Mac)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">tracert example.com</div>
-                    <div class="cmd-desc">Trace route to destination (Windows)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">traceroute -n example.com</div>
-                    <div class="cmd-desc">Don't resolve hostnames (faster)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">traceroute -m 20 example.com</div>
-                    <div class="cmd-desc">Set max hops to 20</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">traceroute -I example.com</div>
-                    <div class="cmd-desc">Use ICMP instead of UDP</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">traceroute -T example.com</div>
-                    <div class="cmd-desc">Use TCP SYN for tracing</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">mtr example.com</div>
-                    <div class="cmd-desc">Continuous traceroute with statistics (better tool)</div>
-                </div>
-                <div class="note">
-                    <strong>Note:</strong> Each hop shows 3 RTT measurements. * means no response (timeout or filtered)
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="netstat-network-statistics">
                 <div class="card-header">📊 netstat - Network Statistics</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">netstat -a</div>
-                    <div class="cmd-desc">Show all connections and listening ports</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">netstat -an</div>
-                    <div class="cmd-desc">Show all with numeric addresses (no DNS lookup)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">netstat -t</div>
-                    <div class="cmd-desc">Show TCP connections only</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">netstat -u</div>
-                    <div class="cmd-desc">Show UDP connections only</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">netstat -l</div>
-                    <div class="cmd-desc">Show only listening sockets</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">netstat -p</div>
-                    <div class="cmd-desc">Show process ID and program name</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">netstat -r</div>
-                    <div class="cmd-desc">Show routing table</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">netstat -i</div>
-                    <div class="cmd-desc">Show network interfaces</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">netstat -s</div>
-                    <div class="cmd-desc">Show protocol statistics</div>
-                </div>
-                <div class="warning">
-                    ⚠️ <strong>Note:</strong> netstat is deprecated on many systems. Use <code>ss</code> instead on Linux
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="nslookup-dns-lookup">
                 <div class="card-header">🔍 nslookup - DNS Lookup</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">nslookup example.com</div>
-                    <div class="cmd-desc">Basic DNS query</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">nslookup example.com 8.8.8.8</div>
-                    <div class="cmd-desc">Query specific DNS server</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">nslookup -type=MX example.com</div>
-                    <div class="cmd-desc">Query mail servers</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">nslookup -type=NS example.com</div>
-                    <div class="cmd-desc">Query nameservers</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">nslookup -type=TXT example.com</div>
-                    <div class="cmd-desc">Query text records</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">nslookup -type=SOA example.com</div>
-                    <div class="cmd-desc">Query start of authority</div>
-                </div>
-                <div class="note">
-                    <strong>Note:</strong> nslookup is considered deprecated. Use <code>dig</code> for more detailed DNS queries
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="dig-dns-information-groper">
                 <div class="card-header">🔎 dig - DNS Information Groper</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">dig example.com</div>
-                    <div class="cmd-desc">Detailed DNS query (A record)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">dig example.com A</div>
-                    <div class="cmd-desc">Query specific record type</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">dig @8.8.8.8 example.com</div>
-                    <div class="cmd-desc">Query specific DNS server</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">dig +short example.com</div>
-                    <div class="cmd-desc">Show only the answer</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">dig +trace example.com</div>
-                    <div class="cmd-desc">Trace DNS resolution path from root</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">dig -x 192.0.2.1</div>
-                    <div class="cmd-desc">Reverse DNS lookup</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">dig example.com ANY</div>
-                    <div class="cmd-desc">Query all available records</div>
-                </div>
-                <div class="tip">
-                    💡 <strong>Tip:</strong> dig provides more detailed output than nslookup, including query time and TTL
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="tcpdump-packet-capture">
                 <div class="card-header">📦 tcpdump - Packet Capture</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">sudo tcpdump -i eth0</div>
-                    <div class="cmd-desc">Capture packets on interface eth0</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">sudo tcpdump -i any</div>
-                    <div class="cmd-desc">Capture on all interfaces</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">sudo tcpdump -n</div>
-                    <div class="cmd-desc">Don't resolve hostnames</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">sudo tcpdump -c 100</div>
-                    <div class="cmd-desc">Capture 100 packets then stop</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">sudo tcpdump host 192.168.1.1</div>
-                    <div class="cmd-desc">Capture traffic to/from specific host</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">sudo tcpdump port 80</div>
-                    <div class="cmd-desc">Capture traffic on port 80</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">sudo tcpdump tcp</div>
-                    <div class="cmd-desc">Capture only TCP traffic</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">sudo tcpdump udp</div>
-                    <div class="cmd-desc">Capture only UDP traffic</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">sudo tcpdump -w capture.pcap</div>
-                    <div class="cmd-desc">Write packets to file</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">sudo tcpdump -r capture.pcap</div>
-                    <div class="cmd-desc">Read packets from file</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">sudo tcpdump -A</div>
-                    <div class="cmd-desc">Print packet contents in ASCII</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">sudo tcpdump -X</div>
-                    <div class="cmd-desc">Print packet contents in hex and ASCII</div>
-                </div>
-                <div class="warning">
-                    ⚠️ <strong>Warning:</strong> Requires root/admin privileges. Can capture sensitive data - use responsibly
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="wireshark-basics">
                 <div class="card-header">🦈 Wireshark Basics</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">wireshark</div>
-                    <div class="cmd-desc">Launch Wireshark GUI</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">tshark -i eth0</div>
-                    <div class="cmd-desc">Command-line Wireshark capture</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">tshark -r capture.pcap</div>
-                    <div class="cmd-desc">Read pcap file</div>
-                </div>
-                <div class="note">
-                    <strong>Common Display Filters:</strong><br>
-                    <code>ip.addr == 192.168.1.1</code> - Filter by IP<br>
-                    <code>tcp.port == 80</code> - Filter by port<br>
-                    <code>http</code> - Show only HTTP traffic<br>
-                    <code>dns</code> - Show only DNS traffic<br>
-                    <code>tcp.flags.syn == 1</code> - Show SYN packets<br>
-                    <code>ip.src == 192.168.1.1</code> - Filter source IP
-                </div>
-                <div class="tip">
-                    💡 <strong>Tip:</strong> Right-click packets to follow TCP/UDP streams for easier analysis
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="additional-tools">
                 <div class="card-header">🔧 Additional Tools</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ss -tuln</div>
-                    <div class="cmd-desc">Show listening TCP/UDP ports (modern netstat)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ip addr show</div>
-                    <div class="cmd-desc">Show IP addresses and interfaces</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ip route show</div>
-                    <div class="cmd-desc">Show routing table</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ifconfig</div>
-                    <div class="cmd-desc">Show network interfaces (deprecated, use ip)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">route -n</div>
-                    <div class="cmd-desc">Show routing table (deprecated, use ip route)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">arp -a</div>
-                    <div class="cmd-desc">Show ARP cache (IP to MAC mappings)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">nmap -sP 192.168.1.0/24</div>
-                    <div class="cmd-desc">Scan network for active hosts</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">nmap -p 80,443 example.com</div>
-                    <div class="cmd-desc">Scan specific ports</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">telnet example.com 80</div>
-                    <div class="cmd-desc">Test TCP port connectivity</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">nc -zv example.com 80</div>
-                    <div class="cmd-desc">Test port with netcat</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">curl -I https://example.com</div>
-                    <div class="cmd-desc">Test HTTP/HTTPS connectivity</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="performance-testing">
                 <div class="card-header">📈 Performance Testing</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">iperf3 -s</div>
-                    <div class="cmd-desc">Start iperf server</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">iperf3 -c server_ip</div>
-                    <div class="cmd-desc">Test bandwidth to server</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">speedtest-cli</div>
-                    <div class="cmd-desc">Test internet speed (requires installation)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">mtr -r -c 10 example.com</div>
-                    <div class="cmd-desc">Generate traceroute report with 10 cycles</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ethtool eth0</div>
-                    <div class="cmd-desc">Show interface speed and duplex settings</div>
-                </div>
-                <div class="tip">
-                    💡 <strong>Tip:</strong> Use iperf3 between two systems to test actual network throughput
+                <div class="code-block">
+                    
                 </div>
             </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">🔄 Common Troubleshooting Workflows</div>
-            
-            <div class="workflow-box">
-                <div class="workflow-title">Basic Connectivity Issue</div>
-                <div class="workflow-step">Check physical connection (cable, WiFi)</div>
-                <div class="workflow-step">Verify interface is up: <code>ip addr show</code> or <code>ifconfig</code></div>
-                <div class="workflow-step">Ping localhost: <code>ping 127.0.0.1</code> (tests TCP/IP stack)</div>
-                <div class="workflow-step">Ping gateway: <code>ping [gateway_ip]</code> (tests local network)</div>
-                <div class="workflow-step">Ping external IP: <code>ping 8.8.8.8</code> (tests internet connectivity)</div>
-                <div class="workflow-step">Ping domain: <code>ping google.com</code> (tests DNS resolution)</div>
-                <div class="workflow-step">If domain fails but IP works, check DNS: <code>cat /etc/resolv.conf</code></div>
+            <div class="card" id="common-troubleshooting-workflows">
+                <div class="card-header">🔄 Common Troubleshooting Workflows</div>
+                <div class="code-block">
+                    
+                </div>
             </div>
-
-            <div class="workflow-box">
-                <div class="workflow-title">Slow Connection Diagnosis</div>
-                <div class="workflow-step">Check packet loss: <code>ping -c 100 example.com</code></div>
-                <div class="workflow-step">Identify problematic hop: <code>mtr example.com</code></div>
-                <div class="workflow-step">Check interface errors: <code>netstat -i</code> or <code>ip -s link</code></div>
-                <div class="workflow-step">Test bandwidth: <code>iperf3 -c server</code></div>
-                <div class="workflow-step">Check for congestion: <code>ss -s</code> (socket statistics)</div>
-                <div class="workflow-step">Monitor real-time traffic: <code>iftop</code> or <code>nethogs</code></div>
+            <div class="card" id="tcpdump-filter-examples">
+                <div class="card-header">🎯 tcpdump Filter Examples</div>
+                <div class="code-block">
+                    
+                </div>
             </div>
-
-            <div class="workflow-box">
-                <div class="workflow-title">DNS Resolution Problems</div>
-                <div class="workflow-step">Test with different DNS: <code>dig @8.8.8.8 example.com</code></div>
-                <div class="workflow-step">Check local DNS config: <code>cat /etc/resolv.conf</code></div>
-                <div class="workflow-step">Flush DNS cache (varies by OS)</div>
-                <div class="workflow-step">Trace DNS path: <code>dig +trace example.com</code></div>
-                <div class="workflow-step">Check authoritative servers: <code>dig NS example.com</code></div>
-                <div class="workflow-step">Verify DNS propagation: Query multiple DNS servers</div>
+            <div class="card" id="common-network-issues">
+                <div class="card-header">⚠️ Common Network Issues</div>
+                <div class="code-block">
+                    
+                </div>
             </div>
-
-            <div class="workflow-box">
-                <div class="workflow-title">Port/Service Not Accessible</div>
-                <div class="workflow-step">Verify service is running: <code>systemctl status service_name</code></div>
-                <div class="workflow-step">Check if port is listening: <code>ss -tuln | grep :port</code></div>
-                <div class="workflow-step">Test local connectivity: <code>telnet localhost port</code></div>
-                <div class="workflow-step">Test remote connectivity: <code>telnet remote_ip port</code></div>
-                <div class="workflow-step">Check firewall rules: <code>iptables -L</code> or <code>firewall-cmd --list-all</code></div>
-                <div class="workflow-step">Capture packets: <code>sudo tcpdump -i any port [port]</code></div>
-                <div class="workflow-step">Check for connection attempts in logs</div>
+            <div class="card" id="best-practices">
+                <div class="card-header">💡 Best Practices</div>
+                <div class="code-block">
+                    
+                </div>
             </div>
-
-            <div class="workflow-box">
-                <div class="workflow-title">High Latency Investigation</div>
-                <div class="workflow-step">Baseline latency: <code>ping -c 100 target</code></div>
-                <div class="workflow-step">Identify where delay occurs: <code>mtr -r target</code></div>
-                <div class="workflow-step">Check local interface: <code>ethtool eth0</code></div>
-                <div class="workflow-step">Monitor CPU/memory on both ends</div>
-                <div class="workflow-step">Check for network congestion: <code>iftop</code></div>
-                <div class="workflow-step">Test different times of day (ISP throttling?)</div>
-                <div class="workflow-step">Compare with alternative route/VPN</div>
-            </div>
-
-            <div class="workflow-box">
-                <div class="workflow-title">Packet Loss Analysis</div>
-                <div class="workflow-step">Measure loss rate: <code>ping -c 1000 target</code></div>
-                <div class="workflow-step">Identify where loss occurs: <code>mtr -r -c 100 target</code></div>
-                <div class="workflow-step">Check interface statistics: <code>ip -s link show eth0</code></div>
-                <div class="workflow-step">Look for errors/drops in interface stats</div>
-                <div class="workflow-step">Check physical layer (cable, WiFi signal)</div>
-                <div class="workflow-step">Test with different packet sizes: <code>ping -s 1400 target</code></div>
-                <div class="workflow-step">Capture and analyze: <code>sudo tcpdump -i any -w loss.pcap</code></div>
+            <div class="card" id="quick-reference-error-messages">
+                <div class="card-header">📚 Quick Reference - Error Messages</div>
+                <div class="code-block">
+                    
+                </div>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header">🎯 tcpdump Filter Examples</div>
-            
-            <div class="cmd-row">
-                <div class="cmd-name">sudo tcpdump 'tcp[tcpflags] & tcp-syn != 0'</div>
-                <div class="cmd-desc">Capture SYN packets (connection attempts)</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">sudo tcpdump 'src host 192.168.1.1'</div>
-                <div class="cmd-desc">Capture from specific source</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">sudo tcpdump 'dst port 443'</div>
-                <div class="cmd-desc">Capture to destination port 443</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">sudo tcpdump 'net 192.168.1.0/24'</div>
-                <div class="cmd-desc">Capture traffic from/to subnet</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">sudo tcpdump 'tcp and port 80'</div>
-                <div class="cmd-desc">Capture TCP traffic on port 80</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">sudo tcpdump 'icmp'</div>
-                <div class="cmd-desc">Capture ICMP (ping) traffic</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">sudo tcpdump 'not port 22'</div>
-                <div class="cmd-desc">Exclude SSH traffic</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">sudo tcpdump 'portrange 80-443'</div>
-                <div class="cmd-desc">Capture port range</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">sudo tcpdump 'greater 1000'</div>
-                <div class="cmd-desc">Capture packets larger than 1000 bytes</div>
-            </div>
-            <div class="tip">
-                💡 <strong>Tip:</strong> Combine filters with 'and', 'or', 'not' for complex captures
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">⚠️ Common Network Issues</div>
-            
-            <div class="workflow-box">
-                <div class="workflow-title">Issue: "Destination Host Unreachable"</div>
-                <div class="workflow-step"><strong>Cause:</strong> No route to host, host is down, or firewall blocking</div>
-                <div class="workflow-step"><strong>Check:</strong> Routing table, host status, firewall rules</div>
-                <div class="workflow-step"><strong>Fix:</strong> Add route, start host, adjust firewall</div>
-            </div>
-
-            <div class="workflow-box">
-                <div class="workflow-title">Issue: "Connection Timed Out"</div>
-                <div class="workflow-step"><strong>Cause:</strong> Firewall blocking, service not listening, network congestion</div>
-                <div class="workflow-step"><strong>Check:</strong> Service status, firewall, packet capture</div>
-                <div class="workflow-step"><strong>Fix:</strong> Start service, open firewall port, check network path</div>
-            </div>
-
-            <div class="workflow-box">
-                <div class="workflow-title">Issue: "Connection Refused"</div>
-                <div class="workflow-step"><strong>Cause:</strong> Service not running or not listening on that port</div>
-                <div class="workflow-step"><strong>Check:</strong> Service status, listening ports</div>
-                <div class="workflow-step"><strong>Fix:</strong> Start service, verify configuration</div>
-            </div>
-
-            <div class="workflow-box">
-                <div class="workflow-title">Issue: "Network Unreachable"</div>
-                <div class="workflow-step"><strong>Cause:</strong> No default gateway or incorrect routing</div>
-                <div class="workflow-step"><strong>Check:</strong> Routing table, gateway configuration</div>
-                <div class="workflow-step"><strong>Fix:</strong> Add default route, configure gateway</div>
-            </div>
-
-            <div class="workflow-box">
-                <div class="workflow-title">Issue: High Packet Loss</div>
-                <div class="workflow-step"><strong>Cause:</strong> Bad cable, WiFi interference, congestion, faulty hardware</div>
-                <div class="workflow-step"><strong>Check:</strong> Physical connections, interface errors, mtr output</div>
-                <div class="workflow-step"><strong>Fix:</strong> Replace cable, change WiFi channel, upgrade hardware</div>
-            </div>
-
-            <div class="workflow-box">
-                <div class="workflow-title">Issue: DNS Not Resolving</div>
-                <div class="workflow-step"><strong>Cause:</strong> DNS server down, incorrect configuration, firewall blocking port 53</div>
-                <div class="workflow-step"><strong>Check:</strong> /etc/resolv.conf, DNS server reachability, firewall</div>
-                <div class="workflow-step"><strong>Fix:</strong> Use alternative DNS (8.8.8.8), fix configuration, open port 53</div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">💡 Best Practices</div>
-            
-            <div class="tip">
-                <strong>Document Your Baseline</strong><br>
-                Know your normal latency, bandwidth, and packet loss rates. This makes anomalies easier to spot.
-            </div>
-
-            <div class="tip">
-                <strong>Work from Layer 1 Up</strong><br>
-                Start with physical layer (cables, WiFi), then network layer (IP, routing), then application layer.
-            </div>
-
-            <div class="tip">
-                <strong>Use Multiple Tools</strong><br>
-                Confirm findings with different tools. ping + mtr + traceroute gives better picture than any single tool.
-            </div>
-
-            <div class="tip">
-                <strong>Capture Before Making Changes</strong><br>
-                Use tcpdump to capture traffic before troubleshooting. You can analyze it later if needed.
-            </div>
-
-            <div class="tip">
-                <strong>Check Both Ends</strong><br>
-                Network issues can be on either side. Test from both client and server perspectives.
-            </div>
-
-            <div class="warning">
-                <strong>Security Considerations</strong><br>
-                • tcpdump and Wireshark can capture sensitive data - use on trusted networks only<br>
-                • Some tools require root/admin privileges<br>
-                • Port scanning (nmap) may trigger security alerts<br>
-                • Always get permission before troubleshooting production systems
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">📚 Quick Reference - Error Messages</div>
-            
-            <div class="cmd-row">
-                <div class="cmd-name">EHOSTUNREACH</div>
-                <div class="cmd-desc">No route to host - routing problem</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">ENETUNREACH</div>
-                <div class="cmd-desc">Network unreachable - no gateway</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">ECONNREFUSED</div>
-                <div class="cmd-desc">Connection refused - service not listening</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">ETIMEDOUT</div>
-                <div class="cmd-desc">Connection timed out - firewall or no response</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">EHOSTDOWN</div>
-                <div class="cmd-desc">Host is down - system not responding</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">ENETDOWN</div>
-                <div class="cmd-desc">Network interface is down</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">EPIPE</div>
-                <div class="cmd-desc">Broken pipe - connection closed by remote</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">ECONNRESET</div>
-                <div class="cmd-desc">Connection reset by peer - abrupt close</div>
-            </div>
-        </div>
-
-        <div class="footer">
-            <p>Network Troubleshooting Cheatsheet | Essential commands for diagnosing connectivity issues</p>
-        </div>
+        <footer>
+            <p>&copy; 2025 Cheatsheets Collection. Open source and community driven.</p>
+        </footer>
     </div>
 </body>
 </html>

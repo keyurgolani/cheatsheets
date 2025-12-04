@@ -3,818 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="REST API design principles, HTTP methods, status codes, and best practices.">
     <title>REST API Design Cheatsheet</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #e0e6ed;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 2rem;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            font-size: 3rem;
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #8b95a5;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .card {
-            background: rgba(30, 41, 59, 0.6);
-            border: 1px solid rgba(100, 116, 139, 0.3);
-            border-radius: 12px;
-            padding: 1.5rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: rgba(59, 130, 246, 0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
-        }
-
-        .card-header {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #3b82f6;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid rgba(59, 130, 246, 0.3);
-        }
-
-        .cmd-row {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.5rem;
-            margin-bottom: 0.75rem;
-            padding: 0.5rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 6px;
-            transition: background 0.2s ease;
-        }
-
-        .cmd-row:hover {
-            background: rgba(59, 130, 246, 0.1);
-        }
-
-        .cmd-name {
-            color: #60a5fa;
-            font-weight: 600;
-            font-family: 'Courier New', monospace;
-            font-size: 0.95rem;
-        }
-
-        .cmd-desc {
-            color: #cbd5e1;
-            padding-left: 1rem;
-            font-size: 0.9rem;
-        }
-
-        code {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            color: #a5d6ff;
-            font-size: 0.9em;
-        }
-
-        .note {
-            background: rgba(59, 130, 246, 0.1);
-            border-left: 4px solid #3b82f6;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .tip {
-            background: rgba(16, 185, 129, 0.1);
-            border-left: 4px solid #10b981;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .warning {
-            background: rgba(239, 68, 68, 0.1);
-            border-left: 4px solid #ef4444;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(100, 116, 139, 0.3);
-            color: #8b95a5;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../script.js" defer></script>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-brand">
+                <i class="ph ph-books"></i> Cheatsheets
+            </a>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="btn-icon" aria-label="Toggle theme">
+                    <i class="ph ph-moon"></i>
+                </button>
+                <button id="download-btn" class="btn-icon" aria-label="Download PDF">
+                    <i class="ph ph-download-simple"></i>
+                </button>
+                <a href="https://github.com/keyurgolani/Cheatsheets" class="btn-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                    <i class="ph ph-github-logo"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
-        <h1>🔌 REST API Design</h1>
-        <p class="subtitle">Best practices and patterns for building RESTful APIs</p>
+        <header class="cheatsheet-header">
+            <h1>🔌 REST API Design</h1>
+            <p>Best practices and patterns for building RESTful APIs</p>
+            <div class="search-container" style="margin-top: 1.5rem; margin-bottom: 0;">
+                <span class="search-icon"><i class="ph ph-magnifying-glass"></i></span>
+                <input type="text" class="search-input" id="cheatsheet-search" placeholder="Filter this cheatsheet..." aria-label="Filter cheatsheet">
+            </div>
+        </header>
 
-        <div class="grid">
-            <div class="card">
+        <div class="masonry-grid" id="cheatsheet-grid">
+            
+            <div class="card" id="core-design-principles">
                 <div class="card-header">📐 Core Design Principles</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Client-Server Architecture</div>
-                    <div class="cmd-desc">Separation of concerns between UI and data storage</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Stateless</div>
-                    <div class="cmd-desc">Each request contains all information needed to process it</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Cacheable</div>
-                    <div class="cmd-desc">Responses must define themselves as cacheable or not</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Uniform Interface</div>
-                    <div class="cmd-desc">Consistent resource identification and manipulation</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Layered System</div>
-                    <div class="cmd-desc">Client cannot tell if connected directly to end server</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Code on Demand (Optional)</div>
-                    <div class="cmd-desc">Servers can extend client functionality by transferring code</div>
-                </div>
-                <div class="note">
-                    <strong>REST:</strong> Representational State Transfer - architectural style for distributed systems.
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="resource-naming-conventions">
                 <div class="card-header">🎯 Resource Naming Conventions</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Use nouns, not verbs</div>
-                    <div class="cmd-desc">/users not /getUsers or /createUser</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Use plural nouns</div>
-                    <div class="cmd-desc">/users/123 not /user/123</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Use lowercase and hyphens</div>
-                    <div class="cmd-desc">/user-profiles not /userProfiles or /user_profiles</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Hierarchical relationships</div>
-                    <div class="cmd-desc">/users/123/orders/456 for nested resources</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Avoid deep nesting</div>
-                    <div class="cmd-desc">Limit to 2-3 levels: /resources/{id}/sub-resources</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Use query parameters for filtering</div>
-                    <div class="cmd-desc">/users?status=active&role=admin</div>
-                </div>
-                <div class="tip">
-                    💡 <strong>Best practice:</strong> Keep URLs simple, predictable, and human-readable.
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="http-methods-usage">
                 <div class="card-header">🔧 HTTP Methods Usage</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">GET /resources</div>
-                    <div class="cmd-desc">Retrieve list of resources (collection)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">GET /resources/{id}</div>
-                    <div class="cmd-desc">Retrieve specific resource by ID</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">POST /resources</div>
-                    <div class="cmd-desc">Create new resource, return 201 with Location header</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">PUT /resources/{id}</div>
-                    <div class="cmd-desc">Replace entire resource (full update), idempotent</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">PATCH /resources/{id}</div>
-                    <div class="cmd-desc">Partial update of resource, idempotent</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">DELETE /resources/{id}</div>
-                    <div class="cmd-desc">Remove resource, return 204 No Content</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">HEAD /resources/{id}</div>
-                    <div class="cmd-desc">Check if resource exists without retrieving body</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">OPTIONS /resources</div>
-                    <div class="cmd-desc">Discover allowed methods for resource</div>
-                </div>
-                <div class="note">
-                    <strong>Idempotent:</strong> Multiple identical requests have same effect as single request (GET, PUT, DELETE, HEAD, OPTIONS).
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="status-code-guidelines">
                 <div class="card-header">📊 Status Code Guidelines</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">200 OK</div>
-                    <div class="cmd-desc">Successful GET, PUT, PATCH with response body</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">201 Created</div>
-                    <div class="cmd-desc">Successful POST, include Location header</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">204 No Content</div>
-                    <div class="cmd-desc">Successful DELETE or PUT without response body</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">400 Bad Request</div>
-                    <div class="cmd-desc">Malformed request syntax or invalid JSON</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">401 Unauthorized</div>
-                    <div class="cmd-desc">Authentication required or failed</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">403 Forbidden</div>
-                    <div class="cmd-desc">Authenticated but not authorized</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">404 Not Found</div>
-                    <div class="cmd-desc">Resource does not exist</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">409 Conflict</div>
-                    <div class="cmd-desc">Request conflicts with current state</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">422 Unprocessable Entity</div>
-                    <div class="cmd-desc">Valid syntax but failed validation</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">429 Too Many Requests</div>
-                    <div class="cmd-desc">Rate limit exceeded</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">500 Internal Server Error</div>
-                    <div class="cmd-desc">Unexpected server error</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">503 Service Unavailable</div>
-                    <div class="cmd-desc">Server temporarily unavailable</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="api-versioning-strategies">
                 <div class="card-header">🔢 API Versioning Strategies</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">URL Path Versioning</div>
-                    <div class="cmd-desc">/api/v1/users or /v1/users (most common)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Query Parameter Versioning</div>
-                    <div class="cmd-desc">/api/users?version=1 (less common)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Header Versioning</div>
-                    <div class="cmd-desc">Accept: application/vnd.api.v1+json</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Custom Header Versioning</div>
-                    <div class="cmd-desc">X-API-Version: 1 or API-Version: 1</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Content Negotiation</div>
-                    <div class="cmd-desc">Accept: application/json; version=1</div>
-                </div>
-                <div class="tip">
-                    💡 <strong>Recommendation:</strong> URL path versioning is most visible and easiest to use. Version only when breaking changes occur.
-                </div>
-                <div class="note">
-                    <strong>Semantic versioning:</strong> Use v1, v2, v3 for major versions. Avoid v1.1, v1.2 in URLs.
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="pagination-patterns">
                 <div class="card-header">📄 Pagination Patterns</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Offset-based Pagination</div>
-                    <div class="cmd-desc">/users?limit=20&offset=40 (page 3)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Page-based Pagination</div>
-                    <div class="cmd-desc">/users?page=3&per_page=20 (more intuitive)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Cursor-based Pagination</div>
-                    <div class="cmd-desc">/users?cursor=eyJpZCI6MTIzfQ&limit=20 (best for real-time)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Response Metadata</div>
-                    <div class="cmd-desc">Include total, page, per_page, total_pages in response</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Link Headers</div>
-                    <div class="cmd-desc">Link: &lt;/users?page=4&gt;; rel="next", &lt;/users?page=2&gt;; rel="prev"</div>
-                </div>
-                <div class="note">
-                    <strong>Cursor pagination:</strong> Best for large datasets and real-time data. Prevents missing/duplicate items when data changes.
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="filtering-sorting-searching">
                 <div class="card-header">🔍 Filtering, Sorting & Searching</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Simple Filtering</div>
-                    <div class="cmd-desc">/users?status=active&role=admin</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Range Filtering</div>
-                    <div class="cmd-desc">/products?price_min=10&price_max=100</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Date Range Filtering</div>
-                    <div class="cmd-desc">/orders?created_after=2024-01-01&created_before=2024-12-31</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Sorting</div>
-                    <div class="cmd-desc">/users?sort=created_at or /users?sort=-created_at (descending)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Multiple Sort Fields</div>
-                    <div class="cmd-desc">/users?sort=last_name,first_name or sort[]=last_name&sort[]=first_name</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Full-text Search</div>
-                    <div class="cmd-desc">/users?q=john or /search?query=john&type=users</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Field Selection</div>
-                    <div class="cmd-desc">/users?fields=id,name,email (sparse fieldsets)</div>
-                </div>
-                <div class="tip">
-                    💡 <strong>Convention:</strong> Use minus (-) prefix for descending sort: ?sort=-created_at
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="authentication-patterns">
                 <div class="card-header">🔐 Authentication Patterns</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Bearer Token (JWT)</div>
-                    <div class="cmd-desc">Authorization: Bearer eyJhbGciOiJIUzI1NiIs...</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">API Key in Header</div>
-                    <div class="cmd-desc">X-API-Key: your-api-key-here</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">API Key in Query</div>
-                    <div class="cmd-desc">/api/users?api_key=your-key (less secure, avoid if possible)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">OAuth 2.0</div>
-                    <div class="cmd-desc">Authorization: Bearer {access_token} (industry standard)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Basic Authentication</div>
-                    <div class="cmd-desc">Authorization: Basic base64(username:password)</div>
-                </div>
-                <div class="warning">
-                    ⚠️ <strong>Security:</strong> Always use HTTPS. Never send credentials in query parameters. Implement token expiration and refresh.
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="rate-limiting">
                 <div class="card-header">⚡ Rate Limiting</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">X-RateLimit-Limit</div>
-                    <div class="cmd-desc">Maximum requests allowed in time window</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">X-RateLimit-Remaining</div>
-                    <div class="cmd-desc">Number of requests remaining in current window</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">X-RateLimit-Reset</div>
-                    <div class="cmd-desc">Unix timestamp when rate limit resets</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">429 Too Many Requests</div>
-                    <div class="cmd-desc">Return when limit exceeded with Retry-After header</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Retry-After</div>
-                    <div class="cmd-desc">Seconds to wait before retrying (e.g., Retry-After: 60)</div>
-                </div>
-                <div class="note">
-                    <strong>Common limits:</strong> 1000 requests/hour for authenticated, 100/hour for unauthenticated users.
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="error-response-format">
                 <div class="card-header">❌ Error Response Format</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Consistent Error Structure</div>
-                    <div class="cmd-desc">{ "error": { "code": "VALIDATION_ERROR", "message": "...", "details": [...] } }</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Error Code</div>
-                    <div class="cmd-desc">Machine-readable error identifier (e.g., INVALID_EMAIL)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Error Message</div>
-                    <div class="cmd-desc">Human-readable description of the error</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Error Details</div>
-                    <div class="cmd-desc">Array of field-specific validation errors</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Request ID</div>
-                    <div class="cmd-desc">Include unique request ID for debugging and support</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Documentation Link</div>
-                    <div class="cmd-desc">URL to error documentation or troubleshooting guide</div>
-                </div>
-                <div class="tip">
-                    💡 <strong>Best practice:</strong> Never expose internal error details or stack traces in production.
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="response-format-best-practices">
                 <div class="card-header">📦 Response Format Best Practices</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Consistent JSON Structure</div>
-                    <div class="cmd-desc">Use same envelope format across all endpoints</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">camelCase for JSON</div>
-                    <div class="cmd-desc">{ "firstName": "John", "lastName": "Doe" }</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">snake_case Alternative</div>
-                    <div class="cmd-desc">{ "first_name": "John", "last_name": "Doe" } (Python/Ruby style)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ISO 8601 for Dates</div>
-                    <div class="cmd-desc">2024-11-29T10:30:00Z or 2024-11-29T10:30:00+00:00</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Null vs Omission</div>
-                    <div class="cmd-desc">Include null for known empty values, omit for unknown/not applicable</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Metadata Wrapper</div>
-                    <div class="cmd-desc">{ "data": [...], "meta": { "total": 100, "page": 1 } }</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">HATEOAS Links</div>
-                    <div class="cmd-desc">Include links to related resources: { "links": { "self": "/users/123" } }</div>
-                </div>
-                <div class="note">
-                    <strong>Consistency:</strong> Choose one naming convention (camelCase or snake_case) and use it everywhere.
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="hateoas-hypermedia">
                 <div class="card-header">🔗 HATEOAS (Hypermedia)</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Self Link</div>
-                    <div class="cmd-desc">"_links": { "self": { "href": "/users/123" } }</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Related Resources</div>
-                    <div class="cmd-desc">"_links": { "orders": { "href": "/users/123/orders" } }</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Actions</div>
-                    <div class="cmd-desc">"_links": { "activate": { "href": "/users/123/activate", "method": "POST" } }</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Pagination Links</div>
-                    <div class="cmd-desc">"_links": { "next": "/users?page=2", "prev": "/users?page=1" }</div>
-                </div>
-                <div class="note">
-                    <strong>HATEOAS:</strong> Hypermedia as the Engine of Application State - clients discover actions through links.
+                <div class="code-block">
+                    
                 </div>
             </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">🎯 Complete Endpoint Examples</div>
-            <div class="cmd-row">
-                <div class="cmd-name">GET /api/v1/users</div>
-                <div class="cmd-desc">List all users with pagination, filtering, sorting</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">GET /api/v1/users?status=active&sort=-created_at&page=2&per_page=20</div>
-                <div class="cmd-desc">Active users, newest first, page 2 with 20 items</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">GET /api/v1/users/123</div>
-                <div class="cmd-desc">Get specific user by ID → 200 OK or 404 Not Found</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">POST /api/v1/users</div>
-                <div class="cmd-desc">Create new user → 201 Created with Location: /api/v1/users/124</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">PUT /api/v1/users/123</div>
-                <div class="cmd-desc">Replace entire user resource → 200 OK or 204 No Content</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">PATCH /api/v1/users/123</div>
-                <div class="cmd-desc">Update specific fields → 200 OK with updated resource</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">DELETE /api/v1/users/123</div>
-                <div class="cmd-desc">Delete user → 204 No Content or 404 Not Found</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">GET /api/v1/users/123/orders</div>
-                <div class="cmd-desc">Get all orders for specific user (nested resource)</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">POST /api/v1/users/123/orders</div>
-                <div class="cmd-desc">Create order for specific user → 201 Created</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">GET /api/v1/orders/456</div>
-                <div class="cmd-desc">Get specific order directly (avoid deep nesting)</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">POST /api/v1/users/123/password/reset</div>
-                <div class="cmd-desc">Action endpoint for non-CRUD operations</div>
-            </div>
-            <div class="tip">
-                💡 <strong>Tip:</strong> For actions that don't fit CRUD, use POST with descriptive endpoint: /resources/{id}/action
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">📝 Request/Response Examples</div>
-            <div class="cmd-row">
-                <div class="cmd-name">POST /api/v1/users Request</div>
-                <div class="cmd-desc">
-                    <code>{ "firstName": "John", "lastName": "Doe", "email": "john@example.com", "role": "user" }</code>
+            <div class="card" id="complete-endpoint-examples">
+                <div class="card-header">🎯 Complete Endpoint Examples</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-            <div class="cmd-row">
-                <div class="cmd-name">POST /api/v1/users Response (201)</div>
-                <div class="cmd-desc">
-                    <code>Location: /api/v1/users/124</code><br>
-                    <code>{ "id": 124, "firstName": "John", "lastName": "Doe", "email": "john@example.com", "role": "user", "createdAt": "2024-11-29T10:30:00Z" }</code>
+            <div class="card" id="requestresponse-examples">
+                <div class="card-header">📝 Request/Response Examples</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-            <div class="cmd-row">
-                <div class="cmd-name">GET /api/v1/users?page=1&per_page=2 Response (200)</div>
-                <div class="cmd-desc">
-                    <code>{ "data": [{"id": 1, "name": "Alice"}, {"id": 2, "name": "Bob"}], "meta": { "total": 100, "page": 1, "perPage": 2, "totalPages": 50 }, "_links": { "next": "/api/v1/users?page=2&per_page=2" } }</code>
+            <div class="card" id="security-best-practices">
+                <div class="card-header">🛡️ Security Best Practices</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-            <div class="cmd-row">
-                <div class="cmd-name">POST /api/v1/users Error Response (422)</div>
-                <div class="cmd-desc">
-                    <code>{ "error": { "code": "VALIDATION_ERROR", "message": "Validation failed", "details": [{ "field": "email", "message": "Invalid email format" }] } }</code>
+            <div class="card" id="performance-best-practices">
+                <div class="card-header">⚡ Performance Best Practices</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="documentation-best-practices">
+                <div class="card-header">📚 Documentation Best Practices</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="api-design-checklist">
+                <div class="card-header">🎨 API Design Checklist</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header">🛡️ Security Best Practices</div>
-            <div class="cmd-row">
-                <div class="cmd-name">Always use HTTPS</div>
-                <div class="cmd-desc">Encrypt all API traffic with TLS/SSL</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Implement authentication</div>
-                <div class="cmd-desc">Require authentication for all non-public endpoints</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Use authorization</div>
-                <div class="cmd-desc">Verify user permissions for each resource access</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Validate all input</div>
-                <div class="cmd-desc">Sanitize and validate request data to prevent injection attacks</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Implement rate limiting</div>
-                <div class="cmd-desc">Prevent abuse and DDoS attacks</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Use CORS properly</div>
-                <div class="cmd-desc">Configure Access-Control-Allow-Origin carefully</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Don't expose sensitive data</div>
-                <div class="cmd-desc">Never return passwords, tokens, or internal IDs unnecessarily</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Log security events</div>
-                <div class="cmd-desc">Track authentication failures, authorization denials</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Use security headers</div>
-                <div class="cmd-desc">Implement HSTS, CSP, X-Content-Type-Options</div>
-            </div>
-            <div class="warning">
-                ⚠️ <strong>Critical:</strong> Never trust client input. Always validate and sanitize on the server side.
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">⚡ Performance Best Practices</div>
-            <div class="cmd-row">
-                <div class="cmd-name">Implement caching</div>
-                <div class="cmd-desc">Use Cache-Control, ETag, and conditional requests</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Enable compression</div>
-                <div class="cmd-desc">Use gzip or brotli for response compression</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Paginate large collections</div>
-                <div class="cmd-desc">Never return unbounded lists</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Use field selection</div>
-                <div class="cmd-desc">Allow clients to request only needed fields</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Implement async operations</div>
-                <div class="cmd-desc">Return 202 Accepted for long-running tasks with status endpoint</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Use connection pooling</div>
-                <div class="cmd-desc">Reuse database connections efficiently</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Optimize database queries</div>
-                <div class="cmd-desc">Use indexes, avoid N+1 queries, implement eager loading</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Monitor and log</div>
-                <div class="cmd-desc">Track response times, error rates, and usage patterns</div>
-            </div>
-            <div class="tip">
-                💡 <strong>Performance tip:</strong> Use ETags for conditional requests to reduce bandwidth and server load.
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">📚 Documentation Best Practices</div>
-            <div class="cmd-row">
-                <div class="cmd-name">Use OpenAPI/Swagger</div>
-                <div class="cmd-desc">Document API with OpenAPI 3.0 specification</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Provide examples</div>
-                <div class="cmd-desc">Include request/response examples for every endpoint</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Document error codes</div>
-                <div class="cmd-desc">List all possible error codes and their meanings</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Include authentication guide</div>
-                <div class="cmd-desc">Explain how to obtain and use API credentials</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Provide SDKs/client libraries</div>
-                <div class="cmd-desc">Offer libraries for popular languages</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Keep changelog</div>
-                <div class="cmd-desc">Document all API changes and deprecations</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">Interactive documentation</div>
-                <div class="cmd-desc">Allow developers to test endpoints directly from docs</div>
-            </div>
-            <div class="note">
-                <strong>Good documentation:</strong> Clear, complete, and up-to-date documentation is crucial for API adoption.
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">🎨 API Design Checklist</div>
-            <div class="cmd-row">
-                <div class="cmd-name">✓ Use nouns for resources, not verbs</div>
-                <div class="cmd-desc">/users not /getUsers</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">✓ Use HTTP methods correctly</div>
-                <div class="cmd-desc">GET for read, POST for create, PUT/PATCH for update, DELETE for remove</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">✓ Return appropriate status codes</div>
-                <div class="cmd-desc">2xx for success, 4xx for client errors, 5xx for server errors</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">✓ Version your API</div>
-                <div class="cmd-desc">Use /v1/ prefix or header versioning</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">✓ Implement pagination</div>
-                <div class="cmd-desc">Never return unbounded collections</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">✓ Support filtering and sorting</div>
-                <div class="cmd-desc">Use query parameters for collection operations</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">✓ Use consistent naming</div>
-                <div class="cmd-desc">Choose camelCase or snake_case and stick with it</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">✓ Provide meaningful error messages</div>
-                <div class="cmd-desc">Include error codes, messages, and details</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">✓ Implement authentication and authorization</div>
-                <div class="cmd-desc">Secure all non-public endpoints</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">✓ Use HTTPS everywhere</div>
-                <div class="cmd-desc">Encrypt all API traffic</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">✓ Implement rate limiting</div>
-                <div class="cmd-desc">Prevent abuse with appropriate limits</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">✓ Document thoroughly</div>
-                <div class="cmd-desc">Provide clear, complete API documentation</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">✓ Test extensively</div>
-                <div class="cmd-desc">Unit tests, integration tests, and contract tests</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">✓ Monitor and log</div>
-                <div class="cmd-desc">Track usage, errors, and performance</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">✓ Plan for deprecation</div>
-                <div class="cmd-desc">Communicate changes well in advance</div>
-            </div>
-        </div>
-
-        <div class="footer">
-            <p>REST API Design Best Practices & Patterns</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">🔌 Build scalable, maintainable, and developer-friendly APIs</p>
-        </div>
+        <footer>
+            <p>&copy; 2025 Cheatsheets Collection. Open source and community driven.</p>
+        </footer>
     </div>
 </body>
 </html>

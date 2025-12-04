@@ -3,635 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Kubernetes commands and concepts for container orchestration and cluster management.">
     <title>Kubernetes kubectl Cheatsheet</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: linear-gradient(135deg, #326ce5 0%, #1a4d9e 100%);
-            color: #e0e6ed;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 2rem;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            font-size: 3rem;
-            color: white;
-            margin-bottom: 0.5rem;
-            text-align: center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .subtitle {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.95);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            color: #1a202c;
-        }
-
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-        }
-
-        .card-header {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #326ce5;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #326ce5;
-        }
-
-        .cmd-row {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.5rem;
-            margin-bottom: 0.75rem;
-            padding: 0.5rem;
-            background: rgba(50, 108, 229, 0.05);
-            border-radius: 6px;
-            transition: background 0.2s ease;
-        }
-
-        .cmd-row:hover {
-            background: rgba(50, 108, 229, 0.1);
-        }
-
-        .cmd-name {
-            color: #326ce5;
-            font-weight: 600;
-            font-family: 'Courier New', monospace;
-            font-size: 0.95rem;
-        }
-
-        .cmd-desc {
-            color: #4a5568;
-            padding-left: 1rem;
-            font-size: 0.9rem;
-        }
-
-        code {
-            background: rgba(50, 108, 229, 0.1);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            color: #326ce5;
-            font-size: 0.9em;
-        }
-
-        .code-block {
-            background: rgba(26, 32, 44, 0.95);
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-            font-family: 'Courier New', monospace;
-            color: #e0e6ed;
-            overflow-x: auto;
-        }
-
-        .code-line {
-            margin: 0.3rem 0;
-        }
-
-        .keyword {
-            color: #326ce5;
-            font-weight: 600;
-        }
-
-        .comment {
-            color: #68d391;
-        }
-
-        .note {
-            background: rgba(59, 130, 246, 0.1);
-            border-left: 4px solid #3b82f6;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-            color: #1a202c;
-        }
-
-        .tip {
-            background: rgba(16, 185, 129, 0.1);
-            border-left: 4px solid #10b981;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-            color: #1a202c;
-        }
-
-        .warning {
-            background: rgba(239, 68, 68, 0.1);
-            border-left: 4px solid #ef4444;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-            color: #1a202c;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../script.js" defer></script>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-brand">
+                <i class="ph ph-books"></i> Cheatsheets
+            </a>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="btn-icon" aria-label="Toggle theme">
+                    <i class="ph ph-moon"></i>
+                </button>
+                <button id="download-btn" class="btn-icon" aria-label="Download PDF">
+                    <i class="ph ph-download-simple"></i>
+                </button>
+                <a href="https://github.com/keyurgolani/Cheatsheets" class="btn-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                    <i class="ph ph-github-logo"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
-        <h1>☸️ Kubernetes kubectl</h1>
-        <p class="subtitle">Essential kubectl commands for Kubernetes cluster management</p>
+        <header class="cheatsheet-header">
+            <h1>☸️ Kubernetes kubectl</h1>
+            <p>Essential kubectl commands for Kubernetes cluster management</p>
+            <div class="search-container" style="margin-top: 1.5rem; margin-bottom: 0;">
+                <span class="search-icon"><i class="ph ph-magnifying-glass"></i></span>
+                <input type="text" class="search-input" id="cheatsheet-search" placeholder="Filter this cheatsheet..." aria-label="Filter cheatsheet">
+            </div>
+        </header>
 
-        <div class="grid">
-            <div class="card">
+        <div class="masonry-grid" id="cheatsheet-grid">
+            
+            <div class="card" id="getting-started">
                 <div class="card-header">🚀 Getting Started</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl version</div>
-                    <div class="cmd-desc">Show client and server version</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl cluster-info</div>
-                    <div class="cmd-desc">Display cluster information</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl config view</div>
-                    <div class="cmd-desc">Show kubeconfig settings</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl config get-contexts</div>
-                    <div class="cmd-desc">List available contexts</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl config use-context [name]</div>
-                    <div class="cmd-desc">Switch to different context</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl config current-context</div>
-                    <div class="cmd-desc">Show current context</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl get nodes</div>
-                    <div class="cmd-desc">List all nodes in cluster</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="pod-management">
                 <div class="card-header">📦 Pod Management</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl get pods</div>
-                    <div class="cmd-desc">List pods in current namespace</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl get pods -A</div>
-                    <div class="cmd-desc">List pods in all namespaces</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl get pods -o wide</div>
-                    <div class="cmd-desc">List pods with more details</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl describe pod [name]</div>
-                    <div class="cmd-desc">Show detailed pod information</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl logs [pod]</div>
-                    <div class="cmd-desc">View pod logs</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl logs -f [pod]</div>
-                    <div class="cmd-desc">Follow pod logs</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl logs [pod] -c [container]</div>
-                    <div class="cmd-desc">View logs from specific container</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl delete pod [name]</div>
-                    <div class="cmd-desc">Delete a pod</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="resource-creation">
                 <div class="card-header">🎯 Resource Creation</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl create -f [file.yaml]</div>
-                    <div class="cmd-desc">Create resource from file</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl apply -f [file.yaml]</div>
-                    <div class="cmd-desc">Apply configuration from file</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl apply -f [directory]/</div>
-                    <div class="cmd-desc">Apply all files in directory</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl create deployment [name] --image=[image]</div>
-                    <div class="cmd-desc">Create deployment</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl run [name] --image=[image]</div>
-                    <div class="cmd-desc">Run pod with image</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl expose deployment [name] --port=80</div>
-                    <div class="cmd-desc">Expose deployment as service</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl delete -f [file.yaml]</div>
-                    <div class="cmd-desc">Delete resources from file</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="deployments">
                 <div class="card-header">🔄 Deployments</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl get deployments</div>
-                    <div class="cmd-desc">List deployments</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl describe deployment [name]</div>
-                    <div class="cmd-desc">Show deployment details</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl scale deployment [name] --replicas=3</div>
-                    <div class="cmd-desc">Scale deployment</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl set image deployment/[name] [container]=[image]</div>
-                    <div class="cmd-desc">Update container image</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl rollout status deployment/[name]</div>
-                    <div class="cmd-desc">Check rollout status</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl rollout history deployment/[name]</div>
-                    <div class="cmd-desc">View rollout history</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl rollout undo deployment/[name]</div>
-                    <div class="cmd-desc">Rollback to previous version</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl delete deployment [name]</div>
-                    <div class="cmd-desc">Delete deployment</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="services">
                 <div class="card-header">🌐 Services</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl get services</div>
-                    <div class="cmd-desc">List services</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl get svc</div>
-                    <div class="cmd-desc">List services (short)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl describe service [name]</div>
-                    <div class="cmd-desc">Show service details</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl expose pod [name] --port=80 --type=NodePort</div>
-                    <div class="cmd-desc">Expose pod as NodePort service</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl expose deployment [name] --type=LoadBalancer</div>
-                    <div class="cmd-desc">Expose as LoadBalancer</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl delete service [name]</div>
-                    <div class="cmd-desc">Delete service</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="namespaces">
                 <div class="card-header">📛 Namespaces</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl get namespaces</div>
-                    <div class="cmd-desc">List all namespaces</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl get ns</div>
-                    <div class="cmd-desc">List namespaces (short)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl create namespace [name]</div>
-                    <div class="cmd-desc">Create namespace</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl get pods -n [namespace]</div>
-                    <div class="cmd-desc">List pods in namespace</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl config set-context --current --namespace=[name]</div>
-                    <div class="cmd-desc">Set default namespace</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl delete namespace [name]</div>
-                    <div class="cmd-desc">Delete namespace</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="debugging-inspection">
                 <div class="card-header">🔍 Debugging & Inspection</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl exec -it [pod] -- /bin/bash</div>
-                    <div class="cmd-desc">Open shell in pod</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl exec [pod] -- [command]</div>
-                    <div class="cmd-desc">Execute command in pod</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl top nodes</div>
-                    <div class="cmd-desc">Show node resource usage</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl top pods</div>
-                    <div class="cmd-desc">Show pod resource usage</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl get events</div>
-                    <div class="cmd-desc">List cluster events</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl get events --sort-by=.metadata.creationTimestamp</div>
-                    <div class="cmd-desc">List events sorted by time</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl port-forward [pod] 8080:80</div>
-                    <div class="cmd-desc">Forward local port to pod</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="configmaps-secrets">
                 <div class="card-header">⚙️ ConfigMaps & Secrets</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl get configmaps</div>
-                    <div class="cmd-desc">List ConfigMaps</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl create configmap [name] --from-file=[file]</div>
-                    <div class="cmd-desc">Create ConfigMap from file</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl create configmap [name] --from-literal=key=value</div>
-                    <div class="cmd-desc">Create ConfigMap from literal</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl get secrets</div>
-                    <div class="cmd-desc">List secrets</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl create secret generic [name] --from-literal=key=value</div>
-                    <div class="cmd-desc">Create secret from literal</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl describe secret [name]</div>
-                    <div class="cmd-desc">Show secret details</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="persistent-volumes">
                 <div class="card-header">💾 Persistent Volumes</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl get pv</div>
-                    <div class="cmd-desc">List persistent volumes</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl get pvc</div>
-                    <div class="cmd-desc">List persistent volume claims</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl describe pv [name]</div>
-                    <div class="cmd-desc">Show PV details</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl describe pvc [name]</div>
-                    <div class="cmd-desc">Show PVC details</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl delete pvc [name]</div>
-                    <div class="cmd-desc">Delete PVC</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="resource-queries">
                 <div class="card-header">📊 Resource Queries</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl get all</div>
-                    <div class="cmd-desc">List all resources</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl get all -A</div>
-                    <div class="cmd-desc">List all resources in all namespaces</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl get [resource] -o yaml</div>
-                    <div class="cmd-desc">Output resource as YAML</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl get [resource] -o json</div>
-                    <div class="cmd-desc">Output resource as JSON</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl get pods --selector=app=myapp</div>
-                    <div class="cmd-desc">Filter by label selector</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl get pods --field-selector=status.phase=Running</div>
-                    <div class="cmd-desc">Filter by field selector</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="labels-annotations">
                 <div class="card-header">🏷️ Labels & Annotations</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl label pods [name] env=prod</div>
-                    <div class="cmd-desc">Add label to pod</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl label pods [name] env-</div>
-                    <div class="cmd-desc">Remove label from pod</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl annotate pods [name] description="my app"</div>
-                    <div class="cmd-desc">Add annotation to pod</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl get pods -l env=prod</div>
-                    <div class="cmd-desc">Get pods with label</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl get pods --show-labels</div>
-                    <div class="cmd-desc">Show all pod labels</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="editing-resources">
                 <div class="card-header">📝 Editing Resources</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl edit [resource] [name]</div>
-                    <div class="cmd-desc">Edit resource in editor</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl patch [resource] [name] -p '[json]'</div>
-                    <div class="cmd-desc">Patch resource with JSON</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl replace -f [file.yaml]</div>
-                    <div class="cmd-desc">Replace resource from file</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kubectl replace --force -f [file.yaml]</div>
-                    <div class="cmd-desc">Force replace (delete and recreate)</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">📄 Example Pod YAML</div>
-            <div class="code-block">
-                <div class="code-line"><span class="keyword">apiVersion:</span> v1</div>
-                <div class="code-line"><span class="keyword">kind:</span> Pod</div>
-                <div class="code-line"><span class="keyword">metadata:</span></div>
-                <div class="code-line">  <span class="keyword">name:</span> nginx-pod</div>
-                <div class="code-line">  <span class="keyword">labels:</span></div>
-                <div class="code-line">    <span class="keyword">app:</span> nginx</div>
-                <div class="code-line">    <span class="keyword">env:</span> production</div>
-                <div class="code-line"><span class="keyword">spec:</span></div>
-                <div class="code-line">  <span class="keyword">containers:</span></div>
-                <div class="code-line">  - <span class="keyword">name:</span> nginx</div>
-                <div class="code-line">    <span class="keyword">image:</span> nginx:1.21</div>
-                <div class="code-line">    <span class="keyword">ports:</span></div>
-                <div class="code-line">    - <span class="keyword">containerPort:</span> 80</div>
-                <div class="code-line">    <span class="keyword">env:</span></div>
-                <div class="code-line">    - <span class="keyword">name:</span> ENV_VAR</div>
-                <div class="code-line">      <span class="keyword">value:</span> "production"</div>
-                <div class="code-line">    <span class="keyword">resources:</span></div>
-                <div class="code-line">      <span class="keyword">requests:</span></div>
-                <div class="code-line">        <span class="keyword">memory:</span> "64Mi"</div>
-                <div class="code-line">        <span class="keyword">cpu:</span> "250m"</div>
-                <div class="code-line">      <span class="keyword">limits:</span></div>
-                <div class="code-line">        <span class="keyword">memory:</span> "128Mi"</div>
-                <div class="code-line">        <span class="keyword">cpu:</span> "500m"</div>
+            <div class="card" id="example-pod-yaml">
+                <div class="card-header">📄 Example Pod YAML</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="keyword">apiVersion:</span> v1</div><div class="code-line"><span class="keyword">kind:</span> Pod</div><div class="code-line"><span class="keyword">metadata:</span></div><div class="code-line"> <span class="keyword">name:</span> nginx-pod</div><div class="code-line"> <span class="keyword">labels:</span></div><div class="code-line"> <span class="keyword">app:</span> nginx</div><div class="code-line"> <span class="keyword">env:</span> production</div><div class="code-line"><span class="keyword">spec:</span></div><div class="code-line"> <span class="keyword">containers:</span></div><div class="code-line">  - <span class="keyword">name:</span> nginx</div><div class="code-line"> <span class="keyword">image:</span> nginx:1.21</div><div class="code-line"> <span class="keyword">ports:</span></div><div class="code-line">    - <span class="keyword">containerPort:</span> 80</div><div class="code-line"> <span class="keyword">env:</span></div><div class="code-line">    - <span class="keyword">name:</span> ENV_VAR</div><div class="code-line"> <span class="keyword">value:</span> "production"</div><div class="code-line"> <span class="keyword">resources:</span></div><div class="code-line"> <span class="keyword">requests:</span></div><div class="code-line"> <span class="keyword">memory:</span> "64Mi"</div><div class="code-line"> <span class="keyword">cpu:</span> "250m"</div><div class="code-line"> <span class="keyword">limits:</span></div><div class="code-line"> <span class="keyword">memory:</span> "128Mi"</div><div class="code-line"> <span class="keyword">cpu:</span> "500m"</div>
+                </div>
+            </div>
+            <div class="card" id="example-deployment-yaml">
+                <div class="card-header">🚀 Example Deployment YAML</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="keyword">apiVersion:</span> apps/v1</div><div class="code-line"><span class="keyword">kind:</span> Deployment</div><div class="code-line"><span class="keyword">metadata:</span></div><div class="code-line"> <span class="keyword">name:</span> nginx-deployment</div><div class="code-line"><span class="keyword">spec:</span></div><div class="code-line"> <span class="keyword">replicas:</span> 3</div><div class="code-line"> <span class="keyword">selector:</span></div><div class="code-line"> <span class="keyword">matchLabels:</span></div><div class="code-line"> <span class="keyword">app:</span> nginx</div><div class="code-line"> <span class="keyword">template:</span></div><div class="code-line"> <span class="keyword">metadata:</span></div><div class="code-line"> <span class="keyword">labels:</span></div><div class="code-line"> <span class="keyword">app:</span> nginx</div><div class="code-line"> <span class="keyword">spec:</span></div><div class="code-line"> <span class="keyword">containers:</span></div><div class="code-line">      - <span class="keyword">name:</span> nginx</div><div class="code-line"> <span class="keyword">image:</span> nginx:1.21</div><div class="code-line"> <span class="keyword">ports:</span></div><div class="code-line">        - <span class="keyword">containerPort:</span> 80</div>
+                </div>
+            </div>
+            <div class="card" id="example-service-yaml">
+                <div class="card-header">🌐 Example Service YAML</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="keyword">apiVersion:</span> v1</div><div class="code-line"><span class="keyword">kind:</span> Service</div><div class="code-line"><span class="keyword">metadata:</span></div><div class="code-line"> <span class="keyword">name:</span> nginx-service</div><div class="code-line"><span class="keyword">spec:</span></div><div class="code-line"> <span class="keyword">type:</span> LoadBalancer</div><div class="code-line"> <span class="keyword">selector:</span></div><div class="code-line"> <span class="keyword">app:</span> nginx</div><div class="code-line"> <span class="keyword">ports:</span></div><div class="code-line">  - <span class="keyword">protocol:</span> TCP</div><div class="code-line"> <span class="keyword">port:</span> 80</div><div class="code-line"> <span class="keyword">targetPort:</span> 80</div>
+                </div>
+            </div>
+            <div class="card" id="useful-tips">
+                <div class="card-header">💡 Useful Tips</div>
+                <div class="code-block">
+                    
+                </div>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header">🚀 Example Deployment YAML</div>
-            <div class="code-block">
-                <div class="code-line"><span class="keyword">apiVersion:</span> apps/v1</div>
-                <div class="code-line"><span class="keyword">kind:</span> Deployment</div>
-                <div class="code-line"><span class="keyword">metadata:</span></div>
-                <div class="code-line">  <span class="keyword">name:</span> nginx-deployment</div>
-                <div class="code-line"><span class="keyword">spec:</span></div>
-                <div class="code-line">  <span class="keyword">replicas:</span> 3</div>
-                <div class="code-line">  <span class="keyword">selector:</span></div>
-                <div class="code-line">    <span class="keyword">matchLabels:</span></div>
-                <div class="code-line">      <span class="keyword">app:</span> nginx</div>
-                <div class="code-line">  <span class="keyword">template:</span></div>
-                <div class="code-line">    <span class="keyword">metadata:</span></div>
-                <div class="code-line">      <span class="keyword">labels:</span></div>
-                <div class="code-line">        <span class="keyword">app:</span> nginx</div>
-                <div class="code-line">    <span class="keyword">spec:</span></div>
-                <div class="code-line">      <span class="keyword">containers:</span></div>
-                <div class="code-line">      - <span class="keyword">name:</span> nginx</div>
-                <div class="code-line">        <span class="keyword">image:</span> nginx:1.21</div>
-                <div class="code-line">        <span class="keyword">ports:</span></div>
-                <div class="code-line">        - <span class="keyword">containerPort:</span> 80</div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">🌐 Example Service YAML</div>
-            <div class="code-block">
-                <div class="code-line"><span class="keyword">apiVersion:</span> v1</div>
-                <div class="code-line"><span class="keyword">kind:</span> Service</div>
-                <div class="code-line"><span class="keyword">metadata:</span></div>
-                <div class="code-line">  <span class="keyword">name:</span> nginx-service</div>
-                <div class="code-line"><span class="keyword">spec:</span></div>
-                <div class="code-line">  <span class="keyword">type:</span> LoadBalancer</div>
-                <div class="code-line">  <span class="keyword">selector:</span></div>
-                <div class="code-line">    <span class="keyword">app:</span> nginx</div>
-                <div class="code-line">  <span class="keyword">ports:</span></div>
-                <div class="code-line">  - <span class="keyword">protocol:</span> TCP</div>
-                <div class="code-line">    <span class="keyword">port:</span> 80</div>
-                <div class="code-line">    <span class="keyword">targetPort:</span> 80</div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">💡 Useful Tips</div>
-            <div class="tip">
-                <strong>Aliases:</strong> Save time with kubectl aliases<br>
-                • <code>alias k=kubectl</code><br>
-                • <code>alias kgp='kubectl get pods'</code><br>
-                • <code>alias kgs='kubectl get services'</code><br>
-                • <code>alias kgd='kubectl get deployments'</code>
-            </div>
-            <div class="tip" style="margin-top: 0.75rem;">
-                <strong>Autocomplete:</strong> Enable kubectl autocomplete<br>
-                • Bash: <code>source &lt;(kubectl completion bash)</code><br>
-                • Zsh: <code>source &lt;(kubectl completion zsh)</code>
-            </div>
-            <div class="note" style="margin-top: 0.75rem;">
-                <strong>Context Switching:</strong> Use tools like <code>kubectx</code> and <code>kubens</code> for easier context and namespace switching
-            </div>
-            <div class="warning" style="margin-top: 0.75rem;">
-                ⚠️ <strong>Warning:</strong> Always verify your current context before running destructive commands like <code>delete</code>
-            </div>
-        </div>
-
-        <div class="footer">
-            <p>Essential Kubernetes kubectl Commands Reference</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">☸️ Master your cluster management!</p>
-        </div>
+        <footer>
+            <p>&copy; 2025 Cheatsheets Collection. Open source and community driven.</p>
+        </footer>
     </div>
 </body>
 </html>

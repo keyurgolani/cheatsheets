@@ -3,743 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="DNS (Domain Name System) reference with record types, commands, and troubleshooting.">
     <title>DNS Cheatsheet</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #e0e6ed;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 2rem;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            font-size: 3rem;
-            background: linear-gradient(135deg, #06b6d4 0%, #22d3ee 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #8b95a5;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .card {
-            background: rgba(30, 41, 59, 0.6);
-            border: 1px solid rgba(100, 116, 139, 0.3);
-            border-radius: 12px;
-            padding: 1.5rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: rgba(6, 182, 212, 0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(6, 182, 212, 0.15);
-        }
-
-        .card-header {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #06b6d4;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid rgba(6, 182, 212, 0.3);
-        }
-
-        .cmd-row {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.5rem;
-            margin-bottom: 0.75rem;
-            padding: 0.5rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 6px;
-            transition: background 0.2s ease;
-        }
-
-        .cmd-row:hover {
-            background: rgba(6, 182, 212, 0.1);
-        }
-
-        .cmd-name {
-            color: #22d3ee;
-            font-weight: 600;
-            font-family: 'Courier New', monospace;
-            font-size: 0.95rem;
-        }
-
-        .cmd-desc {
-            color: #cbd5e1;
-            padding-left: 1rem;
-            font-size: 0.9rem;
-        }
-
-        code {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            color: #a5d6ff;
-            font-size: 0.9em;
-        }
-
-        .note {
-            background: rgba(59, 130, 246, 0.1);
-            border-left: 4px solid #3b82f6;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .tip {
-            background: rgba(16, 185, 129, 0.1);
-            border-left: 4px solid #10b981;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .warning {
-            background: rgba(239, 68, 68, 0.1);
-            border-left: 4px solid #ef4444;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .record-box {
-            background: rgba(6, 182, 212, 0.1);
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin: 0.5rem 0;
-            border-left: 4px solid #06b6d4;
-        }
-
-        .record-title {
-            color: #22d3ee;
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-        }
-
-        .record-desc {
-            color: #cbd5e1;
-            font-size: 0.9rem;
-        }
-
-        .workflow-box {
-            background: rgba(6, 182, 212, 0.05);
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-            border: 1px solid rgba(6, 182, 212, 0.2);
-        }
-
-        .workflow-title {
-            color: #22d3ee;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            font-size: 1.05rem;
-        }
-
-        .workflow-step {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-            color: #cbd5e1;
-        }
-
-        .workflow-step:before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: #06b6d4;
-            font-weight: bold;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(100, 116, 139, 0.3);
-            color: #8b95a5;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../script.js" defer></script>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-brand">
+                <i class="ph ph-books"></i> Cheatsheets
+            </a>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="btn-icon" aria-label="Toggle theme">
+                    <i class="ph ph-moon"></i>
+                </button>
+                <button id="download-btn" class="btn-icon" aria-label="Download PDF">
+                    <i class="ph ph-download-simple"></i>
+                </button>
+                <a href="https://github.com/keyurgolani/Cheatsheets" class="btn-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                    <i class="ph ph-github-logo"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
-        <h1>🌐 DNS (Domain Name System)</h1>
-        <p class="subtitle">Record types, resolution process, and troubleshooting commands</p>
+        <header class="cheatsheet-header">
+            <h1>🌐 DNS (Domain Name System)</h1>
+            <p>Record types, resolution process, and troubleshooting commands</p>
+            <div class="search-container" style="margin-top: 1.5rem; margin-bottom: 0;">
+                <span class="search-icon"><i class="ph ph-magnifying-glass"></i></span>
+                <input type="text" class="search-input" id="cheatsheet-search" placeholder="Filter this cheatsheet..." aria-label="Filter cheatsheet">
+            </div>
+        </header>
 
-        <div class="grid">
-            <div class="card">
+        <div class="masonry-grid" id="cheatsheet-grid">
+            
+            <div class="card" id="common-dns-record-types">
                 <div class="card-header">📋 Common DNS Record Types</div>
-                <div class="record-box">
-                    <div class="record-title">A (Address Record)</div>
-                    <div class="record-desc">Maps domain to IPv4 address<br>
-                    Example: <code>example.com. IN A 192.0.2.1</code></div>
-                </div>
-                <div class="record-box">
-                    <div class="record-title">AAAA (IPv6 Address Record)</div>
-                    <div class="record-desc">Maps domain to IPv6 address<br>
-                    Example: <code>example.com. IN AAAA 2001:db8::1</code></div>
-                </div>
-                <div class="record-box">
-                    <div class="record-title">CNAME (Canonical Name)</div>
-                    <div class="record-desc">Alias from one domain to another<br>
-                    Example: <code>www.example.com. IN CNAME example.com.</code></div>
-                </div>
-                <div class="record-box">
-                    <div class="record-title">MX (Mail Exchange)</div>
-                    <div class="record-desc">Specifies mail server for domain<br>
-                    Example: <code>example.com. IN MX 10 mail.example.com.</code></div>
-                </div>
-                <div class="record-box">
-                    <div class="record-title">TXT (Text Record)</div>
-                    <div class="record-desc">Arbitrary text data (SPF, DKIM, verification)<br>
-                    Example: <code>example.com. IN TXT "v=spf1 include:_spf.google.com ~all"</code></div>
-                </div>
-                <div class="record-box">
-                    <div class="record-title">NS (Name Server)</div>
-                    <div class="record-desc">Delegates subdomain to nameservers<br>
-                    Example: <code>example.com. IN NS ns1.example.com.</code></div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="additional-record-types">
                 <div class="card-header">📝 Additional Record Types</div>
-                <div class="record-box">
-                    <div class="record-title">PTR (Pointer Record)</div>
-                    <div class="record-desc">Reverse DNS lookup (IP to domain)<br>
-                    Example: <code>1.2.0.192.in-addr.arpa. IN PTR example.com.</code></div>
-                </div>
-                <div class="record-box">
-                    <div class="record-title">SOA (Start of Authority)</div>
-                    <div class="record-desc">Zone authority and configuration info<br>
-                    Contains: primary NS, admin email, serial, refresh, retry, expire, TTL</div>
-                </div>
-                <div class="record-box">
-                    <div class="record-title">SRV (Service Record)</div>
-                    <div class="record-desc">Specifies location of services<br>
-                    Example: <code>_sip._tcp.example.com. IN SRV 10 60 5060 sipserver.example.com.</code></div>
-                </div>
-                <div class="record-box">
-                    <div class="record-title">CAA (Certification Authority Authorization)</div>
-                    <div class="record-desc">Specifies which CAs can issue certificates<br>
-                    Example: <code>example.com. IN CAA 0 issue "letsencrypt.org"</code></div>
-                </div>
-                <div class="record-box">
-                    <div class="record-title">DNSKEY / DS (DNSSEC)</div>
-                    <div class="record-desc">Public keys for DNSSEC validation<br>
-                    Used for secure DNS authentication</div>
-                </div>
-                <div class="tip">
-                    💡 <strong>TTL (Time To Live):</strong> Specifies how long a record can be cached (in seconds)
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="dig-command-dns-lookup">
                 <div class="card-header">🔍 dig Command (DNS Lookup)</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">dig example.com</div>
-                    <div class="cmd-desc">Basic DNS query (A record)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">dig example.com A</div>
-                    <div class="cmd-desc">Query specific record type (A)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">dig example.com AAAA</div>
-                    <div class="cmd-desc">Query IPv6 address</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">dig example.com MX</div>
-                    <div class="cmd-desc">Query mail servers</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">dig example.com NS</div>
-                    <div class="cmd-desc">Query nameservers</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">dig example.com TXT</div>
-                    <div class="cmd-desc">Query text records</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">dig example.com ANY</div>
-                    <div class="cmd-desc">Query all available records</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">dig @8.8.8.8 example.com</div>
-                    <div class="cmd-desc">Query specific DNS server</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">dig +short example.com</div>
-                    <div class="cmd-desc">Show only the answer</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">dig +trace example.com</div>
-                    <div class="cmd-desc">Trace DNS resolution path</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">dig -x 192.0.2.1</div>
-                    <div class="cmd-desc">Reverse DNS lookup (PTR)</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="nslookup-command">
                 <div class="card-header">🔎 nslookup Command</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">nslookup example.com</div>
-                    <div class="cmd-desc">Basic DNS query</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">nslookup example.com 8.8.8.8</div>
-                    <div class="cmd-desc">Query specific DNS server</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">nslookup -type=MX example.com</div>
-                    <div class="cmd-desc">Query mail servers</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">nslookup -type=NS example.com</div>
-                    <div class="cmd-desc">Query nameservers</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">nslookup -type=TXT example.com</div>
-                    <div class="cmd-desc">Query text records</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">nslookup -type=SOA example.com</div>
-                    <div class="cmd-desc">Query start of authority</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">nslookup -type=PTR 1.2.0.192.in-addr.arpa</div>
-                    <div class="cmd-desc">Reverse DNS lookup</div>
-                </div>
-                <div class="note">
-                    <strong>Note:</strong> nslookup is considered deprecated in favor of dig, but still widely used
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="host-command">
                 <div class="card-header">🖥️ host Command</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">host example.com</div>
-                    <div class="cmd-desc">Simple DNS lookup</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">host -t A example.com</div>
-                    <div class="cmd-desc">Query A record</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">host -t MX example.com</div>
-                    <div class="cmd-desc">Query mail servers</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">host -t NS example.com</div>
-                    <div class="cmd-desc">Query nameservers</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">host -a example.com</div>
-                    <div class="cmd-desc">Query all records (verbose)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">host 192.0.2.1</div>
-                    <div class="cmd-desc">Reverse DNS lookup</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="system-dns-commands">
                 <div class="card-header">⚙️ System DNS Commands</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">cat /etc/resolv.conf</div>
-                    <div class="cmd-desc">View system DNS servers (Linux/Mac)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ipconfig /displaydns</div>
-                    <div class="cmd-desc">Display DNS cache (Windows)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ipconfig /flushdns</div>
-                    <div class="cmd-desc">Clear DNS cache (Windows)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">sudo dscacheutil -flushcache</div>
-                    <div class="cmd-desc">Clear DNS cache (macOS)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">sudo systemd-resolve --flush-caches</div>
-                    <div class="cmd-desc">Clear DNS cache (Linux systemd)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">sudo systemd-resolve --statistics</div>
-                    <div class="cmd-desc">View DNS cache statistics (Linux)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">resolvectl status</div>
-                    <div class="cmd-desc">View DNS resolver status (Linux)</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="public-dns-servers">
                 <div class="card-header">🌍 Public DNS Servers</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">8.8.8.8 / 8.8.4.4</div>
-                    <div class="cmd-desc">Google Public DNS</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">1.1.1.1 / 1.0.0.1</div>
-                    <div class="cmd-desc">Cloudflare DNS (fast, privacy-focused)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">9.9.9.9 / 149.112.112.112</div>
-                    <div class="cmd-desc">Quad9 DNS (security-focused)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">208.67.222.222 / 208.67.220.220</div>
-                    <div class="cmd-desc">OpenDNS</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">64.6.64.6 / 64.6.65.6</div>
-                    <div class="cmd-desc">Verisign Public DNS</div>
-                </div>
-                <div class="tip">
-                    💡 <strong>Tip:</strong> Use multiple DNS servers for redundancy
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="dns-troubleshooting">
                 <div class="card-header">🔧 DNS Troubleshooting</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">dig +trace example.com</div>
-                    <div class="cmd-desc">Trace full DNS resolution path from root</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">dig @ns1.example.com example.com</div>
-                    <div class="cmd-desc">Query authoritative nameserver directly</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">dig +norecurse @8.8.8.8 example.com</div>
-                    <div class="cmd-desc">Non-recursive query (check cache only)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">dig +dnssec example.com</div>
-                    <div class="cmd-desc">Check DNSSEC validation</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">whois example.com</div>
-                    <div class="cmd-desc">Domain registration information</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">nmap --script dns-brute example.com</div>
-                    <div class="cmd-desc">DNS subdomain enumeration</div>
-                </div>
-                <div class="warning">
-                    ⚠️ <strong>Common Issues:</strong> Propagation delays (24-48h), incorrect TTL, misconfigured NS records
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="dns-record-syntax">
                 <div class="card-header">📊 DNS Record Syntax</div>
-                <div class="record-box">
-                    <div class="record-title">General Format</div>
-                    <div class="record-desc">
-                        <code>name TTL class type data</code><br><br>
-                        <strong>Example:</strong><br>
-                        <code>example.com. 3600 IN A 192.0.2.1</code>
-                    </div>
-                </div>
-                <div class="record-box">
-                    <div class="record-title">MX Record Format</div>
-                    <div class="record-desc">
-                        <code>domain TTL IN MX priority mailserver</code><br><br>
-                        <strong>Example:</strong><br>
-                        <code>example.com. 3600 IN MX 10 mail.example.com.</code><br>
-                        Lower priority number = higher priority
-                    </div>
-                </div>
-                <div class="record-box">
-                    <div class="record-title">SRV Record Format</div>
-                    <div class="record-desc">
-                        <code>_service._proto.name TTL IN SRV priority weight port target</code><br><br>
-                        <strong>Example:</strong><br>
-                        <code>_sip._tcp.example.com. 3600 IN SRV 10 60 5060 sipserver.example.com.</code>
-                    </div>
-                </div>
-                <div class="note">
-                    <strong>Class:</strong> Almost always "IN" (Internet). Other classes (CH, HS) are rarely used.
+                <div class="code-block">
+                    
                 </div>
             </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">🔄 DNS Resolution Process</div>
-            
-            <div class="workflow-box">
-                <div class="workflow-title">Recursive DNS Query Flow</div>
-                <div class="workflow-step">User types "example.com" in browser</div>
-                <div class="workflow-step">Browser checks its own DNS cache</div>
-                <div class="workflow-step">OS checks system DNS cache (/etc/hosts, local cache)</div>
-                <div class="workflow-step">Query sent to configured DNS resolver (ISP or public DNS)</div>
-                <div class="workflow-step">Resolver checks its cache</div>
-                <div class="workflow-step">If not cached, resolver queries root nameserver (.) for .com TLD</div>
-                <div class="workflow-step">Root server responds with .com TLD nameservers</div>
-                <div class="workflow-step">Resolver queries .com TLD nameserver for example.com</div>
-                <div class="workflow-step">TLD server responds with authoritative nameservers for example.com</div>
-                <div class="workflow-step">Resolver queries authoritative nameserver for example.com</div>
-                <div class="workflow-step">Authoritative server responds with IP address</div>
-                <div class="workflow-step">Resolver caches result and returns IP to client</div>
-                <div class="workflow-step">Browser connects to IP address</div>
-            </div>
-
-            <div class="note">
-                <strong>Caching Levels:</strong><br>
-                1. Browser cache (short TTL)<br>
-                2. OS cache (system resolver)<br>
-                3. Router cache (local network)<br>
-                4. ISP/Public DNS cache (configured resolver)<br>
-                Each level reduces query time significantly
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">🎯 DNS Query Types</div>
-            
-            <div class="record-box">
-                <div class="record-title">Recursive Query</div>
-                <div class="record-desc">
-                    Client asks resolver to find the answer completely<br>
-                    Resolver does all the work and returns final result<br>
-                    Most common type for end users
+            <div class="card" id="dns-resolution-process">
+                <div class="card-header">🔄 DNS Resolution Process</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="record-box">
-                <div class="record-title">Iterative Query</div>
-                <div class="record-desc">
-                    Server returns best answer it has or referral to another server<br>
-                    Client must follow referrals<br>
-                    Used between DNS servers
+            <div class="card" id="dns-query-types">
+                <div class="card-header">🎯 DNS Query Types</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="record-box">
-                <div class="record-title">Non-Recursive Query</div>
-                <div class="record-desc">
-                    Query for cached data only<br>
-                    Server returns cached answer or error<br>
-                    No additional lookups performed
+            <div class="card" id="dns-security-dnssec">
+                <div class="card-header">🔐 DNS Security (DNSSEC)</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="dns-best-practices">
+                <div class="card-header">💡 DNS Best Practices</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="common-dns-issues-solutions">
+                <div class="card-header">⚠️ Common DNS Issues & Solutions</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="dns-response-codes">
+                <div class="card-header">📚 DNS Response Codes</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header">🔐 DNS Security (DNSSEC)</div>
-            
-            <div class="record-box">
-                <div class="record-title">What is DNSSEC?</div>
-                <div class="record-desc">
-                    DNS Security Extensions add cryptographic signatures to DNS records<br>
-                    Prevents DNS spoofing and cache poisoning attacks<br>
-                    Validates that DNS responses are authentic
-                </div>
-            </div>
-
-            <div class="record-box">
-                <div class="record-title">DNSSEC Record Types</div>
-                <div class="record-desc">
-                    <strong>DNSKEY:</strong> Public key for zone<br>
-                    <strong>RRSIG:</strong> Signature for record set<br>
-                    <strong>DS:</strong> Delegation signer (links parent to child zone)<br>
-                    <strong>NSEC/NSEC3:</strong> Proof of non-existence
-                </div>
-            </div>
-
-            <div class="cmd-row">
-                <div class="cmd-name">dig +dnssec example.com</div>
-                <div class="cmd-desc">Check if DNSSEC is enabled</div>
-            </div>
-
-            <div class="cmd-row">
-                <div class="cmd-name">dig DNSKEY example.com</div>
-                <div class="cmd-desc">Query DNSSEC public keys</div>
-            </div>
-
-            <div class="tip">
-                💡 <strong>Best Practice:</strong> Enable DNSSEC for your domains to prevent DNS hijacking
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">💡 DNS Best Practices</div>
-            
-            <div class="record-box">
-                <div class="record-title">TTL Configuration</div>
-                <div class="record-desc">
-                    • Use longer TTL (3600-86400s) for stable records<br>
-                    • Use shorter TTL (300-600s) before planned changes<br>
-                    • Balance between performance and flexibility
-                </div>
-            </div>
-
-            <div class="record-box">
-                <div class="record-title">Redundancy</div>
-                <div class="record-desc">
-                    • Use multiple nameservers (minimum 2, recommended 3-4)<br>
-                    • Distribute nameservers geographically<br>
-                    • Use different providers for nameservers
-                </div>
-            </div>
-
-            <div class="record-box">
-                <div class="record-title">Security</div>
-                <div class="record-desc">
-                    • Enable DNSSEC for authentication<br>
-                    • Use CAA records to control certificate issuance<br>
-                    • Implement SPF, DKIM, DMARC for email security<br>
-                    • Regularly audit DNS records
-                </div>
-            </div>
-
-            <div class="record-box">
-                <div class="record-title">Performance</div>
-                <div class="record-desc">
-                    • Use Anycast for global distribution<br>
-                    • Implement DNS load balancing<br>
-                    • Monitor DNS query performance<br>
-                    • Use CDN with DNS integration
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">⚠️ Common DNS Issues & Solutions</div>
-            
-            <div class="record-box">
-                <div class="record-title">DNS Propagation Delays</div>
-                <div class="record-desc">
-                    <strong>Issue:</strong> Changes not visible immediately<br>
-                    <strong>Cause:</strong> TTL caching at various levels<br>
-                    <strong>Solution:</strong> Lower TTL before changes, wait for old TTL to expire
-                </div>
-            </div>
-
-            <div class="record-box">
-                <div class="record-title">NXDOMAIN (Domain Not Found)</div>
-                <div class="record-desc">
-                    <strong>Issue:</strong> Domain doesn't exist<br>
-                    <strong>Cause:</strong> Typo, expired domain, or misconfigured NS records<br>
-                    <strong>Solution:</strong> Verify domain spelling, check registration, verify NS records
-                </div>
-            </div>
-
-            <div class="record-box">
-                <div class="record-title">SERVFAIL (Server Failure)</div>
-                <div class="record-desc">
-                    <strong>Issue:</strong> DNS server error<br>
-                    <strong>Cause:</strong> Nameserver down, DNSSEC validation failure, misconfiguration<br>
-                    <strong>Solution:</strong> Check nameserver status, verify DNSSEC chain, review zone file
-                </div>
-            </div>
-
-            <div class="record-box">
-                <div class="record-title">Slow DNS Resolution</div>
-                <div class="record-desc">
-                    <strong>Issue:</strong> Queries taking too long<br>
-                    <strong>Cause:</strong> Distant nameservers, network issues, overloaded servers<br>
-                    <strong>Solution:</strong> Use faster DNS servers (1.1.1.1, 8.8.8.8), check network, add more nameservers
-                </div>
-            </div>
-
-            <div class="record-box">
-                <div class="record-title">Cached Incorrect Records</div>
-                <div class="record-desc">
-                    <strong>Issue:</strong> Old/wrong data being returned<br>
-                    <strong>Cause:</strong> Stale cache entries<br>
-                    <strong>Solution:</strong> Flush local DNS cache, wait for TTL expiration, query authoritative server directly
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">📚 DNS Response Codes</div>
-            
-            <div class="cmd-row">
-                <div class="cmd-name">NOERROR (0)</div>
-                <div class="cmd-desc">Successful query, answer returned</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">FORMERR (1)</div>
-                <div class="cmd-desc">Format error - query malformed</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">SERVFAIL (2)</div>
-                <div class="cmd-desc">Server failure - unable to process</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">NXDOMAIN (3)</div>
-                <div class="cmd-desc">Non-existent domain</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">NOTIMP (4)</div>
-                <div class="cmd-desc">Not implemented - query type not supported</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">REFUSED (5)</div>
-                <div class="cmd-desc">Query refused by server policy</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">YXDOMAIN (6)</div>
-                <div class="cmd-desc">Name exists when it should not</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">NOTAUTH (9)</div>
-                <div class="cmd-desc">Server not authoritative for zone</div>
-            </div>
-        </div>
-
-        <div class="footer">
-            <p>DNS (Domain Name System) Reference Guide</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">🌐 The phonebook of the internet - translating human-readable names to IP addresses</p>
-        </div>
+        <footer>
+            <p>&copy; 2025 Cheatsheets Collection. Open source and community driven.</p>
+        </footer>
     </div>
 </body>
 </html>

@@ -3,540 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Essential algorithms reference including sorting, searching, and fundamental computer science algorithms.">
     <title>Common Algorithms Cheatsheet</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #e0e6ed;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 2rem;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            font-size: 3rem;
-            background: linear-gradient(135deg, #48bb78 0%, #38b2ac 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #8b95a5;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .card {
-            background: rgba(30, 41, 59, 0.6);
-            border: 1px solid rgba(100, 116, 139, 0.3);
-            border-radius: 12px;
-            padding: 1.5rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: rgba(72, 187, 120, 0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(72, 187, 120, 0.15);
-        }
-
-        .card-header {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #48bb78;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid rgba(72, 187, 120, 0.3);
-        }
-
-        .algo-name {
-            color: #38b2ac;
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-top: 1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .algo-name:first-child {
-            margin-top: 0;
-        }
-
-        .complexity {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 0.5rem;
-            margin: 0.5rem 0;
-            padding: 0.5rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 6px;
-            font-size: 0.9rem;
-        }
-
-        .complexity-label {
-            color: #8b95a5;
-            font-weight: 500;
-        }
-
-        .complexity-value {
-            color: #cbd5e1;
-            font-family: 'Courier New', monospace;
-        }
-
-        .code-block {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 1rem;
-            border-radius: 6px;
-            margin: 0.75rem 0;
-            border-left: 3px solid #48bb78;
-        }
-
-        .code-line {
-            font-family: 'Courier New', monospace;
-            color: #a5d6ff;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin: 0.2rem 0;
-        }
-
-        .comment {
-            color: #48bb78;
-        }
-
-        .keyword {
-            color: #fbbf24;
-        }
-
-        .string {
-            color: #f472b6;
-        }
-
-        code {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            color: #a5d6ff;
-            font-size: 0.9em;
-        }
-
-        .note {
-            background: rgba(59, 130, 246, 0.1);
-            border-left: 4px solid #3b82f6;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .tip {
-            background: rgba(16, 185, 129, 0.1);
-            border-left: 4px solid #10b981;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .warning {
-            background: rgba(239, 68, 68, 0.1);
-            border-left: 4px solid #ef4444;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(100, 116, 139, 0.3);
-            color: #8b95a5;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../script.js" defer></script>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-brand">
+                <i class="ph ph-books"></i> Cheatsheets
+            </a>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="btn-icon" aria-label="Toggle theme">
+                    <i class="ph ph-moon"></i>
+                </button>
+                <button id="download-btn" class="btn-icon" aria-label="Download PDF">
+                    <i class="ph ph-download-simple"></i>
+                </button>
+                <a href="https://github.com/keyurgolani/Cheatsheets" class="btn-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                    <i class="ph ph-github-logo"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
-        <h1>⚡ Common Algorithms</h1>
-        <p class="subtitle">Essential sorting, searching, and traversal algorithms with complexity analysis</p>
+        <header class="cheatsheet-header">
+            <h1>Common Algorithms</h1>
+            <p>Essential sorting, searching, and traversal algorithms with complexity analysis</p>
+            <div class="search-container" style="margin-top: 1.5rem; margin-bottom: 0;">
+                <span class="search-icon"><i class="ph ph-magnifying-glass"></i></span>
+                <input type="text" class="search-input" id="cheatsheet-search" placeholder="Filter this cheatsheet..." aria-label="Filter cheatsheet">
+            </div>
+        </header>
 
-        <div class="grid">
-            <div class="card">
+        <div class="masonry-grid" id="cheatsheet-grid">
+            
+            <div class="card" id="quicksort">
                 <div class="card-header">🔄 Quicksort</div>
-                <div class="algo-name">Divide and Conquer Sorting</div>
-                
-                <div class="complexity">
-                    <div class="complexity-label">Best Time:</div>
-                    <div class="complexity-value">O(n log n)</div>
-                </div>
-                <div class="complexity">
-                    <div class="complexity-label">Average Time:</div>
-                    <div class="complexity-value">O(n log n)</div>
-                </div>
-                <div class="complexity">
-                    <div class="complexity-label">Worst Time:</div>
-                    <div class="complexity-value">O(n²)</div>
-                </div>
-                <div class="complexity">
-                    <div class="complexity-label">Space:</div>
-                    <div class="complexity-value">O(log n)</div>
-                </div>
-
                 <div class="code-block">
-                    <div class="code-line"><span class="keyword">function</span> quicksort(arr, low, high):</div>
-                    <div class="code-line">    <span class="keyword">if</span> low &lt; high:</div>
-                    <div class="code-line">        pivot = partition(arr, low, high)</div>
-                    <div class="code-line">        quicksort(arr, low, pivot - 1)</div>
-                    <div class="code-line">        quicksort(arr, pivot + 1, high)</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="keyword">function</span> partition(arr, low, high):</div>
-                    <div class="code-line">    pivot = arr[high]</div>
-                    <div class="code-line">    i = low - 1</div>
-                    <div class="code-line">    <span class="keyword">for</span> j = low <span class="keyword">to</span> high - 1:</div>
-                    <div class="code-line">        <span class="keyword">if</span> arr[j] &lt; pivot:</div>
-                    <div class="code-line">            i = i + 1</div>
-                    <div class="code-line">            swap(arr[i], arr[j])</div>
-                    <div class="code-line">    swap(arr[i + 1], arr[high])</div>
-                    <div class="code-line">    <span class="keyword">return</span> i + 1</div>
-                </div>
-
-                <div class="tip">
-                    💡 <strong>Best for:</strong> General-purpose sorting, in-place sorting. Unstable sort.
+                    <div class="code-line"><span class="keyword">function</span> quicksort(arr, low, high):</div><div class="code-line"> <span class="keyword">if</span> low &lt; high:</div><div class="code-line">        pivot = partition(arr, low, high)</div><div class="code-line">        quicksort(arr, low, pivot - 1)</div><div class="code-line">        quicksort(arr, pivot + 1, high)</div><div class="code-line"></div><div class="code-line"><span class="keyword">function</span> partition(arr, low, high):</div><div class="code-line">    pivot = arr[high]</div><div class="code-line">    i = low - 1</div><div class="code-line"> <span class="keyword">for</span> j = low <span class="keyword">to</span> high - 1:</div><div class="code-line"> <span class="keyword">if</span> arr[j] &lt; pivot:</div><div class="code-line">            i = i + 1</div><div class="code-line">            swap(arr[i], arr[j])</div><div class="code-line">    swap(arr[i + 1], arr[high])</div><div class="code-line"> <span class="keyword">return</span> i + 1</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="mergesort">
                 <div class="card-header">🔀 Mergesort</div>
-                <div class="algo-name">Stable Divide and Conquer</div>
-                
-                <div class="complexity">
-                    <div class="complexity-label">Best Time:</div>
-                    <div class="complexity-value">O(n log n)</div>
-                </div>
-                <div class="complexity">
-                    <div class="complexity-label">Average Time:</div>
-                    <div class="complexity-value">O(n log n)</div>
-                </div>
-                <div class="complexity">
-                    <div class="complexity-label">Worst Time:</div>
-                    <div class="complexity-value">O(n log n)</div>
-                </div>
-                <div class="complexity">
-                    <div class="complexity-label">Space:</div>
-                    <div class="complexity-value">O(n)</div>
-                </div>
-
                 <div class="code-block">
-                    <div class="code-line"><span class="keyword">function</span> mergesort(arr):</div>
-                    <div class="code-line">    <span class="keyword">if</span> length(arr) &lt;= 1:</div>
-                    <div class="code-line">        <span class="keyword">return</span> arr</div>
-                    <div class="code-line">    </div>
-                    <div class="code-line">    mid = length(arr) / 2</div>
-                    <div class="code-line">    left = mergesort(arr[0:mid])</div>
-                    <div class="code-line">    right = mergesort(arr[mid:end])</div>
-                    <div class="code-line">    </div>
-                    <div class="code-line">    <span class="keyword">return</span> merge(left, right)</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="keyword">function</span> merge(left, right):</div>
-                    <div class="code-line">    result = []</div>
-                    <div class="code-line">    <span class="keyword">while</span> left and right not empty:</div>
-                    <div class="code-line">        <span class="keyword">if</span> left[0] &lt;= right[0]:</div>
-                    <div class="code-line">            append left[0] to result</div>
-                    <div class="code-line">        <span class="keyword">else</span>:</div>
-                    <div class="code-line">            append right[0] to result</div>
-                    <div class="code-line">    append remaining elements</div>
-                    <div class="code-line">    <span class="keyword">return</span> result</div>
-                </div>
-
-                <div class="tip">
-                    💡 <strong>Best for:</strong> Stable sorting, linked lists, external sorting. Guaranteed O(n log n).
+                    <div class="code-line"><span class="keyword">function</span> mergesort(arr):</div><div class="code-line"> <span class="keyword">if</span> length(arr) &lt;= 1:</div><div class="code-line"> <span class="keyword">return</span> arr</div><div class="code-line"> </div><div class="code-line">    mid = length(arr) / 2</div><div class="code-line">    left = mergesort(arr[0:mid])</div><div class="code-line">    right = mergesort(arr[mid:end])</div><div class="code-line"> </div><div class="code-line"> <span class="keyword">return</span> merge(left, right)</div><div class="code-line"></div><div class="code-line"><span class="keyword">function</span> merge(left, right):</div><div class="code-line">    result = []</div><div class="code-line"> <span class="keyword">while</span> left and right not empty:</div><div class="code-line"> <span class="keyword">if</span> left[0] &lt;= right[0]:</div><div class="code-line">            append left[0] to result</div><div class="code-line"> <span class="keyword">else</span>:</div><div class="code-line">            append right[0] to result</div><div class="code-line">    append remaining elements</div><div class="code-line"> <span class="keyword">return</span> result</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="heapsort">
                 <div class="card-header">🏔️ Heapsort</div>
-                <div class="algo-name">Heap-Based Sorting</div>
-                
-                <div class="complexity">
-                    <div class="complexity-label">Best Time:</div>
-                    <div class="complexity-value">O(n log n)</div>
-                </div>
-                <div class="complexity">
-                    <div class="complexity-label">Average Time:</div>
-                    <div class="complexity-value">O(n log n)</div>
-                </div>
-                <div class="complexity">
-                    <div class="complexity-label">Worst Time:</div>
-                    <div class="complexity-value">O(n log n)</div>
-                </div>
-                <div class="complexity">
-                    <div class="complexity-label">Space:</div>
-                    <div class="complexity-value">O(1)</div>
-                </div>
-
                 <div class="code-block">
-                    <div class="code-line"><span class="keyword">function</span> heapsort(arr):</div>
-                    <div class="code-line">    n = length(arr)</div>
-                    <div class="code-line">    </div>
-                    <div class="code-line">    <span class="comment">// Build max heap</span></div>
-                    <div class="code-line">    <span class="keyword">for</span> i = n/2 - 1 <span class="keyword">down to</span> 0:</div>
-                    <div class="code-line">        heapify(arr, n, i)</div>
-                    <div class="code-line">    </div>
-                    <div class="code-line">    <span class="comment">// Extract elements from heap</span></div>
-                    <div class="code-line">    <span class="keyword">for</span> i = n - 1 <span class="keyword">down to</span> 1:</div>
-                    <div class="code-line">        swap(arr[0], arr[i])</div>
-                    <div class="code-line">        heapify(arr, i, 0)</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="keyword">function</span> heapify(arr, n, i):</div>
-                    <div class="code-line">    largest = i</div>
-                    <div class="code-line">    left = 2 * i + 1</div>
-                    <div class="code-line">    right = 2 * i + 2</div>
-                    <div class="code-line">    </div>
-                    <div class="code-line">    <span class="keyword">if</span> left &lt; n and arr[left] &gt; arr[largest]:</div>
-                    <div class="code-line">        largest = left</div>
-                    <div class="code-line">    <span class="keyword">if</span> right &lt; n and arr[right] &gt; arr[largest]:</div>
-                    <div class="code-line">        largest = right</div>
-                    <div class="code-line">    </div>
-                    <div class="code-line">    <span class="keyword">if</span> largest != i:</div>
-                    <div class="code-line">        swap(arr[i], arr[largest])</div>
-                    <div class="code-line">        heapify(arr, n, largest)</div>
-                </div>
-
-                <div class="tip">
-                    💡 <strong>Best for:</strong> In-place sorting with guaranteed O(n log n). Unstable sort.
+                    <div class="code-line"><span class="keyword">function</span> heapsort(arr):</div><div class="code-line">    n = length(arr)</div><div class="code-line"> </div><div class="code-line"> <span class="comment">// Build max heap</span></div><div class="code-line"> <span class="keyword">for</span> i = n/2 - 1 <span class="keyword">down to</span> 0:</div><div class="code-line">        heapify(arr, n, i)</div><div class="code-line"> </div><div class="code-line"> <span class="comment">// Extract elements from heap</span></div><div class="code-line"> <span class="keyword">for</span> i = n - 1 <span class="keyword">down to</span> 1:</div><div class="code-line">        swap(arr[0], arr[i])</div><div class="code-line">        heapify(arr, i, 0)</div><div class="code-line"></div><div class="code-line"><span class="keyword">function</span> heapify(arr, n, i):</div><div class="code-line">    largest = i</div><div class="code-line">    left = 2 * i + 1</div><div class="code-line">    right = 2 * i + 2</div><div class="code-line"> </div><div class="code-line"> <span class="keyword">if</span> left &lt; n and arr[left] &gt; arr[largest]:</div><div class="code-line">        largest = left</div><div class="code-line"> <span class="keyword">if</span> right &lt; n and arr[right] &gt; arr[largest]:</div><div class="code-line">        largest = right</div><div class="code-line"> </div><div class="code-line"> <span class="keyword">if</span> largest != i:</div><div class="code-line">        swap(arr[i], arr[largest])</div><div class="code-line">        heapify(arr, n, largest)</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="binary-search">
                 <div class="card-header">🔍 Binary Search</div>
-                <div class="algo-name">Efficient Searching in Sorted Arrays</div>
-                
-                <div class="complexity">
-                    <div class="complexity-label">Time:</div>
-                    <div class="complexity-value">O(log n)</div>
-                </div>
-                <div class="complexity">
-                    <div class="complexity-label">Space:</div>
-                    <div class="complexity-value">O(1) iterative, O(log n) recursive</div>
-                </div>
-
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// Iterative approach</span></div>
-                    <div class="code-line"><span class="keyword">function</span> binarySearch(arr, target):</div>
-                    <div class="code-line">    left = 0</div>
-                    <div class="code-line">    right = length(arr) - 1</div>
-                    <div class="code-line">    </div>
-                    <div class="code-line">    <span class="keyword">while</span> left &lt;= right:</div>
-                    <div class="code-line">        mid = left + (right - left) / 2</div>
-                    <div class="code-line">        </div>
-                    <div class="code-line">        <span class="keyword">if</span> arr[mid] == target:</div>
-                    <div class="code-line">            <span class="keyword">return</span> mid</div>
-                    <div class="code-line">        <span class="keyword">else if</span> arr[mid] &lt; target:</div>
-                    <div class="code-line">            left = mid + 1</div>
-                    <div class="code-line">        <span class="keyword">else</span>:</div>
-                    <div class="code-line">            right = mid - 1</div>
-                    <div class="code-line">    </div>
-                    <div class="code-line">    <span class="keyword">return</span> -1  <span class="comment">// Not found</span></div>
-                </div>
-
-                <div class="note">
-                    <strong>Requirements:</strong> Array must be sorted. Use <code>left + (right - left) / 2</code> to avoid integer overflow.
+                    <div class="code-line"><span class="comment">// Iterative approach</span></div><div class="code-line"><span class="keyword">function</span> binarySearch(arr, target):</div><div class="code-line">    left = 0</div><div class="code-line">    right = length(arr) - 1</div><div class="code-line"> </div><div class="code-line"> <span class="keyword">while</span> left &lt;= right:</div><div class="code-line">        mid = left + (right - left) / 2</div><div class="code-line"> </div><div class="code-line"> <span class="keyword">if</span> arr[mid] == target:</div><div class="code-line"> <span class="keyword">return</span> mid</div><div class="code-line"> <span class="keyword">else if</span> arr[mid] &lt; target:</div><div class="code-line">            left = mid + 1</div><div class="code-line"> <span class="keyword">else</span>:</div><div class="code-line">            right = mid - 1</div><div class="code-line"> </div><div class="code-line"> <span class="keyword">return</span> -1  <span class="comment">// Not found</span></div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="depth-first-search-dfs">
                 <div class="card-header">🌳 Depth-First Search (DFS)</div>
-                <div class="algo-name">Graph/Tree Traversal</div>
-                
-                <div class="complexity">
-                    <div class="complexity-label">Time:</div>
-                    <div class="complexity-value">O(V + E) for graphs, O(n) for trees</div>
-                </div>
-                <div class="complexity">
-                    <div class="complexity-label">Space:</div>
-                    <div class="complexity-value">O(h) where h is height/depth</div>
-                </div>
-
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// Recursive approach</span></div>
-                    <div class="code-line"><span class="keyword">function</span> dfs(node, visited):</div>
-                    <div class="code-line">    <span class="keyword">if</span> node is null or node in visited:</div>
-                    <div class="code-line">        <span class="keyword">return</span></div>
-                    <div class="code-line">    </div>
-                    <div class="code-line">    add node to visited</div>
-                    <div class="code-line">    process(node)</div>
-                    <div class="code-line">    </div>
-                    <div class="code-line">    <span class="keyword">for each</span> neighbor in node.neighbors:</div>
-                    <div class="code-line">        dfs(neighbor, visited)</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Iterative with stack</span></div>
-                    <div class="code-line"><span class="keyword">function</span> dfsIterative(start):</div>
-                    <div class="code-line">    stack = [start]</div>
-                    <div class="code-line">    visited = set()</div>
-                    <div class="code-line">    </div>
-                    <div class="code-line">    <span class="keyword">while</span> stack not empty:</div>
-                    <div class="code-line">        node = stack.pop()</div>
-                    <div class="code-line">        <span class="keyword">if</span> node not in visited:</div>
-                    <div class="code-line">            add node to visited</div>
-                    <div class="code-line">            process(node)</div>
-                    <div class="code-line">            <span class="keyword">for each</span> neighbor in node.neighbors:</div>
-                    <div class="code-line">                stack.push(neighbor)</div>
-                </div>
-
-                <div class="tip">
-                    💡 <strong>Best for:</strong> Pathfinding, topological sorting, cycle detection, maze solving.
+                    <div class="code-line"><span class="comment">// Recursive approach</span></div><div class="code-line"><span class="keyword">function</span> dfs(node, visited):</div><div class="code-line"> <span class="keyword">if</span> node is null or node in visited:</div><div class="code-line"> <span class="keyword">return</span></div><div class="code-line"> </div><div class="code-line">    add node to visited</div><div class="code-line">    process(node)</div><div class="code-line"> </div><div class="code-line"> <span class="keyword">for each</span> neighbor in node.neighbors:</div><div class="code-line">        dfs(neighbor, visited)</div><div class="code-line"></div><div class="code-line"><span class="comment">// Iterative with stack</span></div><div class="code-line"><span class="keyword">function</span> dfsIterative(start):</div><div class="code-line">    stack = [start]</div><div class="code-line">    visited = set()</div><div class="code-line"> </div><div class="code-line"> <span class="keyword">while</span> stack not empty:</div><div class="code-line">        node = stack.pop()</div><div class="code-line"> <span class="keyword">if</span> node not in visited:</div><div class="code-line">            add node to visited</div><div class="code-line">            process(node)</div><div class="code-line"> <span class="keyword">for each</span> neighbor in node.neighbors:</div><div class="code-line">                stack.push(neighbor)</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="breadth-first-search-bfs">
                 <div class="card-header">📊 Breadth-First Search (BFS)</div>
-                <div class="algo-name">Level-Order Traversal</div>
-                
-                <div class="complexity">
-                    <div class="complexity-label">Time:</div>
-                    <div class="complexity-value">O(V + E) for graphs, O(n) for trees</div>
-                </div>
-                <div class="complexity">
-                    <div class="complexity-label">Space:</div>
-                    <div class="complexity-value">O(w) where w is max width</div>
-                </div>
-
                 <div class="code-block">
-                    <div class="code-line"><span class="keyword">function</span> bfs(start):</div>
-                    <div class="code-line">    queue = [start]</div>
-                    <div class="code-line">    visited = set([start])</div>
-                    <div class="code-line">    </div>
-                    <div class="code-line">    <span class="keyword">while</span> queue not empty:</div>
-                    <div class="code-line">        node = queue.dequeue()</div>
-                    <div class="code-line">        process(node)</div>
-                    <div class="code-line">        </div>
-                    <div class="code-line">        <span class="keyword">for each</span> neighbor in node.neighbors:</div>
-                    <div class="code-line">            <span class="keyword">if</span> neighbor not in visited:</div>
-                    <div class="code-line">                add neighbor to visited</div>
-                    <div class="code-line">                queue.enqueue(neighbor)</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// With distance tracking</span></div>
-                    <div class="code-line"><span class="keyword">function</span> bfsWithDistance(start):</div>
-                    <div class="code-line">    queue = [(start, 0)]</div>
-                    <div class="code-line">    visited = set([start])</div>
-                    <div class="code-line">    </div>
-                    <div class="code-line">    <span class="keyword">while</span> queue not empty:</div>
-                    <div class="code-line">        node, distance = queue.dequeue()</div>
-                    <div class="code-line">        process(node, distance)</div>
-                    <div class="code-line">        </div>
-                    <div class="code-line">        <span class="keyword">for each</span> neighbor in node.neighbors:</div>
-                    <div class="code-line">            <span class="keyword">if</span> neighbor not in visited:</div>
-                    <div class="code-line">                add neighbor to visited</div>
-                    <div class="code-line">                queue.enqueue((neighbor, distance + 1))</div>
+                    <div class="code-line"><span class="keyword">function</span> bfs(start):</div><div class="code-line">    queue = [start]</div><div class="code-line">    visited = set([start])</div><div class="code-line"> </div><div class="code-line"> <span class="keyword">while</span> queue not empty:</div><div class="code-line">        node = queue.dequeue()</div><div class="code-line">        process(node)</div><div class="code-line"> </div><div class="code-line"> <span class="keyword">for each</span> neighbor in node.neighbors:</div><div class="code-line"> <span class="keyword">if</span> neighbor not in visited:</div><div class="code-line">                add neighbor to visited</div><div class="code-line">                queue.enqueue(neighbor)</div><div class="code-line"></div><div class="code-line"><span class="comment">// With distance tracking</span></div><div class="code-line"><span class="keyword">function</span> bfsWithDistance(start):</div><div class="code-line">    queue = [(start, 0)]</div><div class="code-line">    visited = set([start])</div><div class="code-line"> </div><div class="code-line"> <span class="keyword">while</span> queue not empty:</div><div class="code-line">        node, distance = queue.dequeue()</div><div class="code-line">        process(node, distance)</div><div class="code-line"> </div><div class="code-line"> <span class="keyword">for each</span> neighbor in node.neighbors:</div><div class="code-line"> <span class="keyword">if</span> neighbor not in visited:</div><div class="code-line">                add neighbor to visited</div><div class="code-line">                queue.enqueue((neighbor, distance + 1))</div>
                 </div>
-
-                <div class="tip">
-                    💡 <strong>Best for:</strong> Shortest path in unweighted graphs, level-order traversal, finding nearest neighbors.
+            </div>
+            <div class="card" id="complexity-comparison">
+                <div class="card-header">📈 Complexity Comparison</div>
+                <div class="code-block">
+                    <div class="code-line">Algorithm      | Best       | Average    | Worst      | Space  | Stable</div><div class="code-line">---------------|------------|------------|------------|--------|--------</div><div class="code-line">Quicksort      | O(n log n) | O(n log n) | O(n²)      | O(log n)| No</div><div class="code-line">Mergesort      | O(n log n) | O(n log n) | O(n log n) | O(n)   | Yes</div><div class="code-line">Heapsort       | O(n log n) | O(n log n) | O(n log n) | O(1)   | No</div><div class="code-line">Bubble Sort    | O(n)       | O(n²)      | O(n²)      | O(1)   | Yes</div><div class="code-line">Insertion Sort | O(n)       | O(n²)      | O(n²)      | O(1)   | Yes</div><div class="code-line">Selection Sort | O(n²)      | O(n²)      | O(n²)      | O(1)   | No</div>
+                </div>
+            </div>
+            <div class="card" id="algorithm-selection-guide">
+                <div class="card-header">💡 Algorithm Selection Guide</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
         </div>
 
-        <div class="card" style="margin-bottom: 2rem;">
-            <div class="card-header">📈 Complexity Comparison</div>
-            
-            <div class="algo-name">Sorting Algorithms</div>
-            <div class="code-block">
-                <div class="code-line">Algorithm      | Best       | Average    | Worst      | Space  | Stable</div>
-                <div class="code-line">---------------|------------|------------|------------|--------|--------</div>
-                <div class="code-line">Quicksort      | O(n log n) | O(n log n) | O(n²)      | O(log n)| No</div>
-                <div class="code-line">Mergesort      | O(n log n) | O(n log n) | O(n log n) | O(n)   | Yes</div>
-                <div class="code-line">Heapsort       | O(n log n) | O(n log n) | O(n log n) | O(1)   | No</div>
-                <div class="code-line">Bubble Sort    | O(n)       | O(n²)      | O(n²)      | O(1)   | Yes</div>
-                <div class="code-line">Insertion Sort | O(n)       | O(n²)      | O(n²)      | O(1)   | Yes</div>
-                <div class="code-line">Selection Sort | O(n²)      | O(n²)      | O(n²)      | O(1)   | No</div>
-            </div>
-
-            <div class="algo-name">Searching Algorithms</div>
-            <div class="code-block">
-                <div class="code-line">Algorithm      | Time       | Space      | Requirements</div>
-                <div class="code-line">---------------|------------|------------|---------------------------</div>
-                <div class="code-line">Binary Search  | O(log n)   | O(1)       | Sorted array</div>
-                <div class="code-line">Linear Search  | O(n)       | O(1)       | None</div>
-                <div class="code-line">DFS            | O(V + E)   | O(h)       | Graph/tree structure</div>
-                <div class="code-line">BFS            | O(V + E)   | O(w)       | Graph/tree structure</div>
-            </div>
-
-            <div class="note">
-                <strong>Legend:</strong> V = vertices, E = edges, h = height, w = width, n = number of elements
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">💡 Algorithm Selection Guide</div>
-            
-            <div class="algo-name">When to Use Each Algorithm</div>
-            
-            <div class="tip">
-                <strong>Quicksort:</strong> General-purpose sorting, when average-case performance matters and stability isn't required. Best for arrays.
-            </div>
-
-            <div class="tip">
-                <strong>Mergesort:</strong> When stability is required, sorting linked lists, external sorting (large datasets), guaranteed O(n log n) needed.
-            </div>
-
-            <div class="tip">
-                <strong>Heapsort:</strong> When you need guaranteed O(n log n) with O(1) space, priority queue operations, finding k largest/smallest elements.
-            </div>
-
-            <div class="tip">
-                <strong>Binary Search:</strong> Searching in sorted arrays, finding insertion points, range queries, optimization problems.
-            </div>
-
-            <div class="tip">
-                <strong>DFS:</strong> Pathfinding, topological sorting, cycle detection, maze solving, backtracking problems, tree traversal (pre/in/post-order).
-            </div>
-
-            <div class="tip">
-                <strong>BFS:</strong> Shortest path in unweighted graphs, level-order traversal, finding connected components, nearest neighbor problems.
-            </div>
-
-            <div class="warning">
-                ⚠️ <strong>Important:</strong> Always consider the specific characteristics of your data and requirements when choosing an algorithm. Theoretical complexity doesn't always translate to practical performance.
-            </div>
-        </div>
-
-        <div class="footer">
-            <p>Common Algorithms Reference with Complexity Analysis</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">💡 Understanding time and space complexity is crucial for writing efficient code</p>
-        </div>
+        <footer>
+            <p>&copy; 2025 Cheatsheets Collection. Open source and community driven.</p>
+        </footer>
     </div>
 </body>
 </html>

@@ -3,1090 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Complete ASCII character reference table with symbols, codes, and special characters.">
     <title>ASCII Symbols Cheatsheet</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #e0e6ed;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 2rem;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            font-size: 3rem;
-            background: linear-gradient(135deg, #e0e6ed 0%, #94a3b8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #8b95a5;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .card {
-            background: rgba(30, 41, 59, 0.6);
-            border: 1px solid rgba(100, 116, 139, 0.3);
-            border-radius: 12px;
-            padding: 1.5rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: rgba(148, 163, 184, 0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(148, 163, 184, 0.15);
-        }
-
-        .card-header {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #94a3b8;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid rgba(148, 163, 184, 0.3);
-        }
-
-        .symbol-row {
-            display: grid;
-            grid-template-columns: 60px 1fr;
-            gap: 1rem;
-            margin-bottom: 0.75rem;
-            padding: 0.75rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 6px;
-            transition: background 0.2s ease;
-            align-items: center;
-        }
-
-        .symbol-row:hover {
-            background: rgba(148, 163, 184, 0.1);
-        }
-
-        .symbol-char {
-            font-size: 2rem;
-            color: #e0e6ed;
-            font-family: 'Courier New', monospace;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        .symbol-info {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-        }
-
-        .symbol-name {
-            color: #cbd5e1;
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-
-        .symbol-codes {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            font-size: 0.85rem;
-            color: #8b95a5;
-            font-family: 'Courier New', monospace;
-        }
-
-        .symbol-codes span {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-        }
-
-        code {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            color: #a5d6ff;
-            font-size: 0.9em;
-        }
-
-        .note {
-            background: rgba(59, 130, 246, 0.1);
-            border-left: 4px solid #3b82f6;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .tip {
-            background: rgba(16, 185, 129, 0.1);
-            border-left: 4px solid #10b981;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(100, 116, 139, 0.3);
-            color: #8b95a5;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            .grid {
-                grid-template-columns: 1fr;
-            }
-            .symbol-char {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../script.js" defer></script>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-brand">
+                <i class="ph ph-books"></i> Cheatsheets
+            </a>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="btn-icon" aria-label="Toggle theme">
+                    <i class="ph ph-moon"></i>
+                </button>
+                <button id="download-btn" class="btn-icon" aria-label="Download PDF">
+                    <i class="ph ph-download-simple"></i>
+                </button>
+                <a href="https://github.com/keyurgolani/Cheatsheets" class="btn-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                    <i class="ph ph-github-logo"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
-        <h1>📋 ASCII Symbols Reference</h1>
-        <p class="subtitle">Common symbols with decimal, hex, and HTML entity codes</p>
+        <header class="cheatsheet-header">
+            <h1>📋 ASCII Symbols Reference</h1>
+            <p>Common symbols with decimal, hex, and HTML entity codes</p>
+            <div class="search-container" style="margin-top: 1.5rem; margin-bottom: 0;">
+                <span class="search-icon"><i class="ph ph-magnifying-glass"></i></span>
+                <input type="text" class="search-input" id="cheatsheet-search" placeholder="Filter this cheatsheet..." aria-label="Filter cheatsheet">
+            </div>
+        </header>
 
-        <div class="grid">
-            <div class="card">
+        <div class="masonry-grid" id="cheatsheet-grid">
+            
+            <div class="card" id="common-punctuation">
                 <div class="card-header">💬 Common Punctuation</div>
-                <div class="symbol-row">
-                    <div class="symbol-char">!</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Exclamation Mark</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 33</span>
-                            <span>Hex: 21</span>
-                            <span>&amp;#33;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">?</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Question Mark</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 63</span>
-                            <span>Hex: 3F</span>
-                            <span>&amp;#63;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">@</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">At Sign</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 64</span>
-                            <span>Hex: 40</span>
-                            <span>&amp;#64;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">#</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Hash / Number Sign</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 35</span>
-                            <span>Hex: 23</span>
-                            <span>&amp;#35;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">$</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Dollar Sign</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 36</span>
-                            <span>Hex: 24</span>
-                            <span>&amp;#36;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">%</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Percent Sign</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 37</span>
-                            <span>Hex: 25</span>
-                            <span>&amp;#37;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">&</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Ampersand</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 38</span>
-                            <span>Hex: 26</span>
-                            <span>&amp;amp;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">*</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Asterisk</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 42</span>
-                            <span>Hex: 2A</span>
-                            <span>&amp;#42;</span>
-                        </div>
-                    </div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="brackets-delimiters">
                 <div class="card-header">🔤 Brackets & Delimiters</div>
-                <div class="symbol-row">
-                    <div class="symbol-char">(</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Left Parenthesis</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 40</span>
-                            <span>Hex: 28</span>
-                            <span>&amp;#40;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">)</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Right Parenthesis</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 41</span>
-                            <span>Hex: 29</span>
-                            <span>&amp;#41;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">[</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Left Square Bracket</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 91</span>
-                            <span>Hex: 5B</span>
-                            <span>&amp;#91;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">]</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Right Square Bracket</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 93</span>
-                            <span>Hex: 5D</span>
-                            <span>&amp;#93;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">{</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Left Curly Brace</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 123</span>
-                            <span>Hex: 7B</span>
-                            <span>&amp;#123;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">}</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Right Curly Brace</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 125</span>
-                            <span>Hex: 7D</span>
-                            <span>&amp;#125;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char"><</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Less Than</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 60</span>
-                            <span>Hex: 3C</span>
-                            <span>&amp;lt;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">></div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Greater Than</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 62</span>
-                            <span>Hex: 3E</span>
-                            <span>&amp;gt;</span>
-                        </div>
-                    </div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="mathematical-symbols">
                 <div class="card-header">➕ Mathematical Symbols</div>
-                <div class="symbol-row">
-                    <div class="symbol-char">+</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Plus Sign</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 43</span>
-                            <span>Hex: 2B</span>
-                            <span>&amp;#43;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">-</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Minus / Hyphen</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 45</span>
-                            <span>Hex: 2D</span>
-                            <span>&amp;#45;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">=</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Equals Sign</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 61</span>
-                            <span>Hex: 3D</span>
-                            <span>&amp;#61;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">/</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Forward Slash</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 47</span>
-                            <span>Hex: 2F</span>
-                            <span>&amp;#47;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">\</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Backslash</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 92</span>
-                            <span>Hex: 5C</span>
-                            <span>&amp;#92;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">^</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Caret</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 94</span>
-                            <span>Hex: 5E</span>
-                            <span>&amp;#94;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">~</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Tilde</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 126</span>
-                            <span>Hex: 7E</span>
-                            <span>&amp;#126;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">|</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Vertical Bar / Pipe</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 124</span>
-                            <span>Hex: 7C</span>
-                            <span>&amp;#124;</span>
-                        </div>
-                    </div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="box-drawing-characters">
                 <div class="card-header">📐 Box Drawing Characters</div>
-                <div class="symbol-row">
-                    <div class="symbol-char">─</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Box Horizontal</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 9472</span>
-                            <span>Hex: 2500</span>
-                            <span>&amp;#9472;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">│</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Box Vertical</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 9474</span>
-                            <span>Hex: 2502</span>
-                            <span>&amp;#9474;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">┌</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Box Down Right</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 9484</span>
-                            <span>Hex: 250C</span>
-                            <span>&amp;#9484;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">┐</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Box Down Left</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 9488</span>
-                            <span>Hex: 2510</span>
-                            <span>&amp;#9488;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">└</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Box Up Right</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 9492</span>
-                            <span>Hex: 2514</span>
-                            <span>&amp;#9492;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">┘</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Box Up Left</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 9496</span>
-                            <span>Hex: 2518</span>
-                            <span>&amp;#9496;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">├</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Box Vertical Right</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 9500</span>
-                            <span>Hex: 251C</span>
-                            <span>&amp;#9500;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">┤</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Box Vertical Left</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 9508</span>
-                            <span>Hex: 2524</span>
-                            <span>&amp;#9508;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">┬</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Box Down Horizontal</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 9516</span>
-                            <span>Hex: 252C</span>
-                            <span>&amp;#9516;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">┴</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Box Up Horizontal</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 9524</span>
-                            <span>Hex: 2534</span>
-                            <span>&amp;#9524;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">┼</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Box Cross</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 9532</span>
-                            <span>Hex: 253C</span>
-                            <span>&amp;#9532;</span>
-                        </div>
-                    </div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="arrow-symbols">
                 <div class="card-header">⬆️ Arrow Symbols</div>
-                <div class="symbol-row">
-                    <div class="symbol-char">↑</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Upward Arrow</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 8593</span>
-                            <span>Hex: 2191</span>
-                            <span>&amp;uarr;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">↓</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Downward Arrow</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 8595</span>
-                            <span>Hex: 2193</span>
-                            <span>&amp;darr;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">←</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Leftward Arrow</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 8592</span>
-                            <span>Hex: 2190</span>
-                            <span>&amp;larr;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">→</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Rightward Arrow</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 8594</span>
-                            <span>Hex: 2192</span>
-                            <span>&amp;rarr;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">↔</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Left Right Arrow</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 8596</span>
-                            <span>Hex: 2194</span>
-                            <span>&amp;harr;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">↕</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Up Down Arrow</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 8597</span>
-                            <span>Hex: 2195</span>
-                            <span>&amp;#8597;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">⇒</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Double Right Arrow</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 8658</span>
-                            <span>Hex: 21D2</span>
-                            <span>&amp;rArr;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">⇐</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Double Left Arrow</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 8656</span>
-                            <span>Hex: 21D0</span>
-                            <span>&amp;lArr;</span>
-                        </div>
-                    </div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="special-characters">
                 <div class="card-header">✨ Special Characters</div>
-                <div class="symbol-row">
-                    <div class="symbol-char">©</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Copyright Sign</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 169</span>
-                            <span>Hex: A9</span>
-                            <span>&amp;copy;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">®</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Registered Sign</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 174</span>
-                            <span>Hex: AE</span>
-                            <span>&amp;reg;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">™</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Trademark Sign</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 8482</span>
-                            <span>Hex: 2122</span>
-                            <span>&amp;trade;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">°</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Degree Sign</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 176</span>
-                            <span>Hex: B0</span>
-                            <span>&amp;deg;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">±</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Plus-Minus Sign</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 177</span>
-                            <span>Hex: B1</span>
-                            <span>&amp;plusmn;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">×</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Multiplication Sign</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 215</span>
-                            <span>Hex: D7</span>
-                            <span>&amp;times;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">÷</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Division Sign</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 247</span>
-                            <span>Hex: F7</span>
-                            <span>&amp;divide;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">§</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Section Sign</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 167</span>
-                            <span>Hex: A7</span>
-                            <span>&amp;sect;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">¶</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Pilcrow / Paragraph</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 182</span>
-                            <span>Hex: B6</span>
-                            <span>&amp;para;</span>
-                        </div>
-                    </div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="currency-symbols">
                 <div class="card-header">💱 Currency Symbols</div>
-                <div class="symbol-row">
-                    <div class="symbol-char">¢</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Cent Sign</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 162</span>
-                            <span>Hex: A2</span>
-                            <span>&amp;cent;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">£</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Pound Sign</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 163</span>
-                            <span>Hex: A3</span>
-                            <span>&amp;pound;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">¥</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Yen Sign</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 165</span>
-                            <span>Hex: A5</span>
-                            <span>&amp;yen;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">€</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Euro Sign</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 8364</span>
-                            <span>Hex: 20AC</span>
-                            <span>&amp;euro;</span>
-                        </div>
-                    </div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="greek-letters-common">
                 <div class="card-header">🔣 Greek Letters (Common)</div>
-                <div class="symbol-row">
-                    <div class="symbol-char">α</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Alpha (lowercase)</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 945</span>
-                            <span>Hex: 3B1</span>
-                            <span>&amp;alpha;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">β</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Beta (lowercase)</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 946</span>
-                            <span>Hex: 3B2</span>
-                            <span>&amp;beta;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">γ</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Gamma (lowercase)</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 947</span>
-                            <span>Hex: 3B3</span>
-                            <span>&amp;gamma;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">δ</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Delta (lowercase)</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 948</span>
-                            <span>Hex: 3B4</span>
-                            <span>&amp;delta;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">π</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Pi (lowercase)</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 960</span>
-                            <span>Hex: 3C0</span>
-                            <span>&amp;pi;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">Σ</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Sigma (uppercase)</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 931</span>
-                            <span>Hex: 3A3</span>
-                            <span>&amp;Sigma;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">Ω</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Omega (uppercase)</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 937</span>
-                            <span>Hex: 3A9</span>
-                            <span>&amp;Omega;</span>
-                        </div>
-                    </div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="superscripts-subscripts">
                 <div class="card-header">🔢 Superscripts & Subscripts</div>
-                <div class="symbol-row">
-                    <div class="symbol-char">¹</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Superscript One</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 185</span>
-                            <span>Hex: B9</span>
-                            <span>&amp;sup1;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">²</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Superscript Two</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 178</span>
-                            <span>Hex: B2</span>
-                            <span>&amp;sup2;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">³</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Superscript Three</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 179</span>
-                            <span>Hex: B3</span>
-                            <span>&amp;sup3;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">¼</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Fraction One Quarter</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 188</span>
-                            <span>Hex: BC</span>
-                            <span>&amp;frac14;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">½</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Fraction One Half</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 189</span>
-                            <span>Hex: BD</span>
-                            <span>&amp;frac12;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">¾</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Fraction Three Quarters</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 190</span>
-                            <span>Hex: BE</span>
-                            <span>&amp;frac34;</span>
-                        </div>
-                    </div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="quotation-marks">
                 <div class="card-header">📝 Quotation Marks</div>
-                <div class="symbol-row">
-                    <div class="symbol-char">"</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Quotation Mark</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 34</span>
-                            <span>Hex: 22</span>
-                            <span>&amp;quot;</span>
-                        </div>
-                    </div>
+                <div class="code-block">
+                    
                 </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">'</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Apostrophe</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 39</span>
-                            <span>Hex: 27</span>
-                            <span>&amp;#39;</span>
-                        </div>
-                    </div>
+            </div>
+            <div class="card" id="usage-tips">
+                <div class="card-header">💡 Usage Tips</div>
+                <div class="code-block">
+                    
                 </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">"</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Left Double Quote</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 8220</span>
-                            <span>Hex: 201C</span>
-                            <span>&amp;ldquo;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">"</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Right Double Quote</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 8221</span>
-                            <span>Hex: 201D</span>
-                            <span>&amp;rdquo;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">'</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Left Single Quote</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 8216</span>
-                            <span>Hex: 2018</span>
-                            <span>&amp;lsquo;</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="symbol-row">
-                    <div class="symbol-char">'</div>
-                    <div class="symbol-info">
-                        <div class="symbol-name">Right Single Quote</div>
-                        <div class="symbol-codes">
-                            <span>Dec: 8217</span>
-                            <span>Hex: 2019</span>
-                            <span>&amp;rsquo;</span>
-                        </div>
-                    </div>
+            </div>
+            <div class="card" id="common-ascii-art-patterns">
+                <div class="card-header">🎨 Common ASCII Art Patterns</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header">💡 Usage Tips</div>
-            <div class="tip">
-                <strong>HTML Entities:</strong> Use HTML entities (like <code>&amp;copy;</code>) in HTML documents to ensure proper rendering across all browsers and character encodings.
-            </div>
-            <div class="tip">
-                <strong>Decimal Codes:</strong> In HTML, you can use decimal codes like <code>&amp;#169;</code> for the copyright symbol.
-            </div>
-            <div class="tip">
-                <strong>Hex Codes:</strong> Hex codes can be used in HTML with <code>&amp;#x</code> prefix, like <code>&amp;#xA9;</code> for copyright.
-            </div>
-            <div class="note">
-                <strong>Box Drawing:</strong> Box drawing characters are perfect for creating ASCII art, terminal UI elements, and text-based diagrams. They work best with monospace fonts.
-            </div>
-            <div class="note">
-                <strong>Unicode Support:</strong> Most modern systems support Unicode characters. If a symbol doesn't display correctly, ensure your document uses UTF-8 encoding.
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">🎨 Common ASCII Art Patterns</div>
-            <div style="background: rgba(0, 0, 0, 0.3); padding: 1rem; border-radius: 6px; font-family: 'Courier New', monospace; color: #a5d6ff; line-height: 1.4;">
-                <div>┌─────────────────┐</div>
-                <div>│  Simple Box     │</div>
-                <div>└─────────────────┘</div>
-                <div style="margin-top: 1rem;">┌─────┬─────┬─────┐</div>
-                <div>│  A  │  B  │  C  │</div>
-                <div>├─────┼─────┼─────┤</div>
-                <div>│  1  │  2  │  3  │</div>
-                <div>└─────┴─────┴─────┘</div>
-                <div style="margin-top: 1rem;">Tree Structure:</div>
-                <div>├── folder1</div>
-                <div>│   ├── file1.txt</div>
-                <div>│   └── file2.txt</div>
-                <div>└── folder2</div>
-                <div>    └── file3.txt</div>
-            </div>
-        </div>
-
-        <div class="footer">
-            <p>ASCII & Unicode Symbol Reference</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">💡 Copy symbols directly or use their codes in your documents</p>
-        </div>
+        <footer>
+            <p>&copy; 2025 Cheatsheets Collection. Open source and community driven.</p>
+        </footer>
     </div>
 </body>
 </html>

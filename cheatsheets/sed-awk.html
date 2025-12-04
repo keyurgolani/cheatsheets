@@ -3,518 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sed and Awk text processing commands for Unix/Linux stream editing and pattern matching.">
     <title>sed & awk Text Processing Cheatsheet</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
-            color: #e0e6ed;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 2rem;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            font-size: 3rem;
-            color: white;
-            margin-bottom: 0.5rem;
-            text-align: center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .subtitle {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.95);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            color: #1a202c;
-        }
-
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-        }
-
-        .card-header {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #059669;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #10b981;
-        }
-
-        .cmd-box {
-            background: rgba(5, 150, 105, 0.05);
-            padding: 0.75rem;
-            margin: 0.5rem 0;
-            border-radius: 6px;
-            border-left: 3px solid #10b981;
-        }
-
-        .cmd-title {
-            font-family: 'Courier New', monospace;
-            color: #059669;
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-        }
-
-        .cmd-desc {
-            color: #4a5568;
-            font-size: 0.9rem;
-        }
-
-        .code-block {
-            background: rgba(26, 32, 44, 0.95);
-            padding: 1rem;
-            border-radius: 6px;
-            font-family: 'Courier New', monospace;
-            color: #a5d6ff;
-            margin: 0.5rem 0;
-            border-left: 3px solid #10b981;
-            overflow-x: auto;
-            font-size: 0.9rem;
-        }
-
-        .note {
-            background: rgba(59, 130, 246, 0.1);
-            border-left: 4px solid #3b82f6;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .tip {
-            background: rgba(16, 185, 129, 0.1);
-            border-left: 4px solid #10b981;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../script.js" defer></script>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-brand">
+                <i class="ph ph-books"></i> Cheatsheets
+            </a>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="btn-icon" aria-label="Toggle theme">
+                    <i class="ph ph-moon"></i>
+                </button>
+                <button id="download-btn" class="btn-icon" aria-label="Download PDF">
+                    <i class="ph ph-download-simple"></i>
+                </button>
+                <a href="https://github.com/keyurgolani/Cheatsheets" class="btn-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                    <i class="ph ph-github-logo"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
-        <h1>⚡ sed & awk Text Processing</h1>
-        <p class="subtitle">Stream editing and pattern scanning essentials</p>
-
-        <div class="grid">
-            <div class="card">
-                <div class="card-header">🔧 sed Basics</div>
-                <div class="cmd-box">
-                    <div class="cmd-title">sed 's/old/new/' file</div>
-                    <div class="cmd-desc">Replace first occurrence per line</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">sed 's/old/new/g' file</div>
-                    <div class="cmd-desc">Replace all occurrences (global)</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">sed -i 's/old/new/g' file</div>
-                    <div class="cmd-desc">Edit file in-place</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">sed -n 'p' file</div>
-                    <div class="cmd-desc">Print (suppress automatic output with -n)</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">sed 'd' file</div>
-                    <div class="cmd-desc">Delete all lines</div>
-                </div>
+        <header class="cheatsheet-header">
+            <h1>sed & awk Text Processing</h1>
+            <p>Stream editing and pattern scanning essentials</p>
+            <div class="search-container" style="margin-top: 1.5rem; margin-bottom: 0;">
+                <span class="search-icon"><i class="ph ph-magnifying-glass"></i></span>
+                <input type="text" class="search-input" id="cheatsheet-search" placeholder="Filter this cheatsheet..." aria-label="Filter cheatsheet">
             </div>
+        </header>
 
-            <div class="card">
-                <div class="card-header">📍 sed Line Addressing</div>
-                <div class="cmd-box">
-                    <div class="cmd-title">sed '5d' file</div>
-                    <div class="cmd-desc">Delete line 5</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">sed '2,5d' file</div>
-                    <div class="cmd-desc">Delete lines 2 through 5</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">sed '1,/pattern/d' file</div>
-                    <div class="cmd-desc">Delete from line 1 to first pattern match</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">sed '/pattern/d' file</div>
-                    <div class="cmd-desc">Delete lines matching pattern</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">sed -n '10,20p' file</div>
-                    <div class="cmd-desc">Print only lines 10-20</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">sed -n '/start/,/end/p' file</div>
-                    <div class="cmd-desc">Print from start pattern to end pattern</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">✏️ sed Substitution</div>
-                <div class="cmd-box">
-                    <div class="cmd-title">sed 's/old/new/2' file</div>
-                    <div class="cmd-desc">Replace 2nd occurrence on each line</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">sed 's/old/new/gi' file</div>
-                    <div class="cmd-desc">Global, case-insensitive replace</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">sed 's|/path/old|/path/new|' file</div>
-                    <div class="cmd-desc">Use | delimiter for paths</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">sed 's/^/prefix/' file</div>
-                    <div class="cmd-desc">Add prefix to each line</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">sed 's/$/suffix/' file</div>
-                    <div class="cmd-desc">Add suffix to each line</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">sed 's/.*pattern.*/replacement/' file</div>
-                    <div class="cmd-desc">Replace entire line containing pattern</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">🔄 sed Advanced Commands</div>
-                <div class="cmd-box">
-                    <div class="cmd-title">sed 'y/abc/ABC/' file</div>
-                    <div class="cmd-desc">Transliterate (like tr command)</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">sed '/pattern/a\new line' file</div>
-                    <div class="cmd-desc">Append line after pattern</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">sed '/pattern/i\new line' file</div>
-                    <div class="cmd-desc">Insert line before pattern</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">sed '/pattern/c\replacement' file</div>
-                    <div class="cmd-desc">Change (replace) matching line</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">sed -e 'cmd1' -e 'cmd2' file</div>
-                    <div class="cmd-desc">Multiple commands</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">sed 's/\([0-9]*\)/[\1]/' file</div>
-                    <div class="cmd-desc">Capture groups with \( \) and reference with \1</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">📊 awk Basics</div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk '{print}' file</div>
-                    <div class="cmd-desc">Print all lines</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk '{print $1}' file</div>
-                    <div class="cmd-desc">Print first field</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk '{print $1, $3}' file</div>
-                    <div class="cmd-desc">Print fields 1 and 3</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk '{print $NF}' file</div>
-                    <div class="cmd-desc">Print last field</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk -F: '{print $1}' file</div>
-                    <div class="cmd-desc">Use : as field separator</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">🔍 awk Pattern Matching</div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk '/pattern/' file</div>
-                    <div class="cmd-desc">Print lines matching pattern</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk '!/pattern/' file</div>
-                    <div class="cmd-desc">Print lines NOT matching pattern</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk '/start/,/end/' file</div>
-                    <div class="cmd-desc">Print from start to end pattern</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk '$1 == "value"' file</div>
-                    <div class="cmd-desc">Print if field 1 equals value</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk '$3 > 100' file</div>
-                    <div class="cmd-desc">Print if field 3 is greater than 100</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk '$2 ~ /pattern/' file</div>
-                    <div class="cmd-desc">Print if field 2 matches pattern</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">🧮 awk Built-in Variables</div>
-                <div class="cmd-box">
-                    <div class="cmd-title">NR</div>
-                    <div class="cmd-desc">Current record (line) number</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">NF</div>
-                    <div class="cmd-desc">Number of fields in current record</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">FS</div>
-                    <div class="cmd-desc">Field separator (default: whitespace)</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">OFS</div>
-                    <div class="cmd-desc">Output field separator</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">RS</div>
-                    <div class="cmd-desc">Record separator (default: newline)</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">ORS</div>
-                    <div class="cmd-desc">Output record separator</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">FILENAME</div>
-                    <div class="cmd-desc">Current filename</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">🔢 awk Calculations</div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk '{sum += $1} END {print sum}' file</div>
-                    <div class="cmd-desc">Sum of field 1</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk '{sum += $1} END {print sum/NR}' file</div>
-                    <div class="cmd-desc">Average of field 1</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk '{print $1 * $2}' file</div>
-                    <div class="cmd-desc">Multiply fields 1 and 2</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk '{total += $3} END {print total}' file</div>
-                    <div class="cmd-desc">Accumulate field 3</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">🎯 awk BEGIN & END</div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk 'BEGIN {print "Header"} {print} END {print "Footer"}' file</div>
-                    <div class="cmd-desc">Execute before, during, and after processing</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk 'BEGIN {FS=":"} {print $1}' file</div>
-                    <div class="cmd-desc">Set field separator in BEGIN</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk 'BEGIN {OFS="|"} {print $1, $2}' file</div>
-                    <div class="cmd-desc">Set output field separator</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">📝 awk String Functions</div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk '{print length($1)}' file</div>
-                    <div class="cmd-desc">Length of field 1</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk '{print toupper($1)}' file</div>
-                    <div class="cmd-desc">Convert to uppercase</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk '{print tolower($1)}' file</div>
-                    <div class="cmd-desc">Convert to lowercase</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk '{print substr($1, 1, 3)}' file</div>
-                    <div class="cmd-desc">Substring: chars 1-3</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk '{gsub(/old/, "new"); print}' file</div>
-                    <div class="cmd-desc">Global substitution</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk '{sub(/old/, "new"); print}' file</div>
-                    <div class="cmd-desc">First occurrence substitution</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">🔀 awk Control Flow</div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk '{if ($1 > 10) print $1}' file</div>
-                    <div class="cmd-desc">If statement</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk '{if ($1 > 10) print "big"; else print "small"}' file</div>
-                    <div class="cmd-desc">If-else statement</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk '{for(i=1; i<=NF; i++) print $i}' file</div>
-                    <div class="cmd-desc">For loop through fields</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk '{while (x<5) {print x; x++}}' file</div>
-                    <div class="cmd-desc">While loop</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">📊 awk Arrays</div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk '{count[$1]++} END {for (w in count) print w, count[w]}' file</div>
-                    <div class="cmd-desc">Count occurrences of field 1</div>
-                </div>
-                <div class="cmd-box">
-                    <div class="cmd-title">awk '{arr[NR] = $1} END {print arr[1]}' file</div>
-                    <div class="cmd-desc">Store in array, access later</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">💡 Practical Examples</div>
+        <div class="masonry-grid" id="cheatsheet-grid">
             
-            <div class="code-block">
-                # sed: Remove blank lines
-                sed '/^$/d' file
-
-                # sed: Remove comments
-                sed '/^#/d' file
-
-                # sed: Double space file
-                sed G file
-
-                # sed: Number lines
-                sed = file | sed 'N;s/\n/\t/'
-
-                # sed: Replace only in specific lines
-                sed '10,20s/old/new/g' file
-
-                # awk: Print specific columns from CSV
-                awk -F, '{print $1, $3, $5}' file.csv
-
-                # awk: Sum column in CSV
-                awk -F, '{sum += $3} END {print sum}' file.csv
-
-                # awk: Print lines longer than 80 characters
-                awk 'length > 80' file
-
-                # awk: Print line numbers with content
-                awk '{print NR, $0}' file
-
-                # awk: Remove duplicate lines
-                awk '!seen[$0]++' file
-
-                # awk: Print lines between patterns
-                awk '/START/,/END/' file
-
-                # awk: Field reordering
-                awk '{print $3, $2, $1}' file
-
-                # awk: Join lines with comma
-                awk '{printf "%s%s", (NR>1 ? "," : ""), $1} END {print ""}' file
+            <div class="card" id="sed-basics">
+                <div class="card-header">🔧 sed Basics</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="sed-line-addressing">
+                <div class="card-header">📍 sed Line Addressing</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="sed-substitution">
+                <div class="card-header">✏️ sed Substitution</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="sed-advanced-commands">
+                <div class="card-header">🔄 sed Advanced Commands</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="awk-basics">
+                <div class="card-header">📊 awk Basics</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="awk-pattern-matching">
+                <div class="card-header">🔍 awk Pattern Matching</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="awk-built-in-variables">
+                <div class="card-header">🧮 awk Built-in Variables</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="awk-calculations">
+                <div class="card-header">🔢 awk Calculations</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="awk-begin-end">
+                <div class="card-header">🎯 awk BEGIN & END</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="awk-string-functions">
+                <div class="card-header">📝 awk String Functions</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="awk-control-flow">
+                <div class="card-header">🔀 awk Control Flow</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="awk-arrays">
+                <div class="card-header">📊 awk Arrays</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="practical-examples">
+                <div class="card-header">💡 Practical Examples</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="combining-sed-awk">
+                <div class="card-header">🔗 Combining sed & awk</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="tips-best-practices">
+                <div class="card-header">💡 Tips & Best Practices</div>
+                <div class="code-block">
+                    
+                </div>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header">🔗 Combining sed & awk</div>
-            <div class="code-block">
-                # Clean data: remove comments, extract column
-                sed '/^#/d' file | awk '{print $2}'
-
-                # Process log: filter errors, format output
-                sed -n '/ERROR/p' log.txt | awk '{print $1, $3}'
-
-                # CSV processing: select columns, replace values
-                awk -F, '{print $1, $2}' file.csv | sed 's/old/new/g'
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">💡 Tips & Best Practices</div>
-            <div class="tip">
-                <strong>sed Tips:</strong><br>
-                • Use -i.bak for in-place editing with backup<br>
-                • Test without -i first to preview changes<br>
-                • Use different delimiters (|, #, @) for paths<br>
-                • Chain multiple commands with -e<br><br>
-                
-                <strong>awk Tips:</strong><br>
-                • Default delimiter is any whitespace<br>
-                • Fields start at $1, $0 is entire line<br>
-                • Use -F for custom field separator<br>
-                • printf for formatted output<br>
-                • Use arrays for complex data processing
-            </div>
-        </div>
-
-        <div class="footer">
-            <p>sed & awk Text Processing Reference</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">⚡ Powerful stream editing and text manipulation</p>
-        </div>
+        <footer>
+            <p>&copy; 2025 Cheatsheets Collection. Open source and community driven.</p>
+        </footer>
     </div>
 </body>
 </html>

@@ -3,700 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Nginx web server configuration reference for reverse proxy, load balancing, and optimization.">
     <title>Nginx Configuration Cheatsheet</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #e0e6ed;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 2rem;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            font-size: 3rem;
-            background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #8b95a5;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .card {
-            background: rgba(30, 41, 59, 0.6);
-            border: 1px solid rgba(100, 116, 139, 0.3);
-            border-radius: 12px;
-            padding: 1.5rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: rgba(16, 185, 129, 0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.15);
-        }
-
-        .card-header {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #10b981;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid rgba(16, 185, 129, 0.3);
-        }
-
-        .cmd-row {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.5rem;
-            margin-bottom: 0.75rem;
-            padding: 0.5rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 6px;
-            transition: background 0.2s ease;
-        }
-
-        .cmd-row:hover {
-            background: rgba(16, 185, 129, 0.1);
-        }
-
-        .cmd-name {
-            color: #34d399;
-            font-weight: 600;
-            font-family: 'Courier New', monospace;
-            font-size: 0.95rem;
-        }
-
-        .cmd-desc {
-            color: #cbd5e1;
-            padding-left: 1rem;
-            font-size: 0.9rem;
-        }
-
-        code {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            color: #a5d6ff;
-            font-size: 0.9em;
-        }
-
-        .code-block {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 1rem;
-            border-radius: 6px;
-            margin: 0.75rem 0;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            overflow-x: auto;
-        }
-
-        .code-line {
-            color: #e0e6ed;
-            line-height: 1.5;
-        }
-
-        .comment {
-            color: #10b981;
-        }
-
-        .keyword {
-            color: #fbbf24;
-        }
-
-        .string {
-            color: #f472b6;
-        }
-
-        .note {
-            background: rgba(59, 130, 246, 0.1);
-            border-left: 4px solid #3b82f6;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .tip {
-            background: rgba(16, 185, 129, 0.1);
-            border-left: 4px solid #10b981;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .warning {
-            background: rgba(239, 68, 68, 0.1);
-            border-left: 4px solid #ef4444;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(100, 116, 139, 0.3);
-            color: #8b95a5;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../script.js" defer></script>
 </head>
 <body>
-    <div class="container">
-        <h1>⚙️ Nginx Configuration</h1>
-        <p class="subtitle">Web server configuration essentials and best practices</p>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-brand">
+                <i class="ph ph-books"></i> Cheatsheets
+            </a>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="btn-icon" aria-label="Toggle theme">
+                    <i class="ph ph-moon"></i>
+                </button>
+                <button id="download-btn" class="btn-icon" aria-label="Download PDF">
+                    <i class="ph ph-download-simple"></i>
+                </button>
+                <a href="https://github.com/keyurgolani/Cheatsheets" class="btn-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                    <i class="ph ph-github-logo"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
 
-        <div class="grid">
-            <div class="card">
+    <div class="container">
+        <header class="cheatsheet-header">
+            <h1>⚙️ Nginx Configuration</h1>
+            <p>Web server configuration essentials and best practices</p>
+            <div class="search-container" style="margin-top: 1.5rem; margin-bottom: 0;">
+                <span class="search-icon"><i class="ph ph-magnifying-glass"></i></span>
+                <input type="text" class="search-input" id="cheatsheet-search" placeholder="Filter this cheatsheet..." aria-label="Filter cheatsheet">
+            </div>
+        </header>
+
+        <div class="masonry-grid" id="cheatsheet-grid">
+            
+            <div class="card" id="basic-configuration-structure">
                 <div class="card-header">🚀 Basic Configuration Structure</div>
                 <div class="code-block">
-<div class="code-line"><span class="comment"># Main context</span></div>
-<div class="code-line"><span class="keyword">user</span> nginx;</div>
-<div class="code-line"><span class="keyword">worker_processes</span> auto;</div>
-<div class="code-line"><span class="keyword">error_log</span> /var/log/nginx/error.log;</div>
-<div class="code-line"></div>
-<div class="code-line"><span class="keyword">events</span> {</div>
-<div class="code-line">    <span class="keyword">worker_connections</span> 1024;</div>
-<div class="code-line">}</div>
-<div class="code-line"></div>
-<div class="code-line"><span class="keyword">http</span> {</div>
-<div class="code-line">    <span class="comment"># HTTP context</span></div>
-<div class="code-line">    <span class="keyword">include</span> /etc/nginx/mime.types;</div>
-<div class="code-line">    <span class="keyword">default_type</span> application/octet-stream;</div>
-<div class="code-line">}</div>
-                </div>
-                <div class="note">
-                    <strong>Configuration Hierarchy:</strong><br>
-                    Main → Events → HTTP → Server → Location
+                    <div class="code-line"><span class="comment"># Main context</span></div><div class="code-line"><span class="keyword">user</span> nginx;</div><div class="code-line"><span class="keyword">worker_processes</span> auto;</div><div class="code-line"><span class="keyword">error_log</span> /var/log/nginx/error.log;</div><div class="code-line"></div><div class="code-line"><span class="keyword">events</span> {</div><div class="code-line"> <span class="keyword">worker_connections</span> 1024;</div><div class="code-line">}</div><div class="code-line"></div><div class="code-line"><span class="keyword">http</span> {</div><div class="code-line"> <span class="comment"># HTTP context</span></div><div class="code-line"> <span class="keyword">include</span> /etc/nginx/mime.types;</div><div class="code-line"> <span class="keyword">default_type</span> application/octet-stream;</div><div class="code-line">}</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="server-block-virtual-host">
                 <div class="card-header">🌐 Server Block (Virtual Host)</div>
                 <div class="code-block">
-<div class="code-line"><span class="keyword">server</span> {</div>
-<div class="code-line">    <span class="keyword">listen</span> 80;</div>
-<div class="code-line">    <span class="keyword">listen</span> [::]:80;</div>
-<div class="code-line">    <span class="keyword">server_name</span> example.com www.example.com;</div>
-<div class="code-line"></div>
-<div class="code-line">    <span class="keyword">root</span> /var/www/html;</div>
-<div class="code-line">    <span class="keyword">index</span> index.html index.htm;</div>
-<div class="code-line"></div>
-<div class="code-line">    <span class="keyword">access_log</span> /var/log/nginx/access.log;</div>
-<div class="code-line">    <span class="keyword">error_log</span> /var/log/nginx/error.log;</div>
-<div class="code-line">}</div>
-                </div>
-                <div class="tip">
-                    💡 Use <code>server_name _;</code> for default/catch-all server
+                    <div class="code-line"><span class="keyword">server</span> {</div><div class="code-line"> <span class="keyword">listen</span> 80;</div><div class="code-line"> <span class="keyword">listen</span> [::]:80;</div><div class="code-line"> <span class="keyword">server_name</span> example.com www.example.com;</div><div class="code-line"></div><div class="code-line"> <span class="keyword">root</span> /var/www/html;</div><div class="code-line"> <span class="keyword">index</span> index.html index.htm;</div><div class="code-line"></div><div class="code-line"> <span class="keyword">access_log</span> /var/log/nginx/access.log;</div><div class="code-line"> <span class="keyword">error_log</span> /var/log/nginx/error.log;</div><div class="code-line">}</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="location-blocks">
                 <div class="card-header">📍 Location Blocks</div>
                 <div class="code-block">
-<div class="code-line"><span class="comment"># Exact match</span></div>
-<div class="code-line"><span class="keyword">location</span> = /path {</div>
-<div class="code-line">    <span class="comment"># Matches /path exactly</span></div>
-<div class="code-line">}</div>
-<div class="code-line"></div>
-<div class="code-line"><span class="comment"># Prefix match</span></div>
-<div class="code-line"><span class="keyword">location</span> /images/ {</div>
-<div class="code-line">    <span class="comment"># Matches /images/*</span></div>
-<div class="code-line">}</div>
-<div class="code-line"></div>
-<div class="code-line"><span class="comment"># Regex match (case-sensitive)</span></div>
-<div class="code-line"><span class="keyword">location</span> ~ \.php$ {</div>
-<div class="code-line">    <span class="comment"># Matches .php files</span></div>
-<div class="code-line">}</div>
-<div class="code-line"></div>
-<div class="code-line"><span class="comment"># Regex match (case-insensitive)</span></div>
-<div class="code-line"><span class="keyword">location</span> ~* \.(jpg|png|gif)$ {</div>
-<div class="code-line">    <span class="comment"># Matches image files</span></div>
-<div class="code-line">}</div>
-<div class="code-line"></div>
-<div class="code-line"><span class="comment"># Priority prefix match</span></div>
-<div class="code-line"><span class="keyword">location</span> ^~ /static/ {</div>
-<div class="code-line">    <span class="comment"># Stops regex matching</span></div>
-<div class="code-line">}</div>
-                </div>
-                <div class="note">
-                    <strong>Match Priority:</strong> = → ^~ → ~ / ~* → prefix
+                    <div class="code-line"><span class="comment"># Exact match</span></div><div class="code-line"><span class="keyword">location</span> = /path {</div><div class="code-line"> <span class="comment"># Matches /path exactly</span></div><div class="code-line">}</div><div class="code-line"></div><div class="code-line"><span class="comment"># Prefix match</span></div><div class="code-line"><span class="keyword">location</span> /images/ {</div><div class="code-line"> <span class="comment"># Matches /images/*</span></div><div class="code-line">}</div><div class="code-line"></div><div class="code-line"><span class="comment"># Regex match (case-sensitive)</span></div><div class="code-line"><span class="keyword">location</span> ~ \.php$ {</div><div class="code-line"> <span class="comment"># Matches .php files</span></div><div class="code-line">}</div><div class="code-line"></div><div class="code-line"><span class="comment"># Regex match (case-insensitive)</span></div><div class="code-line"><span class="keyword">location</span> ~* \.(jpg|png|gif)$ {</div><div class="code-line"> <span class="comment"># Matches image files</span></div><div class="code-line">}</div><div class="code-line"></div><div class="code-line"><span class="comment"># Priority prefix match</span></div><div class="code-line"><span class="keyword">location</span> ^~ /static/ {</div><div class="code-line"> <span class="comment"># Stops regex matching</span></div><div class="code-line">}</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="reverse-proxy-configuration">
                 <div class="card-header">🔄 Reverse Proxy Configuration</div>
                 <div class="code-block">
-<div class="code-line"><span class="keyword">location</span> / {</div>
-<div class="code-line">    <span class="keyword">proxy_pass</span> http://localhost:3000;</div>
-<div class="code-line">    <span class="keyword">proxy_http_version</span> 1.1;</div>
-<div class="code-line"></div>
-<div class="code-line">    <span class="comment"># Headers</span></div>
-<div class="code-line">    <span class="keyword">proxy_set_header</span> Host $host;</div>
-<div class="code-line">    <span class="keyword">proxy_set_header</span> X-Real-IP $remote_addr;</div>
-<div class="code-line">    <span class="keyword">proxy_set_header</span> X-Forwarded-For $proxy_add_x_forwarded_for;</div>
-<div class="code-line">    <span class="keyword">proxy_set_header</span> X-Forwarded-Proto $scheme;</div>
-<div class="code-line"></div>
-<div class="code-line">    <span class="comment"># WebSocket support</span></div>
-<div class="code-line">    <span class="keyword">proxy_set_header</span> Upgrade $http_upgrade;</div>
-<div class="code-line">    <span class="keyword">proxy_set_header</span> Connection <span class="string">"upgrade"</span>;</div>
-<div class="code-line"></div>
-<div class="code-line">    <span class="comment"># Timeouts</span></div>
-<div class="code-line">    <span class="keyword">proxy_connect_timeout</span> 60s;</div>
-<div class="code-line">    <span class="keyword">proxy_send_timeout</span> 60s;</div>
-<div class="code-line">    <span class="keyword">proxy_read_timeout</span> 60s;</div>
-<div class="code-line">}</div>
+                    <div class="code-line"><span class="keyword">location</span> / {</div><div class="code-line"> <span class="keyword">proxy_pass</span> http://localhost:3000;</div><div class="code-line"> <span class="keyword">proxy_http_version</span> 1.1;</div><div class="code-line"></div><div class="code-line"> <span class="comment"># Headers</span></div><div class="code-line"> <span class="keyword">proxy_set_header</span> Host $host;</div><div class="code-line"> <span class="keyword">proxy_set_header</span> X-Real-IP $remote_addr;</div><div class="code-line"> <span class="keyword">proxy_set_header</span> X-Forwarded-For $proxy_add_x_forwarded_for;</div><div class="code-line"> <span class="keyword">proxy_set_header</span> X-Forwarded-Proto $scheme;</div><div class="code-line"></div><div class="code-line"> <span class="comment"># WebSocket support</span></div><div class="code-line"> <span class="keyword">proxy_set_header</span> Upgrade $http_upgrade;</div><div class="code-line"> <span class="keyword">proxy_set_header</span> Connection <span class="string">"upgrade"</span>;</div><div class="code-line"></div><div class="code-line"> <span class="comment"># Timeouts</span></div><div class="code-line"> <span class="keyword">proxy_connect_timeout</span> 60s;</div><div class="code-line"> <span class="keyword">proxy_send_timeout</span> 60s;</div><div class="code-line"> <span class="keyword">proxy_read_timeout</span> 60s;</div><div class="code-line">}</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="load-balancing">
                 <div class="card-header">⚖️ Load Balancing</div>
                 <div class="code-block">
-<div class="code-line"><span class="keyword">upstream</span> backend {</div>
-<div class="code-line">    <span class="comment"># Round-robin (default)</span></div>
-<div class="code-line">    <span class="keyword">server</span> backend1.example.com;</div>
-<div class="code-line">    <span class="keyword">server</span> backend2.example.com;</div>
-<div class="code-line">    <span class="keyword">server</span> backend3.example.com;</div>
-<div class="code-line">}</div>
-<div class="code-line"></div>
-<div class="code-line"><span class="keyword">upstream</span> weighted {</div>
-<div class="code-line">    <span class="comment"># Weighted distribution</span></div>
-<div class="code-line">    <span class="keyword">server</span> backend1.example.com weight=3;</div>
-<div class="code-line">    <span class="keyword">server</span> backend2.example.com weight=1;</div>
-<div class="code-line">}</div>
-<div class="code-line"></div>
-<div class="code-line"><span class="keyword">upstream</span> ip_hash_backend {</div>
-<div class="code-line">    <span class="comment"># Session persistence</span></div>
-<div class="code-line">    <span class="keyword">ip_hash</span>;</div>
-<div class="code-line">    <span class="keyword">server</span> backend1.example.com;</div>
-<div class="code-line">    <span class="keyword">server</span> backend2.example.com;</div>
-<div class="code-line">}</div>
-<div class="code-line"></div>
-<div class="code-line"><span class="keyword">upstream</span> least_conn_backend {</div>
-<div class="code-line">    <span class="comment"># Least connections</span></div>
-<div class="code-line">    <span class="keyword">least_conn</span>;</div>
-<div class="code-line">    <span class="keyword">server</span> backend1.example.com;</div>
-<div class="code-line">    <span class="keyword">server</span> backend2.example.com;</div>
-<div class="code-line">}</div>
+                    <div class="code-line"><span class="keyword">upstream</span> backend {</div><div class="code-line"> <span class="comment"># Round-robin (default)</span></div><div class="code-line"> <span class="keyword">server</span> backend1.example.com;</div><div class="code-line"> <span class="keyword">server</span> backend2.example.com;</div><div class="code-line"> <span class="keyword">server</span> backend3.example.com;</div><div class="code-line">}</div><div class="code-line"></div><div class="code-line"><span class="keyword">upstream</span> weighted {</div><div class="code-line"> <span class="comment"># Weighted distribution</span></div><div class="code-line"> <span class="keyword">server</span> backend1.example.com weight=3;</div><div class="code-line"> <span class="keyword">server</span> backend2.example.com weight=1;</div><div class="code-line">}</div><div class="code-line"></div><div class="code-line"><span class="keyword">upstream</span> ip_hash_backend {</div><div class="code-line"> <span class="comment"># Session persistence</span></div><div class="code-line"> <span class="keyword">ip_hash</span>;</div><div class="code-line"> <span class="keyword">server</span> backend1.example.com;</div><div class="code-line"> <span class="keyword">server</span> backend2.example.com;</div><div class="code-line">}</div><div class="code-line"></div><div class="code-line"><span class="keyword">upstream</span> least_conn_backend {</div><div class="code-line"> <span class="comment"># Least connections</span></div><div class="code-line"> <span class="keyword">least_conn</span>;</div><div class="code-line"> <span class="keyword">server</span> backend1.example.com;</div><div class="code-line"> <span class="keyword">server</span> backend2.example.com;</div><div class="code-line">}</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="ssltls-configuration">
                 <div class="card-header">🔒 SSL/TLS Configuration</div>
                 <div class="code-block">
-<div class="code-line"><span class="keyword">server</span> {</div>
-<div class="code-line">    <span class="keyword">listen</span> 443 ssl http2;</div>
-<div class="code-line">    <span class="keyword">listen</span> [::]:443 ssl http2;</div>
-<div class="code-line">    <span class="keyword">server_name</span> example.com;</div>
-<div class="code-line"></div>
-<div class="code-line">    <span class="comment"># SSL certificates</span></div>
-<div class="code-line">    <span class="keyword">ssl_certificate</span> /path/to/cert.pem;</div>
-<div class="code-line">    <span class="keyword">ssl_certificate_key</span> /path/to/key.pem;</div>
-<div class="code-line"></div>
-<div class="code-line">    <span class="comment"># SSL protocols and ciphers</span></div>
-<div class="code-line">    <span class="keyword">ssl_protocols</span> TLSv1.2 TLSv1.3;</div>
-<div class="code-line">    <span class="keyword">ssl_ciphers</span> HIGH:!aNULL:!MD5;</div>
-<div class="code-line">    <span class="keyword">ssl_prefer_server_ciphers</span> on;</div>
-<div class="code-line"></div>
-<div class="code-line">    <span class="comment"># SSL session cache</span></div>
-<div class="code-line">    <span class="keyword">ssl_session_cache</span> shared:SSL:10m;</div>
-<div class="code-line">    <span class="keyword">ssl_session_timeout</span> 10m;</div>
-<div class="code-line"></div>
-<div class="code-line">    <span class="comment"># HSTS</span></div>
-<div class="code-line">    <span class="keyword">add_header</span> Strict-Transport-Security <span class="string">"max-age=31536000"</span> always;</div>
-<div class="code-line">}</div>
-<div class="code-line"></div>
-<div class="code-line"><span class="comment"># HTTP to HTTPS redirect</span></div>
-<div class="code-line"><span class="keyword">server</span> {</div>
-<div class="code-line">    <span class="keyword">listen</span> 80;</div>
-<div class="code-line">    <span class="keyword">server_name</span> example.com;</div>
-<div class="code-line">    <span class="keyword">return</span> 301 https://$server_name$request_uri;</div>
-<div class="code-line">}</div>
+                    <div class="code-line"><span class="keyword">server</span> {</div><div class="code-line"> <span class="keyword">listen</span> 443 ssl http2;</div><div class="code-line"> <span class="keyword">listen</span> [::]:443 ssl http2;</div><div class="code-line"> <span class="keyword">server_name</span> example.com;</div><div class="code-line"></div><div class="code-line"> <span class="comment"># SSL certificates</span></div><div class="code-line"> <span class="keyword">ssl_certificate</span> /path/to/cert.pem;</div><div class="code-line"> <span class="keyword">ssl_certificate_key</span> /path/to/key.pem;</div><div class="code-line"></div><div class="code-line"> <span class="comment"># SSL protocols and ciphers</span></div><div class="code-line"> <span class="keyword">ssl_protocols</span> TLSv1.2 TLSv1.3;</div><div class="code-line"> <span class="keyword">ssl_ciphers</span> HIGH:!aNULL:!MD5;</div><div class="code-line"> <span class="keyword">ssl_prefer_server_ciphers</span> on;</div><div class="code-line"></div><div class="code-line"> <span class="comment"># SSL session cache</span></div><div class="code-line"> <span class="keyword">ssl_session_cache</span> shared:SSL:10m;</div><div class="code-line"> <span class="keyword">ssl_session_timeout</span> 10m;</div><div class="code-line"></div><div class="code-line"> <span class="comment"># HSTS</span></div><div class="code-line"> <span class="keyword">add_header</span> Strict-Transport-Security <span class="string">"max-age=31536000"</span> always;</div><div class="code-line">}</div><div class="code-line"></div><div class="code-line"><span class="comment"># HTTP to HTTPS redirect</span></div><div class="code-line"><span class="keyword">server</span> {</div><div class="code-line"> <span class="keyword">listen</span> 80;</div><div class="code-line"> <span class="keyword">server_name</span> example.com;</div><div class="code-line"> <span class="keyword">return</span> 301 https://$server_name$request_uri;</div><div class="code-line">}</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="static-file-serving">
                 <div class="card-header">📦 Static File Serving</div>
                 <div class="code-block">
-<div class="code-line"><span class="keyword">location</span> /static/ {</div>
-<div class="code-line">    <span class="keyword">alias</span> /var/www/static/;</div>
-<div class="code-line">    <span class="keyword">expires</span> 30d;</div>
-<div class="code-line">    <span class="keyword">add_header</span> Cache-Control <span class="string">"public, immutable"</span>;</div>
-<div class="code-line">}</div>
-<div class="code-line"></div>
-<div class="code-line"><span class="keyword">location</span> ~* \.(jpg|jpeg|png|gif|ico|css|js)$ {</div>
-<div class="code-line">    <span class="keyword">expires</span> 1y;</div>
-<div class="code-line">    <span class="keyword">add_header</span> Cache-Control <span class="string">"public, immutable"</span>;</div>
-<div class="code-line">    <span class="keyword">access_log</span> off;</div>
-<div class="code-line">}</div>
-<div class="code-line"></div>
-<div class="code-line"><span class="comment"># Gzip compression</span></div>
-<div class="code-line"><span class="keyword">gzip</span> on;</div>
-<div class="code-line"><span class="keyword">gzip_vary</span> on;</div>
-<div class="code-line"><span class="keyword">gzip_types</span> text/plain text/css application/json application/javascript text/xml;</div>
-<div class="code-line"><span class="keyword">gzip_min_length</span> 1000;</div>
+                    <div class="code-line"><span class="keyword">location</span> /static/ {</div><div class="code-line"> <span class="keyword">alias</span> /var/www/static/;</div><div class="code-line"> <span class="keyword">expires</span> 30d;</div><div class="code-line"> <span class="keyword">add_header</span> Cache-Control <span class="string">"public, immutable"</span>;</div><div class="code-line">}</div><div class="code-line"></div><div class="code-line"><span class="keyword">location</span> ~* \.(jpg|jpeg|png|gif|ico|css|js)$ {</div><div class="code-line"> <span class="keyword">expires</span> 1y;</div><div class="code-line"> <span class="keyword">add_header</span> Cache-Control <span class="string">"public, immutable"</span>;</div><div class="code-line"> <span class="keyword">access_log</span> off;</div><div class="code-line">}</div><div class="code-line"></div><div class="code-line"><span class="comment"># Gzip compression</span></div><div class="code-line"><span class="keyword">gzip</span> on;</div><div class="code-line"><span class="keyword">gzip_vary</span> on;</div><div class="code-line"><span class="keyword">gzip_types</span> text/plain text/css application/json application/javascript text/xml;</div><div class="code-line"><span class="keyword">gzip_min_length</span> 1000;</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="security-headers">
                 <div class="card-header">🔐 Security Headers</div>
                 <div class="code-block">
-<div class="code-line"><span class="comment"># Add security headers</span></div>
-<div class="code-line"><span class="keyword">add_header</span> X-Frame-Options <span class="string">"SAMEORIGIN"</span> always;</div>
-<div class="code-line"><span class="keyword">add_header</span> X-Content-Type-Options <span class="string">"nosniff"</span> always;</div>
-<div class="code-line"><span class="keyword">add_header</span> X-XSS-Protection <span class="string">"1; mode=block"</span> always;</div>
-<div class="code-line"><span class="keyword">add_header</span> Referrer-Policy <span class="string">"no-referrer-when-downgrade"</span> always;</div>
-<div class="code-line"><span class="keyword">add_header</span> Content-Security-Policy <span class="string">"default-src 'self'"</span> always;</div>
-<div class="code-line"></div>
-<div class="code-line"><span class="comment"># Hide Nginx version</span></div>
-<div class="code-line"><span class="keyword">server_tokens</span> off;</div>
-<div class="code-line"></div>
-<div class="code-line"><span class="comment"># Limit request size</span></div>
-<div class="code-line"><span class="keyword">client_max_body_size</span> 10M;</div>
-<div class="code-line"></div>
-<div class="code-line"><span class="comment"># Rate limiting</span></div>
-<div class="code-line"><span class="keyword">limit_req_zone</span> $binary_remote_addr zone=mylimit:10m rate=10r/s;</div>
-<div class="code-line"><span class="keyword">limit_req</span> zone=mylimit burst=20 nodelay;</div>
-                </div>
-                <div class="warning">
-                    ⚠️ Always test security headers for compatibility with your application
+                    <div class="code-line"><span class="comment"># Add security headers</span></div><div class="code-line"><span class="keyword">add_header</span> X-Frame-Options <span class="string">"SAMEORIGIN"</span> always;</div><div class="code-line"><span class="keyword">add_header</span> X-Content-Type-Options <span class="string">"nosniff"</span> always;</div><div class="code-line"><span class="keyword">add_header</span> X-XSS-Protection <span class="string">"1; mode=block"</span> always;</div><div class="code-line"><span class="keyword">add_header</span> Referrer-Policy <span class="string">"no-referrer-when-downgrade"</span> always;</div><div class="code-line"><span class="keyword">add_header</span> Content-Security-Policy <span class="string">"default-src 'self'"</span> always;</div><div class="code-line"></div><div class="code-line"><span class="comment"># Hide Nginx version</span></div><div class="code-line"><span class="keyword">server_tokens</span> off;</div><div class="code-line"></div><div class="code-line"><span class="comment"># Limit request size</span></div><div class="code-line"><span class="keyword">client_max_body_size</span> 10M;</div><div class="code-line"></div><div class="code-line"><span class="comment"># Rate limiting</span></div><div class="code-line"><span class="keyword">limit_req_zone</span> $binary_remote_addr zone=mylimit:10m rate=10r/s;</div><div class="code-line"><span class="keyword">limit_req</span> zone=mylimit burst=20 nodelay;</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="redirects-rewrites">
                 <div class="card-header">🎯 Redirects & Rewrites</div>
                 <div class="code-block">
-<div class="code-line"><span class="comment"># Permanent redirect</span></div>
-<div class="code-line"><span class="keyword">return</span> 301 https://example.com$request_uri;</div>
-<div class="code-line"></div>
-<div class="code-line"><span class="comment"># Temporary redirect</span></div>
-<div class="code-line"><span class="keyword">return</span> 302 /new-location;</div>
-<div class="code-line"></div>
-<div class="code-line"><span class="comment"># Rewrite URL</span></div>
-<div class="code-line"><span class="keyword">rewrite</span> ^/old-path/(.*)$ /new-path/$1 permanent;</div>
-<div class="code-line"></div>
-<div class="code-line"><span class="comment"># Conditional redirect</span></div>
-<div class="code-line"><span class="keyword">if</span> ($host != <span class="string">"example.com"</span>) {</div>
-<div class="code-line">    <span class="keyword">return</span> 301 https://example.com$request_uri;</div>
-<div class="code-line">}</div>
-<div class="code-line"></div>
-<div class="code-line"><span class="comment"># Try files in order</span></div>
-<div class="code-line"><span class="keyword">try_files</span> $uri $uri/ /index.html;</div>
-                </div>
-                <div class="note">
-                    Use <code>return</code> instead of <code>rewrite</code> when possible for better performance
+                    <div class="code-line"><span class="comment"># Permanent redirect</span></div><div class="code-line"><span class="keyword">return</span> 301 https://example.com$request_uri;</div><div class="code-line"></div><div class="code-line"><span class="comment"># Temporary redirect</span></div><div class="code-line"><span class="keyword">return</span> 302 /new-location;</div><div class="code-line"></div><div class="code-line"><span class="comment"># Rewrite URL</span></div><div class="code-line"><span class="keyword">rewrite</span> ^/old-path/(.*)$ /new-path/$1 permanent;</div><div class="code-line"></div><div class="code-line"><span class="comment"># Conditional redirect</span></div><div class="code-line"><span class="keyword">if</span> ($host != <span class="string">"example.com"</span>) {</div><div class="code-line"> <span class="keyword">return</span> 301 https://example.com$request_uri;</div><div class="code-line">}</div><div class="code-line"></div><div class="code-line"><span class="comment"># Try files in order</span></div><div class="code-line"><span class="keyword">try_files</span> $uri $uri/ /index.html;</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="php-fpm-configuration">
                 <div class="card-header">🐘 PHP-FPM Configuration</div>
                 <div class="code-block">
-<div class="code-line"><span class="keyword">location</span> ~ \.php$ {</div>
-<div class="code-line">    <span class="keyword">fastcgi_pass</span> unix:/var/run/php/php8.1-fpm.sock;</div>
-<div class="code-line">    <span class="keyword">fastcgi_index</span> index.php;</div>
-<div class="code-line">    <span class="keyword">fastcgi_param</span> SCRIPT_FILENAME $document_root$fastcgi_script_name;</div>
-<div class="code-line">    <span class="keyword">include</span> fastcgi_params;</div>
-<div class="code-line"></div>
-<div class="code-line">    <span class="comment"># Security: prevent access to hidden files</span></div>
-<div class="code-line">    <span class="keyword">fastcgi_param</span> PHP_VALUE <span class="string">"open_basedir=$document_root:/tmp/"</span>;</div>
-<div class="code-line">}</div>
-<div class="code-line"></div>
-<div class="code-line"><span class="comment"># Deny access to .php files in uploads</span></div>
-<div class="code-line"><span class="keyword">location</span> ~* /uploads/.*\.php$ {</div>
-<div class="code-line">    <span class="keyword">deny</span> all;</div>
-<div class="code-line">}</div>
+                    <div class="code-line"><span class="keyword">location</span> ~ \.php$ {</div><div class="code-line"> <span class="keyword">fastcgi_pass</span> unix:/var/run/php/php8.1-fpm.sock;</div><div class="code-line"> <span class="keyword">fastcgi_index</span> index.php;</div><div class="code-line"> <span class="keyword">fastcgi_param</span> SCRIPT_FILENAME $document_root$fastcgi_script_name;</div><div class="code-line"> <span class="keyword">include</span> fastcgi_params;</div><div class="code-line"></div><div class="code-line"> <span class="comment"># Security: prevent access to hidden files</span></div><div class="code-line"> <span class="keyword">fastcgi_param</span> PHP_VALUE <span class="string">"open_basedir=$document_root:/tmp/"</span>;</div><div class="code-line">}</div><div class="code-line"></div><div class="code-line"><span class="comment"># Deny access to .php files in uploads</span></div><div class="code-line"><span class="keyword">location</span> ~* /uploads/.*\.php$ {</div><div class="code-line"> <span class="keyword">deny</span> all;</div><div class="code-line">}</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="common-directives">
                 <div class="card-header">🔧 Common Directives</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">root /var/www/html;</div>
-                    <div class="cmd-desc">Set document root directory</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">index index.html index.php;</div>
-                    <div class="cmd-desc">Define index files in order</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">error_page 404 /404.html;</div>
-                    <div class="cmd-desc">Custom error page</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">error_page 500 502 503 504 /50x.html;</div>
-                    <div class="cmd-desc">Multiple error codes</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">access_log off;</div>
-                    <div class="cmd-desc">Disable access logging</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">sendfile on;</div>
-                    <div class="cmd-desc">Enable efficient file transfers</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">tcp_nopush on;</div>
-                    <div class="cmd-desc">Optimize packet transmission</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">tcp_nodelay on;</div>
-                    <div class="cmd-desc">Disable Nagle's algorithm</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">keepalive_timeout 65;</div>
-                    <div class="cmd-desc">Keep connections alive (seconds)</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="nginx-commands">
                 <div class="card-header">🛠️ Nginx Commands</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">nginx -t</div>
-                    <div class="cmd-desc">Test configuration syntax</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">nginx -T</div>
-                    <div class="cmd-desc">Test and dump configuration</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">nginx -s reload</div>
-                    <div class="cmd-desc">Reload configuration gracefully</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">nginx -s stop</div>
-                    <div class="cmd-desc">Stop Nginx immediately</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">nginx -s quit</div>
-                    <div class="cmd-desc">Graceful shutdown</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">nginx -s reopen</div>
-                    <div class="cmd-desc">Reopen log files</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">systemctl start nginx</div>
-                    <div class="cmd-desc">Start Nginx service</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">systemctl restart nginx</div>
-                    <div class="cmd-desc">Restart Nginx service</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">systemctl status nginx</div>
-                    <div class="cmd-desc">Check Nginx status</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">systemctl enable nginx</div>
-                    <div class="cmd-desc">Enable on boot</div>
-                </div>
-                <div class="tip">
-                    💡 Always run <code>nginx -t</code> before reloading configuration
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="logging-configuration">
                 <div class="card-header">📝 Logging Configuration</div>
                 <div class="code-block">
-<div class="code-line"><span class="comment"># Custom log format</span></div>
-<div class="code-line"><span class="keyword">log_format</span> main <span class="string">'$remote_addr - $remote_user [$time_local] '</span></div>
-<div class="code-line">                  <span class="string">'"$request" $status $body_bytes_sent '</span></div>
-<div class="code-line">                  <span class="string">'"$http_referer" "$http_user_agent"'</span>;</div>
-<div class="code-line"></div>
-<div class="code-line"><span class="comment"># JSON log format</span></div>
-<div class="code-line"><span class="keyword">log_format</span> json escape=json <span class="string">'{'</span></div>
-<div class="code-line">    <span class="string">'"time":"$time_iso8601",'</span></div>
-<div class="code-line">    <span class="string">'"remote_addr":"$remote_addr",'</span></div>
-<div class="code-line">    <span class="string">'"request":"$request",'</span></div>
-<div class="code-line">    <span class="string">'"status":$status,'</span></div>
-<div class="code-line">    <span class="string">'"body_bytes_sent":$body_bytes_sent'</span></div>
-<div class="code-line"><span class="string">'}'</span>;</div>
-<div class="code-line"></div>
-<div class="code-line"><span class="keyword">access_log</span> /var/log/nginx/access.log main;</div>
-<div class="code-line"><span class="keyword">error_log</span> /var/log/nginx/error.log warn;</div>
+                    <div class="code-line"><span class="comment"># Custom log format</span></div><div class="code-line"><span class="keyword">log_format</span> main <span class="string">'$remote_addr - $remote_user [$time_local] '</span></div><div class="code-line"> <span class="string">'"$request" $status $body_bytes_sent '</span></div><div class="code-line"> <span class="string">'"$http_referer" "$http_user_agent"'</span>;</div><div class="code-line"></div><div class="code-line"><span class="comment"># JSON log format</span></div><div class="code-line"><span class="keyword">log_format</span> json escape=json <span class="string">'{'</span></div><div class="code-line"> <span class="string">'"time":"$time_iso8601",'</span></div><div class="code-line"> <span class="string">'"remote_addr":"$remote_addr",'</span></div><div class="code-line"> <span class="string">'"request":"$request",'</span></div><div class="code-line"> <span class="string">'"status":$status,'</span></div><div class="code-line"> <span class="string">'"body_bytes_sent":$body_bytes_sent'</span></div><div class="code-line"><span class="string">'}'</span>;</div><div class="code-line"></div><div class="code-line"><span class="keyword">access_log</span> /var/log/nginx/access.log main;</div><div class="code-line"><span class="keyword">error_log</span> /var/log/nginx/error.log warn;</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="spa-single-page-application">
                 <div class="card-header">🎨 SPA (Single Page Application)</div>
                 <div class="code-block">
-<div class="code-line"><span class="keyword">server</span> {</div>
-<div class="code-line">    <span class="keyword">listen</span> 80;</div>
-<div class="code-line">    <span class="keyword">server_name</span> app.example.com;</div>
-<div class="code-line">    <span class="keyword">root</span> /var/www/app/dist;</div>
-<div class="code-line">    <span class="keyword">index</span> index.html;</div>
-<div class="code-line"></div>
-<div class="code-line">    <span class="comment"># Handle client-side routing</span></div>
-<div class="code-line">    <span class="keyword">location</span> / {</div>
-<div class="code-line">        <span class="keyword">try_files</span> $uri $uri/ /index.html;</div>
-<div class="code-line">    }</div>
-<div class="code-line"></div>
-<div class="code-line">    <span class="comment"># Cache static assets</span></div>
-<div class="code-line">    <span class="keyword">location</span> ~* \.(js|css|png|jpg|jpeg|gif|ico|svg)$ {</div>
-<div class="code-line">        <span class="keyword">expires</span> 1y;</div>
-<div class="code-line">        <span class="keyword">add_header</span> Cache-Control <span class="string">"public, immutable"</span>;</div>
-<div class="code-line">    }</div>
-<div class="code-line"></div>
-<div class="code-line">    <span class="comment"># API proxy</span></div>
-<div class="code-line">    <span class="keyword">location</span> /api/ {</div>
-<div class="code-line">        <span class="keyword">proxy_pass</span> http://localhost:3000/;</div>
-<div class="code-line">        <span class="keyword">proxy_set_header</span> Host $host;</div>
-<div class="code-line">        <span class="keyword">proxy_set_header</span> X-Real-IP $remote_addr;</div>
-<div class="code-line">    }</div>
-<div class="code-line">}</div>
+                    <div class="code-line"><span class="keyword">server</span> {</div><div class="code-line"> <span class="keyword">listen</span> 80;</div><div class="code-line"> <span class="keyword">server_name</span> app.example.com;</div><div class="code-line"> <span class="keyword">root</span> /var/www/app/dist;</div><div class="code-line"> <span class="keyword">index</span> index.html;</div><div class="code-line"></div><div class="code-line"> <span class="comment"># Handle client-side routing</span></div><div class="code-line"> <span class="keyword">location</span> / {</div><div class="code-line"> <span class="keyword">try_files</span> $uri $uri/ /index.html;</div><div class="code-line">    }</div><div class="code-line"></div><div class="code-line"> <span class="comment"># Cache static assets</span></div><div class="code-line"> <span class="keyword">location</span> ~* \.(js|css|png|jpg|jpeg|gif|ico|svg)$ {</div><div class="code-line"> <span class="keyword">expires</span> 1y;</div><div class="code-line"> <span class="keyword">add_header</span> Cache-Control <span class="string">"public, immutable"</span>;</div><div class="code-line">    }</div><div class="code-line"></div><div class="code-line"> <span class="comment"># API proxy</span></div><div class="code-line"> <span class="keyword">location</span> /api/ {</div><div class="code-line"> <span class="keyword">proxy_pass</span> http://localhost:3000/;</div><div class="code-line"> <span class="keyword">proxy_set_header</span> Host $host;</div><div class="code-line"> <span class="keyword">proxy_set_header</span> X-Real-IP $remote_addr;</div><div class="code-line">    }</div><div class="code-line">}</div>
+                </div>
+            </div>
+            <div class="card" id="best-practices">
+                <div class="card-header">💡 Best Practices</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="debugging-troubleshooting">
+                <div class="card-header">🔍 Debugging & Troubleshooting</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment"># Enable debug logging</span></div><div class="code-line"><span class="keyword">error_log</span> /var/log/nginx/error.log debug;</div><div class="code-line"></div><div class="code-line"><span class="comment"># Check which config file is being used</span></div><div class="code-line">$ nginx -V</div><div class="code-line"></div><div class="code-line"><span class="comment"># View error logs</span></div><div class="code-line">$ tail -f /var/log/nginx/error.log</div><div class="code-line"></div><div class="code-line"><span class="comment"># View access logs</span></div><div class="code-line">$ tail -f /var/log/nginx/access.log</div><div class="code-line"></div><div class="code-line"><span class="comment"># Check listening ports</span></div><div class="code-line">$ netstat -tlnp | grep nginx</div><div class="code-line"></div><div class="code-line"><span class="comment"># Test upstream connectivity</span></div><div class="code-line">$ curl -I http://localhost:3000</div>
+                </div>
+            </div>
+            <div class="card" id="useful-variables">
+                <div class="card-header">📚 Useful Variables</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header">💡 Best Practices</div>
-            <div class="tip">
-                <strong>Performance:</strong><br>
-                • Enable gzip compression for text-based content<br>
-                • Use HTTP/2 for better performance<br>
-                • Set appropriate cache headers for static assets<br>
-                • Enable sendfile and tcp_nopush for file serving<br>
-                • Use upstream keepalive for backend connections
-            </div>
-            <div class="tip" style="margin-top: 1rem;">
-                <strong>Security:</strong><br>
-                • Always use HTTPS with modern TLS versions<br>
-                • Hide Nginx version with server_tokens off<br>
-                • Implement rate limiting to prevent abuse<br>
-                • Set security headers (CSP, X-Frame-Options, etc.)<br>
-                • Restrict access to sensitive locations<br>
-                • Keep Nginx and modules updated
-            </div>
-            <div class="tip" style="margin-top: 1rem;">
-                <strong>Configuration Management:</strong><br>
-                • Test configuration before reloading: <code>nginx -t</code><br>
-                • Use include directives to organize configs<br>
-                • Keep server blocks in separate files<br>
-                • Use variables for repeated values<br>
-                • Comment your configuration thoroughly<br>
-                • Version control your configuration files
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">🔍 Debugging & Troubleshooting</div>
-            <div class="code-block">
-<div class="code-line"><span class="comment"># Enable debug logging</span></div>
-<div class="code-line"><span class="keyword">error_log</span> /var/log/nginx/error.log debug;</div>
-<div class="code-line"></div>
-<div class="code-line"><span class="comment"># Check which config file is being used</span></div>
-<div class="code-line">$ nginx -V</div>
-<div class="code-line"></div>
-<div class="code-line"><span class="comment"># View error logs</span></div>
-<div class="code-line">$ tail -f /var/log/nginx/error.log</div>
-<div class="code-line"></div>
-<div class="code-line"><span class="comment"># View access logs</span></div>
-<div class="code-line">$ tail -f /var/log/nginx/access.log</div>
-<div class="code-line"></div>
-<div class="code-line"><span class="comment"># Check listening ports</span></div>
-<div class="code-line">$ netstat -tlnp | grep nginx</div>
-<div class="code-line"></div>
-<div class="code-line"><span class="comment"># Test upstream connectivity</span></div>
-<div class="code-line">$ curl -I http://localhost:3000</div>
-            </div>
-            <div class="note">
-                <strong>Common Issues:</strong><br>
-                • 502 Bad Gateway: Backend server not responding<br>
-                • 403 Forbidden: Permission issues or missing index file<br>
-                • 404 Not Found: Incorrect root or location configuration<br>
-                • Connection refused: Nginx not running or wrong port
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">📚 Useful Variables</div>
-            <div class="cmd-row">
-                <div class="cmd-name">$host</div>
-                <div class="cmd-desc">Hostname from request line or Host header</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">$remote_addr</div>
-                <div class="cmd-desc">Client IP address</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">$request_uri</div>
-                <div class="cmd-desc">Full original request URI with arguments</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">$uri</div>
-                <div class="cmd-desc">Current URI in request (normalized)</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">$args</div>
-                <div class="cmd-desc">Query string arguments</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">$scheme</div>
-                <div class="cmd-desc">Request scheme (http or https)</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">$server_name</div>
-                <div class="cmd-desc">Name of the server block</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">$request_method</div>
-                <div class="cmd-desc">HTTP method (GET, POST, etc.)</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">$http_user_agent</div>
-                <div class="cmd-desc">User-Agent header value</div>
-            </div>
-            <div class="cmd-row">
-                <div class="cmd-name">$document_root</div>
-                <div class="cmd-desc">Root directive value for current request</div>
-            </div>
-        </div>
-
-        <div class="footer">
-            <p>Nginx Configuration Reference & Best Practices</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">💡 Official documentation: <code>nginx.org/en/docs/</code></p>
-        </div>
+        <footer>
+            <p>&copy; 2025 Cheatsheets Collection. Open source and community driven.</p>
+        </footer>
     </div>
 </body>
 </html>

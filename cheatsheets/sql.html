@@ -3,443 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="SQL query reference with SELECT, JOIN, aggregation, and database operations.">
     <title>SQL Queries & Commands Cheatsheet</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-            color: #e0e6ed;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 2rem;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            font-size: 3rem;
-            color: white;
-            margin-bottom: 0.5rem;
-            text-align: center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .subtitle {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.95);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            color: #1a202c;
-        }
-
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-        }
-
-        .card-header {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #1e3a8a;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #3b82f6;
-        }
-
-        .code-block {
-            background: rgba(30, 58, 138, 0.95);
-            padding: 1rem;
-            border-radius: 6px;
-            font-family: 'Courier New', monospace;
-            color: #93c5fd;
-            margin: 0.5rem 0;
-            border-left: 3px solid #60a5fa;
-            overflow-x: auto;
-            font-size: 0.9rem;
-        }
-
-        .code-line {
-            margin: 0.2rem 0;
-        }
-
-        .keyword {
-            color: #fbbf24;
-            font-weight: 600;
-        }
-
-        .comment {
-            color: #86efac;
-        }
-
-        code {
-            background: rgba(30, 58, 138, 0.1);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            color: #1e3a8a;
-            font-size: 0.9em;
-        }
-
-        .note {
-            background: rgba(59, 130, 246, 0.1);
-            border-left: 4px solid #3b82f6;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .tip {
-            background: rgba(16, 185, 129, 0.1);
-            border-left: 4px solid #10b981;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../script.js" defer></script>
 </head>
 <body>
-    <div class="container">
-        <h1>🗄️ SQL Queries & Commands</h1>
-        <p class="subtitle">Complete guide to database operations</p>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-brand">
+                <i class="ph ph-books"></i> Cheatsheets
+            </a>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="btn-icon" aria-label="Toggle theme">
+                    <i class="ph ph-moon"></i>
+                </button>
+                <button id="download-btn" class="btn-icon" aria-label="Download PDF">
+                    <i class="ph ph-download-simple"></i>
+                </button>
+                <a href="https://github.com/keyurgolani/Cheatsheets" class="btn-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                    <i class="ph ph-github-logo"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
 
-        <div class="grid">
-            <div class="card">
+    <div class="container">
+        <header class="cheatsheet-header">
+            <h1>🗄️ SQL Queries & Commands</h1>
+            <p>Complete guide to database operations</p>
+            <div class="search-container" style="margin-top: 1.5rem; margin-bottom: 0;">
+                <span class="search-icon"><i class="ph ph-magnifying-glass"></i></span>
+                <input type="text" class="search-input" id="cheatsheet-search" placeholder="Filter this cheatsheet..." aria-label="Filter cheatsheet">
+            </div>
+        </header>
+
+        <div class="masonry-grid" id="cheatsheet-grid">
+            
+            <div class="card" id="select-queries">
                 <div class="card-header">📊 SELECT Queries</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">-- Basic select</span></div>
-                    <div class="code-line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> users;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- Select specific columns</span></div>
-                    <div class="code-line"><span class="keyword">SELECT</span> name, email <span class="keyword">FROM</span> users;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- With alias</span></div>
-                    <div class="code-line"><span class="keyword">SELECT</span> name <span class="keyword">AS</span> full_name <span class="keyword">FROM</span> users;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- Distinct values</span></div>
-                    <div class="code-line"><span class="keyword">SELECT DISTINCT</span> city <span class="keyword">FROM</span> users;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- Limit results</span></div>
-                    <div class="code-line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> users <span class="keyword">LIMIT</span> 10;</div>
+                    <div class="code-line"><span class="comment">-- Basic select</span></div><div class="code-line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> users;</div><div class="code-line"></div><div class="code-line"><span class="comment">-- Select specific columns</span></div><div class="code-line"><span class="keyword">SELECT</span> name, email <span class="keyword">FROM</span> users;</div><div class="code-line"></div><div class="code-line"><span class="comment">-- With alias</span></div><div class="code-line"><span class="keyword">SELECT</span> name <span class="keyword">AS</span> full_name <span class="keyword">FROM</span> users;</div><div class="code-line"></div><div class="code-line"><span class="comment">-- Distinct values</span></div><div class="code-line"><span class="keyword">SELECT DISTINCT</span> city <span class="keyword">FROM</span> users;</div><div class="code-line"></div><div class="code-line"><span class="comment">-- Limit results</span></div><div class="code-line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> users <span class="keyword">LIMIT</span> 10;</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="where-clause">
                 <div class="card-header">🔍 WHERE Clause</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">-- Basic conditions</span></div>
-                    <div class="code-line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> users</div>
-                    <div class="code-line"><span class="keyword">WHERE</span> age > 18;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- Multiple conditions</span></div>
-                    <div class="code-line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> users</div>
-                    <div class="code-line"><span class="keyword">WHERE</span> age > 18 <span class="keyword">AND</span> city = 'NYC';</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- OR condition</span></div>
-                    <div class="code-line"><span class="keyword">WHERE</span> city = 'NYC' <span class="keyword">OR</span> city = 'LA';</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- IN operator</span></div>
-                    <div class="code-line"><span class="keyword">WHERE</span> city <span class="keyword">IN</span> ('NYC', 'LA', 'SF');</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- BETWEEN</span></div>
-                    <div class="code-line"><span class="keyword">WHERE</span> age <span class="keyword">BETWEEN</span> 18 <span class="keyword">AND</span> 65;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- LIKE pattern matching</span></div>
-                    <div class="code-line"><span class="keyword">WHERE</span> name <span class="keyword">LIKE</span> 'J%';</div>
-                    <div class="code-line"><span class="keyword">WHERE</span> email <span class="keyword">LIKE</span> '%@gmail.com';</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- IS NULL</span></div>
-                    <div class="code-line"><span class="keyword">WHERE</span> phone <span class="keyword">IS NULL</span>;</div>
-                    <div class="code-line"><span class="keyword">WHERE</span> phone <span class="keyword">IS NOT NULL</span>;</div>
+                    <div class="code-line"><span class="comment">-- Basic conditions</span></div><div class="code-line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> users</div><div class="code-line"><span class="keyword">WHERE</span> age &gt; 18;</div><div class="code-line"></div><div class="code-line"><span class="comment">-- Multiple conditions</span></div><div class="code-line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> users</div><div class="code-line"><span class="keyword">WHERE</span> age &gt; 18 <span class="keyword">AND</span> city = 'NYC';</div><div class="code-line"></div><div class="code-line"><span class="comment">-- OR condition</span></div><div class="code-line"><span class="keyword">WHERE</span> city = 'NYC' <span class="keyword">OR</span> city = 'LA';</div><div class="code-line"></div><div class="code-line"><span class="comment">-- IN operator</span></div><div class="code-line"><span class="keyword">WHERE</span> city <span class="keyword">IN</span> ('NYC', 'LA', 'SF');</div><div class="code-line"></div><div class="code-line"><span class="comment">-- BETWEEN</span></div><div class="code-line"><span class="keyword">WHERE</span> age <span class="keyword">BETWEEN</span> 18 <span class="keyword">AND</span> 65;</div><div class="code-line"></div><div class="code-line"><span class="comment">-- LIKE pattern matching</span></div><div class="code-line"><span class="keyword">WHERE</span> name <span class="keyword">LIKE</span> 'J%';</div><div class="code-line"><span class="keyword">WHERE</span> email <span class="keyword">LIKE</span> '%@gmail.com';</div><div class="code-line"></div><div class="code-line"><span class="comment">-- IS NULL</span></div><div class="code-line"><span class="keyword">WHERE</span> phone <span class="keyword">IS NULL</span>;</div><div class="code-line"><span class="keyword">WHERE</span> phone <span class="keyword">IS NOT NULL</span>;</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="order-by-sorting">
                 <div class="card-header">📈 ORDER BY & Sorting</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">-- Sort ascending (default)</span></div>
-                    <div class="code-line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> users</div>
-                    <div class="code-line"><span class="keyword">ORDER BY</span> name;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- Sort descending</span></div>
-                    <div class="code-line"><span class="keyword">ORDER BY</span> age <span class="keyword">DESC</span>;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- Multiple columns</span></div>
-                    <div class="code-line"><span class="keyword">ORDER BY</span> city <span class="keyword">ASC</span>, age <span class="keyword">DESC</span>;</div>
+                    <div class="code-line"><span class="comment">-- Sort ascending (default)</span></div><div class="code-line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> users</div><div class="code-line"><span class="keyword">ORDER BY</span> name;</div><div class="code-line"></div><div class="code-line"><span class="comment">-- Sort descending</span></div><div class="code-line"><span class="keyword">ORDER BY</span> age <span class="keyword">DESC</span>;</div><div class="code-line"></div><div class="code-line"><span class="comment">-- Multiple columns</span></div><div class="code-line"><span class="keyword">ORDER BY</span> city <span class="keyword">ASC</span>, age <span class="keyword">DESC</span>;</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="aggregate-functions">
                 <div class="card-header">📊 Aggregate Functions</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">-- COUNT</span></div>
-                    <div class="code-line"><span class="keyword">SELECT COUNT</span>(*) <span class="keyword">FROM</span> users;</div>
-                    <div class="code-line"><span class="keyword">SELECT COUNT</span>(<span class="keyword">DISTINCT</span> city) <span class="keyword">FROM</span> users;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- SUM, AVG, MIN, MAX</span></div>
-                    <div class="code-line"><span class="keyword">SELECT SUM</span>(price) <span class="keyword">FROM</span> orders;</div>
-                    <div class="code-line"><span class="keyword">SELECT AVG</span>(age) <span class="keyword">FROM</span> users;</div>
-                    <div class="code-line"><span class="keyword">SELECT MIN</span>(price), <span class="keyword">MAX</span>(price)</div>
-                    <div class="code-line"><span class="keyword">FROM</span> products;</div>
+                    <div class="code-line"><span class="comment">-- COUNT</span></div><div class="code-line"><span class="keyword">SELECT COUNT</span>(*) <span class="keyword">FROM</span> users;</div><div class="code-line"><span class="keyword">SELECT COUNT</span>(<span class="keyword">DISTINCT</span> city) <span class="keyword">FROM</span> users;</div><div class="code-line"></div><div class="code-line"><span class="comment">-- SUM, AVG, MIN, MAX</span></div><div class="code-line"><span class="keyword">SELECT SUM</span>(price) <span class="keyword">FROM</span> orders;</div><div class="code-line"><span class="keyword">SELECT AVG</span>(age) <span class="keyword">FROM</span> users;</div><div class="code-line"><span class="keyword">SELECT MIN</span>(price), <span class="keyword">MAX</span>(price)</div><div class="code-line"><span class="keyword">FROM</span> products;</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="group-by-having">
                 <div class="card-header">🔗 GROUP BY & HAVING</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">-- Group by single column</span></div>
-                    <div class="code-line"><span class="keyword">SELECT</span> city, <span class="keyword">COUNT</span>(*)</div>
-                    <div class="code-line"><span class="keyword">FROM</span> users</div>
-                    <div class="code-line"><span class="keyword">GROUP BY</span> city;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- Multiple columns</span></div>
-                    <div class="code-line"><span class="keyword">SELECT</span> city, age, <span class="keyword">COUNT</span>(*)</div>
-                    <div class="code-line"><span class="keyword">FROM</span> users</div>
-                    <div class="code-line"><span class="keyword">GROUP BY</span> city, age;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- HAVING (filter groups)</span></div>
-                    <div class="code-line"><span class="keyword">SELECT</span> city, <span class="keyword">COUNT</span>(*) <span class="keyword">AS</span> cnt</div>
-                    <div class="code-line"><span class="keyword">FROM</span> users</div>
-                    <div class="code-line"><span class="keyword">GROUP BY</span> city</div>
-                    <div class="code-line"><span class="keyword">HAVING</span> cnt > 10;</div>
+                    <div class="code-line"><span class="comment">-- Group by single column</span></div><div class="code-line"><span class="keyword">SELECT</span> city, <span class="keyword">COUNT</span>(*)</div><div class="code-line"><span class="keyword">FROM</span> users</div><div class="code-line"><span class="keyword">GROUP BY</span> city;</div><div class="code-line"></div><div class="code-line"><span class="comment">-- Multiple columns</span></div><div class="code-line"><span class="keyword">SELECT</span> city, age, <span class="keyword">COUNT</span>(*)</div><div class="code-line"><span class="keyword">FROM</span> users</div><div class="code-line"><span class="keyword">GROUP BY</span> city, age;</div><div class="code-line"></div><div class="code-line"><span class="comment">-- HAVING (filter groups)</span></div><div class="code-line"><span class="keyword">SELECT</span> city, <span class="keyword">COUNT</span>(*) <span class="keyword">AS</span> cnt</div><div class="code-line"><span class="keyword">FROM</span> users</div><div class="code-line"><span class="keyword">GROUP BY</span> city</div><div class="code-line"><span class="keyword">HAVING</span> cnt &gt; 10;</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="join-operations">
                 <div class="card-header">🔄 JOIN Operations</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">-- INNER JOIN</span></div>
-                    <div class="code-line"><span class="keyword">SELECT</span> users.name, orders.amount</div>
-                    <div class="code-line"><span class="keyword">FROM</span> users</div>
-                    <div class="code-line"><span class="keyword">INNER JOIN</span> orders</div>
-                    <div class="code-line">  <span class="keyword">ON</span> users.id = orders.user_id;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- LEFT JOIN</span></div>
-                    <div class="code-line"><span class="keyword">SELECT</span> users.name, orders.amount</div>
-                    <div class="code-line"><span class="keyword">FROM</span> users</div>
-                    <div class="code-line"><span class="keyword">LEFT JOIN</span> orders</div>
-                    <div class="code-line">  <span class="keyword">ON</span> users.id = orders.user_id;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- RIGHT JOIN</span></div>
-                    <div class="code-line"><span class="keyword">RIGHT JOIN</span> orders</div>
-                    <div class="code-line">  <span class="keyword">ON</span> users.id = orders.user_id;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- FULL OUTER JOIN</span></div>
-                    <div class="code-line"><span class="keyword">FULL OUTER JOIN</span> orders</div>
-                    <div class="code-line">  <span class="keyword">ON</span> users.id = orders.user_id;</div>
+                    <div class="code-line"><span class="comment">-- INNER JOIN</span></div><div class="code-line"><span class="keyword">SELECT</span> users.name, orders.amount</div><div class="code-line"><span class="keyword">FROM</span> users</div><div class="code-line"><span class="keyword">INNER JOIN</span> orders</div><div class="code-line"> <span class="keyword">ON</span> users.id = orders.user_id;</div><div class="code-line"></div><div class="code-line"><span class="comment">-- LEFT JOIN</span></div><div class="code-line"><span class="keyword">SELECT</span> users.name, orders.amount</div><div class="code-line"><span class="keyword">FROM</span> users</div><div class="code-line"><span class="keyword">LEFT JOIN</span> orders</div><div class="code-line"> <span class="keyword">ON</span> users.id = orders.user_id;</div><div class="code-line"></div><div class="code-line"><span class="comment">-- RIGHT JOIN</span></div><div class="code-line"><span class="keyword">RIGHT JOIN</span> orders</div><div class="code-line"> <span class="keyword">ON</span> users.id = orders.user_id;</div><div class="code-line"></div><div class="code-line"><span class="comment">-- FULL OUTER JOIN</span></div><div class="code-line"><span class="keyword">FULL OUTER JOIN</span> orders</div><div class="code-line"> <span class="keyword">ON</span> users.id = orders.user_id;</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="insert-data">
                 <div class="card-header">➕ INSERT Data</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">-- Insert single row</span></div>
-                    <div class="code-line"><span class="keyword">INSERT INTO</span> users (name, email, age)</div>
-                    <div class="code-line"><span class="keyword">VALUES</span> ('John', 'j@ex.com', 30);</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- Insert multiple rows</span></div>
-                    <div class="code-line"><span class="keyword">INSERT INTO</span> users (name, email)</div>
-                    <div class="code-line"><span class="keyword">VALUES</span></div>
-                    <div class="code-line">  ('Alice', 'a@ex.com'),</div>
-                    <div class="code-line">  ('Bob', 'b@ex.com');</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- Insert from select</span></div>
-                    <div class="code-line"><span class="keyword">INSERT INTO</span> archive</div>
-                    <div class="code-line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> users</div>
-                    <div class="code-line"><span class="keyword">WHERE</span> status = 'inactive';</div>
+                    <div class="code-line"><span class="comment">-- Insert single row</span></div><div class="code-line"><span class="keyword">INSERT INTO</span> users (name, email, age)</div><div class="code-line"><span class="keyword">VALUES</span> ('John', 'j@ex.com', 30);</div><div class="code-line"></div><div class="code-line"><span class="comment">-- Insert multiple rows</span></div><div class="code-line"><span class="keyword">INSERT INTO</span> users (name, email)</div><div class="code-line"><span class="keyword">VALUES</span></div><div class="code-line">  ('Alice', 'a@ex.com'),</div><div class="code-line">  ('Bob', 'b@ex.com');</div><div class="code-line"></div><div class="code-line"><span class="comment">-- Insert from select</span></div><div class="code-line"><span class="keyword">INSERT INTO</span> archive</div><div class="code-line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> users</div><div class="code-line"><span class="keyword">WHERE</span> status = 'inactive';</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="update-data">
                 <div class="card-header">✏️ UPDATE Data</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">-- Update single column</span></div>
-                    <div class="code-line"><span class="keyword">UPDATE</span> users</div>
-                    <div class="code-line"><span class="keyword">SET</span> age = 31</div>
-                    <div class="code-line"><span class="keyword">WHERE</span> id = 1;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- Update multiple columns</span></div>
-                    <div class="code-line"><span class="keyword">UPDATE</span> users</div>
-                    <div class="code-line"><span class="keyword">SET</span> age = 31, city = 'LA'</div>
-                    <div class="code-line"><span class="keyword">WHERE</span> id = 1;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- Increment value</span></div>
-                    <div class="code-line"><span class="keyword">UPDATE</span> products</div>
-                    <div class="code-line"><span class="keyword">SET</span> price = price * 1.1;</div>
+                    <div class="code-line"><span class="comment">-- Update single column</span></div><div class="code-line"><span class="keyword">UPDATE</span> users</div><div class="code-line"><span class="keyword">SET</span> age = 31</div><div class="code-line"><span class="keyword">WHERE</span> id = 1;</div><div class="code-line"></div><div class="code-line"><span class="comment">-- Update multiple columns</span></div><div class="code-line"><span class="keyword">UPDATE</span> users</div><div class="code-line"><span class="keyword">SET</span> age = 31, city = 'LA'</div><div class="code-line"><span class="keyword">WHERE</span> id = 1;</div><div class="code-line"></div><div class="code-line"><span class="comment">-- Increment value</span></div><div class="code-line"><span class="keyword">UPDATE</span> products</div><div class="code-line"><span class="keyword">SET</span> price = price * 1.1;</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="delete-data">
                 <div class="card-header">🗑️ DELETE Data</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">-- Delete specific rows</span></div>
-                    <div class="code-line"><span class="keyword">DELETE FROM</span> users</div>
-                    <div class="code-line"><span class="keyword">WHERE</span> id = 1;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- Delete all rows (careful!)</span></div>
-                    <div class="code-line"><span class="keyword">DELETE FROM</span> users;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- Truncate (faster, resets auto-increment)</span></div>
-                    <div class="code-line"><span class="keyword">TRUNCATE TABLE</span> users;</div>
+                    <div class="code-line"><span class="comment">-- Delete specific rows</span></div><div class="code-line"><span class="keyword">DELETE FROM</span> users</div><div class="code-line"><span class="keyword">WHERE</span> id = 1;</div><div class="code-line"></div><div class="code-line"><span class="comment">-- Delete all rows (careful!)</span></div><div class="code-line"><span class="keyword">DELETE FROM</span> users;</div><div class="code-line"></div><div class="code-line"><span class="comment">-- Truncate (faster, resets auto-increment)</span></div><div class="code-line"><span class="keyword">TRUNCATE TABLE</span> users;</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="create-table">
                 <div class="card-header">🏗️ CREATE TABLE</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="keyword">CREATE TABLE</span> users (</div>
-                    <div class="code-line">  id <span class="keyword">INT PRIMARY KEY AUTO_INCREMENT</span>,</div>
-                    <div class="code-line">  name <span class="keyword">VARCHAR</span>(100) <span class="keyword">NOT NULL</span>,</div>
-                    <div class="code-line">  email <span class="keyword">VARCHAR</span>(255) <span class="keyword">UNIQUE</span>,</div>
-                    <div class="code-line">  age <span class="keyword">INT</span>,</div>
-                    <div class="code-line">  created_at <span class="keyword">TIMESTAMP DEFAULT CURRENT_TIMESTAMP</span></div>
-                    <div class="code-line">);</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- With foreign key</span></div>
-                    <div class="code-line"><span class="keyword">CREATE TABLE</span> orders (</div>
-                    <div class="code-line">  id <span class="keyword">INT PRIMARY KEY</span>,</div>
-                    <div class="code-line">  user_id <span class="keyword">INT</span>,</div>
-                    <div class="code-line">  amount <span class="keyword">DECIMAL</span>(10, 2),</div>
-                    <div class="code-line">  <span class="keyword">FOREIGN KEY</span> (user_id)</div>
-                    <div class="code-line">    <span class="keyword">REFERENCES</span> users(id)</div>
-                    <div class="code-line">);</div>
+                    <div class="code-line"><span class="keyword">CREATE TABLE</span> users (</div><div class="code-line">  id <span class="keyword">INT PRIMARY KEY AUTO_INCREMENT</span>,</div><div class="code-line">  name <span class="keyword">VARCHAR</span>(100) <span class="keyword">NOT NULL</span>,</div><div class="code-line">  email <span class="keyword">VARCHAR</span>(255) <span class="keyword">UNIQUE</span>,</div><div class="code-line">  age <span class="keyword">INT</span>,</div><div class="code-line">  created_at <span class="keyword">TIMESTAMP DEFAULT CURRENT_TIMESTAMP</span></div><div class="code-line">);</div><div class="code-line"></div><div class="code-line"><span class="comment">-- With foreign key</span></div><div class="code-line"><span class="keyword">CREATE TABLE</span> orders (</div><div class="code-line">  id <span class="keyword">INT PRIMARY KEY</span>,</div><div class="code-line">  user_id <span class="keyword">INT</span>,</div><div class="code-line">  amount <span class="keyword">DECIMAL</span>(10, 2),</div><div class="code-line"> <span class="keyword">FOREIGN KEY</span> (user_id)</div><div class="code-line"> <span class="keyword">REFERENCES</span> users(id)</div><div class="code-line">);</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="alter-table">
                 <div class="card-header">🔧 ALTER TABLE</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">-- Add column</span></div>
-                    <div class="code-line"><span class="keyword">ALTER TABLE</span> users</div>
-                    <div class="code-line"><span class="keyword">ADD COLUMN</span> phone <span class="keyword">VARCHAR</span>(20);</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- Drop column</span></div>
-                    <div class="code-line"><span class="keyword">ALTER TABLE</span> users</div>
-                    <div class="code-line"><span class="keyword">DROP COLUMN</span> phone;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- Modify column</span></div>
-                    <div class="code-line"><span class="keyword">ALTER TABLE</span> users</div>
-                    <div class="code-line"><span class="keyword">MODIFY COLUMN</span> age <span class="keyword">SMALLINT</span>;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- Rename column</span></div>
-                    <div class="code-line"><span class="keyword">ALTER TABLE</span> users</div>
-                    <div class="code-line"><span class="keyword">RENAME COLUMN</span> name <span class="keyword">TO</span> full_name;</div>
+                    <div class="code-line"><span class="comment">-- Add column</span></div><div class="code-line"><span class="keyword">ALTER TABLE</span> users</div><div class="code-line"><span class="keyword">ADD COLUMN</span> phone <span class="keyword">VARCHAR</span>(20);</div><div class="code-line"></div><div class="code-line"><span class="comment">-- Drop column</span></div><div class="code-line"><span class="keyword">ALTER TABLE</span> users</div><div class="code-line"><span class="keyword">DROP COLUMN</span> phone;</div><div class="code-line"></div><div class="code-line"><span class="comment">-- Modify column</span></div><div class="code-line"><span class="keyword">ALTER TABLE</span> users</div><div class="code-line"><span class="keyword">MODIFY COLUMN</span> age <span class="keyword">SMALLINT</span>;</div><div class="code-line"></div><div class="code-line"><span class="comment">-- Rename column</span></div><div class="code-line"><span class="keyword">ALTER TABLE</span> users</div><div class="code-line"><span class="keyword">RENAME COLUMN</span> name <span class="keyword">TO</span> full_name;</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="indexes">
                 <div class="card-header">📑 Indexes</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">-- Create index</span></div>
-                    <div class="code-line"><span class="keyword">CREATE INDEX</span> idx_email</div>
-                    <div class="code-line"><span class="keyword">ON</span> users(email);</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- Unique index</span></div>
-                    <div class="code-line"><span class="keyword">CREATE UNIQUE INDEX</span> idx_email</div>
-                    <div class="code-line"><span class="keyword">ON</span> users(email);</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- Composite index</span></div>
-                    <div class="code-line"><span class="keyword">CREATE INDEX</span> idx_name_city</div>
-                    <div class="code-line"><span class="keyword">ON</span> users(name, city);</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">-- Drop index</span></div>
-                    <div class="code-line"><span class="keyword">DROP INDEX</span> idx_email <span class="keyword">ON</span> users;</div>
+                    <div class="code-line"><span class="comment">-- Create index</span></div><div class="code-line"><span class="keyword">CREATE INDEX</span> idx_email</div><div class="code-line"><span class="keyword">ON</span> users(email);</div><div class="code-line"></div><div class="code-line"><span class="comment">-- Unique index</span></div><div class="code-line"><span class="keyword">CREATE UNIQUE INDEX</span> idx_email</div><div class="code-line"><span class="keyword">ON</span> users(email);</div><div class="code-line"></div><div class="code-line"><span class="comment">-- Composite index</span></div><div class="code-line"><span class="keyword">CREATE INDEX</span> idx_name_city</div><div class="code-line"><span class="keyword">ON</span> users(name, city);</div><div class="code-line"></div><div class="code-line"><span class="comment">-- Drop index</span></div><div class="code-line"><span class="keyword">DROP INDEX</span> idx_email <span class="keyword">ON</span> users;</div>
+                </div>
+            </div>
+            <div class="card" id="subqueries">
+                <div class="card-header">🔍 Subqueries</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">-- Subquery in WHERE</span></div><div class="code-line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> users</div><div class="code-line"><span class="keyword">WHERE</span> age &gt; (<span class="keyword">SELECT AVG</span>(age) <span class="keyword">FROM</span> users);</div><div class="code-line"></div><div class="code-line"><span class="comment">-- Subquery in FROM</span></div><div class="code-line"><span class="keyword">SELECT</span> avg_age</div><div class="code-line"><span class="keyword">FROM</span> (<span class="keyword">SELECT AVG</span>(age) <span class="keyword">AS</span> avg_age <span class="keyword">FROM</span> users) <span class="keyword">AS</span> subquery;</div><div class="code-line"></div><div class="code-line"><span class="comment">-- Correlated subquery</span></div><div class="code-line"><span class="keyword">SELECT</span> name</div><div class="code-line"><span class="keyword">FROM</span> users u</div><div class="code-line"><span class="keyword">WHERE</span> age &gt; (<span class="keyword">SELECT AVG</span>(age)</div><div class="code-line"> <span class="keyword">FROM</span> users u2</div><div class="code-line"> <span class="keyword">WHERE</span> u2.city = u.city);</div>
+                </div>
+            </div>
+            <div class="card" id="common-data-types">
+                <div class="card-header">🎯 Common Data Types</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="best-practices">
+                <div class="card-header">💡 Best Practices</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header">🔍 Subqueries</div>
-            <div class="code-block">
-                <div class="code-line"><span class="comment">-- Subquery in WHERE</span></div>
-                <div class="code-line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> users</div>
-                <div class="code-line"><span class="keyword">WHERE</span> age > (<span class="keyword">SELECT AVG</span>(age) <span class="keyword">FROM</span> users);</div>
-                <div class="code-line"></div>
-                <div class="code-line"><span class="comment">-- Subquery in FROM</span></div>
-                <div class="code-line"><span class="keyword">SELECT</span> avg_age</div>
-                <div class="code-line"><span class="keyword">FROM</span> (<span class="keyword">SELECT AVG</span>(age) <span class="keyword">AS</span> avg_age <span class="keyword">FROM</span> users) <span class="keyword">AS</span> subquery;</div>
-                <div class="code-line"></div>
-                <div class="code-line"><span class="comment">-- Correlated subquery</span></div>
-                <div class="code-line"><span class="keyword">SELECT</span> name</div>
-                <div class="code-line"><span class="keyword">FROM</span> users u</div>
-                <div class="code-line"><span class="keyword">WHERE</span> age > (<span class="keyword">SELECT AVG</span>(age)</div>
-                <div class="code-line">              <span class="keyword">FROM</span> users u2</div>
-                <div class="code-line">              <span class="keyword">WHERE</span> u2.city = u.city);</div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">🎯 Common Data Types</div>
-            <div class="note">
-                <strong>Numeric:</strong> INT, SMALLINT, BIGINT, DECIMAL(p,s), FLOAT, DOUBLE<br><br>
-                <strong>String:</strong> CHAR(n), VARCHAR(n), TEXT, MEDIUMTEXT, LONGTEXT<br><br>
-                <strong>Date/Time:</strong> DATE, TIME, DATETIME, TIMESTAMP, YEAR<br><br>
-                <strong>Binary:</strong> BLOB, MEDIUMBLOB, LONGBLOB<br><br>
-                <strong>Other:</strong> BOOLEAN, JSON, ENUM
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">💡 Best Practices</div>
-            <div class="tip">
-                <strong>✅ Do:</strong><br>
-                • Use indexes on frequently queried columns<br>
-                • Always use WHERE with UPDATE/DELETE<br>
-                • Use transactions for related operations<br>
-                • Normalize your database design<br>
-                • Use prepared statements to prevent SQL injection<br>
-                • Add appropriate constraints (NOT NULL, UNIQUE, etc.)<br>
-                • Use meaningful table and column names
-            </div>
-        </div>
-
-        <div class="footer">
-            <p>Essential SQL Commands & Queries Reference</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">🗄️ Structured Query Language for all databases</p>
-        </div>
+        <footer>
+            <p>&copy; 2025 Cheatsheets Collection. Open source and community driven.</p>
+        </footer>
     </div>
 </body>
 </html>
