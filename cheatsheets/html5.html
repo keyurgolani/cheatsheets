@@ -3,1036 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="HTML5 reference with semantic elements, forms, multimedia, and modern web standards.">
     <title>HTML5 Cheatsheet</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #e0e6ed;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 2rem;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            font-size: 3rem;
-            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #8b95a5;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .card {
-            background: rgba(30, 41, 59, 0.6);
-            border: 1px solid rgba(100, 116, 139, 0.3);
-            border-radius: 12px;
-            padding: 1.5rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: rgba(255, 107, 53, 0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(255, 107, 53, 0.15);
-        }
-
-        .card-header {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #ff6b35;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid rgba(255, 107, 53, 0.3);
-        }
-
-        .cmd-row {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.5rem;
-            margin-bottom: 0.75rem;
-            padding: 0.5rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 6px;
-            transition: background 0.2s ease;
-        }
-
-        .cmd-row:hover {
-            background: rgba(255, 107, 53, 0.1);
-        }
-
-        .cmd-name {
-            color: #f7931e;
-            font-weight: 600;
-            font-family: 'Courier New', monospace;
-            font-size: 0.95rem;
-        }
-
-        .cmd-desc {
-            color: #cbd5e1;
-            padding-left: 1rem;
-            font-size: 0.9rem;
-        }
-
-        code {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            color: #a5d6ff;
-            font-size: 0.9em;
-        }
-
-        .code-block {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 1rem;
-            border-radius: 6px;
-            margin: 0.5rem 0;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            overflow-x: auto;
-        }
-
-        .code-line {
-            color: #a5d6ff;
-            margin: 0.2rem 0;
-        }
-
-        .note {
-            background: rgba(59, 130, 246, 0.1);
-            border-left: 4px solid #3b82f6;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .tip {
-            background: rgba(16, 185, 129, 0.1);
-            border-left: 4px solid #10b981;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .warning {
-            background: rgba(239, 68, 68, 0.1);
-            border-left: 4px solid #ef4444;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(100, 116, 139, 0.3);
-            color: #8b95a5;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../script.js" defer></script>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-brand">
+                <i class="ph ph-books"></i> Cheatsheets
+            </a>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="btn-icon" aria-label="Toggle theme">
+                    <i class="ph ph-moon"></i>
+                </button>
+                <button id="download-btn" class="btn-icon" aria-label="Download PDF">
+                    <i class="ph ph-download-simple"></i>
+                </button>
+                <a href="https://github.com/keyurgolani/Cheatsheets" class="btn-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                    <i class="ph ph-github-logo"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
-        <h1>📄 HTML5 Reference</h1>
-        <p class="subtitle">Modern HTML elements, attributes, and best practices</p>
-
-        <div class="grid">
-            <div class="card">
-                <div class="card-header">🏗️ Document Structure</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;!DOCTYPE html&gt;</div>
-                    <div class="cmd-desc">HTML5 document type declaration</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;html lang="en"&gt;</div>
-                    <div class="cmd-desc">Root element with language attribute</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;head&gt;</div>
-                    <div class="cmd-desc">Contains metadata and document information</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;meta charset="UTF-8"&gt;</div>
-                    <div class="cmd-desc">Character encoding declaration</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;meta name="viewport" content="..."&gt;</div>
-                    <div class="cmd-desc">Responsive viewport configuration</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;title&gt;</div>
-                    <div class="cmd-desc">Page title (shown in browser tab)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;body&gt;</div>
-                    <div class="cmd-desc">Contains visible page content</div>
-                </div>
+        <header class="cheatsheet-header">
+            <h1>📄 HTML5 Reference</h1>
+            <p>Modern HTML elements, attributes, and best practices</p>
+            <div class="search-container" style="margin-top: 1.5rem; margin-bottom: 0;">
+                <span class="search-icon"><i class="ph ph-magnifying-glass"></i></span>
+                <input type="text" class="search-input" id="cheatsheet-search" placeholder="Filter this cheatsheet..." aria-label="Filter cheatsheet">
             </div>
+        </header>
 
-            <div class="card">
-                <div class="card-header">📐 Semantic Structure Elements</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;header&gt;</div>
-                    <div class="cmd-desc">Introductory content or navigation</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;nav&gt;</div>
-                    <div class="cmd-desc">Navigation links section</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;main&gt;</div>
-                    <div class="cmd-desc">Main content (unique to page)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;article&gt;</div>
-                    <div class="cmd-desc">Self-contained content (blog post, news)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;section&gt;</div>
-                    <div class="cmd-desc">Thematic grouping of content</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;aside&gt;</div>
-                    <div class="cmd-desc">Sidebar or tangentially related content</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;footer&gt;</div>
-                    <div class="cmd-desc">Footer for document or section</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;figure&gt; / &lt;figcaption&gt;</div>
-                    <div class="cmd-desc">Image/diagram with caption</div>
-                </div>
-                <div class="tip">
-                    💡 Use semantic elements for better SEO and accessibility
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">📝 Text Content Elements</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;h1&gt; to &lt;h6&gt;</div>
-                    <div class="cmd-desc">Heading levels (h1 most important)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;p&gt;</div>
-                    <div class="cmd-desc">Paragraph</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;span&gt;</div>
-                    <div class="cmd-desc">Inline container (no semantic meaning)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;div&gt;</div>
-                    <div class="cmd-desc">Block container (no semantic meaning)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;strong&gt;</div>
-                    <div class="cmd-desc">Strong importance (bold)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;em&gt;</div>
-                    <div class="cmd-desc">Emphasis (italic)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;mark&gt;</div>
-                    <div class="cmd-desc">Highlighted text</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;small&gt;</div>
-                    <div class="cmd-desc">Smaller text (fine print)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;del&gt; / &lt;ins&gt;</div>
-                    <div class="cmd-desc">Deleted/inserted text</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;sub&gt; / &lt;sup&gt;</div>
-                    <div class="cmd-desc">Subscript/superscript</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;code&gt;</div>
-                    <div class="cmd-desc">Inline code snippet</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;pre&gt;</div>
-                    <div class="cmd-desc">Preformatted text (preserves whitespace)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;blockquote&gt;</div>
-                    <div class="cmd-desc">Block quotation</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;abbr title="..."&gt;</div>
-                    <div class="cmd-desc">Abbreviation with full text</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;time datetime="..."&gt;</div>
-                    <div class="cmd-desc">Date/time with machine-readable format</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">📋 Lists</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;ul&gt;</div>
-                    <div class="cmd-desc">Unordered list (bullets)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;ol&gt;</div>
-                    <div class="cmd-desc">Ordered list (numbers)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;li&gt;</div>
-                    <div class="cmd-desc">List item</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;dl&gt;</div>
-                    <div class="cmd-desc">Description list</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;dt&gt;</div>
-                    <div class="cmd-desc">Description term</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;dd&gt;</div>
-                    <div class="cmd-desc">Description definition</div>
-                </div>
-                <div class="code-block">
-                    <div class="code-line">&lt;ol start="5" reversed&gt;</div>
-                    <div class="code-line">  &lt;li&gt;Item 5&lt;/li&gt;</div>
-                    <div class="code-line">  &lt;li&gt;Item 4&lt;/li&gt;</div>
-                    <div class="code-line">&lt;/ol&gt;</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">🔗 Links and Navigation</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;a href="url"&gt;</div>
-                    <div class="cmd-desc">Hyperlink</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;a href="#id"&gt;</div>
-                    <div class="cmd-desc">Link to page anchor</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;a href="mailto:email"&gt;</div>
-                    <div class="cmd-desc">Email link</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;a href="tel:+1234567890"&gt;</div>
-                    <div class="cmd-desc">Phone link</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">target="_blank"</div>
-                    <div class="cmd-desc">Open in new tab</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">rel="noopener noreferrer"</div>
-                    <div class="cmd-desc">Security for external links</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">download="filename"</div>
-                    <div class="cmd-desc">Download link instead of navigate</div>
-                </div>
-                <div class="warning">
-                    ⚠️ Always use <code>rel="noopener noreferrer"</code> with <code>target="_blank"</code>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">🖼️ Images and Media</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;img src="..." alt="..."&gt;</div>
-                    <div class="cmd-desc">Image (alt text required for accessibility)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">width / height</div>
-                    <div class="cmd-desc">Image dimensions (prevents layout shift)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">loading="lazy"</div>
-                    <div class="cmd-desc">Lazy load images</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;picture&gt;</div>
-                    <div class="cmd-desc">Responsive images container</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;source&gt;</div>
-                    <div class="cmd-desc">Media source for picture/video/audio</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">srcset / sizes</div>
-                    <div class="cmd-desc">Responsive image sources</div>
-                </div>
-                <div class="code-block">
-                    <div class="code-line">&lt;picture&gt;</div>
-                    <div class="code-line">  &lt;source srcset="large.jpg" media="(min-width: 800px)"&gt;</div>
-                    <div class="code-line">  &lt;source srcset="medium.jpg" media="(min-width: 400px)"&gt;</div>
-                    <div class="code-line">  &lt;img src="small.jpg" alt="Description"&gt;</div>
-                    <div class="code-line">&lt;/picture&gt;</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">🎬 Video and Audio</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;video src="..." controls&gt;</div>
-                    <div class="cmd-desc">Video player</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;audio src="..." controls&gt;</div>
-                    <div class="cmd-desc">Audio player</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">autoplay</div>
-                    <div class="cmd-desc">Auto-play media (use sparingly)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">loop</div>
-                    <div class="cmd-desc">Loop playback</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">muted</div>
-                    <div class="cmd-desc">Start muted</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">poster="image.jpg"</div>
-                    <div class="cmd-desc">Video thumbnail (before play)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">preload="none|metadata|auto"</div>
-                    <div class="cmd-desc">Preload behavior</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;track&gt;</div>
-                    <div class="cmd-desc">Subtitles/captions for video</div>
-                </div>
-                <div class="code-block">
-                    <div class="code-line">&lt;video controls width="640" height="360"&gt;</div>
-                    <div class="code-line">  &lt;source src="video.mp4" type="video/mp4"&gt;</div>
-                    <div class="code-line">  &lt;source src="video.webm" type="video/webm"&gt;</div>
-                    <div class="code-line">  &lt;track kind="subtitles" src="subs.vtt" srclang="en"&gt;</div>
-                    <div class="code-line">  Your browser doesn't support video.</div>
-                    <div class="code-line">&lt;/video&gt;</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">📊 Tables</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;table&gt;</div>
-                    <div class="cmd-desc">Table container</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;thead&gt;</div>
-                    <div class="cmd-desc">Table header section</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;tbody&gt;</div>
-                    <div class="cmd-desc">Table body section</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;tfoot&gt;</div>
-                    <div class="cmd-desc">Table footer section</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;tr&gt;</div>
-                    <div class="cmd-desc">Table row</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;th&gt;</div>
-                    <div class="cmd-desc">Table header cell</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;td&gt;</div>
-                    <div class="cmd-desc">Table data cell</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">colspan / rowspan</div>
-                    <div class="cmd-desc">Merge cells horizontally/vertically</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;caption&gt;</div>
-                    <div class="cmd-desc">Table caption/title</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">📝 Form Elements</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;form action="..." method="POST"&gt;</div>
-                    <div class="cmd-desc">Form container</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;input type="text"&gt;</div>
-                    <div class="cmd-desc">Text input field</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;input type="email"&gt;</div>
-                    <div class="cmd-desc">Email input with validation</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;input type="password"&gt;</div>
-                    <div class="cmd-desc">Password input (hidden text)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;input type="number"&gt;</div>
-                    <div class="cmd-desc">Numeric input</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;input type="tel"&gt;</div>
-                    <div class="cmd-desc">Telephone number</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;input type="url"&gt;</div>
-                    <div class="cmd-desc">URL input with validation</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;input type="date"&gt;</div>
-                    <div class="cmd-desc">Date picker</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;input type="time"&gt;</div>
-                    <div class="cmd-desc">Time picker</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;input type="datetime-local"&gt;</div>
-                    <div class="cmd-desc">Date and time picker</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;input type="color"&gt;</div>
-                    <div class="cmd-desc">Color picker</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;input type="range"&gt;</div>
-                    <div class="cmd-desc">Slider control</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;input type="file"&gt;</div>
-                    <div class="cmd-desc">File upload</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;input type="checkbox"&gt;</div>
-                    <div class="cmd-desc">Checkbox</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;input type="radio"&gt;</div>
-                    <div class="cmd-desc">Radio button</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;input type="search"&gt;</div>
-                    <div class="cmd-desc">Search input</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;textarea&gt;</div>
-                    <div class="cmd-desc">Multi-line text input</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;select&gt; / &lt;option&gt;</div>
-                    <div class="cmd-desc">Dropdown menu</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;button type="submit"&gt;</div>
-                    <div class="cmd-desc">Submit button</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;button type="button"&gt;</div>
-                    <div class="cmd-desc">Generic button</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;button type="reset"&gt;</div>
-                    <div class="cmd-desc">Reset form button</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;label for="input-id"&gt;</div>
-                    <div class="cmd-desc">Input label (improves accessibility)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;fieldset&gt; / &lt;legend&gt;</div>
-                    <div class="cmd-desc">Group related form controls</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;datalist&gt;</div>
-                    <div class="cmd-desc">Autocomplete suggestions</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;output&gt;</div>
-                    <div class="cmd-desc">Calculation result display</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;progress&gt;</div>
-                    <div class="cmd-desc">Progress bar</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;meter&gt;</div>
-                    <div class="cmd-desc">Scalar measurement gauge</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">✅ Form Attributes</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">required</div>
-                    <div class="cmd-desc">Field must be filled</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">placeholder="text"</div>
-                    <div class="cmd-desc">Hint text in input</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">pattern="regex"</div>
-                    <div class="cmd-desc">Validation pattern</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">minlength / maxlength</div>
-                    <div class="cmd-desc">Text length constraints</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">min / max</div>
-                    <div class="cmd-desc">Numeric range constraints</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">step</div>
-                    <div class="cmd-desc">Increment value for number/range</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">disabled</div>
-                    <div class="cmd-desc">Disable input (not submitted)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">readonly</div>
-                    <div class="cmd-desc">Read-only (still submitted)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">autofocus</div>
-                    <div class="cmd-desc">Auto-focus on page load</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">autocomplete="on|off"</div>
-                    <div class="cmd-desc">Browser autocomplete behavior</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">multiple</div>
-                    <div class="cmd-desc">Allow multiple values (file, select)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">accept="image/*"</div>
-                    <div class="cmd-desc">File type filter</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">novalidate</div>
-                    <div class="cmd-desc">Disable form validation (on form)</div>
-                </div>
-                <div class="code-block">
-                    <div class="code-line">&lt;input type="email" </div>
-                    <div class="code-line">       required </div>
-                    <div class="code-line">       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"</div>
-                    <div class="code-line">       placeholder="user@example.com"&gt;</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">🎯 Global Attributes</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">id="unique-id"</div>
-                    <div class="cmd-desc">Unique identifier</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">class="class-names"</div>
-                    <div class="cmd-desc">CSS class names (space-separated)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">style="css-properties"</div>
-                    <div class="cmd-desc">Inline CSS styles</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">title="tooltip"</div>
-                    <div class="cmd-desc">Tooltip text on hover</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">data-*="value"</div>
-                    <div class="cmd-desc">Custom data attributes</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">hidden</div>
-                    <div class="cmd-desc">Hide element</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">contenteditable="true"</div>
-                    <div class="cmd-desc">Make element editable</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">draggable="true"</div>
-                    <div class="cmd-desc">Enable drag and drop</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">spellcheck="true"</div>
-                    <div class="cmd-desc">Enable spell checking</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">translate="yes|no"</div>
-                    <div class="cmd-desc">Translation hint</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">dir="ltr|rtl"</div>
-                    <div class="cmd-desc">Text direction</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">lang="en"</div>
-                    <div class="cmd-desc">Language code</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">tabindex="0"</div>
-                    <div class="cmd-desc">Tab order (0 = natural order)</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">♿ Accessibility (ARIA)</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">alt="description"</div>
-                    <div class="cmd-desc">Image alternative text (required)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">role="button|navigation|..."</div>
-                    <div class="cmd-desc">ARIA role for semantic meaning</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">aria-label="description"</div>
-                    <div class="cmd-desc">Accessible label for screen readers</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">aria-labelledby="id"</div>
-                    <div class="cmd-desc">Reference to labeling element</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">aria-describedby="id"</div>
-                    <div class="cmd-desc">Reference to description element</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">aria-hidden="true"</div>
-                    <div class="cmd-desc">Hide from screen readers</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">aria-live="polite|assertive"</div>
-                    <div class="cmd-desc">Announce dynamic content changes</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">aria-expanded="true|false"</div>
-                    <div class="cmd-desc">Collapsible element state</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">aria-pressed="true|false"</div>
-                    <div class="cmd-desc">Toggle button state</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">aria-checked="true|false"</div>
-                    <div class="cmd-desc">Checkbox/radio state</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">aria-disabled="true"</div>
-                    <div class="cmd-desc">Indicate disabled state</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">aria-invalid="true"</div>
-                    <div class="cmd-desc">Indicate validation error</div>
-                </div>
-                <div class="tip">
-                    💡 Use semantic HTML first, ARIA attributes as enhancement
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">🔧 Meta Tags</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;meta name="description" content="..."&gt;</div>
-                    <div class="cmd-desc">Page description for SEO</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;meta name="keywords" content="..."&gt;</div>
-                    <div class="cmd-desc">Keywords (less important now)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;meta name="author" content="..."&gt;</div>
-                    <div class="cmd-desc">Page author</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;meta name="viewport" content="..."&gt;</div>
-                    <div class="cmd-desc">Responsive viewport settings</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;meta http-equiv="refresh" content="30"&gt;</div>
-                    <div class="cmd-desc">Auto-refresh page</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;meta property="og:title" content="..."&gt;</div>
-                    <div class="cmd-desc">Open Graph (social media) title</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;meta property="og:image" content="..."&gt;</div>
-                    <div class="cmd-desc">Social media preview image</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;meta name="twitter:card" content="..."&gt;</div>
-                    <div class="cmd-desc">Twitter card type</div>
-                </div>
-                <div class="code-block">
-                    <div class="code-line">&lt;meta name="viewport" </div>
-                    <div class="code-line">      content="width=device-width, initial-scale=1.0"&gt;</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">📦 Embedded Content</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;iframe src="..."&gt;</div>
-                    <div class="cmd-desc">Embed external page</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;embed src="..."&gt;</div>
-                    <div class="cmd-desc">Embed plugin content</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;object data="..."&gt;</div>
-                    <div class="cmd-desc">Embed external resource</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;canvas&gt;</div>
-                    <div class="cmd-desc">Drawing surface for graphics (via JS)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;svg&gt;</div>
-                    <div class="cmd-desc">Inline SVG graphics</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;map&gt; / &lt;area&gt;</div>
-                    <div class="cmd-desc">Image map with clickable regions</div>
-                </div>
-                <div class="warning">
-                    ⚠️ Use <code>sandbox</code> attribute on iframes for security
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">📜 Script and Style</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;script src="file.js"&gt;</div>
-                    <div class="cmd-desc">External JavaScript file</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;script&gt;...&lt;/script&gt;</div>
-                    <div class="cmd-desc">Inline JavaScript</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">defer</div>
-                    <div class="cmd-desc">Execute after HTML parsing</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">async</div>
-                    <div class="cmd-desc">Execute asynchronously</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">type="module"</div>
-                    <div class="cmd-desc">ES6 module script</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;noscript&gt;</div>
-                    <div class="cmd-desc">Fallback for no JavaScript</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;link rel="stylesheet" href="..."&gt;</div>
-                    <div class="cmd-desc">External CSS file</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;style&gt;...&lt;/style&gt;</div>
-                    <div class="cmd-desc">Inline CSS</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;link rel="icon" href="..."&gt;</div>
-                    <div class="cmd-desc">Favicon</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;link rel="preload" href="..."&gt;</div>
-                    <div class="cmd-desc">Preload resource</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;link rel="prefetch" href="..."&gt;</div>
-                    <div class="cmd-desc">Prefetch for future navigation</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">🎨 Interactive Elements</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;details&gt;</div>
-                    <div class="cmd-desc">Collapsible disclosure widget</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;summary&gt;</div>
-                    <div class="cmd-desc">Summary/heading for details</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&lt;dialog&gt;</div>
-                    <div class="cmd-desc">Modal dialog box</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">open</div>
-                    <div class="cmd-desc">Show details/dialog by default</div>
-                </div>
-                <div class="code-block">
-                    <div class="code-line">&lt;details&gt;</div>
-                    <div class="code-line">  &lt;summary&gt;Click to expand&lt;/summary&gt;</div>
-                    <div class="code-line">  &lt;p&gt;Hidden content here&lt;/p&gt;</div>
-                    <div class="code-line">&lt;/details&gt;</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">🔤 Character Entities</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&amp;lt;</div>
-                    <div class="cmd-desc">Less than: &lt;</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&amp;gt;</div>
-                    <div class="cmd-desc">Greater than: &gt;</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&amp;amp;</div>
-                    <div class="cmd-desc">Ampersand: &amp;</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&amp;quot;</div>
-                    <div class="cmd-desc">Quote: "</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&amp;apos;</div>
-                    <div class="cmd-desc">Apostrophe: '</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&amp;nbsp;</div>
-                    <div class="cmd-desc">Non-breaking space</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&amp;copy;</div>
-                    <div class="cmd-desc">Copyright: ©</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&amp;reg;</div>
-                    <div class="cmd-desc">Registered: ®</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&amp;trade;</div>
-                    <div class="cmd-desc">Trademark: ™</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&amp;#8364;</div>
-                    <div class="cmd-desc">Euro: € (numeric entity)</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">✨ HTML5 Best Practices</div>
+        <div class="masonry-grid" id="cheatsheet-grid">
             
-            <div class="note">
-                <strong>Semantic HTML:</strong><br>
-                • Use semantic elements (&lt;header&gt;, &lt;nav&gt;, &lt;main&gt;, &lt;article&gt;, &lt;footer&gt;) instead of generic &lt;div&gt;<br>
-                • Improves SEO, accessibility, and code maintainability<br>
-                • Makes document structure clear to browsers and assistive technologies
+            <div class="card" id="document-structure">
+                <div class="card-header">🏗️ Document Structure</div>
+                <div class="code-block">
+                    
+                </div>
             </div>
-
-            <div class="tip">
-                <strong>Accessibility:</strong><br>
-                • Always include <code>alt</code> text for images<br>
-                • Use <code>&lt;label&gt;</code> elements for all form inputs<br>
-                • Ensure proper heading hierarchy (h1 → h2 → h3)<br>
-                • Test with keyboard navigation (Tab, Enter, Space)<br>
-                • Use ARIA attributes when semantic HTML isn't sufficient
+            <div class="card" id="semantic-structure-elements">
+                <div class="card-header">📐 Semantic Structure Elements</div>
+                <div class="code-block">
+                    
+                </div>
             </div>
-
-            <div class="note">
-                <strong>Performance:</strong><br>
-                • Use <code>loading="lazy"</code> for images below the fold<br>
-                • Add <code>width</code> and <code>height</code> to images to prevent layout shift<br>
-                • Use <code>defer</code> or <code>async</code> for script tags<br>
-                • Minimize inline styles, use external CSS<br>
-                • Compress images and use modern formats (WebP, AVIF)
+            <div class="card" id="text-content-elements">
+                <div class="card-header">📝 Text Content Elements</div>
+                <div class="code-block">
+                    
+                </div>
             </div>
-
-            <div class="tip">
-                <strong>SEO:</strong><br>
-                • Include descriptive <code>&lt;title&gt;</code> and meta description<br>
-                • Use heading tags (h1-h6) appropriately<br>
-                • Add Open Graph and Twitter Card meta tags<br>
-                • Create descriptive URLs and link text<br>
-                • Use structured data (JSON-LD) for rich snippets
+            <div class="card" id="lists">
+                <div class="card-header">📋 Lists</div>
+                <div class="code-block">
+                    <div class="code-line">&lt;ol start="5" reversed&gt;</div><div class="code-line">  &lt;li&gt;Item 5&lt;/li&gt;</div><div class="code-line">  &lt;li&gt;Item 4&lt;/li&gt;</div><div class="code-line">&lt;/ol&gt;</div>
+                </div>
             </div>
-
-            <div class="warning">
-                <strong>Security:</strong><br>
-                • Use <code>rel="noopener noreferrer"</code> with <code>target="_blank"</code><br>
-                • Sanitize user input to prevent XSS attacks<br>
-                • Use HTTPS for all external resources<br>
-                • Add <code>sandbox</code> attribute to untrusted iframes<br>
-                • Validate and escape data on both client and server
+            <div class="card" id="links-and-navigation">
+                <div class="card-header">🔗 Links and Navigation</div>
+                <div class="code-block">
+                    
+                </div>
             </div>
-
-            <div class="note">
-                <strong>Validation:</strong><br>
-                • Use HTML5 form validation attributes (<code>required</code>, <code>pattern</code>, <code>type</code>)<br>
-                • Validate with W3C Markup Validation Service<br>
-                • Test in multiple browsers and devices<br>
-                • Check accessibility with Lighthouse or axe DevTools
+            <div class="card" id="images-and-media">
+                <div class="card-header">🖼️ Images and Media</div>
+                <div class="code-block">
+                    <div class="code-line">&lt;picture&gt;</div><div class="code-line">  &lt;source srcset="large.jpg" media="(min-width: 800px)"&gt;</div><div class="code-line">  &lt;source srcset="medium.jpg" media="(min-width: 400px)"&gt;</div><div class="code-line">  &lt;img src="small.jpg" alt="Description"&gt;</div><div class="code-line">&lt;/picture&gt;</div>
+                </div>
+            </div>
+            <div class="card" id="video-and-audio">
+                <div class="card-header">🎬 Video and Audio</div>
+                <div class="code-block">
+                    <div class="code-line">&lt;video controls width="640" height="360"&gt;</div><div class="code-line">  &lt;source src="video.mp4" type="video/mp4"&gt;</div><div class="code-line">  &lt;source src="video.webm" type="video/webm"&gt;</div><div class="code-line">  &lt;track kind="subtitles" src="subs.vtt" srclang="en"&gt;</div><div class="code-line">  Your browser doesn't support video.</div><div class="code-line">&lt;/video&gt;</div>
+                </div>
+            </div>
+            <div class="card" id="tables">
+                <div class="card-header">📊 Tables</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="form-elements">
+                <div class="card-header">📝 Form Elements</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="form-attributes">
+                <div class="card-header">✅ Form Attributes</div>
+                <div class="code-block">
+                    <div class="code-line">&lt;input type="email" </div><div class="code-line">       required </div><div class="code-line">       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"</div><div class="code-line">       placeholder="user@example.com"&gt;</div>
+                </div>
+            </div>
+            <div class="card" id="global-attributes">
+                <div class="card-header">🎯 Global Attributes</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="accessibility-aria">
+                <div class="card-header">♿ Accessibility (ARIA)</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="meta-tags">
+                <div class="card-header">🔧 Meta Tags</div>
+                <div class="code-block">
+                    <div class="code-line">&lt;meta name="viewport" </div><div class="code-line">      content="width=device-width, initial-scale=1.0"&gt;</div>
+                </div>
+            </div>
+            <div class="card" id="embedded-content">
+                <div class="card-header">📦 Embedded Content</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="script-and-style">
+                <div class="card-header">📜 Script and Style</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="interactive-elements">
+                <div class="card-header">🎨 Interactive Elements</div>
+                <div class="code-block">
+                    <div class="code-line">&lt;details&gt;</div><div class="code-line">  &lt;summary&gt;Click to expand&lt;/summary&gt;</div><div class="code-line">  &lt;p&gt;Hidden content here&lt;/p&gt;</div><div class="code-line">&lt;/details&gt;</div>
+                </div>
+            </div>
+            <div class="card" id="character-entities">
+                <div class="card-header">🔤 Character Entities</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="html5-best-practices">
+                <div class="card-header">✨ HTML5 Best Practices</div>
+                <div class="code-block">
+                    
+                </div>
             </div>
         </div>
 
-        <div class="footer">
-            <p>HTML5 Elements, Attributes & Best Practices Reference</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">💡 Always validate your HTML at <code>validator.w3.org</code></p>
-        </div>
+        <footer>
+            <p>&copy; 2025 Cheatsheets Collection. Open source and community driven.</p>
+        </footer>
     </div>
 </body>
 </html>

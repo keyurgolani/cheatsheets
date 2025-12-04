@@ -3,673 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Microservices architecture patterns for building distributed systems.">
     <title>Microservices Patterns Cheatsheet</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #e0e6ed;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 2rem;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            font-size: 3rem;
-            background: linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #8b95a5;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .card {
-            background: rgba(30, 41, 59, 0.6);
-            border: 1px solid rgba(100, 116, 139, 0.3);
-            border-radius: 12px;
-            padding: 1.5rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: rgba(20, 184, 166, 0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(20, 184, 166, 0.15);
-        }
-
-        .card-header {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #14b8a6;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid rgba(20, 184, 166, 0.3);
-        }
-
-        .pattern-name {
-            color: #06b6d4;
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-top: 1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .pattern-desc {
-            color: #cbd5e1;
-            margin-bottom: 0.75rem;
-            font-size: 0.95rem;
-        }
-
-        .code-block {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 1rem;
-            border-radius: 6px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            margin: 0.75rem 0;
-            overflow-x: auto;
-        }
-
-        .code-line {
-            display: block;
-            line-height: 1.5;
-        }
-
-        .comment {
-            color: #10b981;
-        }
-
-        .keyword {
-            color: #fbbf24;
-        }
-
-        .string {
-            color: #ec4899;
-        }
-
-        code {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            color: #a5d6ff;
-            font-size: 0.9em;
-        }
-
-        .note {
-            background: rgba(59, 130, 246, 0.1);
-            border-left: 4px solid #3b82f6;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .tip {
-            background: rgba(16, 185, 129, 0.1);
-            border-left: 4px solid #10b981;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .use-case {
-            background: rgba(20, 184, 166, 0.1);
-            border-left: 4px solid #14b8a6;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .warning {
-            background: rgba(239, 68, 68, 0.1);
-            border-left: 4px solid #ef4444;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(100, 116, 139, 0.3);
-            color: #8b95a5;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../script.js" defer></script>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-brand">
+                <i class="ph ph-books"></i> Cheatsheets
+            </a>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="btn-icon" aria-label="Toggle theme">
+                    <i class="ph ph-moon"></i>
+                </button>
+                <button id="download-btn" class="btn-icon" aria-label="Download PDF">
+                    <i class="ph ph-download-simple"></i>
+                </button>
+                <a href="https://github.com/keyurgolani/Cheatsheets" class="btn-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                    <i class="ph ph-github-logo"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
-        <h1>🏗️ Microservices Patterns</h1>
-        <p class="subtitle">Essential patterns for building distributed microservices architectures</p>
+        <header class="cheatsheet-header">
+            <h1>🏗️ Microservices Patterns</h1>
+            <p>Essential patterns for building distributed microservices architectures</p>
+            <div class="search-container" style="margin-top: 1.5rem; margin-bottom: 0;">
+                <span class="search-icon"><i class="ph ph-magnifying-glass"></i></span>
+                <input type="text" class="search-input" id="cheatsheet-search" placeholder="Filter this cheatsheet..." aria-label="Filter cheatsheet">
+            </div>
+        </header>
 
-        <div class="grid">
-            <div class="card">
+        <div class="masonry-grid" id="cheatsheet-grid">
+            
+            <div class="card" id="service-decomposition-by-business-capability">
                 <div class="card-header">🔨 Service Decomposition: By Business Capability</div>
-                <div class="pattern-desc">Decompose the application into services based on business capabilities, where each service implements a specific business function.</div>
-                
-                <div class="code-block"><span class="code-line"><span class="comment">// Example: E-commerce decomposition</span></span>
-<span class="code-line">services:</span>
-<span class="code-line">  - <span class="string">Order Service</span>      <span class="comment">// Order management</span></span>
-<span class="code-line">  - <span class="string">Catalog Service</span>    <span class="comment">// Product catalog</span></span>
-<span class="code-line">  - <span class="string">Payment Service</span>    <span class="comment">// Payment processing</span></span>
-<span class="code-line">  - <span class="string">Shipping Service</span>   <span class="comment">// Shipping & delivery</span></span>
-<span class="code-line">  - <span class="string">Customer Service</span>   <span class="comment">// Customer management</span></span></div>
-
-                <div class="use-case">
-                    <strong>Use When:</strong> Starting a new microservices architecture, organizing teams around business domains
-                </div>
-                <div class="tip">
-                    <strong>Benefits:</strong> Clear service boundaries, easier to understand, aligns with business organization
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="service-decomposition-by-subdomain-ddd">
                 <div class="card-header">🔨 Service Decomposition: By Subdomain (DDD)</div>
-                <div class="pattern-desc">Use Domain-Driven Design to identify subdomains and bounded contexts, creating services around each bounded context.</div>
-                
-                <div class="code-block"><span class="code-line"><span class="comment">// Example: Banking system</span></span>
-<span class="code-line">bounded_contexts:</span>
-<span class="code-line">  - <span class="string">Account Management</span>  <span class="comment">// Core domain</span></span>
-<span class="code-line">  - <span class="string">Transaction Processing</span> <span class="comment">// Core domain</span></span>
-<span class="code-line">  - <span class="string">Fraud Detection</span>     <span class="comment">// Supporting domain</span></span>
-<span class="code-line">  - <span class="string">Notification</span>        <span class="comment">// Generic subdomain</span></span>
-<span class="code-line">  - <span class="string">Reporting</span>           <span class="comment">// Supporting domain</span></span></div>
-
-                <div class="use-case">
-                    <strong>Use When:</strong> Complex business domains, need for clear domain boundaries, large teams
-                </div>
-                <div class="tip">
-                    <strong>Benefits:</strong> Strong domain boundaries, reduced coupling, independent evolution
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="communication-synchronous-restgrpc">
                 <div class="card-header">📡 Communication: Synchronous (REST/gRPC)</div>
-                <div class="pattern-desc">Services communicate directly using HTTP/REST or gRPC for request-response interactions.</div>
-                
-                <div class="code-block"><span class="code-line"><span class="comment">// REST API call</span></span>
-<span class="code-line"><span class="keyword">const</span> response = <span class="keyword">await</span> fetch(</span>
-<span class="code-line">  <span class="string">'http://order-service/api/orders/123'</span>,</span>
-<span class="code-line">  { method: <span class="string">'GET'</span> }</span>
-<span class="code-line">);</span>
-<span class="code-line"></span>
-<span class="code-line"><span class="comment">// gRPC call</span></span>
-<span class="code-line"><span class="keyword">const</span> order = <span class="keyword">await</span> orderClient.getOrder({</span>
-<span class="code-line">  orderId: <span class="string">'123'</span></span>
-<span class="code-line">});</span></div>
-
-                <div class="use-case">
-                    <strong>Use When:</strong> Need immediate response, simple request-response, low latency requirements
-                </div>
-                <div class="warning">
-                    <strong>Drawback:</strong> Tight coupling, reduced availability (caller blocked), cascading failures
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="communication-asynchronous-message-queue">
                 <div class="card-header">📡 Communication: Asynchronous (Message Queue)</div>
-                <div class="pattern-desc">Services communicate through message brokers (RabbitMQ, Kafka) for decoupled, event-driven interactions.</div>
-                
-                <div class="code-block"><span class="code-line"><span class="comment">// Publishing an event</span></span>
-<span class="code-line"><span class="keyword">await</span> messageQueue.publish(<span class="string">'order.created'</span>, {</span>
-<span class="code-line">  orderId: <span class="string">'123'</span>,</span>
-<span class="code-line">  customerId: <span class="string">'456'</span>,</span>
-<span class="code-line">  total: <span class="string">99.99</span></span>
-<span class="code-line">});</span>
-<span class="code-line"></span>
-<span class="code-line"><span class="comment">// Subscribing to events</span></span>
-<span class="code-line">messageQueue.subscribe(<span class="string">'order.created'</span>, <span class="keyword">async</span> (event) => {</span>
-<span class="code-line">  <span class="keyword">await</span> processOrder(event);</span>
-<span class="code-line">});</span></div>
-
-                <div class="use-case">
-                    <strong>Use When:</strong> Event-driven workflows, high throughput, loose coupling needed, fire-and-forget operations
-                </div>
-                <div class="tip">
-                    <strong>Benefits:</strong> Loose coupling, better availability, natural load leveling, temporal decoupling
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="communication-api-gateway">
                 <div class="card-header">📡 Communication: API Gateway</div>
-                <div class="pattern-desc">Single entry point for all clients that routes requests to appropriate microservices and aggregates results.</div>
-                
-                <div class="code-block"><span class="code-line"><span class="comment">// API Gateway routing</span></span>
-<span class="code-line">routes:</span>
-<span class="code-line">  <span class="string">'/api/orders/*'</span>    → Order Service</span>
-<span class="code-line">  <span class="string">'/api/products/*'</span>  → Catalog Service</span>
-<span class="code-line">  <span class="string">'/api/users/*'</span>     → User Service</span>
-<span class="code-line"></span>
-<span class="code-line">features:</span>
-<span class="code-line">  - Authentication & Authorization</span>
-<span class="code-line">  - Rate limiting</span>
-<span class="code-line">  - Request/Response transformation</span>
-<span class="code-line">  - Response aggregation</span></div>
-
-                <div class="use-case">
-                    <strong>Use When:</strong> Multiple client types, need for request aggregation, cross-cutting concerns
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="resilience-circuit-breaker">
                 <div class="card-header">🛡️ Resilience: Circuit Breaker</div>
-                <div class="pattern-desc">Prevents cascading failures by stopping calls to a failing service and providing fallback behavior.</div>
-                
-                <div class="code-block"><span class="code-line"><span class="keyword">class</span> CircuitBreaker {</span>
-<span class="code-line">  states = [<span class="string">'CLOSED'</span>, <span class="string">'OPEN'</span>, <span class="string">'HALF_OPEN'</span>];</span>
-<span class="code-line">  </span>
-<span class="code-line">  <span class="keyword">async</span> call(fn) {</span>
-<span class="code-line">    <span class="keyword">if</span> (<span class="keyword">this</span>.state === <span class="string">'OPEN'</span>) {</span>
-<span class="code-line">      <span class="keyword">return</span> <span class="keyword">this</span>.fallback();</span>
-<span class="code-line">    }</span>
-<span class="code-line">    <span class="keyword">try</span> {</span>
-<span class="code-line">      <span class="keyword">const</span> result = <span class="keyword">await</span> fn();</span>
-<span class="code-line">      <span class="keyword">this</span>.onSuccess();</span>
-<span class="code-line">      <span class="keyword">return</span> result;</span>
-<span class="code-line">    } <span class="keyword">catch</span> (error) {</span>
-<span class="code-line">      <span class="keyword">this</span>.onFailure();</span>
-<span class="code-line">      <span class="keyword">throw</span> error;</span>
-<span class="code-line">    }</span>
-<span class="code-line">  }</span>
-<span class="code-line">}</span></div>
-
-                <div class="use-case">
-                    <strong>Use When:</strong> Calling unreliable external services, preventing cascading failures
-                </div>
-                <div class="note">
-                    <strong>States:</strong> CLOSED (normal), OPEN (failing, reject calls), HALF_OPEN (testing recovery)
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="resilience-retry-pattern">
                 <div class="card-header">🛡️ Resilience: Retry Pattern</div>
-                <div class="pattern-desc">Automatically retry failed operations with exponential backoff to handle transient failures.</div>
-                
-                <div class="code-block"><span class="code-line"><span class="keyword">async function</span> retryWithBackoff(</span>
-<span class="code-line">  fn,</span>
-<span class="code-line">  maxRetries = <span class="string">3</span>,</span>
-<span class="code-line">  baseDelay = <span class="string">1000</span></span>
-<span class="code-line">) {</span>
-<span class="code-line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="string">0</span>; i < maxRetries; i++) {</span>
-<span class="code-line">    <span class="keyword">try</span> {</span>
-<span class="code-line">      <span class="keyword">return await</span> fn();</span>
-<span class="code-line">    } <span class="keyword">catch</span> (error) {</span>
-<span class="code-line">      <span class="keyword">if</span> (i === maxRetries - <span class="string">1</span>) <span class="keyword">throw</span> error;</span>
-<span class="code-line">      <span class="keyword">const</span> delay = baseDelay * Math.pow(<span class="string">2</span>, i);</span>
-<span class="code-line">      <span class="keyword">await</span> sleep(delay);</span>
-<span class="code-line">    }</span>
-<span class="code-line">  }</span>
-<span class="code-line">}</span></div>
-
-                <div class="use-case">
-                    <strong>Use When:</strong> Transient network failures, temporary service unavailability
-                </div>
-                <div class="warning">
-                    <strong>Caution:</strong> Don't retry non-idempotent operations without proper safeguards
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="resilience-bulkhead-pattern">
                 <div class="card-header">🛡️ Resilience: Bulkhead Pattern</div>
-                <div class="pattern-desc">Isolate resources for different services to prevent one failing service from consuming all resources.</div>
-                
-                <div class="code-block"><span class="code-line"><span class="comment">// Thread pool isolation</span></span>
-<span class="code-line"><span class="keyword">const</span> pools = {</span>
-<span class="code-line">  orderService: <span class="keyword">new</span> ThreadPool({ size: <span class="string">10</span> }),</span>
-<span class="code-line">  paymentService: <span class="keyword">new</span> ThreadPool({ size: <span class="string">5</span> }),</span>
-<span class="code-line">  catalogService: <span class="keyword">new</span> ThreadPool({ size: <span class="string">15</span> })</span>
-<span class="code-line">};</span>
-<span class="code-line"></span>
-<span class="code-line"><span class="comment">// Each service gets isolated resources</span></span>
-<span class="code-line"><span class="keyword">await</span> pools.orderService.execute(() => {</span>
-<span class="code-line">  <span class="keyword">return</span> callOrderService();</span>
-<span class="code-line">});</span></div>
-
-                <div class="use-case">
-                    <strong>Use When:</strong> Protecting critical services, preventing resource exhaustion, multi-tenant systems
-                </div>
-                <div class="tip">
-                    <strong>Benefits:</strong> Fault isolation, predictable resource allocation, prevents cascading failures
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="resilience-timeout-pattern">
                 <div class="card-header">🛡️ Resilience: Timeout Pattern</div>
-                <div class="pattern-desc">Set time limits on operations to prevent indefinite waiting and resource exhaustion.</div>
-                
-                <div class="code-block"><span class="code-line"><span class="keyword">async function</span> withTimeout(promise, ms) {</span>
-<span class="code-line">  <span class="keyword">const</span> timeout = <span class="keyword">new</span> Promise((_, reject) => {</span>
-<span class="code-line">    setTimeout(() => {</span>
-<span class="code-line">      reject(<span class="keyword">new</span> Error(<span class="string">'Operation timed out'</span>));</span>
-<span class="code-line">    }, ms);</span>
-<span class="code-line">  });</span>
-<span class="code-line">  </span>
-<span class="code-line">  <span class="keyword">return</span> Promise.race([promise, timeout]);</span>
-<span class="code-line">}</span>
-<span class="code-line"></span>
-<span class="code-line"><span class="comment">// Usage</span></span>
-<span class="code-line"><span class="keyword">await</span> withTimeout(callService(), <span class="string">5000</span>);</span></div>
-
-                <div class="use-case">
-                    <strong>Use When:</strong> All external service calls, database queries, any I/O operations
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="data-database-per-service">
                 <div class="card-header">💾 Data: Database per Service</div>
-                <div class="pattern-desc">Each microservice has its own private database that cannot be accessed directly by other services.</div>
-                
-                <div class="code-block"><span class="code-line"><span class="comment">// Each service owns its data</span></span>
-<span class="code-line">Order Service    → orders_db</span>
-<span class="code-line">Customer Service → customers_db</span>
-<span class="code-line">Inventory Service → inventory_db</span>
-<span class="code-line"></span>
-<span class="code-line"><span class="comment">// Services communicate via APIs</span></span>
-<span class="code-line">Order Service → API call → Customer Service</span></div>
-
-                <div class="use-case">
-                    <strong>Use When:</strong> Need for service independence, different data storage requirements, polyglot persistence
-                </div>
-                <div class="tip">
-                    <strong>Benefits:</strong> Loose coupling, independent scaling, technology flexibility
-                </div>
-                <div class="warning">
-                    <strong>Challenge:</strong> Distributed transactions, data consistency, joins across services
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="data-saga-pattern">
                 <div class="card-header">💾 Data: Saga Pattern</div>
-                <div class="pattern-desc">Manage distributed transactions across services using a sequence of local transactions with compensating actions.</div>
-                
-                <div class="code-block"><span class="code-line"><span class="comment">// Choreography-based saga</span></span>
-<span class="code-line"><span class="string">1.</span> Order Service: Create order → emit OrderCreated</span>
-<span class="code-line"><span class="string">2.</span> Payment Service: Process payment → emit PaymentProcessed</span>
-<span class="code-line"><span class="string">3.</span> Inventory Service: Reserve items → emit ItemsReserved</span>
-<span class="code-line"><span class="string">4.</span> Shipping Service: Schedule delivery → emit DeliveryScheduled</span>
-<span class="code-line"></span>
-<span class="code-line"><span class="comment">// If step fails, compensate previous steps</span></span>
-<span class="code-line"><span class="keyword">if</span> (payment fails):</span>
-<span class="code-line">  → Cancel order</span>
-<span class="code-line"><span class="keyword">if</span> (inventory fails):</span>
-<span class="code-line">  → Refund payment → Cancel order</span></div>
-
-                <div class="use-case">
-                    <strong>Use When:</strong> Distributed transactions, long-running business processes, eventual consistency acceptable
-                </div>
-                <div class="note">
-                    <strong>Types:</strong> Choreography (event-driven) vs Orchestration (central coordinator)
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="data-event-sourcing">
                 <div class="card-header">💾 Data: Event Sourcing</div>
-                <div class="pattern-desc">Store the state of an entity as a sequence of state-changing events rather than just the current state.</div>
-                
-                <div class="code-block"><span class="code-line"><span class="comment">// Traditional: Store current state</span></span>
-<span class="code-line">{ orderId: <span class="string">'123'</span>, status: <span class="string">'SHIPPED'</span>, total: <span class="string">99.99</span> }</span>
-<span class="code-line"></span>
-<span class="code-line"><span class="comment">// Event Sourcing: Store events</span></span>
-<span class="code-line">events = [</span>
-<span class="code-line">  { type: <span class="string">'OrderCreated'</span>, total: <span class="string">99.99</span> },</span>
-<span class="code-line">  { type: <span class="string">'PaymentReceived'</span>, amount: <span class="string">99.99</span> },</span>
-<span class="code-line">  { type: <span class="string">'OrderShipped'</span>, trackingId: <span class="string">'ABC123'</span> }</span>
-<span class="code-line">];</span>
-<span class="code-line"></span>
-<span class="code-line"><span class="comment">// Rebuild state by replaying events</span></span>
-<span class="code-line">currentState = events.reduce(applyEvent, initialState);</span></div>
-
-                <div class="use-case">
-                    <strong>Use When:</strong> Need complete audit trail, temporal queries, event-driven architecture
-                </div>
-                <div class="tip">
-                    <strong>Benefits:</strong> Complete history, audit trail, time travel, event replay
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="data-cqrs-command-query-responsibility-segregation">
                 <div class="card-header">💾 Data: CQRS (Command Query Responsibility Segregation)</div>
-                <div class="pattern-desc">Separate read and write operations into different models, optimizing each for its specific use case.</div>
-                
-                <div class="code-block"><span class="code-line"><span class="comment">// Write Model (Commands)</span></span>
-<span class="code-line"><span class="keyword">class</span> OrderCommandService {</span>
-<span class="code-line">  createOrder(data) { <span class="comment">/* write to DB */</span> }</span>
-<span class="code-line">  updateOrder(id, data) { <span class="comment">/* write to DB */</span> }</span>
-<span class="code-line">}</span>
-<span class="code-line"></span>
-<span class="code-line"><span class="comment">// Read Model (Queries)</span></span>
-<span class="code-line"><span class="keyword">class</span> OrderQueryService {</span>
-<span class="code-line">  getOrder(id) { <span class="comment">/* read from optimized view */</span> }</span>
-<span class="code-line">  searchOrders(criteria) { <span class="comment">/* read from search index */</span> }</span>
-<span class="code-line">}</span></div>
-
-                <div class="use-case">
-                    <strong>Use When:</strong> Different read/write performance needs, complex queries, high read/write ratio difference
-                </div>
-                <div class="tip">
-                    <strong>Benefits:</strong> Independent scaling, optimized data models, better performance
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="observability-distributed-tracing">
                 <div class="card-header">🔍 Observability: Distributed Tracing</div>
-                <div class="pattern-desc">Track requests as they flow through multiple services to understand system behavior and diagnose issues.</div>
-                
-                <div class="code-block"><span class="code-line"><span class="comment">// Add trace context to requests</span></span>
-<span class="code-line"><span class="keyword">const</span> span = tracer.startSpan(<span class="string">'process-order'</span>);</span>
-<span class="code-line">span.setTag(<span class="string">'orderId'</span>, orderId);</span>
-<span class="code-line"></span>
-<span class="code-line"><span class="keyword">try</span> {</span>
-<span class="code-line">  <span class="keyword">await</span> processOrder(orderId);</span>
-<span class="code-line">  span.setTag(<span class="string">'status'</span>, <span class="string">'success'</span>);</span>
-<span class="code-line">} <span class="keyword">catch</span> (error) {</span>
-<span class="code-line">  span.setTag(<span class="string">'error'</span>, <span class="keyword">true</span>);</span>
-<span class="code-line">  span.log({ event: <span class="string">'error'</span>, message: error.message });</span>
-<span class="code-line">} <span class="keyword">finally</span> {</span>
-<span class="code-line">  span.finish();</span>
-<span class="code-line">}</span></div>
-
-                <div class="use-case">
-                    <strong>Use When:</strong> Debugging distributed systems, performance analysis, understanding request flow
-                </div>
-                <div class="note">
-                    <strong>Tools:</strong> Jaeger, Zipkin, AWS X-Ray, OpenTelemetry
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="observability-health-check-api">
                 <div class="card-header">🔍 Observability: Health Check API</div>
-                <div class="pattern-desc">Expose endpoints that report the health status of a service and its dependencies.</div>
-                
-                <div class="code-block"><span class="code-line"><span class="comment">// Health check endpoint</span></span>
-<span class="code-line">app.get(<span class="string">'/health'</span>, <span class="keyword">async</span> (req, res) => {</span>
-<span class="code-line">  <span class="keyword">const</span> health = {</span>
-<span class="code-line">    status: <span class="string">'UP'</span>,</span>
-<span class="code-line">    checks: {</span>
-<span class="code-line">      database: <span class="keyword">await</span> checkDatabase(),</span>
-<span class="code-line">      cache: <span class="keyword">await</span> checkCache(),</span>
-<span class="code-line">      messageQueue: <span class="keyword">await</span> checkQueue()</span>
-<span class="code-line">    }</span>
-<span class="code-line">  };</span>
-<span class="code-line">  </span>
-<span class="code-line">  <span class="keyword">const</span> status = health.checks.every(c => c === <span class="string">'UP'</span>)</span>
-<span class="code-line">    ? <span class="string">200</span> : <span class="string">503</span>;</span>
-<span class="code-line">  res.status(status).json(health);</span>
-<span class="code-line">});</span></div>
-
-                <div class="use-case">
-                    <strong>Use When:</strong> Container orchestration, load balancing, monitoring systems
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="security-service-mesh">
                 <div class="card-header">🔐 Security: Service Mesh</div>
-                <div class="pattern-desc">Infrastructure layer that handles service-to-service communication, security, and observability.</div>
-                
-                <div class="code-block"><span class="code-line"><span class="comment">// Service mesh features</span></span>
-<span class="code-line">features:</span>
-<span class="code-line">  - mTLS encryption between services</span>
-<span class="code-line">  - Traffic management & routing</span>
-<span class="code-line">  - Load balancing</span>
-<span class="code-line">  - Circuit breaking</span>
-<span class="code-line">  - Retry logic</span>
-<span class="code-line">  - Metrics & tracing</span>
-<span class="code-line">  - Service discovery</span>
-<span class="code-line"></span>
-<span class="code-line"><span class="comment">// Popular implementations</span></span>
-<span class="code-line">- Istio</span>
-<span class="code-line">- Linkerd</span>
-<span class="code-line">- Consul Connect</span></div>
-
-                <div class="use-case">
-                    <strong>Use When:</strong> Large microservices deployments, need for consistent cross-cutting concerns
-                </div>
-                <div class="tip">
-                    <strong>Benefits:</strong> Security by default, consistent observability, traffic control
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="deployment-sidecar-pattern">
                 <div class="card-header">🚀 Deployment: Sidecar Pattern</div>
-                <div class="pattern-desc">Deploy helper components alongside the main application to provide supporting features.</div>
-                
-                <div class="code-block"><span class="code-line"><span class="comment">// Kubernetes pod with sidecar</span></span>
-<span class="code-line">pod:</span>
-<span class="code-line">  containers:</span>
-<span class="code-line">    - name: app</span>
-<span class="code-line">      image: my-service:<span class="string">1.0</span></span>
-<span class="code-line">    </span>
-<span class="code-line">    - name: logging-sidecar</span>
-<span class="code-line">      image: fluentd:<span class="string">latest</span></span>
-<span class="code-line">      <span class="comment"># Collects and forwards logs</span></span>
-<span class="code-line">    </span>
-<span class="code-line">    - name: proxy-sidecar</span>
-<span class="code-line">      image: envoy:<span class="string">latest</span></span>
-<span class="code-line">      <span class="comment"># Handles network traffic</span></span></div>
-
-                <div class="use-case">
-                    <strong>Use When:</strong> Adding cross-cutting concerns, service mesh implementation, log aggregation
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-        </div>
-
-        <div class="card" style="margin-bottom: 2rem;">
-            <div class="card-header">🎯 Pattern Selection Guide</div>
-            
-            <div class="pattern-name">Starting a Microservices Architecture</div>
-            <div class="pattern-desc">Begin with service decomposition by business capability or subdomain (DDD). Use synchronous communication initially, add async as needed.</div>
-
-            <div class="pattern-name">Ensuring Reliability</div>
-            <div class="pattern-desc">Implement circuit breaker, retry with exponential backoff, and timeouts. Add bulkhead pattern for critical services.</div>
-
-            <div class="pattern-name">Managing Data Consistency</div>
-            <div class="pattern-desc">Use database per service with saga pattern for distributed transactions. Consider event sourcing for audit requirements.</div>
-
-            <div class="pattern-name">Improving Performance</div>
-            <div class="pattern-desc">Implement CQRS for read-heavy workloads. Use API gateway for request aggregation. Add caching at multiple levels.</div>
-
-            <div class="pattern-name">Enhancing Observability</div>
-            <div class="pattern-desc">Implement distributed tracing, centralized logging, and health check APIs. Consider service mesh for comprehensive observability.</div>
-
-            <div class="tip">
-                <strong>Best Practice:</strong> Start simple and add patterns as complexity grows. Don't over-engineer from the start.
+            <div class="card" id="pattern-selection-guide">
+                <div class="card-header">🎯 Pattern Selection Guide</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="common-pitfalls">
+                <div class="card-header">⚠️ Common Pitfalls</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="pattern-combinations">
+                <div class="card-header">📖 Pattern Combinations</div>
+                <div class="code-block">
+                    
+                </div>
             </div>
         </div>
 
-        <div class="card" style="margin-bottom: 2rem;">
-            <div class="card-header">⚠️ Common Pitfalls</div>
-            
-            <div class="pattern-name">Distributed Monolith</div>
-            <div class="pattern-desc">Services that are too tightly coupled defeat the purpose of microservices. Ensure loose coupling through well-defined APIs.</div>
-
-            <div class="pattern-name">Ignoring Network Failures</div>
-            <div class="pattern-desc">Network calls will fail. Always implement timeouts, retries, and circuit breakers.</div>
-
-            <div class="pattern-name">Shared Database</div>
-            <div class="pattern-desc">Sharing databases between services creates tight coupling. Use database per service pattern.</div>
-
-            <div class="pattern-name">Lack of Monitoring</div>
-            <div class="pattern-desc">Without proper observability, debugging distributed systems is nearly impossible. Invest in tracing and logging early.</div>
-
-            <div class="pattern-name">Premature Decomposition</div>
-            <div class="pattern-desc">Don't start with microservices. Begin with a monolith and decompose when you understand the domain boundaries.</div>
-
-            <div class="warning">
-                <strong>Remember:</strong> Microservices add complexity. Only adopt them when the benefits outweigh the operational overhead.
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">📖 Pattern Combinations</div>
-            
-            <div class="pattern-name">E-commerce Order Processing</div>
-            <div class="pattern-desc">
-                <strong>Patterns:</strong> API Gateway + Saga + Event Sourcing + Circuit Breaker<br>
-                <strong>Flow:</strong> API Gateway receives order → Saga orchestrates payment, inventory, shipping → Events stored for audit → Circuit breakers protect external payment gateway
-            </div>
-
-            <div class="pattern-name">High-Traffic Content Platform</div>
-            <div class="pattern-desc">
-                <strong>Patterns:</strong> CQRS + Event Sourcing + Async Messaging + Database per Service<br>
-                <strong>Flow:</strong> Write commands update event store → Events published to message queue → Read models updated asynchronously → Queries served from optimized read databases
-            </div>
-
-            <div class="pattern-name">Real-time Analytics System</div>
-            <div class="pattern-desc">
-                <strong>Patterns:</strong> Event Sourcing + Async Messaging + CQRS + Distributed Tracing<br>
-                <strong>Flow:</strong> Events captured in real-time → Processed asynchronously → Multiple read models for different analytics → Tracing for performance monitoring
-            </div>
-
-            <div class="note">
-                <strong>Key Insight:</strong> Patterns work best in combination. Choose patterns that complement each other and address your specific challenges.
-            </div>
-        </div>
-
-        <div class="footer">
-            <p>Essential Microservices Patterns Reference</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">🏗️ Based on industry best practices and patterns from Chris Richardson's "Microservices Patterns"</p>
-        </div>
+        <footer>
+            <p>&copy; 2025 Cheatsheets Collection. Open source and community driven.</p>
+        </footer>
     </div>
 </body>
 </html>

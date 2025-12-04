@@ -3,689 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Essential Linux commands for file management, processes, networking, and system administration.">
     <title>Linux/Unix Commands Cheatsheet</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: linear-gradient(135deg, #0f1419 0%, #1a2332 100%);
-            color: #e0e6ed;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 2rem;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            font-size: 3rem;
-            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #8b95a5;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .card {
-            background: rgba(30, 41, 59, 0.6);
-            border: 1px solid rgba(100, 116, 139, 0.3);
-            border-radius: 12px;
-            padding: 1.5rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: rgba(245, 158, 11, 0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.15);
-        }
-
-        .card-header {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #f59e0b;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid rgba(245, 158, 11, 0.3);
-        }
-
-        .cmd-row {
-            display: grid;
-            grid-template-columns: 180px 1fr;
-            gap: 1rem;
-            margin-bottom: 0.75rem;
-            padding: 0.5rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 6px;
-            transition: background 0.2s ease;
-        }
-
-        .cmd-row:hover {
-            background: rgba(245, 158, 11, 0.1);
-        }
-
-        .cmd-name {
-            color: #fbbf24;
-            font-weight: 600;
-            font-family: 'Courier New', monospace;
-            font-size: 0.95rem;
-        }
-
-        .cmd-desc {
-            color: #cbd5e1;
-        }
-
-        code {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            color: #a5d6ff;
-            font-size: 0.9em;
-        }
-
-        .example-box {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 0.75rem;
-            border-radius: 6px;
-            font-family: 'Courier New', monospace;
-            color: #a5d6ff;
-            margin: 0.5rem 0;
-            border-left: 3px solid #10b981;
-        }
-
-        .note {
-            background: rgba(59, 130, 246, 0.1);
-            border-left: 4px solid #3b82f6;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .warning {
-            background: rgba(239, 68, 68, 0.1);
-            border-left: 4px solid #ef4444;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .section-title {
-            font-size: 0.85rem;
-            color: #f59e0b;
-            font-weight: 600;
-            margin: 1rem 0 0.5rem 0;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(100, 116, 139, 0.3);
-            color: #8b95a5;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            .grid {
-                grid-template-columns: 1fr;
-            }
-            .cmd-row {
-                grid-template-columns: 1fr;
-                gap: 0.5rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../script.js" defer></script>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-brand">
+                <i class="ph ph-books"></i> Cheatsheets
+            </a>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="btn-icon" aria-label="Toggle theme">
+                    <i class="ph ph-moon"></i>
+                </button>
+                <button id="download-btn" class="btn-icon" aria-label="Download PDF">
+                    <i class="ph ph-download-simple"></i>
+                </button>
+                <a href="https://github.com/keyurgolani/Cheatsheets" class="btn-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                    <i class="ph ph-github-logo"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
-        <h1>🐧 Linux/Unix Commands</h1>
-        <p class="subtitle">Essential commands for system administration and daily use</p>
+        <header class="cheatsheet-header">
+            <h1>🐧 Linux/Unix Commands</h1>
+            <p>Essential commands for system administration and daily use</p>
+            <div class="search-container" style="margin-top: 1.5rem; margin-bottom: 0;">
+                <span class="search-icon"><i class="ph ph-magnifying-glass"></i></span>
+                <input type="text" class="search-input" id="cheatsheet-search" placeholder="Filter this cheatsheet..." aria-label="Filter cheatsheet">
+            </div>
+        </header>
 
-        <div class="grid">
-            <div class="card">
+        <div class="masonry-grid" id="cheatsheet-grid">
+            
+            <div class="card" id="file-directory-operations">
                 <div class="card-header">📁 File & Directory Operations</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ls</div>
-                    <div class="cmd-desc">List directory contents</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ls -la</div>
-                    <div class="cmd-desc">List all files (including hidden) with details</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ls -lh</div>
-                    <div class="cmd-desc">List with human-readable sizes</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">cd [dir]</div>
-                    <div class="cmd-desc">Change directory</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">cd ~</div>
-                    <div class="cmd-desc">Go to home directory</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">cd -</div>
-                    <div class="cmd-desc">Go to previous directory</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">pwd</div>
-                    <div class="cmd-desc">Print working directory</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">mkdir [dir]</div>
-                    <div class="cmd-desc">Create directory</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">mkdir -p a/b/c</div>
-                    <div class="cmd-desc">Create nested directories</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">rmdir [dir]</div>
-                    <div class="cmd-desc">Remove empty directory</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">rm -rf [dir]</div>
-                    <div class="cmd-desc">Remove directory and contents recursively</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="file-operations">
                 <div class="card-header">📄 File Operations</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">touch [file]</div>
-                    <div class="cmd-desc">Create empty file or update timestamp</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">cp [src] [dest]</div>
-                    <div class="cmd-desc">Copy file</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">cp -r [src] [dest]</div>
-                    <div class="cmd-desc">Copy directory recursively</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">mv [src] [dest]</div>
-                    <div class="cmd-desc">Move or rename file</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">rm [file]</div>
-                    <div class="cmd-desc">Remove file</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">rm -f [file]</div>
-                    <div class="cmd-desc">Force remove without prompt</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ln -s [target] [link]</div>
-                    <div class="cmd-desc">Create symbolic link</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">find . -name "*.txt"</div>
-                    <div class="cmd-desc">Find files by name pattern</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">locate [file]</div>
-                    <div class="cmd-desc">Find file by name (uses database)</div>
-                </div>
-                <div class="warning">
-                    ⚠️ <strong>Warning:</strong> <code>rm -rf</code> permanently deletes files without recovery. Use with caution!
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="viewing-files">
                 <div class="card-header">👁️ Viewing Files</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">cat [file]</div>
-                    <div class="cmd-desc">Display entire file contents</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">less [file]</div>
-                    <div class="cmd-desc">View file with pagination</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">more [file]</div>
-                    <div class="cmd-desc">View file page by page</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">head [file]</div>
-                    <div class="cmd-desc">Display first 10 lines</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">head -n 20 [file]</div>
-                    <div class="cmd-desc">Display first 20 lines</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">tail [file]</div>
-                    <div class="cmd-desc">Display last 10 lines</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">tail -f [file]</div>
-                    <div class="cmd-desc">Follow file updates in real-time</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">wc [file]</div>
-                    <div class="cmd-desc">Count lines, words, and characters</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">wc -l [file]</div>
-                    <div class="cmd-desc">Count lines only</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="permissions-ownership">
                 <div class="card-header">🔐 Permissions & Ownership</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">chmod 755 [file]</div>
-                    <div class="cmd-desc">Set permissions (rwxr-xr-x)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">chmod +x [file]</div>
-                    <div class="cmd-desc">Make file executable</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">chmod -R 644 [dir]</div>
-                    <div class="cmd-desc">Set permissions recursively</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">chown user [file]</div>
-                    <div class="cmd-desc">Change file owner</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">chown user:group [file]</div>
-                    <div class="cmd-desc">Change owner and group</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">chgrp [group] [file]</div>
-                    <div class="cmd-desc">Change file group</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">umask 022</div>
-                    <div class="cmd-desc">Set default permissions for new files</div>
-                </div>
-                <div class="note">
-                    <strong>Permission Numbers:</strong><br>
-                    4 = read (r), 2 = write (w), 1 = execute (x)<br>
-                    755 = rwxr-xr-x | 644 = rw-r--r-- | 777 = rwxrwxrwx
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="process-management">
                 <div class="card-header">⚙️ Process Management</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ps aux</div>
-                    <div class="cmd-desc">List all running processes</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ps aux | grep [name]</div>
-                    <div class="cmd-desc">Find specific process</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">top</div>
-                    <div class="cmd-desc">Display real-time process info</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">htop</div>
-                    <div class="cmd-desc">Interactive process viewer (if installed)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kill [PID]</div>
-                    <div class="cmd-desc">Terminate process by ID</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">kill -9 [PID]</div>
-                    <div class="cmd-desc">Force kill process</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">killall [name]</div>
-                    <div class="cmd-desc">Kill all processes by name</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">bg</div>
-                    <div class="cmd-desc">Resume job in background</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">fg</div>
-                    <div class="cmd-desc">Bring job to foreground</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">jobs</div>
-                    <div class="cmd-desc">List background jobs</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">nohup [cmd] &</div>
-                    <div class="cmd-desc">Run command immune to hangups</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="network-commands">
                 <div class="card-header">🌐 Network Commands</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ping [host]</div>
-                    <div class="cmd-desc">Test network connectivity</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">curl [url]</div>
-                    <div class="cmd-desc">Transfer data from URL</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">wget [url]</div>
-                    <div class="cmd-desc">Download file from URL</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">netstat -tulpn</div>
-                    <div class="cmd-desc">Show listening ports</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ss -tulpn</div>
-                    <div class="cmd-desc">Modern netstat alternative</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ifconfig</div>
-                    <div class="cmd-desc">Display network interfaces (deprecated)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ip addr</div>
-                    <div class="cmd-desc">Show IP addresses (modern)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">traceroute [host]</div>
-                    <div class="cmd-desc">Trace route to host</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">nslookup [domain]</div>
-                    <div class="cmd-desc">DNS lookup</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">dig [domain]</div>
-                    <div class="cmd-desc">DNS lookup (detailed)</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="search-filter">
                 <div class="card-header">🔍 Search & Filter</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">grep "pattern" [file]</div>
-                    <div class="cmd-desc">Search for pattern in file</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">grep -r "pattern" [dir]</div>
-                    <div class="cmd-desc">Recursive search in directory</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">grep -i "pattern" [file]</div>
-                    <div class="cmd-desc">Case-insensitive search</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">awk '{print $1}' [file]</div>
-                    <div class="cmd-desc">Print first column</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">sed 's/old/new/g' [file]</div>
-                    <div class="cmd-desc">Replace text in file</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">sort [file]</div>
-                    <div class="cmd-desc">Sort lines alphabetically</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">uniq [file]</div>
-                    <div class="cmd-desc">Remove duplicate lines</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">cut -d: -f1 [file]</div>
-                    <div class="cmd-desc">Extract column (delimiter :)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">tr 'a-z' 'A-Z'</div>
-                    <div class="cmd-desc">Translate/replace characters</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="disk-system-info">
                 <div class="card-header">💾 Disk & System Info</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">df -h</div>
-                    <div class="cmd-desc">Show disk space usage</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">du -sh [dir]</div>
-                    <div class="cmd-desc">Show directory size</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">du -h --max-depth=1</div>
-                    <div class="cmd-desc">Show subdirectory sizes</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">free -h</div>
-                    <div class="cmd-desc">Display memory usage</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">uptime</div>
-                    <div class="cmd-desc">Show system uptime</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">uname -a</div>
-                    <div class="cmd-desc">Show system information</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">hostname</div>
-                    <div class="cmd-desc">Display system hostname</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">lsblk</div>
-                    <div class="cmd-desc">List block devices</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">mount</div>
-                    <div class="cmd-desc">Show mounted filesystems</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="archive-compression">
                 <div class="card-header">📦 Archive & Compression</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">tar -czf file.tar.gz [dir]</div>
-                    <div class="cmd-desc">Create gzip archive</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">tar -xzf file.tar.gz</div>
-                    <div class="cmd-desc">Extract gzip archive</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">tar -cjf file.tar.bz2 [dir]</div>
-                    <div class="cmd-desc">Create bzip2 archive</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">tar -xjf file.tar.bz2</div>
-                    <div class="cmd-desc">Extract bzip2 archive</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">zip -r file.zip [dir]</div>
-                    <div class="cmd-desc">Create zip archive</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">unzip file.zip</div>
-                    <div class="cmd-desc">Extract zip archive</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">gzip [file]</div>
-                    <div class="cmd-desc">Compress file with gzip</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">gunzip [file.gz]</div>
-                    <div class="cmd-desc">Decompress gzip file</div>
-                </div>
-                <div class="note">
-                    <strong>tar flags:</strong> c=create, x=extract, z=gzip, j=bzip2, f=file, v=verbose
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="user-management">
                 <div class="card-header">👤 User Management</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">whoami</div>
-                    <div class="cmd-desc">Display current user</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">who</div>
-                    <div class="cmd-desc">Show logged in users</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">w</div>
-                    <div class="cmd-desc">Show who is logged in and active</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">id</div>
-                    <div class="cmd-desc">Display user and group IDs</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">sudo [command]</div>
-                    <div class="cmd-desc">Execute command as superuser</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">su - [user]</div>
-                    <div class="cmd-desc">Switch to another user</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">passwd</div>
-                    <div class="cmd-desc">Change password</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">useradd [user]</div>
-                    <div class="cmd-desc">Create new user</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">userdel [user]</div>
-                    <div class="cmd-desc">Delete user</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">groups [user]</div>
-                    <div class="cmd-desc">Show user's groups</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="pipes-redirection">
                 <div class="card-header">🔗 Pipes & Redirection</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">cmd1 | cmd2</div>
-                    <div class="cmd-desc">Pipe output of cmd1 to cmd2</div>
+                <div class="code-block">
+                    
                 </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">cmd > file</div>
-                    <div class="cmd-desc">Redirect output to file (overwrite)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">cmd >> file</div>
-                    <div class="cmd-desc">Redirect output to file (append)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">cmd < file</div>
-                    <div class="cmd-desc">Read input from file</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">cmd 2> file</div>
-                    <div class="cmd-desc">Redirect errors to file</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">cmd &> file</div>
-                    <div class="cmd-desc">Redirect output and errors</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">cmd1 && cmd2</div>
-                    <div class="cmd-desc">Run cmd2 if cmd1 succeeds</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">cmd1 || cmd2</div>
-                    <div class="cmd-desc">Run cmd2 if cmd1 fails</div>
-                </div>
-                <div class="example-box">ls -la | grep "\.txt" | wc -l</div>
-                <p style="color: #8b95a5; font-size: 0.85rem; margin-top: 0.3rem;">Count .txt files in directory</p>
             </div>
-
-            <div class="card">
+            <div class="card" id="scheduling-cron">
                 <div class="card-header">⏰ Scheduling & Cron</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">crontab -e</div>
-                    <div class="cmd-desc">Edit cron jobs</div>
+                <div class="code-block">
+                    
                 </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">crontab -l</div>
-                    <div class="cmd-desc">List cron jobs</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">crontab -r</div>
-                    <div class="cmd-desc">Remove all cron jobs</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">at [time]</div>
-                    <div class="cmd-desc">Schedule one-time job</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">atq</div>
-                    <div class="cmd-desc">List scheduled at jobs</div>
-                </div>
-                <div class="note">
-                    <strong>Cron format:</strong> minute hour day month weekday command<br>
-                    <code>0 2 * * * /backup.sh</code> = Run at 2am daily<br>
-                    <code>*/15 * * * * /check.sh</code> = Run every 15 minutes
+            </div>
+            <div class="card" id="common-command-combinations">
+                <div class="card-header">💡 Common Command Combinations</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header">💡 Common Command Combinations</div>
-            <div class="example-box">$ find . -type f -name "*.log" -mtime +30 -delete</div>
-            <p style="color: #8b95a5; font-size: 0.85rem; margin: 0.3rem 0 1rem 0.5rem;">Delete log files older than 30 days</p>
-
-            <div class="example-box">$ ps aux | grep python | grep -v grep | awk '{print $2}' | xargs kill</div>
-            <p style="color: #8b95a5; font-size: 0.85rem; margin: 0.3rem 0 1rem 0.5rem;">Kill all Python processes</p>
-
-            <div class="example-box">$ du -sh */ | sort -h</div>
-            <p style="color: #8b95a5; font-size: 0.85rem; margin: 0.3rem 0 1rem 0.5rem;">Show directory sizes sorted</p>
-
-            <div class="example-box">$ tail -f /var/log/syslog | grep --line-buffered "error"</div>
-            <p style="color: #8b95a5; font-size: 0.85rem; margin: 0.3rem 0 1rem 0.5rem;">Monitor log file for errors in real-time</p>
-
-            <div class="example-box">$ find . -type f -exec grep -l "TODO" {} \;</div>
-            <p style="color: #8b95a5; font-size: 0.85rem; margin: 0.3rem 0 0 0.5rem;">Find all files containing "TODO"</p>
-        </div>
-
-        <div class="footer">
-            <p>Essential Linux/Unix Commands Reference</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">💡 Use <code>man [command]</code> or <code>command --help</code> for detailed documentation</p>
-        </div>
+        <footer>
+            <p>&copy; 2025 Cheatsheets Collection. Open source and community driven.</p>
+        </footer>
     </div>
 </body>
 </html>

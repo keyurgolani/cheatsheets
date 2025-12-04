@@ -1,0 +1,3500 @@
+[
+  {
+    "title": "\ud83d\udcc4 HTML5 Reference",
+    "section": "\ud83c\udfd7\ufe0f Document Structure",
+    "url": "cheatsheets/html5.html#document-structure",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcc4 HTML5 Reference",
+    "section": "\ud83d\udcd0 Semantic Structure Elements",
+    "url": "cheatsheets/html5.html#semantic-structure-elements",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcc4 HTML5 Reference",
+    "section": "\ud83d\udcdd Text Content Elements",
+    "url": "cheatsheets/html5.html#text-content-elements",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcc4 HTML5 Reference",
+    "section": "\ud83d\udccb Lists",
+    "url": "cheatsheets/html5.html#lists",
+    "content": "<ol start=\"5\" reversed> <li>Item 5</li> <li>Item 4</li> </ol>"
+  },
+  {
+    "title": "\ud83d\udcc4 HTML5 Reference",
+    "section": "\ud83d\udd17 Links and Navigation",
+    "url": "cheatsheets/html5.html#links-and-navigation",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcc4 HTML5 Reference",
+    "section": "\ud83d\uddbc\ufe0f Images and Media",
+    "url": "cheatsheets/html5.html#images-and-media",
+    "content": "<picture> <source srcset=\"large.jpg\" media=\"(min-width: 800px)\"> <source srcset=\"medium.jpg\" media=\"(min-width: 400px)\"> <img src=\"small.jpg\" alt=\"Description\"> </picture>"
+  },
+  {
+    "title": "\ud83d\udcc4 HTML5 Reference",
+    "section": "\ud83c\udfac Video and Audio",
+    "url": "cheatsheets/html5.html#video-and-audio",
+    "content": "<video controls width=\"640\" height=\"360\"> <source src=\"video.mp4\" type=\"video/mp4\"> <source src=\"video.webm\" type=\"video/webm\"> <track kind=\"subtitles\" src=\"subs.vtt\" srclang=\"en\"> Your browser doesn't support video. </video>"
+  },
+  {
+    "title": "\ud83d\udcc4 HTML5 Reference",
+    "section": "\ud83d\udcca Tables",
+    "url": "cheatsheets/html5.html#tables",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcc4 HTML5 Reference",
+    "section": "\ud83d\udcdd Form Elements",
+    "url": "cheatsheets/html5.html#form-elements",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcc4 HTML5 Reference",
+    "section": "\u2705 Form Attributes",
+    "url": "cheatsheets/html5.html#form-attributes",
+    "content": "<input type=\"email\" required pattern=\"[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$\" placeholder=\"user@example.com\">"
+  },
+  {
+    "title": "\ud83d\udcc4 HTML5 Reference",
+    "section": "\ud83c\udfaf Global Attributes",
+    "url": "cheatsheets/html5.html#global-attributes",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcc4 HTML5 Reference",
+    "section": "\u267f Accessibility (ARIA)",
+    "url": "cheatsheets/html5.html#accessibility-aria",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcc4 HTML5 Reference",
+    "section": "\ud83d\udd27 Meta Tags",
+    "url": "cheatsheets/html5.html#meta-tags",
+    "content": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+  },
+  {
+    "title": "\ud83d\udcc4 HTML5 Reference",
+    "section": "\ud83d\udce6 Embedded Content",
+    "url": "cheatsheets/html5.html#embedded-content",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcc4 HTML5 Reference",
+    "section": "\ud83d\udcdc Script and Style",
+    "url": "cheatsheets/html5.html#script-and-style",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcc4 HTML5 Reference",
+    "section": "\ud83c\udfa8 Interactive Elements",
+    "url": "cheatsheets/html5.html#interactive-elements",
+    "content": "<details> <summary>Click to expand</summary> <p>Hidden content here</p> </details>"
+  },
+  {
+    "title": "\ud83d\udcc4 HTML5 Reference",
+    "section": "\ud83d\udd24 Character Entities",
+    "url": "cheatsheets/html5.html#character-entities",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcc4 HTML5 Reference",
+    "section": "\u2728 HTML5 Best Practices",
+    "url": "cheatsheets/html5.html#html5-best-practices",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Design Patterns",
+    "section": "\ud83c\udfd7\ufe0f Creational: Singleton",
+    "url": "cheatsheets/design-patterns.html#creational-singleton",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Design Patterns",
+    "section": "\ud83c\udfd7\ufe0f Creational: Factory Method",
+    "url": "cheatsheets/design-patterns.html#creational-factory-method",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Design Patterns",
+    "section": "\ud83c\udfd7\ufe0f Creational: Builder",
+    "url": "cheatsheets/design-patterns.html#creational-builder",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Design Patterns",
+    "section": "\ud83d\udd0c Structural: Adapter",
+    "url": "cheatsheets/design-patterns.html#structural-adapter",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Design Patterns",
+    "section": "\ud83d\udd0c Structural: Decorator",
+    "url": "cheatsheets/design-patterns.html#structural-decorator",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Design Patterns",
+    "section": "\ud83d\udd0c Structural: Proxy",
+    "url": "cheatsheets/design-patterns.html#structural-proxy",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Design Patterns",
+    "section": "\u26a1 Behavioral: Observer",
+    "url": "cheatsheets/design-patterns.html#behavioral-observer",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Design Patterns",
+    "section": "\u26a1 Behavioral: Strategy",
+    "url": "cheatsheets/design-patterns.html#behavioral-strategy",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Design Patterns",
+    "section": "\u26a1 Behavioral: Command",
+    "url": "cheatsheets/design-patterns.html#behavioral-command",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Design Patterns",
+    "section": "\ud83c\udfd7\ufe0f Creational: Abstract Factory",
+    "url": "cheatsheets/design-patterns.html#creational-abstract-factory",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Design Patterns",
+    "section": "\ud83d\udd0c Structural: Composite",
+    "url": "cheatsheets/design-patterns.html#structural-composite",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Design Patterns",
+    "section": "\u26a1 Behavioral: Template Method",
+    "url": "cheatsheets/design-patterns.html#behavioral-template-method",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Design Patterns",
+    "section": "\u26a1 Behavioral: State",
+    "url": "cheatsheets/design-patterns.html#behavioral-state",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Design Patterns",
+    "section": "\ud83d\udcda Pattern Categories Overview",
+    "url": "cheatsheets/design-patterns.html#pattern-categories-overview",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Design Patterns",
+    "section": "\ud83d\udca1 Pattern Selection Guide",
+    "url": "cheatsheets/design-patterns.html#pattern-selection-guide",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Design Patterns",
+    "section": "\u26a0\ufe0f Common Pitfalls",
+    "url": "cheatsheets/design-patterns.html#common-pitfalls",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd0d Regular Expressions (Regex)",
+    "section": "\ud83d\udccd Anchors",
+    "url": "cheatsheets/regex.html#anchors",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd0d Regular Expressions (Regex)",
+    "section": "\ud83c\udfaf Character Classes",
+    "url": "cheatsheets/regex.html#character-classes",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd0d Regular Expressions (Regex)",
+    "section": "\ud83d\udce6 Character Sets",
+    "url": "cheatsheets/regex.html#character-sets",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd0d Regular Expressions (Regex)",
+    "section": "\ud83d\udd22 Quantifiers",
+    "url": "cheatsheets/regex.html#quantifiers",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd0d Regular Expressions (Regex)",
+    "section": "\ud83d\udd17 Groups & Alternation",
+    "url": "cheatsheets/regex.html#groups-alternation",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd0d Regular Expressions (Regex)",
+    "section": "\ud83d\udc40 Lookahead & Lookbehind",
+    "url": "cheatsheets/regex.html#lookahead-lookbehind",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd0d Regular Expressions (Regex)",
+    "section": "\ud83d\udee1\ufe0f Escape Sequences",
+    "url": "cheatsheets/regex.html#escape-sequences",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd0d Regular Expressions (Regex)",
+    "section": "\ud83d\udea9 Flags/Modifiers",
+    "url": "cheatsheets/regex.html#flagsmodifiers",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd0d Regular Expressions (Regex)",
+    "section": "\ud83d\udce7 Common Patterns",
+    "url": "cheatsheets/regex.html#common-patterns",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd0d Regular Expressions (Regex)",
+    "section": "\ud83d\udcbb Usage in Different Languages",
+    "url": "cheatsheets/regex.html#usage-in-different-languages",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd0d Regular Expressions (Regex)",
+    "section": "\ud83d\udca1 Tips & Best Practices",
+    "url": "cheatsheets/regex.html#tips-best-practices",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd0d Regular Expressions (Regex)",
+    "section": "\ud83d\udd25 Performance Tips",
+    "url": "cheatsheets/regex.html#performance-tips",
+    "content": ""
+  },
+  {
+    "title": "Python Syntax & Standard Library",
+    "section": "\ud83d\udcdd Basic Syntax",
+    "url": "cheatsheets/python.html#basic-syntax",
+    "content": "# Variables (no declaration needed) name = \"Alice\" age = 30 height = 5.6 is_student = True # Multiple assignment x, y, z = 1, 2, 3 # Print output print( \"Hello, World!\" ) print( f\"My name is {name}\" ) # Comments and docstrings \"\"\"Multi-line comment or docstring\"\"\""
+  },
+  {
+    "title": "Python Syntax & Standard Library",
+    "section": "\ud83d\udd22 Data Types",
+    "url": "cheatsheets/python.html#data-types",
+    "content": "# Numbers integer = 42 floating = 3.14 complex_num = 3 + 4j # Strings text = \"Hello\" multiline = \"\"\"Multiple lines\"\"\" # Boolean flag = True # or False # None (null) value = None # Type conversion int( \"42\" ), float( \"3.14\" ), str(42)"
+  },
+  {
+    "title": "Python Syntax & Standard Library",
+    "section": "\ud83d\udcca Lists (Arrays)",
+    "url": "cheatsheets/python.html#lists-arrays",
+    "content": "# Create list fruits = [ \"apple\" , \"banana\" , \"cherry\" ] numbers = [1, 2, 3, 4, 5] mixed = [1, \"two\" , 3.0, True ] # Access elements fruits[0] # \"apple\" fruits[-1] # last item # Slicing fruits[1:3] # [\"banana\", \"cherry\"] fruits[:2] # first 2 fruits[2:] # from index 2 # Methods fruits.append( \"orange\" ) fruits.insert(1, \"mango\" ) fruits.remove( \"banana\" ) fruits.pop() # remove last len(fruits) # length sorted(numbers) # sort"
+  },
+  {
+    "title": "Python Syntax & Standard Library",
+    "section": "\ud83d\udcda Tuples (Immutable)",
+    "url": "cheatsheets/python.html#tuples-immutable",
+    "content": "# Create tuple coordinates = (10, 20) single = (42,) # comma needed # Unpacking x, y = coordinates # Can't modify tuples! # coordinates[0] = 15  # Error"
+  },
+  {
+    "title": "Python Syntax & Standard Library",
+    "section": "\ud83d\uddc2\ufe0f Sets (Unique Items)",
+    "url": "cheatsheets/python.html#sets-unique-items",
+    "content": "# Create set unique = {1, 2, 3, 3} # {1, 2, 3} empty_set = set() # Operations unique.add(4) unique.remove(2) unique.discard(5) # no error if missing # Set operations a = {1, 2, 3} b = {3, 4, 5} a | b # union a & b # intersection a - b # difference"
+  },
+  {
+    "title": "Python Syntax & Standard Library",
+    "section": "\ud83d\udcd6 Dictionaries (Key-Value)",
+    "url": "cheatsheets/python.html#dictionaries-key-value",
+    "content": "# Create dictionary person = { \"name\" : \"Alice\" , \"age\" : 30, \"city\" : \"NYC\" } # Access values person[ \"name\" ] person.get( \"age\" ) person.get( \"email\" , \"N/A\" ) # default # Modify person[ \"age\" ] = 31 person[ \"email\" ] = \"a@ex.com\" # Methods person.keys() # all keys person.values() # all values person.items() # key-value pairs"
+  },
+  {
+    "title": "Python Syntax & Standard Library",
+    "section": "\ud83d\udd01 Loops",
+    "url": "cheatsheets/python.html#loops",
+    "content": "# For loop for i in range(5): print(i) # 0, 1, 2, 3, 4 for fruit in fruits: print(fruit) # Enumerate (with index) for i, fruit in enumerate(fruits): print(i, fruit) # Dictionary loop for key, value in person.items(): print(key, value) # While loop count = 0 while count < 5: print(count) count += 1 # Break and continue break # exit loop continue # skip iteration"
+  },
+  {
+    "title": "Python Syntax & Standard Library",
+    "section": "\ud83d\udd00 Conditionals",
+    "url": "cheatsheets/python.html#conditionals",
+    "content": "# If-elif-else if age < 18: print( \"Minor\" ) elif age < 65: print( \"Adult\" ) else : print( \"Senior\" ) # Ternary operator status = \"Adult\" if age >= 18 else \"Minor\" # Comparison operators # ==, !=, <, >, <=, >= # Logical operators and , or , not # Membership in , not in"
+  },
+  {
+    "title": "Python Syntax & Standard Library",
+    "section": "\ud83d\udd27 Functions",
+    "url": "cheatsheets/python.html#functions",
+    "content": "# Define function def greet(name): return f\"Hello, {name}!\" # Default arguments def power(base, exp=2): return base ** exp # Variable arguments def sum_all(*args): return sum(args) # Keyword arguments def info(**kwargs): for k, v in kwargs.items(): print( f\"{k}: {v}\" ) # Lambda functions square = lambda x: x ** 2 add = lambda x, y: x + y"
+  },
+  {
+    "title": "Python Syntax & Standard Library",
+    "section": "\ud83c\udfaf List Comprehensions",
+    "url": "cheatsheets/python.html#list-comprehensions",
+    "content": "# Basic syntax squares = [x**2 for x in range(10)] # With condition evens = [x for x in range(10) if x % 2 == 0] # Dictionary comprehension square_dict = {x: x**2 for x in range(5)} # Set comprehension unique = {x % 5 for x in range(20)}"
+  },
+  {
+    "title": "Python Syntax & Standard Library",
+    "section": "\ud83d\udce6 Classes & Objects",
+    "url": "cheatsheets/python.html#classes-objects",
+    "content": "class Dog: # Class variable species = \"Canis familiaris\" # Constructor def __init__(self, name, age): self.name = name self.age = age # Method def bark(self): return f\"{self.name} says Woof!\" # String representation def __str__(self): return f\"{self.name} is {self.age}\" # Create instance buddy = Dog( \"Buddy\" , 3) print(buddy.bark())"
+  },
+  {
+    "title": "Python Syntax & Standard Library",
+    "section": "\ud83d\udd04 Exception Handling",
+    "url": "cheatsheets/python.html#exception-handling",
+    "content": "try : result = 10 / 0 except ZeroDivisionError: print( \"Cannot divide by zero!\" ) except Exception as e: print( f\"Error: {e}\" ) else : print( \"Success!\" ) finally : print( \"Cleanup\" ) # Raise exception raise ValueError( \"Invalid value\" )"
+  },
+  {
+    "title": "Python Syntax & Standard Library",
+    "section": "\ud83d\udcda Standard Library Essentials",
+    "url": "cheatsheets/python.html#standard-library-essentials",
+    "content": "# File I/O with open( \"file.txt\" , \"r\" ) as f: content = f.read() with open( \"file.txt\" , \"w\" ) as f: f.write( \"Hello\" ) # JSON import json data = json.loads( '{\"name\": \"Alice\"}' ) text = json.dumps(data) # Datetime from datetime import datetime now = datetime.now() formatted = now.strftime( \"%Y-%m-%d\" ) # Random import random random.randint(1, 10) random.choice([1, 2, 3]) random.shuffle(my_list) # OS operations import os os.listdir( \".\" ) os.path.exists( \"file.txt\" ) os.makedirs( \"newdir\" ) # Regular expressions import re re.match(pattern, string) re.search(pattern, string) re.findall(pattern, string) re.sub(pattern, replacement, string) # Collections from collections import Counter, defaultdict counter = Counter([1, 1, 2, 3, 3, 3]) dd = defaultdict(list)"
+  },
+  {
+    "title": "Python Syntax & Standard Library",
+    "section": "\ud83c\udfa8 String Methods",
+    "url": "cheatsheets/python.html#string-methods",
+    "content": "text = \"  Hello World  \" text.upper() # \"  HELLO WORLD  \" text.lower() # \"  hello world  \" text.strip() # \"Hello World\" text.replace( \"World\" , \"Python\" ) text.split() # [\"Hello\", \"World\"] \"-\" .join([ \"a\" , \"b\" , \"c\" ]) # \"a-b-c\" text.startswith( \"Hello\" ) text.endswith( \"World\" ) text.find( \"World\" ) # index or -1 text.count( \"o\" ) # occurrences"
+  },
+  {
+    "title": "Python Syntax & Standard Library",
+    "section": "\u26a1 Built-in Functions",
+    "url": "cheatsheets/python.html#built-in-functions",
+    "content": "len([1, 2, 3]) # 3 sum([1, 2, 3]) # 6 min([1, 2, 3]) # 1 max([1, 2, 3]) # 3 abs(-5) # 5 round(3.14159, 2) # 3.14 pow(2, 3) # 8 type(42) # isinstance(42, int) # True range(5) # 0, 1, 2, 3, 4 range(1, 6) # 1, 2, 3, 4, 5 range(0, 10, 2) # 0, 2, 4, 6, 8 zip([1, 2], [ \"a\" , \"b\" ]) # pairs map( lambda x: x*2, [1, 2, 3]) filter( lambda x: x>2, [1, 2, 3, 4])"
+  },
+  {
+    "title": "\ud83c\udfdb\ufe0f SOLID Principles",
+    "section": "S - Single Responsibility Principle",
+    "url": "cheatsheets/solid-principles.html#s-single-responsibility-principle",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfdb\ufe0f SOLID Principles",
+    "section": "O - Open/Closed Principle",
+    "url": "cheatsheets/solid-principles.html#o-openclosed-principle",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfdb\ufe0f SOLID Principles",
+    "section": "L - Liskov Substitution Principle",
+    "url": "cheatsheets/solid-principles.html#l-liskov-substitution-principle",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfdb\ufe0f SOLID Principles",
+    "section": "I - Interface Segregation Principle",
+    "url": "cheatsheets/solid-principles.html#i-interface-segregation-principle",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfdb\ufe0f SOLID Principles",
+    "section": "D - Dependency Inversion Principle",
+    "url": "cheatsheets/solid-principles.html#d-dependency-inversion-principle",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfdb\ufe0f SOLID Principles",
+    "section": "\ud83c\udfaf Quick Reference Guide",
+    "url": "cheatsheets/solid-principles.html#quick-reference-guide",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfdb\ufe0f SOLID Principles",
+    "section": "\ud83d\udca1 Practical Application Tips",
+    "url": "cheatsheets/solid-principles.html#practical-application-tips",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfdb\ufe0f SOLID Principles",
+    "section": "\ud83d\udea8 Common Violations & Code Smells",
+    "url": "cheatsheets/solid-principles.html#common-violations-code-smells",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfdb\ufe0f SOLID Principles",
+    "section": "\ud83d\udcda Benefits of Following SOLID",
+    "url": "cheatsheets/solid-principles.html#benefits-of-following-solid",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd00 Git Commands & Workflows",
+    "section": "\ud83c\udfaf Setup & Configuration",
+    "url": "cheatsheets/git.html#setup-configuration",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd00 Git Commands & Workflows",
+    "section": "\ud83c\udd95 Creating Repositories",
+    "url": "cheatsheets/git.html#creating-repositories",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd00 Git Commands & Workflows",
+    "section": "\ud83d\udcca Basic Snapshotting",
+    "url": "cheatsheets/git.html#basic-snapshotting",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd00 Git Commands & Workflows",
+    "section": "\ud83c\udf3f Branching & Merging",
+    "url": "cheatsheets/git.html#branching-merging",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd00 Git Commands & Workflows",
+    "section": "\ud83d\udd04 Remote Repositories",
+    "url": "cheatsheets/git.html#remote-repositories",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd00 Git Commands & Workflows",
+    "section": "\ud83d\udcdc History & Inspection",
+    "url": "cheatsheets/git.html#history-inspection",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd00 Git Commands & Workflows",
+    "section": "\u21a9\ufe0f Undoing Changes",
+    "url": "cheatsheets/git.html#undoing-changes",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd00 Git Commands & Workflows",
+    "section": "\ud83d\udd00 Rebasing",
+    "url": "cheatsheets/git.html#rebasing",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd00 Git Commands & Workflows",
+    "section": "\ud83d\udce6 Stashing",
+    "url": "cheatsheets/git.html#stashing",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd00 Git Commands & Workflows",
+    "section": "\ud83c\udff7\ufe0f Tags",
+    "url": "cheatsheets/git.html#tags",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd00 Git Commands & Workflows",
+    "section": "\ud83d\udd0d Advanced Commands",
+    "url": "cheatsheets/git.html#advanced-commands",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd00 Git Commands & Workflows",
+    "section": "\u2699\ufe0f Configuration Tips",
+    "url": "cheatsheets/git.html#configuration-tips",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd00 Git Commands & Workflows",
+    "section": "\ud83d\udd04 Common Workflows",
+    "url": "cheatsheets/git.html#common-workflows",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd00 Git Commands & Workflows",
+    "section": "\ud83d\udcdd .gitignore Patterns",
+    "url": "cheatsheets/git.html#gitignore-patterns",
+    "content": ""
+  },
+  {
+    "title": "#!/bin/bash Scripting Essentials",
+    "section": "\ud83d\ude80 Script Template",
+    "url": "cheatsheets/bash-scripting.html#script-template",
+    "content": "#!/bin/bash # Script: script_name.sh # Description: What this script does # Author: Your Name # Date: 2025-01-01 # Exit on error, undefined variables, pipe failures set -euo pipefail # Main script logic here echo \"Hello, World!\""
+  },
+  {
+    "title": "#!/bin/bash Scripting Essentials",
+    "section": "\ud83d\udcdd Variables",
+    "url": "cheatsheets/bash-scripting.html#variables",
+    "content": "# Variable assignment (no spaces!) NAME= \"John\" AGE=30 # Using variables echo \"$NAME\" echo \"${NAME}\" # preferred # Command substitution CURRENT_DATE=$(date) FILES=`ls` # old style # Read-only variable readonly PI=3.14159 # Environment variable export PATH=$PATH:/new/path"
+  },
+  {
+    "title": "#!/bin/bash Scripting Essentials",
+    "section": "\ud83d\udd22 Special Variables",
+    "url": "cheatsheets/bash-scripting.html#special-variables",
+    "content": ""
+  },
+  {
+    "title": "#!/bin/bash Scripting Essentials",
+    "section": "\ud83c\udfaf String Operations",
+    "url": "cheatsheets/bash-scripting.html#string-operations",
+    "content": "STRING= \"Hello World\" # Length echo ${#STRING} # 11 # Substring echo ${STRING:0:5} # Hello # Replace first occurrence echo ${STRING/World/Universe} # Replace all occurrences echo ${STRING//o/0} # Default value if empty echo ${VAR:- \"default\" } # Convert to uppercase/lowercase echo ${STRING^^} # HELLO WORLD echo ${STRING,,} # hello world"
+  },
+  {
+    "title": "#!/bin/bash Scripting Essentials",
+    "section": "\ud83d\udd0d Conditional Statements",
+    "url": "cheatsheets/bash-scripting.html#conditional-statements",
+    "content": "# if-else if [ $AGE -gt 18 ]; then echo \"Adult\" elif [ $AGE -eq 18 ]; then echo \"Just turned adult\" else echo \"Minor\" fi # One-liner [ $AGE -gt 18 ] && echo \"Adult\" || echo \"Minor\" # Modern test syntax if [[ $NAME == \"John\" ]]; then echo \"Found John\" fi"
+  },
+  {
+    "title": "#!/bin/bash Scripting Essentials",
+    "section": "\u2696\ufe0f Test Operators",
+    "url": "cheatsheets/bash-scripting.html#test-operators",
+    "content": ""
+  },
+  {
+    "title": "#!/bin/bash Scripting Essentials",
+    "section": "\ud83d\udd04 Loops",
+    "url": "cheatsheets/bash-scripting.html#loops",
+    "content": "# For loop for i in 1 2 3 4 5; do echo \"Number: $i\" done # For loop with range for i in {1..10}; do echo $i done # C-style for loop for ((i=0; i<10; i++)); do echo $i done # While loop COUNT=0 while [ $COUNT -lt 5 ]; do echo $COUNT ((COUNT++)) done # Until loop until [ $COUNT -eq 10 ]; do echo $COUNT ((COUNT++)) done"
+  },
+  {
+    "title": "#!/bin/bash Scripting Essentials",
+    "section": "\ud83d\udccb Arrays",
+    "url": "cheatsheets/bash-scripting.html#arrays",
+    "content": "# Define array FRUITS=( \"Apple\" \"Banana\" \"Orange\" ) # Access elements echo ${FRUITS[0]} # Apple echo ${FRUITS[@]} # All elements echo ${#FRUITS[@]} # Array length # Add element FRUITS+=( \"Grape\" ) # Loop through array for fruit in \"${FRUITS[@]}\" ; do echo $fruit done # Associative array (hash/dict) declare -A COLORS COLORS[red]= \"#FF0000\" COLORS[green]= \"#00FF00\" echo ${COLORS[red]}"
+  },
+  {
+    "title": "#!/bin/bash Scripting Essentials",
+    "section": "\ud83d\udd27 Functions",
+    "url": "cheatsheets/bash-scripting.html#functions",
+    "content": "# Define function function greet() { echo \"Hello, $1!\" } # Alternative syntax greet() { local NAME=$1 # local variable echo \"Hello, $NAME!\" } # Call function greet \"World\" # Return value add() { local result=$(($1 + $2)) echo $result } SUM=$(add 5 3) echo $SUM # 8"
+  },
+  {
+    "title": "#!/bin/bash Scripting Essentials",
+    "section": "\ud83d\udce5 User Input",
+    "url": "cheatsheets/bash-scripting.html#user-input",
+    "content": "# Read input echo \"Enter your name:\" read NAME echo \"Hello, $NAME!\" # Read with prompt read -p \"Enter age: \" AGE # Read password (hidden) read -sp \"Enter password: \" PASSWORD echo # Read with timeout read -t 5 -p \"Quick! Enter something: \" INPUT # Read file line by line while IFS= read -r line; do echo \"Line: $line\" done < file.txt"
+  },
+  {
+    "title": "#!/bin/bash Scripting Essentials",
+    "section": "\ud83d\udd00 Case Statement",
+    "url": "cheatsheets/bash-scripting.html#case-statement",
+    "content": "case $1 in start) echo \"Starting...\" ;; stop) echo \"Stopping...\" ;; restart) echo \"Restarting...\" ;; *) echo \"Usage: $0 {start|stop|restart}\" exit 1 ;; esac"
+  },
+  {
+    "title": "#!/bin/bash Scripting Essentials",
+    "section": "\ud83d\udce4 Input/Output Redirection",
+    "url": "cheatsheets/bash-scripting.html#inputoutput-redirection",
+    "content": "# Redirect output echo \"Hello\" > file.txt # Append output echo \"World\" >> file.txt # Redirect stderr command 2> errors.txt # Redirect both stdout and stderr command &> output.txt command > output.txt 2>&1 # Discard output command > /dev/null 2>&1 # Here document cat << EOF Multiple lines of text EOF"
+  },
+  {
+    "title": "#!/bin/bash Scripting Essentials",
+    "section": "\ud83d\udd22 Arithmetic",
+    "url": "cheatsheets/bash-scripting.html#arithmetic",
+    "content": "# Using (( )) ((x = 5 + 3)) ((x++)) ((x += 5)) # Using expr x=$(expr 5 + 3) # Using $[ ] x=$[5 + 3] # Using $(( )) x=$((5 + 3)) y=$((x * 2)) # Floating point with bc result=$(echo \"scale=2; 10 / 3\" | bc)"
+  },
+  {
+    "title": "#!/bin/bash Scripting Essentials",
+    "section": "\ud83d\udca1 Practical Examples",
+    "url": "cheatsheets/bash-scripting.html#practical-examples",
+    "content": "# Check if command exists if command -v git &> /dev/null; then echo \"Git is installed\" fi # Parse command line options while getopts \"hv:f:\" opt; do case $opt in h) echo \"Help message\" ;; v) VERSION=$OPTARG ;; f) FILE=$OPTARG ;; *) exit 1 ;; esac done # Progress bar for i in {1..100}; do printf \"\\rProgress: [%-50s] %d%%\" $(printf '#%.0s' $(seq 1 $((i/2)))) $i sleep 0.05 done echo # Error handling with trap cleanup() { echo \"Cleaning up...\" rm -f /tmp/tempfile } trap cleanup EXIT # Check if script is run as root if [ \"$(id -u)\" -ne 0 ]; then echo \"This script must be run as root\" exit 1 fi"
+  },
+  {
+    "title": "#!/bin/bash Scripting Essentials",
+    "section": "\u26a1 Best Practices",
+    "url": "cheatsheets/bash-scripting.html#best-practices",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfd7\ufe0f Microservices Patterns",
+    "section": "\ud83d\udd28 Service Decomposition: By Business Capability",
+    "url": "cheatsheets/microservices-patterns.html#service-decomposition-by-business-capability",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfd7\ufe0f Microservices Patterns",
+    "section": "\ud83d\udd28 Service Decomposition: By Subdomain (DDD)",
+    "url": "cheatsheets/microservices-patterns.html#service-decomposition-by-subdomain-ddd",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfd7\ufe0f Microservices Patterns",
+    "section": "\ud83d\udce1 Communication: Synchronous (REST/gRPC)",
+    "url": "cheatsheets/microservices-patterns.html#communication-synchronous-restgrpc",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfd7\ufe0f Microservices Patterns",
+    "section": "\ud83d\udce1 Communication: Asynchronous (Message Queue)",
+    "url": "cheatsheets/microservices-patterns.html#communication-asynchronous-message-queue",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfd7\ufe0f Microservices Patterns",
+    "section": "\ud83d\udce1 Communication: API Gateway",
+    "url": "cheatsheets/microservices-patterns.html#communication-api-gateway",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfd7\ufe0f Microservices Patterns",
+    "section": "\ud83d\udee1\ufe0f Resilience: Circuit Breaker",
+    "url": "cheatsheets/microservices-patterns.html#resilience-circuit-breaker",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfd7\ufe0f Microservices Patterns",
+    "section": "\ud83d\udee1\ufe0f Resilience: Retry Pattern",
+    "url": "cheatsheets/microservices-patterns.html#resilience-retry-pattern",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfd7\ufe0f Microservices Patterns",
+    "section": "\ud83d\udee1\ufe0f Resilience: Bulkhead Pattern",
+    "url": "cheatsheets/microservices-patterns.html#resilience-bulkhead-pattern",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfd7\ufe0f Microservices Patterns",
+    "section": "\ud83d\udee1\ufe0f Resilience: Timeout Pattern",
+    "url": "cheatsheets/microservices-patterns.html#resilience-timeout-pattern",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfd7\ufe0f Microservices Patterns",
+    "section": "\ud83d\udcbe Data: Database per Service",
+    "url": "cheatsheets/microservices-patterns.html#data-database-per-service",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfd7\ufe0f Microservices Patterns",
+    "section": "\ud83d\udcbe Data: Saga Pattern",
+    "url": "cheatsheets/microservices-patterns.html#data-saga-pattern",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfd7\ufe0f Microservices Patterns",
+    "section": "\ud83d\udcbe Data: Event Sourcing",
+    "url": "cheatsheets/microservices-patterns.html#data-event-sourcing",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfd7\ufe0f Microservices Patterns",
+    "section": "\ud83d\udcbe Data: CQRS (Command Query Responsibility Segregation)",
+    "url": "cheatsheets/microservices-patterns.html#data-cqrs-command-query-responsibility-segregation",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfd7\ufe0f Microservices Patterns",
+    "section": "\ud83d\udd0d Observability: Distributed Tracing",
+    "url": "cheatsheets/microservices-patterns.html#observability-distributed-tracing",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfd7\ufe0f Microservices Patterns",
+    "section": "\ud83d\udd0d Observability: Health Check API",
+    "url": "cheatsheets/microservices-patterns.html#observability-health-check-api",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfd7\ufe0f Microservices Patterns",
+    "section": "\ud83d\udd10 Security: Service Mesh",
+    "url": "cheatsheets/microservices-patterns.html#security-service-mesh",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfd7\ufe0f Microservices Patterns",
+    "section": "\ud83d\ude80 Deployment: Sidecar Pattern",
+    "url": "cheatsheets/microservices-patterns.html#deployment-sidecar-pattern",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfd7\ufe0f Microservices Patterns",
+    "section": "\ud83c\udfaf Pattern Selection Guide",
+    "url": "cheatsheets/microservices-patterns.html#pattern-selection-guide",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfd7\ufe0f Microservices Patterns",
+    "section": "\u26a0\ufe0f Common Pitfalls",
+    "url": "cheatsheets/microservices-patterns.html#common-pitfalls",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfd7\ufe0f Microservices Patterns",
+    "section": "\ud83d\udcd6 Pattern Combinations",
+    "url": "cheatsheets/microservices-patterns.html#pattern-combinations",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcca Big O Notation",
+    "section": "\u23f1\ufe0f Common Time Complexities (Best to Worst)",
+    "url": "cheatsheets/big-o.html#common-time-complexities-best-to-worst",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcca Big O Notation",
+    "section": "\ud83d\udd22 Growth Comparison",
+    "url": "cheatsheets/big-o.html#growth-comparison",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcca Big O Notation",
+    "section": "\ud83d\udcc8 Visual Scale",
+    "url": "cheatsheets/big-o.html#visual-scale",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcca Big O Notation",
+    "section": "\ud83d\udcbb Code Examples",
+    "url": "cheatsheets/big-o.html#code-examples",
+    "content": "// Array access int value = arr[5]; // Hash map lookup var value = map.get(key);"
+  },
+  {
+    "title": "\ud83d\udcca Big O Notation",
+    "section": "\ud83d\uddc4\ufe0f Data Structure Operations",
+    "url": "cheatsheets/big-o.html#data-structure-operations",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcca Big O Notation",
+    "section": "\ud83c\udfaf Sorting Algorithms",
+    "url": "cheatsheets/big-o.html#sorting-algorithms",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcca Big O Notation",
+    "section": "\ud83d\udca1 Analysis Tips",
+    "url": "cheatsheets/big-o.html#analysis-tips",
+    "content": ""
+  },
+  {
+    "title": "\u2699\ufe0f C/C++ Essentials",
+    "section": "\ud83c\udfaf Basic C Syntax",
+    "url": "cheatsheets/c-cpp.html#basic-c-syntax",
+    "content": "// Hello World in C #include <stdio.h> int main() { printf( \"Hello, World!\\n\" ); return 0; }"
+  },
+  {
+    "title": "\u2699\ufe0f C/C++ Essentials",
+    "section": "\ud83d\udcdd Data Types",
+    "url": "cheatsheets/c-cpp.html#data-types",
+    "content": "// Integer types char c = 'A' ; // 1 byte short s = 32000; // 2 bytes int i = 100000; // 4 bytes long l = 100000L; // 4/8 bytes long long ll = 100000LL; // 8 bytes // Floating point float f = 3.14f; // 4 bytes double d = 3.14159; // 8 bytes // Modifiers unsigned int ui = 100; // Only positive signed int si = -100; // Positive/negative"
+  },
+  {
+    "title": "\u2699\ufe0f C/C++ Essentials",
+    "section": "\ud83d\udd17 Pointers Basics",
+    "url": "cheatsheets/c-cpp.html#pointers-basics",
+    "content": "// Pointer declaration and usage int x = 10; int *ptr = &x // Pointer to x printf( \"%d\" , *ptr); // Dereference: prints 10 printf( \"%p\" , ptr); // Address of x *ptr = 20; // Modify x through pointer"
+  },
+  {
+    "title": "\u2699\ufe0f C/C++ Essentials",
+    "section": "\ud83e\uddee Pointer Arithmetic",
+    "url": "cheatsheets/c-cpp.html#pointer-arithmetic",
+    "content": "int arr[] = {10, 20, 30, 40}; int *p = arr; // Points to arr[0] printf( \"%d\" , *p); // 10 printf( \"%d\" , *(p + 1)); // 20 printf( \"%d\" , *(p + 2)); // 30 p++; // Move to next element printf( \"%d\" , *p); // 20"
+  },
+  {
+    "title": "\u2699\ufe0f C/C++ Essentials",
+    "section": "\ud83d\udd00 Pointer Types",
+    "url": "cheatsheets/c-cpp.html#pointer-types",
+    "content": "// Null pointer int *ptr = NULL; // C int *ptr = nullptr; // C++11 // Void pointer (generic) void *vptr; int x = 10; vptr = &x // Can point to any type // Pointer to pointer int **pptr = &ptr // Double pointer // Const pointer const int *p1; // Can't modify value int * const p2; // Can't modify pointer const int * const p3; // Both constant"
+  },
+  {
+    "title": "\u2699\ufe0f C/C++ Essentials",
+    "section": "\ud83d\udcbe Dynamic Memory (C)",
+    "url": "cheatsheets/c-cpp.html#dynamic-memory-c",
+    "content": "#include <stdlib.h> // Allocate memory int *ptr = ( int *)malloc( sizeof ( int ) * 10); if (ptr == NULL) { // Handle allocation failure } // Use memory ptr[0] = 42; // Free memory free(ptr); ptr = NULL; // Good practice"
+  },
+  {
+    "title": "\u2699\ufe0f C/C++ Essentials",
+    "section": "\ud83c\udd95 Dynamic Memory (C++)",
+    "url": "cheatsheets/c-cpp.html#dynamic-memory-c",
+    "content": "// Single object int *ptr = new int ; // Allocate *ptr = 42; delete ptr; // Deallocate // Array int *arr = new int [10]; // Allocate array arr[0] = 42; delete [] arr; // Deallocate array // With initialization int *p = new int (42); // Initialize to 42"
+  },
+  {
+    "title": "\u2699\ufe0f C/C++ Essentials",
+    "section": "\u26a0\ufe0f Common Memory Pitfalls",
+    "url": "cheatsheets/c-cpp.html#common-memory-pitfalls",
+    "content": ""
+  },
+  {
+    "title": "\u2699\ufe0f C/C++ Essentials",
+    "section": "\ud83c\udfd7\ufe0f C++ Classes",
+    "url": "cheatsheets/c-cpp.html#c-classes",
+    "content": "class Rectangle { private : int width, height; public : // Constructor Rectangle( int w, int h) : width(w), height(h) {} // Member function int area() { return width * height; } // Destructor ~Rectangle() { // Cleanup code } }; // Usage Rectangle rect(10, 5); cout << rect.area(); // 50"
+  },
+  {
+    "title": "\u2699\ufe0f C/C++ Essentials",
+    "section": "\ud83d\udce6 STL Containers",
+    "url": "cheatsheets/c-cpp.html#stl-containers",
+    "content": "#include <vector> #include <map> #include <set> #include <queue> // Vector - dynamic array vector< int > vec = {1, 2, 3}; vec.push_back(4); vec[0] = 10; // Map - key-value pairs map<string, int > ages; ages[ \"Alice\" ] = 25; ages[ \"Bob\" ] = 30; // Set - unique elements set< int > numbers = {1, 2, 3}; numbers.insert(4); // Queue - FIFO queue< int > q; q.push(1); q.pop();"
+  },
+  {
+    "title": "\u2699\ufe0f C/C++ Essentials",
+    "section": "\ud83d\udd04 STL Container Operations",
+    "url": "cheatsheets/c-cpp.html#stl-container-operations",
+    "content": ""
+  },
+  {
+    "title": "\u2699\ufe0f C/C++ Essentials",
+    "section": "\ud83d\udd01 STL Algorithms",
+    "url": "cheatsheets/c-cpp.html#stl-algorithms",
+    "content": "#include <algorithm> vector< int > vec = {3, 1, 4, 1, 5}; // Sort sort(vec.begin(), vec.end()); // Find auto it = find(vec.begin(), vec.end(), 4); // Count int cnt = count(vec.begin(), vec.end(), 1); // Reverse reverse(vec.begin(), vec.end()); // Max/Min element auto max_it = max_element(vec.begin(), vec.end());"
+  },
+  {
+    "title": "\u2699\ufe0f C/C++ Essentials",
+    "section": "\ud83c\udfaf Smart Pointers (C++11)",
+    "url": "cheatsheets/c-cpp.html#smart-pointers-c11",
+    "content": "#include <memory> // unique_ptr - exclusive ownership unique_ptr< int > ptr1 = make_unique< int >(42); // Can't copy, only move unique_ptr< int > ptr2 = move(ptr1); // shared_ptr - shared ownership shared_ptr< int > sp1 = make_shared< int >(42); shared_ptr< int > sp2 = sp1; // Both own the object // weak_ptr - non-owning reference weak_ptr< int > wp = sp1;"
+  },
+  {
+    "title": "\u2699\ufe0f C/C++ Essentials",
+    "section": "\ud83d\udd27 References",
+    "url": "cheatsheets/c-cpp.html#references",
+    "content": "// Reference - alias to existing variable int x = 10; int &ref = x; // ref is alias for x ref = 20; // x is now 20 // Function with reference parameter void increment( int &n) { n++; // Modifies original } // Const reference (efficient for large objects) void print( const string &str) { cout << str; // Can't modify str }"
+  },
+  {
+    "title": "\u2699\ufe0f C/C++ Essentials",
+    "section": "\ud83d\udd00 Arrays and Strings",
+    "url": "cheatsheets/c-cpp.html#arrays-and-strings",
+    "content": "// C-style array int arr[5] = {1, 2, 3, 4, 5}; int size = sizeof (arr) / sizeof (arr[0]); // C-style string char str[] = \"Hello\" ; // Null-terminated strlen(str); // Length (5) strcpy(dest, src); // Copy string strcat(dest, src); // Concatenate // C++ string (safer) string s = \"Hello\" ; s += \" World\" ; // Concatenate s.length(); // Get length s.substr(0, 5); // Substring"
+  },
+  {
+    "title": "\u2699\ufe0f C/C++ Essentials",
+    "section": "\ud83c\udfdb\ufe0f Structs",
+    "url": "cheatsheets/c-cpp.html#structs",
+    "content": "// C struct struct Point { int x; int y; }; struct Point p = {10, 20}; p.x = 30; // C++ struct (can have methods) struct Rectangle { int width, height; int area() { return width * height; } };"
+  },
+  {
+    "title": "\u2699\ufe0f C/C++ Essentials",
+    "section": "\u2699\ufe0f Compilation Flags",
+    "url": "cheatsheets/c-cpp.html#compilation-flags",
+    "content": "// Example compilation g++ -std=c++17 -Wall -O2 -o program main.cpp"
+  },
+  {
+    "title": "\u2699\ufe0f C/C++ Essentials",
+    "section": "\ud83d\udd0d Debugging Tools",
+    "url": "cheatsheets/c-cpp.html#debugging-tools",
+    "content": ""
+  },
+  {
+    "title": "\u2699\ufe0f C/C++ Essentials",
+    "section": "\ud83c\udfad Templates (C++)",
+    "url": "cheatsheets/c-cpp.html#templates-c",
+    "content": "// Function template template < typename T> T max(T a, T b) { return (a > b) ? a : b; } // Usage cout << max(10, 20); // int version cout << max(3.14, 2.71); // double version // Class template template < typename T> class Stack { private : vector<T> elements; public : void push(T elem) { elements.push_back(elem); } T pop() { T elem = elements.back(); elements.pop_back(); return elem; } };"
+  },
+  {
+    "title": "\u2699\ufe0f C/C++ Essentials",
+    "section": "\ud83d\udd04 Iterators",
+    "url": "cheatsheets/c-cpp.html#iterators",
+    "content": "vector< int > vec = {1, 2, 3, 4, 5}; // Iterator loop for ( auto it = vec.begin(); it != vec.end(); ++it) { cout << *it << \" \" ; } // Range-based for loop (C++11) for ( int val : vec) { cout << val << \" \" ; } // Reference to modify elements for ( int &val : vec) { val *= 2; }"
+  },
+  {
+    "title": "\u2699\ufe0f C/C++ Essentials",
+    "section": "\ud83c\udfaf Modern C++ Features",
+    "url": "cheatsheets/c-cpp.html#modern-c-features",
+    "content": "// Auto type deduction (C++11) auto x = 42; // int auto s = \"Hello\" ; // const char* // Lambda expressions (C++11) auto add = []( int a, int b) { return a + b; }; cout << add(3, 4); // 7 // Nullptr (C++11) int *ptr = nullptr; // Better than NULL // Move semantics (C++11) vector< int > v1 = {1, 2, 3}; vector< int > v2 = move(v1); // Transfer ownership"
+  },
+  {
+    "title": "\u2699\ufe0f C/C++ Essentials",
+    "section": "\ud83d\udca1 Best Practices",
+    "url": "cheatsheets/c-cpp.html#best-practices",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 CSS Cheatsheet",
+    "section": "\ud83c\udfaf Selectors",
+    "url": "cheatsheets/css.html#selectors",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 CSS Cheatsheet",
+    "section": "\ud83d\udce6 Box Model",
+    "url": "cheatsheets/css.html#box-model",
+    "content": "/* Shorthand examples */ padding: 10px; /* all sides */ padding: 10px 20px; /* vertical horizontal */ padding: 10px 20px 15px 25px; /* T R B L */"
+  },
+  {
+    "title": "\ud83c\udfa8 CSS Cheatsheet",
+    "section": "\ud83d\udccd Positioning",
+    "url": "cheatsheets/css.html#positioning",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 CSS Cheatsheet",
+    "section": "\ud83d\udd32 Flexbox Container",
+    "url": "cheatsheets/css.html#flexbox-container",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 CSS Cheatsheet",
+    "section": "\ud83d\udcd0 Flexbox Items",
+    "url": "cheatsheets/css.html#flexbox-items",
+    "content": "/* Common centering pattern */ .container { display: flex; justify-content: center; align-items: center; }"
+  },
+  {
+    "title": "\ud83c\udfa8 CSS Cheatsheet",
+    "section": "\ud83c\udf9b\ufe0f Grid Container",
+    "url": "cheatsheets/css.html#grid-container",
+    "content": "/* Common grid patterns */ grid-template-columns: 1fr 2fr 1fr; grid-template-columns: repeat(3, 1fr); grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));"
+  },
+  {
+    "title": "\ud83c\udfa8 CSS Cheatsheet",
+    "section": "\ud83d\udd22 Grid Items",
+    "url": "cheatsheets/css.html#grid-items",
+    "content": "/* Named grid areas */ grid-template-areas: \"header header header\" \"sidebar main main\" \"footer footer footer\";"
+  },
+  {
+    "title": "\ud83c\udfa8 CSS Cheatsheet",
+    "section": "\ud83c\udfad Transitions",
+    "url": "cheatsheets/css.html#transitions",
+    "content": "/* Transition example */ .button { background: blue; transition: background 0.3s ease; } .button:hover { background: darkblue; }"
+  },
+  {
+    "title": "\ud83c\udfa8 CSS Cheatsheet",
+    "section": "\ud83c\udfac Animations",
+    "url": "cheatsheets/css.html#animations",
+    "content": "@keyframes slide { from { transform: translateX(0); } to { transform: translateX(100px); } } .element { animation: slide 1s ease infinite; }"
+  },
+  {
+    "title": "\ud83c\udfa8 CSS Cheatsheet",
+    "section": "\ud83c\udfa8 Colors & Backgrounds",
+    "url": "cheatsheets/css.html#colors-backgrounds",
+    "content": "/* Color formats */ color: #ff0000; /* Hex */ color: rgb(255, 0, 0); /* RGB */ color: rgba(255, 0, 0, 0.5); /* RGBA */ color: hsl(0, 100%, 50%); /* HSL */"
+  },
+  {
+    "title": "\ud83c\udfa8 CSS Cheatsheet",
+    "section": "\u270d\ufe0f Typography",
+    "url": "cheatsheets/css.html#typography",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 CSS Cheatsheet",
+    "section": "\ud83d\uddbc\ufe0f Display & Visibility",
+    "url": "cheatsheets/css.html#display-visibility",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 CSS Cheatsheet",
+    "section": "\ud83c\udfaf Pseudo-classes",
+    "url": "cheatsheets/css.html#pseudo-classes",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 CSS Cheatsheet",
+    "section": "\u2728 Transforms",
+    "url": "cheatsheets/css.html#transforms",
+    "content": "/* Multiple transforms */ transform: translateX(50px) rotate(45deg) scale(1.2); /* 3D transforms */ transform: rotateX(45deg) rotateY(45deg); transform: perspective(500px) translateZ(100px);"
+  },
+  {
+    "title": "\ud83c\udfa8 CSS Cheatsheet",
+    "section": "\ud83c\udf08 Gradients",
+    "url": "cheatsheets/css.html#gradients",
+    "content": "/* Linear gradients */ background: linear-gradient(to right, red, blue); background: linear-gradient(45deg, red, blue); background: linear-gradient(red 0%, blue 100%); /* Radial gradient */ background: radial-gradient(circle, red, blue); /* Multiple backgrounds */ background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('image.jpg');"
+  },
+  {
+    "title": "\ud83c\udfa8 CSS Cheatsheet",
+    "section": "\ud83c\udfaa Filters & Effects",
+    "url": "cheatsheets/css.html#filters-effects",
+    "content": "/* Shadow examples */ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) inset; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);"
+  },
+  {
+    "title": "\ud83c\udfa8 CSS Cheatsheet",
+    "section": "\ud83d\udcf1 Responsive Design",
+    "url": "cheatsheets/css.html#responsive-design",
+    "content": "/* Mobile-first approach */ .container { width: 100%; } @media (min-width: 768px) { .container { width: 750px; } } @media (min-width: 1024px) { .container { width: 960px; } }"
+  },
+  {
+    "title": "\ud83c\udfa8 CSS Cheatsheet",
+    "section": "\ud83d\udca1 CSS Variables (Custom Properties)",
+    "url": "cheatsheets/css.html#css-variables-custom-properties",
+    "content": "/* Define variables */ :root { --primary-color: #667eea; --spacing: 1rem; --border-radius: 8px; } /* Use variables */ .button { background: var(--primary-color); padding: var(--spacing); border-radius: var(--border-radius); } /* Fallback values */ color: var(--text-color, #333);"
+  },
+  {
+    "title": "\ud83c\udfa8 CSS Cheatsheet",
+    "section": "\ud83c\udfaf Common Patterns",
+    "url": "cheatsheets/css.html#common-patterns",
+    "content": ".center { display: flex; justify-content: center; align-items: center; }"
+  },
+  {
+    "title": "\u2699\ufe0f Nginx Configuration",
+    "section": "\ud83d\ude80 Basic Configuration Structure",
+    "url": "cheatsheets/nginx.html#basic-configuration-structure",
+    "content": "# Main context user nginx; worker_processes auto; error_log /var/log/nginx/error.log; events { worker_connections 1024; } http { # HTTP context include /etc/nginx/mime.types; default_type application/octet-stream; }"
+  },
+  {
+    "title": "\u2699\ufe0f Nginx Configuration",
+    "section": "\ud83c\udf10 Server Block (Virtual Host)",
+    "url": "cheatsheets/nginx.html#server-block-virtual-host",
+    "content": "server { listen 80; listen [::]:80; server_name example.com www.example.com; root /var/www/html; index index.html index.htm; access_log /var/log/nginx/access.log; error_log /var/log/nginx/error.log; }"
+  },
+  {
+    "title": "\u2699\ufe0f Nginx Configuration",
+    "section": "\ud83d\udccd Location Blocks",
+    "url": "cheatsheets/nginx.html#location-blocks",
+    "content": "# Exact match location = /path { # Matches /path exactly } # Prefix match location /images/ { # Matches /images/* } # Regex match (case-sensitive) location ~ \\.php$ { # Matches .php files } # Regex match (case-insensitive) location ~* \\.(jpg|png|gif)$ { # Matches image files } # Priority prefix match location ^~ /static/ { # Stops regex matching }"
+  },
+  {
+    "title": "\u2699\ufe0f Nginx Configuration",
+    "section": "\ud83d\udd04 Reverse Proxy Configuration",
+    "url": "cheatsheets/nginx.html#reverse-proxy-configuration",
+    "content": "location / { proxy_pass http://localhost:3000; proxy_http_version 1.1; # Headers proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; proxy_set_header X-Forwarded-Proto $scheme; # WebSocket support proxy_set_header Upgrade $http_upgrade; proxy_set_header Connection \"upgrade\" ; # Timeouts proxy_connect_timeout 60s; proxy_send_timeout 60s; proxy_read_timeout 60s; }"
+  },
+  {
+    "title": "\u2699\ufe0f Nginx Configuration",
+    "section": "\u2696\ufe0f Load Balancing",
+    "url": "cheatsheets/nginx.html#load-balancing",
+    "content": "upstream backend { # Round-robin (default) server backend1.example.com; server backend2.example.com; server backend3.example.com; } upstream weighted { # Weighted distribution server backend1.example.com weight=3; server backend2.example.com weight=1; } upstream ip_hash_backend { # Session persistence ip_hash ; server backend1.example.com; server backend2.example.com; } upstream least_conn_backend { # Least connections least_conn ; server backend1.example.com; server backend2.example.com; }"
+  },
+  {
+    "title": "\u2699\ufe0f Nginx Configuration",
+    "section": "\ud83d\udd12 SSL/TLS Configuration",
+    "url": "cheatsheets/nginx.html#ssltls-configuration",
+    "content": "server { listen 443 ssl http2; listen [::]:443 ssl http2; server_name example.com; # SSL certificates ssl_certificate /path/to/cert.pem; ssl_certificate_key /path/to/key.pem; # SSL protocols and ciphers ssl_protocols TLSv1.2 TLSv1.3; ssl_ciphers HIGH:!aNULL:!MD5; ssl_prefer_server_ciphers on; # SSL session cache ssl_session_cache shared:SSL:10m; ssl_session_timeout 10m; # HSTS add_header Strict-Transport-Security \"max-age=31536000\" always; } # HTTP to HTTPS redirect server { listen 80; server_name example.com; return 301 https://$server_name$request_uri; }"
+  },
+  {
+    "title": "\u2699\ufe0f Nginx Configuration",
+    "section": "\ud83d\udce6 Static File Serving",
+    "url": "cheatsheets/nginx.html#static-file-serving",
+    "content": "location /static/ { alias /var/www/static/; expires 30d; add_header Cache-Control \"public, immutable\" ; } location ~* \\.(jpg|jpeg|png|gif|ico|css|js)$ { expires 1y; add_header Cache-Control \"public, immutable\" ; access_log off; } # Gzip compression gzip on; gzip_vary on; gzip_types text/plain text/css application/json application/javascript text/xml; gzip_min_length 1000;"
+  },
+  {
+    "title": "\u2699\ufe0f Nginx Configuration",
+    "section": "\ud83d\udd10 Security Headers",
+    "url": "cheatsheets/nginx.html#security-headers",
+    "content": "# Add security headers add_header X-Frame-Options \"SAMEORIGIN\" always; add_header X-Content-Type-Options \"nosniff\" always; add_header X-XSS-Protection \"1; mode=block\" always; add_header Referrer-Policy \"no-referrer-when-downgrade\" always; add_header Content-Security-Policy \"default-src 'self'\" always; # Hide Nginx version server_tokens off; # Limit request size client_max_body_size 10M; # Rate limiting limit_req_zone $binary_remote_addr zone=mylimit:10m rate=10r/s; limit_req zone=mylimit burst=20 nodelay;"
+  },
+  {
+    "title": "\u2699\ufe0f Nginx Configuration",
+    "section": "\ud83c\udfaf Redirects & Rewrites",
+    "url": "cheatsheets/nginx.html#redirects-rewrites",
+    "content": "# Permanent redirect return 301 https://example.com$request_uri; # Temporary redirect return 302 /new-location; # Rewrite URL rewrite ^/old-path/(.*)$ /new-path/$1 permanent; # Conditional redirect if ($host != \"example.com\" ) { return 301 https://example.com$request_uri; } # Try files in order try_files $uri $uri/ /index.html;"
+  },
+  {
+    "title": "\u2699\ufe0f Nginx Configuration",
+    "section": "\ud83d\udc18 PHP-FPM Configuration",
+    "url": "cheatsheets/nginx.html#php-fpm-configuration",
+    "content": "location ~ \\.php$ { fastcgi_pass unix:/var/run/php/php8.1-fpm.sock; fastcgi_index index.php; fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name; include fastcgi_params; # Security: prevent access to hidden files fastcgi_param PHP_VALUE \"open_basedir=$document_root:/tmp/\" ; } # Deny access to .php files in uploads location ~* /uploads/.*\\.php$ { deny all; }"
+  },
+  {
+    "title": "\u2699\ufe0f Nginx Configuration",
+    "section": "\ud83d\udd27 Common Directives",
+    "url": "cheatsheets/nginx.html#common-directives",
+    "content": ""
+  },
+  {
+    "title": "\u2699\ufe0f Nginx Configuration",
+    "section": "\ud83d\udee0\ufe0f Nginx Commands",
+    "url": "cheatsheets/nginx.html#nginx-commands",
+    "content": ""
+  },
+  {
+    "title": "\u2699\ufe0f Nginx Configuration",
+    "section": "\ud83d\udcdd Logging Configuration",
+    "url": "cheatsheets/nginx.html#logging-configuration",
+    "content": "# Custom log format log_format main '$remote_addr - $remote_user [$time_local] ' '\"$request\" $status $body_bytes_sent ' '\"$http_referer\" \"$http_user_agent\"' ; # JSON log format log_format json escape=json '{' '\"time\":\"$time_iso8601\",' '\"remote_addr\":\"$remote_addr\",' '\"request\":\"$request\",' '\"status\":$status,' '\"body_bytes_sent\":$body_bytes_sent' '}' ; access_log /var/log/nginx/access.log main; error_log /var/log/nginx/error.log warn;"
+  },
+  {
+    "title": "\u2699\ufe0f Nginx Configuration",
+    "section": "\ud83c\udfa8 SPA (Single Page Application)",
+    "url": "cheatsheets/nginx.html#spa-single-page-application",
+    "content": "server { listen 80; server_name app.example.com; root /var/www/app/dist; index index.html; # Handle client-side routing location / { try_files $uri $uri/ /index.html; } # Cache static assets location ~* \\.(js|css|png|jpg|jpeg|gif|ico|svg)$ { expires 1y; add_header Cache-Control \"public, immutable\" ; } # API proxy location /api/ { proxy_pass http://localhost:3000/; proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr; } }"
+  },
+  {
+    "title": "\u2699\ufe0f Nginx Configuration",
+    "section": "\ud83d\udca1 Best Practices",
+    "url": "cheatsheets/nginx.html#best-practices",
+    "content": ""
+  },
+  {
+    "title": "\u2699\ufe0f Nginx Configuration",
+    "section": "\ud83d\udd0d Debugging & Troubleshooting",
+    "url": "cheatsheets/nginx.html#debugging-troubleshooting",
+    "content": "# Enable debug logging error_log /var/log/nginx/error.log debug; # Check which config file is being used $ nginx -V # View error logs $ tail -f /var/log/nginx/error.log # View access logs $ tail -f /var/log/nginx/access.log # Check listening ports $ netstat -tlnp | grep nginx # Test upstream connectivity $ curl -I http://localhost:3000"
+  },
+  {
+    "title": "\u2699\ufe0f Nginx Configuration",
+    "section": "\ud83d\udcda Useful Variables",
+    "url": "cheatsheets/nginx.html#useful-variables",
+    "content": ""
+  },
+  {
+    "title": "sed & awk Text Processing",
+    "section": "\ud83d\udd27 sed Basics",
+    "url": "cheatsheets/sed-awk.html#sed-basics",
+    "content": ""
+  },
+  {
+    "title": "sed & awk Text Processing",
+    "section": "\ud83d\udccd sed Line Addressing",
+    "url": "cheatsheets/sed-awk.html#sed-line-addressing",
+    "content": ""
+  },
+  {
+    "title": "sed & awk Text Processing",
+    "section": "\u270f\ufe0f sed Substitution",
+    "url": "cheatsheets/sed-awk.html#sed-substitution",
+    "content": ""
+  },
+  {
+    "title": "sed & awk Text Processing",
+    "section": "\ud83d\udd04 sed Advanced Commands",
+    "url": "cheatsheets/sed-awk.html#sed-advanced-commands",
+    "content": ""
+  },
+  {
+    "title": "sed & awk Text Processing",
+    "section": "\ud83d\udcca awk Basics",
+    "url": "cheatsheets/sed-awk.html#awk-basics",
+    "content": ""
+  },
+  {
+    "title": "sed & awk Text Processing",
+    "section": "\ud83d\udd0d awk Pattern Matching",
+    "url": "cheatsheets/sed-awk.html#awk-pattern-matching",
+    "content": ""
+  },
+  {
+    "title": "sed & awk Text Processing",
+    "section": "\ud83e\uddee awk Built-in Variables",
+    "url": "cheatsheets/sed-awk.html#awk-built-in-variables",
+    "content": ""
+  },
+  {
+    "title": "sed & awk Text Processing",
+    "section": "\ud83d\udd22 awk Calculations",
+    "url": "cheatsheets/sed-awk.html#awk-calculations",
+    "content": ""
+  },
+  {
+    "title": "sed & awk Text Processing",
+    "section": "\ud83c\udfaf awk BEGIN & END",
+    "url": "cheatsheets/sed-awk.html#awk-begin-end",
+    "content": ""
+  },
+  {
+    "title": "sed & awk Text Processing",
+    "section": "\ud83d\udcdd awk String Functions",
+    "url": "cheatsheets/sed-awk.html#awk-string-functions",
+    "content": ""
+  },
+  {
+    "title": "sed & awk Text Processing",
+    "section": "\ud83d\udd00 awk Control Flow",
+    "url": "cheatsheets/sed-awk.html#awk-control-flow",
+    "content": ""
+  },
+  {
+    "title": "sed & awk Text Processing",
+    "section": "\ud83d\udcca awk Arrays",
+    "url": "cheatsheets/sed-awk.html#awk-arrays",
+    "content": ""
+  },
+  {
+    "title": "sed & awk Text Processing",
+    "section": "\ud83d\udca1 Practical Examples",
+    "url": "cheatsheets/sed-awk.html#practical-examples",
+    "content": ""
+  },
+  {
+    "title": "sed & awk Text Processing",
+    "section": "\ud83d\udd17 Combining sed & awk",
+    "url": "cheatsheets/sed-awk.html#combining-sed-awk",
+    "content": ""
+  },
+  {
+    "title": "sed & awk Text Processing",
+    "section": "\ud83d\udca1 Tips & Best Practices",
+    "url": "cheatsheets/sed-awk.html#tips-best-practices",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcb0 Dynamic Programming Patterns",
+    "section": "\ud83c\udfaf What is Dynamic Programming?",
+    "url": "cheatsheets/dynamic-programming.html#what-is-dynamic-programming",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcb0 Dynamic Programming Patterns",
+    "section": "\ud83d\udcdd Memoization (Top-Down)",
+    "url": "cheatsheets/dynamic-programming.html#memoization-top-down",
+    "content": "// Fibonacci with memoization function fib(n, memo = {}): // Base cases if n <= 1: return n // Check if already computed if n in memo: return memo[n] // Compute and store memo[n] = fib(n - 1, memo) + fib(n - 2, memo) return memo[n]"
+  },
+  {
+    "title": "\ud83d\udcb0 Dynamic Programming Patterns",
+    "section": "\ud83d\udcca Tabulation (Bottom-Up)",
+    "url": "cheatsheets/dynamic-programming.html#tabulation-bottom-up",
+    "content": "// Fibonacci with tabulation function fib(n): if n <= 1: return n // Create table dp = array [n + 1] // Base cases dp[0] = 0 dp[1] = 1 // Fill table bottom-up for i = 2 to n: dp[i] = dp[i - 1] + dp[i - 2] return dp[n]"
+  },
+  {
+    "title": "\ud83d\udcb0 Dynamic Programming Patterns",
+    "section": "\ud83c\udf92 0/1 Knapsack Pattern",
+    "url": "cheatsheets/dynamic-programming.html#01-knapsack-pattern",
+    "content": "// Problem: Max value with weight limit function knapsack(weights, values, capacity): n = length(weights) dp = array [n + 1][capacity + 1] // Base case: 0 items or 0 capacity = 0 value for i = 0 to n: dp[i][0] = 0 for w = 0 to capacity: dp[0][w] = 0 // Fill table for i = 1 to n: for w = 1 to capacity: if weights[i - 1] <= w: // Max of: include item or exclude item include = values[i - 1] + dp[i - 1][w - weights[i - 1]] exclude = dp[i - 1][w] dp[i][w] = max(include, exclude) else : // Can't include, too heavy dp[i][w] = dp[i - 1][w] return dp[n][capacity]"
+  },
+  {
+    "title": "\ud83d\udcb0 Dynamic Programming Patterns",
+    "section": "\ud83e\uddec Longest Common Subsequence (LCS)",
+    "url": "cheatsheets/dynamic-programming.html#longest-common-subsequence-lcs",
+    "content": "// Find longest common subsequence function lcs(text1, text2): m = length(text1) n = length(text2) dp = array [m + 1][n + 1] // Base case: empty string has LCS of 0 for i = 0 to m: dp[i][0] = 0 for j = 0 to n: dp[0][j] = 0 // Fill table for i = 1 to m: for j = 1 to n: if text1[i - 1] == text2[j - 1]: // Characters match, extend LCS dp[i][j] = 1 + dp[i - 1][j - 1] else : // Take max from excluding one char dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]) return dp[m][n]"
+  },
+  {
+    "title": "\ud83d\udcb0 Dynamic Programming Patterns",
+    "section": "\ud83d\udcc8 Longest Increasing Subsequence (LIS)",
+    "url": "cheatsheets/dynamic-programming.html#longest-increasing-subsequence-lis",
+    "content": "// DP approach O(n\u00b2) function lengthOfLIS(nums): n = length(nums) if n == 0: return 0 // dp[i] = length of LIS ending at index i dp = array [n] filled with 1 for i = 1 to n - 1: for j = 0 to i - 1: if nums[j] < nums[i]: // Can extend LIS ending at j dp[i] = max(dp[i], dp[j] + 1) return max(dp) // Binary search approach O(n log n) function lengthOfLIS_Optimized(nums): tails = [] // tails[i] = smallest tail of LIS of length i+1 for num in nums: // Binary search for position pos = binarySearch(tails, num) if pos == length(tails): tails.append(num) else : tails[pos] = num return length(tails)"
+  },
+  {
+    "title": "\ud83d\udcb0 Dynamic Programming Patterns",
+    "section": "\ud83e\ude99 Unbounded Knapsack",
+    "url": "cheatsheets/dynamic-programming.html#unbounded-knapsack",
+    "content": "// Coin change: min coins to make amount function coinChange(coins, amount): dp = array [amount + 1] filled with infinity dp[0] = 0 // Base case: 0 coins for amount 0 for a = 1 to amount: for coin in coins: if a - coin >= 0: // Can use this coin dp[a] = min(dp[a], 1 + dp[a - coin]) return dp[amount] if dp[amount] != infinity else -1 // Coin change: count ways to make amount function coinChangeWays(coins, amount): dp = array [amount + 1] filled with 0 dp[0] = 1 // One way to make 0: use no coins // Iterate coins first to avoid duplicates for coin in coins: for a = coin to amount: dp[a] += dp[a - coin] return dp[amount]"
+  },
+  {
+    "title": "\ud83d\udcb0 Dynamic Programming Patterns",
+    "section": "\ud83c\udfad Palindrome Patterns",
+    "url": "cheatsheets/dynamic-programming.html#palindrome-patterns",
+    "content": "// Longest palindromic subsequence function longestPalindromeSubseq(s): n = length(s) dp = array [n][n] // Base case: single character is palindrome for i = 0 to n - 1: dp[i][i] = 1 // Fill table for increasing lengths for length = 2 to n: for i = 0 to n - length: j = i + length - 1 if s[i] == s[j]: // Characters match, add 2 dp[i][j] = 2 + dp[i + 1][j - 1] else : // Take max excluding one end dp[i][j] = max(dp[i + 1][j], dp[i][j - 1]) return dp[0][n - 1] // Longest palindromic substring (expand around center) function longestPalindrome(s): if length(s) < 2: return s start = 0, maxLen = 0 for i = 0 to length(s) - 1: // Odd length palindrome len1 = expandAroundCenter(s, i, i) // Even length palindrome len2 = expandAroundCenter(s, i, i + 1) len = max(len1, len2) if len > maxLen: start = i - (len - 1) / 2 maxLen = len return s[start:start + maxLen]"
+  },
+  {
+    "title": "\ud83d\udcb0 Dynamic Programming Patterns",
+    "section": "\ud83d\udd22 State Transition",
+    "url": "cheatsheets/dynamic-programming.html#state-transition",
+    "content": "// Best time to buy/sell stock with cooldown function maxProfit(prices): n = length(prices) if n <= 1: return 0 // States: hold stock, sold (cooldown), rest hold = -prices[0] // Bought first stock sold = 0 // Just sold rest = 0 // Resting/can buy for i = 1 to n - 1: prevHold = hold prevSold = sold prevRest = rest // Transitions hold = max(prevHold, prevRest - prices[i]) // Keep or buy sold = prevHold + prices[i] // Sell rest = max(prevRest, prevSold) // Rest return max(sold, rest)"
+  },
+  {
+    "title": "\ud83d\udcb0 Dynamic Programming Patterns",
+    "section": "\ud83c\udf93 DP Problem-Solving Framework",
+    "url": "cheatsheets/dynamic-programming.html#dp-problem-solving-framework",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcb0 Dynamic Programming Patterns",
+    "section": "\ud83d\uddfa\ufe0f DP Pattern Recognition Map",
+    "url": "cheatsheets/dynamic-programming.html#dp-pattern-recognition-map",
+    "content": "Problem Type                    | Pattern              | State Definition --------------------------------|----------------------|--------------------------- Subset selection with limit     | 0/1 Knapsack         | dp[i][w] = max value Unlimited item usage            | Unbounded Knapsack   | dp[amount] = min/max/count Two sequences comparison        | LCS                  | dp[i][j] = LCS length Single sequence optimization    | LIS                  | dp[i] = LIS ending at i Palindrome problems             | Palindrome DP        | dp[i][j] = palindrome [i,j] State-based decisions           | State Machine        | dp[i][state] = value Path counting in grid           | Grid DP              | dp[i][j] = paths to (i,j) Partition problems              | Partition DP         | dp[i] = can partition String transformation           | Edit Distance        | dp[i][j] = min operations"
+  },
+  {
+    "title": "\ud83d\udcb0 Dynamic Programming Patterns",
+    "section": "\ud83d\udca1 Complexity Analysis",
+    "url": "cheatsheets/dynamic-programming.html#complexity-analysis",
+    "content": "Pattern              | Time Complexity | Space Complexity | Space Optimized ---------------------|-----------------|------------------|------------------ 0/1 Knapsack         | O(n \u00d7 W)        | O(n \u00d7 W)         | O(W) Unbounded Knapsack   | O(n \u00d7 W)        | O(W)             | O(W) LCS                  | O(m \u00d7 n)        | O(m \u00d7 n)         | O(min(m,n)) LIS (DP)             | O(n\u00b2)           | O(n)             | O(n) LIS (Binary Search)  | O(n log n)      | O(n)             | O(n) Palindrome DP        | O(n\u00b2)           | O(n\u00b2)            | O(n) State Machine        | O(n \u00d7 states)   | O(n \u00d7 states)    | O(states) Grid Path            | O(m \u00d7 n)        | O(m \u00d7 n)         | O(n)"
+  },
+  {
+    "title": "\ud83d\udc33 Docker Commands & Dockerfile",
+    "section": "\ud83d\udce6 Container Basics",
+    "url": "cheatsheets/docker.html#container-basics",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc33 Docker Commands & Dockerfile",
+    "section": "\ud83c\udf9b\ufe0f Container Management",
+    "url": "cheatsheets/docker.html#container-management",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc33 Docker Commands & Dockerfile",
+    "section": "\ud83d\udd0d Container Inspection",
+    "url": "cheatsheets/docker.html#container-inspection",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc33 Docker Commands & Dockerfile",
+    "section": "\ud83d\uddbc\ufe0f Image Management",
+    "url": "cheatsheets/docker.html#image-management",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc33 Docker Commands & Dockerfile",
+    "section": "\ud83c\udfd7\ufe0f Building Images",
+    "url": "cheatsheets/docker.html#building-images",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc33 Docker Commands & Dockerfile",
+    "section": "\ud83d\udcbe Volumes & Data",
+    "url": "cheatsheets/docker.html#volumes-data",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc33 Docker Commands & Dockerfile",
+    "section": "\ud83c\udf10 Networks",
+    "url": "cheatsheets/docker.html#networks",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc33 Docker Commands & Dockerfile",
+    "section": "\ud83d\udd27 Docker Compose",
+    "url": "cheatsheets/docker.html#docker-compose",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc33 Docker Commands & Dockerfile",
+    "section": "\ud83e\uddf9 Cleanup Commands",
+    "url": "cheatsheets/docker.html#cleanup-commands",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc33 Docker Commands & Dockerfile",
+    "section": "\ud83d\udd10 Registry & Authentication",
+    "url": "cheatsheets/docker.html#registry-authentication",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc33 Docker Commands & Dockerfile",
+    "section": "\ud83c\udfaf Interactive Commands",
+    "url": "cheatsheets/docker.html#interactive-commands",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc33 Docker Commands & Dockerfile",
+    "section": "\u2139\ufe0f Info Commands",
+    "url": "cheatsheets/docker.html#\u2139-info-commands",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc33 Docker Commands & Dockerfile",
+    "section": "\ud83d\udcc4 Dockerfile Instructions",
+    "url": "cheatsheets/docker.html#dockerfile-instructions",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc33 Docker Commands & Dockerfile",
+    "section": "\ud83c\udfa8 Dockerfile Best Practices",
+    "url": "cheatsheets/docker.html#dockerfile-best-practices",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc33 Docker Commands & Dockerfile",
+    "section": "\ud83d\udccb docker-compose.yml Example",
+    "url": "cheatsheets/docker.html#docker-composeyml-example",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\uddc4\ufe0f SQL Queries & Commands",
+    "section": "\ud83d\udcca SELECT Queries",
+    "url": "cheatsheets/sql.html#select-queries",
+    "content": "-- Basic select SELECT * FROM users; -- Select specific columns SELECT name, email FROM users; -- With alias SELECT name AS full_name FROM users; -- Distinct values SELECT DISTINCT city FROM users; -- Limit results SELECT * FROM users LIMIT 10;"
+  },
+  {
+    "title": "\ud83d\uddc4\ufe0f SQL Queries & Commands",
+    "section": "\ud83d\udd0d WHERE Clause",
+    "url": "cheatsheets/sql.html#where-clause",
+    "content": "-- Basic conditions SELECT * FROM users WHERE age > 18; -- Multiple conditions SELECT * FROM users WHERE age > 18 AND city = 'NYC'; -- OR condition WHERE city = 'NYC' OR city = 'LA'; -- IN operator WHERE city IN ('NYC', 'LA', 'SF'); -- BETWEEN WHERE age BETWEEN 18 AND 65; -- LIKE pattern matching WHERE name LIKE 'J%'; WHERE email LIKE '%@gmail.com'; -- IS NULL WHERE phone IS NULL ; WHERE phone IS NOT NULL ;"
+  },
+  {
+    "title": "\ud83d\uddc4\ufe0f SQL Queries & Commands",
+    "section": "\ud83d\udcc8 ORDER BY & Sorting",
+    "url": "cheatsheets/sql.html#order-by-sorting",
+    "content": "-- Sort ascending (default) SELECT * FROM users ORDER BY name; -- Sort descending ORDER BY age DESC ; -- Multiple columns ORDER BY city ASC , age DESC ;"
+  },
+  {
+    "title": "\ud83d\uddc4\ufe0f SQL Queries & Commands",
+    "section": "\ud83d\udcca Aggregate Functions",
+    "url": "cheatsheets/sql.html#aggregate-functions",
+    "content": "-- COUNT SELECT COUNT (*) FROM users; SELECT COUNT ( DISTINCT city) FROM users; -- SUM, AVG, MIN, MAX SELECT SUM (price) FROM orders; SELECT AVG (age) FROM users; SELECT MIN (price), MAX (price) FROM products;"
+  },
+  {
+    "title": "\ud83d\uddc4\ufe0f SQL Queries & Commands",
+    "section": "\ud83d\udd17 GROUP BY & HAVING",
+    "url": "cheatsheets/sql.html#group-by-having",
+    "content": "-- Group by single column SELECT city, COUNT (*) FROM users GROUP BY city; -- Multiple columns SELECT city, age, COUNT (*) FROM users GROUP BY city, age; -- HAVING (filter groups) SELECT city, COUNT (*) AS cnt FROM users GROUP BY city HAVING cnt > 10;"
+  },
+  {
+    "title": "\ud83d\uddc4\ufe0f SQL Queries & Commands",
+    "section": "\ud83d\udd04 JOIN Operations",
+    "url": "cheatsheets/sql.html#join-operations",
+    "content": "-- INNER JOIN SELECT users.name, orders.amount FROM users INNER JOIN orders ON users.id = orders.user_id; -- LEFT JOIN SELECT users.name, orders.amount FROM users LEFT JOIN orders ON users.id = orders.user_id; -- RIGHT JOIN RIGHT JOIN orders ON users.id = orders.user_id; -- FULL OUTER JOIN FULL OUTER JOIN orders ON users.id = orders.user_id;"
+  },
+  {
+    "title": "\ud83d\uddc4\ufe0f SQL Queries & Commands",
+    "section": "\u2795 INSERT Data",
+    "url": "cheatsheets/sql.html#insert-data",
+    "content": "-- Insert single row INSERT INTO users (name, email, age) VALUES ('John', 'j@ex.com', 30); -- Insert multiple rows INSERT INTO users (name, email) VALUES ('Alice', 'a@ex.com'), ('Bob', 'b@ex.com'); -- Insert from select INSERT INTO archive SELECT * FROM users WHERE status = 'inactive';"
+  },
+  {
+    "title": "\ud83d\uddc4\ufe0f SQL Queries & Commands",
+    "section": "\u270f\ufe0f UPDATE Data",
+    "url": "cheatsheets/sql.html#update-data",
+    "content": "-- Update single column UPDATE users SET age = 31 WHERE id = 1; -- Update multiple columns UPDATE users SET age = 31, city = 'LA' WHERE id = 1; -- Increment value UPDATE products SET price = price * 1.1;"
+  },
+  {
+    "title": "\ud83d\uddc4\ufe0f SQL Queries & Commands",
+    "section": "\ud83d\uddd1\ufe0f DELETE Data",
+    "url": "cheatsheets/sql.html#delete-data",
+    "content": "-- Delete specific rows DELETE FROM users WHERE id = 1; -- Delete all rows (careful!) DELETE FROM users; -- Truncate (faster, resets auto-increment) TRUNCATE TABLE users;"
+  },
+  {
+    "title": "\ud83d\uddc4\ufe0f SQL Queries & Commands",
+    "section": "\ud83c\udfd7\ufe0f CREATE TABLE",
+    "url": "cheatsheets/sql.html#create-table",
+    "content": "CREATE TABLE users ( id INT PRIMARY KEY AUTO_INCREMENT , name VARCHAR (100) NOT NULL , email VARCHAR (255) UNIQUE , age INT , created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ); -- With foreign key CREATE TABLE orders ( id INT PRIMARY KEY , user_id INT , amount DECIMAL (10, 2), FOREIGN KEY (user_id) REFERENCES users(id) );"
+  },
+  {
+    "title": "\ud83d\uddc4\ufe0f SQL Queries & Commands",
+    "section": "\ud83d\udd27 ALTER TABLE",
+    "url": "cheatsheets/sql.html#alter-table",
+    "content": "-- Add column ALTER TABLE users ADD COLUMN phone VARCHAR (20); -- Drop column ALTER TABLE users DROP COLUMN phone; -- Modify column ALTER TABLE users MODIFY COLUMN age SMALLINT ; -- Rename column ALTER TABLE users RENAME COLUMN name TO full_name;"
+  },
+  {
+    "title": "\ud83d\uddc4\ufe0f SQL Queries & Commands",
+    "section": "\ud83d\udcd1 Indexes",
+    "url": "cheatsheets/sql.html#indexes",
+    "content": "-- Create index CREATE INDEX idx_email ON users(email); -- Unique index CREATE UNIQUE INDEX idx_email ON users(email); -- Composite index CREATE INDEX idx_name_city ON users(name, city); -- Drop index DROP INDEX idx_email ON users;"
+  },
+  {
+    "title": "\ud83d\uddc4\ufe0f SQL Queries & Commands",
+    "section": "\ud83d\udd0d Subqueries",
+    "url": "cheatsheets/sql.html#subqueries",
+    "content": "-- Subquery in WHERE SELECT * FROM users WHERE age > ( SELECT AVG (age) FROM users); -- Subquery in FROM SELECT avg_age FROM ( SELECT AVG (age) AS avg_age FROM users) AS subquery; -- Correlated subquery SELECT name FROM users u WHERE age > ( SELECT AVG (age) FROM users u2 WHERE u2.city = u.city);"
+  },
+  {
+    "title": "\ud83d\uddc4\ufe0f SQL Queries & Commands",
+    "section": "\ud83c\udfaf Common Data Types",
+    "url": "cheatsheets/sql.html#common-data-types",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\uddc4\ufe0f SQL Queries & Commands",
+    "section": "\ud83d\udca1 Best Practices",
+    "url": "cheatsheets/sql.html#best-practices",
+    "content": ""
+  },
+  {
+    "title": "\u269b\ufe0f React Cheatsheet",
+    "section": "\ud83e\ude9d useState Hook",
+    "url": "cheatsheets/react.html#usestate-hook",
+    "content": "// Basic usage const [count, setCount] = useState( 0 ); setCount(count + 1 ); // Functional update (when new state depends on previous) setCount(prevCount => prevCount + 1 ); // Lazy initialization (expensive computation) const [state, setState] = useState(() => { return expensiveComputation(); });"
+  },
+  {
+    "title": "\u269b\ufe0f React Cheatsheet",
+    "section": "\u26a1 useEffect Hook",
+    "url": "cheatsheets/react.html#useeffect-hook",
+    "content": "// Run on every render useEffect(() => { console.log( 'Runs after every render' ); }); // Run only once (on mount) useEffect(() => { console.log( 'Runs once on mount' ); }, []); // Run when dependencies change useEffect(() => { console.log( 'Count changed:' , count); }, [count]); // Cleanup function useEffect(() => { const timer = setInterval(() => {}, 1000 ); return () => clearInterval(timer); }, []);"
+  },
+  {
+    "title": "\u269b\ufe0f React Cheatsheet",
+    "section": "\ud83c\udfaf useContext Hook",
+    "url": "cheatsheets/react.html#usecontext-hook",
+    "content": "// Create context const ThemeContext = React.createContext( 'light' ); // Provider component function App() { return ( <ThemeContext.Provider value= \"dark\" > <Toolbar /> </ThemeContext.Provider> ); } // Consumer component function ThemedButton() { const theme = useContext(ThemeContext); return <button className={theme}>Click</button>; }"
+  },
+  {
+    "title": "\u269b\ufe0f React Cheatsheet",
+    "section": "\ud83d\udd04 useReducer Hook",
+    "url": "cheatsheets/react.html#usereducer-hook",
+    "content": "// Reducer function function reducer(state, action) { switch (action.type) { case 'increment' : return { count: state.count + 1 }; case 'decrement' : return { count: state.count - 1 }; default : return state; } } // Usage const [state, dispatch] = useReducer(reducer, { count: 0 }); dispatch({ type: 'increment' });"
+  },
+  {
+    "title": "\u269b\ufe0f React Cheatsheet",
+    "section": "\ud83d\udcdd useRef Hook",
+    "url": "cheatsheets/react.html#useref-hook",
+    "content": "// Access DOM element const inputRef = useRef( null ); inputRef.current.focus(); // Store mutable value (doesn't trigger re-render) const countRef = useRef( 0 ); countRef.current += 1 ; // Store previous value const prevValue = useRef(); useEffect(() => { prevValue.current = value; }, [value]);"
+  },
+  {
+    "title": "\u269b\ufe0f React Cheatsheet",
+    "section": "\ud83c\udfa8 useMemo Hook",
+    "url": "cheatsheets/react.html#usememo-hook",
+    "content": "// Expensive calculation const expensiveValue = useMemo(() => { return computeExpensiveValue(a, b); }, [a, b]); // Memoize filtered list const filteredList = useMemo(() => { return list.filter(item => item.includes(query)); }, [list, query]);"
+  },
+  {
+    "title": "\u269b\ufe0f React Cheatsheet",
+    "section": "\u2699\ufe0f useCallback Hook",
+    "url": "cheatsheets/react.html#usecallback-hook",
+    "content": "// Memoize callback const handleClick = useCallback(() => { console.log( 'Clicked with count:' , count); }, [count]); // Pass to child component <ChildComponent onClick={handleClick} />"
+  },
+  {
+    "title": "\u269b\ufe0f React Cheatsheet",
+    "section": "\ud83d\udd27 useLayoutEffect Hook",
+    "url": "cheatsheets/react.html#uselayouteffect-hook",
+    "content": "// Measure DOM before paint useLayoutEffect(() => { const rect = divRef.current.getBoundingClientRect(); setHeight(rect.height); }, []);"
+  },
+  {
+    "title": "\u269b\ufe0f React Cheatsheet",
+    "section": "\ud83c\udd94 useId Hook",
+    "url": "cheatsheets/react.html#useid-hook",
+    "content": "// Generate unique ID for form elements const id = useId(); return ( <> <label htmlFor={id}>Name:</label> <input id={id} type= \"text\" /> </> );"
+  },
+  {
+    "title": "\u269b\ufe0f React Cheatsheet",
+    "section": "\ud83c\udfad Component Patterns",
+    "url": "cheatsheets/react.html#component-patterns",
+    "content": "// Functional Component function MyComponent({ name, age }) { return <div>{name} is {age}</div>; } // Arrow Function Component const MyComponent = ({ name, age }) => ( <div>{name} is {age}</div> ); // Component with default props function Button({ text = 'Click me' , onClick }) { return <button onClick={onClick}>{text}</button>; } // Component with children function Card({ children, title }) { return ( <div className= \"card\" > <h2>{title}</h2> {children} </div> ); }"
+  },
+  {
+    "title": "\u269b\ufe0f React Cheatsheet",
+    "section": "\ud83d\udd04 Conditional Rendering",
+    "url": "cheatsheets/react.html#conditional-rendering",
+    "content": "// If-else with ternary {isLoggedIn ? <Dashboard /> : <Login />} // Logical AND for conditional rendering {showMessage && <Message text= \"Hello\" />} // Nullish coalescing for default values {user?.name ?? 'Guest' } // Early return pattern if (!data) return <Loading />; if (error) return <Error message={error} />; return <DataDisplay data={data} />;"
+  },
+  {
+    "title": "\u269b\ufe0f React Cheatsheet",
+    "section": "\ud83d\udccb Lists and Keys",
+    "url": "cheatsheets/react.html#lists-and-keys",
+    "content": "// Render list with map const items = [ 'Apple' , 'Banana' , 'Orange' ]; return ( <ul> {items.map((item, index) => ( <li key={index}>{item}</li> ))} </ul> ); // Better: Use unique ID as key {users.map(user => ( <UserCard key={user.id} user={user} /> ))}"
+  },
+  {
+    "title": "\u269b\ufe0f React Cheatsheet",
+    "section": "\ud83d\udcdd Forms and Controlled Components",
+    "url": "cheatsheets/react.html#forms-and-controlled-components",
+    "content": "// Controlled input const [value, setValue] = useState( '' ); <input value={value} onChange={(e) => setValue(e.target.value)} /> // Form submission const handleSubmit = (e) => { e.preventDefault(); console.log( 'Submitted:' , value); }; // Checkbox const [checked, setChecked] = useState( false ); <input type= \"checkbox\" checked={checked} onChange={(e) => setChecked(e.target.checked)} />"
+  },
+  {
+    "title": "\u269b\ufe0f React Cheatsheet",
+    "section": "\ud83c\udfaf Event Handling",
+    "url": "cheatsheets/react.html#event-handling",
+    "content": "// Click handler <button onClick={() => console.log( 'Clicked' )}> Click me </button> // Handler with parameters const handleClick = (id) => { console.log( 'Clicked item:' , id); }; <button onClick={() => handleClick(item.id)}>Click</button> // Prevent default const handleSubmit = (e) => { e.preventDefault(); // Handle form submission };"
+  },
+  {
+    "title": "\u269b\ufe0f React Cheatsheet",
+    "section": "\ud83e\udde9 Component Composition",
+    "url": "cheatsheets/react.html#component-composition",
+    "content": "// Render props pattern function DataProvider({ render }) { const [data, setData] = useState( null ); return render(data); } <DataProvider render={(data) => <Display data={data} />} /> // Higher-Order Component (HOC) function withLoading(Component) { return function WithLoadingComponent({ isLoading, ...props }) { if (isLoading) return <Loading />; return <Component {...props} />; }; } // Custom Hook pattern function useLocalStorage(key, initialValue) { const [value, setValue] = useState(() => { const item = localStorage.getItem(key); return item ? JSON.parse(item) : initialValue; }); useEffect(() => { localStorage.setItem(key, JSON.stringify(value)); }, [key, value]); return [value, setValue]; }"
+  },
+  {
+    "title": "\u269b\ufe0f React Cheatsheet",
+    "section": "\u26a1 Performance Optimization",
+    "url": "cheatsheets/react.html#performance-optimization",
+    "content": "// React.memo - prevent unnecessary re-renders const MemoizedComponent = React.memo( function MyComponent({ data }) { return <div>{data}</div>; }); // Custom comparison function const MemoizedComponent = React.memo(MyComponent, (prevProps, nextProps) => { return prevProps.id === nextProps.id; }); // Lazy loading components const LazyComponent = React.lazy(() => import ( './Component' )); function App() { return ( <Suspense fallback={<Loading />}> <LazyComponent /> </Suspense> ); }"
+  },
+  {
+    "title": "\u269b\ufe0f React Cheatsheet",
+    "section": "\ud83d\udd00 State Management Patterns",
+    "url": "cheatsheets/react.html#state-management-patterns",
+    "content": "// Lifting state up function Parent() { const [value, setValue] = useState( '' ); return ( <> <ChildA value={value} onChange={setValue} /> <ChildB value={value} /> </> ); } // Context for global state const AppContext = React.createContext(); function AppProvider({ children }) { const [state, setState] = useState(initialState); return ( <AppContext.Provider value={{ state, setState }}> {children} </AppContext.Provider> ); }"
+  },
+  {
+    "title": "\u269b\ufe0f React Cheatsheet",
+    "section": "\ud83d\udee1\ufe0f Error Boundaries",
+    "url": "cheatsheets/react.html#error-boundaries",
+    "content": "// Error boundary class component class ErrorBoundary extends React.Component { constructor(props) { super (props); this .state = { hasError: false }; } static getDerivedStateFromError(error) { return { hasError: true }; } componentDidCatch(error, errorInfo) { console.error( 'Error:' , error, errorInfo); } render() { if ( this .state.hasError) { return <h1>Something went wrong.</h1>; } return this .props.children; } } // Usage <ErrorBoundary> <MyComponent /> </ErrorBoundary>"
+  },
+  {
+    "title": "\u269b\ufe0f React Cheatsheet",
+    "section": "\ud83c\udfac Component Lifecycle (Class Components)",
+    "url": "cheatsheets/react.html#component-lifecycle-class-components",
+    "content": ""
+  },
+  {
+    "title": "\u269b\ufe0f React Cheatsheet",
+    "section": "\ud83d\udd17 Refs and DOM Access",
+    "url": "cheatsheets/react.html#refs-and-dom-access",
+    "content": "// Create ref const inputRef = useRef( null ); // Attach to element <input ref={inputRef} /> // Access DOM element inputRef.current.focus(); // Forward ref to child component const FancyInput = React.forwardRef((props, ref) => ( <input ref={ref} {...props} /> )); // Usage const ref = useRef(); <FancyInput ref={ref} />"
+  },
+  {
+    "title": "\u269b\ufe0f React Cheatsheet",
+    "section": "\ud83c\udfa8 Styling Approaches",
+    "url": "cheatsheets/react.html#styling-approaches",
+    "content": "// Inline styles <div style={{ color: 'red' , fontSize: '16px' }}>Text</div> // CSS classes <div className= \"container active\" >Content</div> // Conditional classes <div className={`btn ${isActive ? 'active' : '' }`}>Button</div> // CSS Modules import styles from './Button.module.css' ; <button className={styles.button}>Click</button>"
+  },
+  {
+    "title": "\u269b\ufe0f React Cheatsheet",
+    "section": "\ud83d\udca1 Best Practices",
+    "url": "cheatsheets/react.html#best-practices",
+    "content": ""
+  },
+  {
+    "title": "\u269b\ufe0f React Cheatsheet",
+    "section": "\ud83d\ude80 Common Patterns",
+    "url": "cheatsheets/react.html#common-patterns",
+    "content": "// Pattern 1: Fetch data on mount useEffect(() => { async function fetchData() { const response = await fetch( '/api/data' ); const data = await response.json(); setData(data); } fetchData(); }, []);"
+  },
+  {
+    "title": "\ud83c\udfaf Algorithm Patterns",
+    "section": "\ud83e\ude9f Sliding Window",
+    "url": "cheatsheets/algorithm-patterns.html#sliding-window",
+    "content": "// Fixed window size function maxSumSubarray(arr, k): windowSum = sum(arr[0:k]) maxSum = windowSum for i = k to length(arr) - 1: windowSum = windowSum - arr[i - k] + arr[i] maxSum = max(maxSum, windowSum) return maxSum // Variable window size function longestSubstringKDistinct(s, k): left = 0, maxLen = 0 charCount = {} for right = 0 to length(s) - 1: charCount[s[right]]++ while size(charCount) > k: charCount[s[left]]-- if charCount[s[left]] == 0: remove s[left] from charCount left++ maxLen = max(maxLen, right - left + 1) return maxLen"
+  },
+  {
+    "title": "\ud83c\udfaf Algorithm Patterns",
+    "section": "\ud83d\udc49\ud83d\udc48 Two Pointers",
+    "url": "cheatsheets/algorithm-patterns.html#two-pointers",
+    "content": "// Opposite direction (converging) function twoSum(arr, target): left = 0 right = length(arr) - 1 while left < right: sum = arr[left] + arr[right] if sum == target: return [left, right] else if sum < target: left++ else : right-- return null // Same direction (chasing) function removeDuplicates(arr): if length(arr) == 0: return 0 slow = 0 for fast = 1 to length(arr) - 1: if arr[fast] != arr[slow]: slow++ arr[slow] = arr[fast] return slow + 1"
+  },
+  {
+    "title": "\ud83c\udfaf Algorithm Patterns",
+    "section": "\ud83d\udc22\ud83d\udc07 Fast & Slow Pointers",
+    "url": "cheatsheets/algorithm-patterns.html#fast-slow-pointers",
+    "content": "// Cycle detection function hasCycle(head): slow = head fast = head while fast != null and fast.next != null: slow = slow.next fast = fast.next.next if slow == fast: return true return false // Find middle of linked list function findMiddle(head): slow = head fast = head while fast != null and fast.next != null: slow = slow.next fast = fast.next.next return slow // Middle node // Find cycle start function findCycleStart(head): slow = fast = head // Find meeting point while fast and fast.next: slow = slow.next fast = fast.next.next if slow == fast: break // Find cycle start slow = head while slow != fast: slow = slow.next fast = fast.next return slow"
+  },
+  {
+    "title": "\ud83c\udfaf Algorithm Patterns",
+    "section": "\ud83d\udcc5 Merge Intervals",
+    "url": "cheatsheets/algorithm-patterns.html#merge-intervals",
+    "content": "// Merge overlapping intervals function mergeIntervals(intervals): if length(intervals) <= 1: return intervals // Sort by start time sort(intervals, key=start) merged = [intervals[0]] for i = 1 to length(intervals) - 1: current = intervals[i] last = merged[length(merged) - 1] if current.start <= last.end: // Overlapping, merge them last.end = max(last.end, current.end) else : // Non-overlapping, add to result merged.append(current) return merged // Insert interval function insertInterval(intervals, newInterval): result = [] i = 0 // Add all intervals before newInterval while i < length(intervals) and intervals[i].end < newInterval.start: result.append(intervals[i]) i++ // Merge overlapping intervals while i < length(intervals) and intervals[i].start <= newInterval.end: newInterval.start = min(newInterval.start, intervals[i].start) newInterval.end = max(newInterval.end, intervals[i].end) i++ result.append(newInterval) // Add remaining intervals while i < length(intervals): result.append(intervals[i]) i++ return result"
+  },
+  {
+    "title": "\ud83c\udfaf Algorithm Patterns",
+    "section": "\ud83d\udd04 Cyclic Sort",
+    "url": "cheatsheets/algorithm-patterns.html#cyclic-sort",
+    "content": "// Cyclic sort - place each number at its correct index function cyclicSort(arr): i = 0 while i < length(arr): correctIndex = arr[i] - 1 if arr[i] != arr[correctIndex]: swap(arr[i], arr[correctIndex]) else : i++ return arr // Find missing number function findMissingNumber(arr): i = 0 n = length(arr) // Place each number at index equal to its value while i < n: correctIndex = arr[i] if arr[i] < n and arr[i] != arr[correctIndex]: swap(arr[i], arr[correctIndex]) else : i++ // Find the first index where number doesn't match for i = 0 to n - 1: if arr[i] != i: return i return n // Find all duplicates function findDuplicates(arr): i = 0 while i < length(arr): correctIndex = arr[i] - 1 if arr[i] != arr[correctIndex]: swap(arr[i], arr[correctIndex]) else : i++ duplicates = [] for i = 0 to length(arr) - 1: if arr[i] != i + 1: duplicates.append(arr[i]) return duplicates"
+  },
+  {
+    "title": "\ud83c\udfaf Algorithm Patterns",
+    "section": "\u21a9\ufe0f In-Place Reversal",
+    "url": "cheatsheets/algorithm-patterns.html#in-place-reversal",
+    "content": "// Reverse entire linked list function reverseList(head): prev = null current = head while current != null: next = current.next current.next = prev prev = current current = next return prev // New head // Reverse sublist from position m to n function reverseBetween(head, m, n): if m == n: return head // Skip to position m-1 current = head prev = null for i = 0 to m - 1: prev = current current = current.next // Reverse from m to n lastNodeBeforeReverse = prev lastNodeOfReverse = current for i = 0 to n - m: next = current.next current.next = prev prev = current current = next // Connect with remaining list if lastNodeBeforeReverse != null: lastNodeBeforeReverse.next = prev else : head = prev lastNodeOfReverse.next = current return head // Reverse every k nodes function reverseKGroup(head, k): if k <= 1 or head == null: return head current = head prev = null while true: lastNodeBeforeReverse = prev lastNodeOfReverse = current // Reverse k nodes for i = 0 to k - 1 and current != null: next = current.next current.next = prev prev = current current = next // Connect with previous part if lastNodeBeforeReverse != null: lastNodeBeforeReverse.next = prev else : head = prev lastNodeOfReverse.next = current if current == null: break prev = lastNodeOfReverse return head"
+  },
+  {
+    "title": "\ud83c\udfaf Algorithm Patterns",
+    "section": "\ud83c\udf93 Pattern Recognition Guide",
+    "url": "cheatsheets/algorithm-patterns.html#pattern-recognition-guide",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfaf Algorithm Patterns",
+    "section": "\ud83d\udca1 Pattern Complexity Summary",
+    "url": "cheatsheets/algorithm-patterns.html#pattern-complexity-summary",
+    "content": "Pattern              | Time       | Space      | Best Use Case ---------------------|------------|------------|-------------------------------- Sliding Window       | O(n)       | O(1)-O(k)  | Contiguous subarrays/substrings Two Pointers         | O(n)       | O(1)       | Sorted arrays, pairs/triplets Fast & Slow Pointers | O(n)       | O(1)       | Linked list cycles, middle Merge Intervals      | O(n log n) | O(n)       | Overlapping intervals Cyclic Sort          | O(n)       | O(1)       | Numbers in range [1, n] In-Place Reversal    | O(n)       | O(1)       | Reversing linked lists"
+  },
+  {
+    "title": "\ud83d\udd0c REST API Design",
+    "section": "\ud83d\udcd0 Core Design Principles",
+    "url": "cheatsheets/rest-api.html#core-design-principles",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd0c REST API Design",
+    "section": "\ud83c\udfaf Resource Naming Conventions",
+    "url": "cheatsheets/rest-api.html#resource-naming-conventions",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd0c REST API Design",
+    "section": "\ud83d\udd27 HTTP Methods Usage",
+    "url": "cheatsheets/rest-api.html#http-methods-usage",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd0c REST API Design",
+    "section": "\ud83d\udcca Status Code Guidelines",
+    "url": "cheatsheets/rest-api.html#status-code-guidelines",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd0c REST API Design",
+    "section": "\ud83d\udd22 API Versioning Strategies",
+    "url": "cheatsheets/rest-api.html#api-versioning-strategies",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd0c REST API Design",
+    "section": "\ud83d\udcc4 Pagination Patterns",
+    "url": "cheatsheets/rest-api.html#pagination-patterns",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd0c REST API Design",
+    "section": "\ud83d\udd0d Filtering, Sorting & Searching",
+    "url": "cheatsheets/rest-api.html#filtering-sorting-searching",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd0c REST API Design",
+    "section": "\ud83d\udd10 Authentication Patterns",
+    "url": "cheatsheets/rest-api.html#authentication-patterns",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd0c REST API Design",
+    "section": "\u26a1 Rate Limiting",
+    "url": "cheatsheets/rest-api.html#rate-limiting",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd0c REST API Design",
+    "section": "\u274c Error Response Format",
+    "url": "cheatsheets/rest-api.html#error-response-format",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd0c REST API Design",
+    "section": "\ud83d\udce6 Response Format Best Practices",
+    "url": "cheatsheets/rest-api.html#response-format-best-practices",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd0c REST API Design",
+    "section": "\ud83d\udd17 HATEOAS (Hypermedia)",
+    "url": "cheatsheets/rest-api.html#hateoas-hypermedia",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd0c REST API Design",
+    "section": "\ud83c\udfaf Complete Endpoint Examples",
+    "url": "cheatsheets/rest-api.html#complete-endpoint-examples",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd0c REST API Design",
+    "section": "\ud83d\udcdd Request/Response Examples",
+    "url": "cheatsheets/rest-api.html#requestresponse-examples",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd0c REST API Design",
+    "section": "\ud83d\udee1\ufe0f Security Best Practices",
+    "url": "cheatsheets/rest-api.html#security-best-practices",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd0c REST API Design",
+    "section": "\u26a1 Performance Best Practices",
+    "url": "cheatsheets/rest-api.html#performance-best-practices",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd0c REST API Design",
+    "section": "\ud83d\udcda Documentation Best Practices",
+    "url": "cheatsheets/rest-api.html#documentation-best-practices",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd0c REST API Design",
+    "section": "\ud83c\udfa8 API Design Checklist",
+    "url": "cheatsheets/rest-api.html#api-design-checklist",
+    "content": ""
+  },
+  {
+    "title": "Common Algorithms",
+    "section": "\ud83d\udd04 Quicksort",
+    "url": "cheatsheets/algorithms.html#quicksort",
+    "content": "function quicksort(arr, low, high): if low < high: pivot = partition(arr, low, high) quicksort(arr, low, pivot - 1) quicksort(arr, pivot + 1, high) function partition(arr, low, high): pivot = arr[high] i = low - 1 for j = low to high - 1: if arr[j] < pivot: i = i + 1 swap(arr[i], arr[j]) swap(arr[i + 1], arr[high]) return i + 1"
+  },
+  {
+    "title": "Common Algorithms",
+    "section": "\ud83d\udd00 Mergesort",
+    "url": "cheatsheets/algorithms.html#mergesort",
+    "content": "function mergesort(arr): if length(arr) <= 1: return arr mid = length(arr) / 2 left = mergesort(arr[0:mid]) right = mergesort(arr[mid:end]) return merge(left, right) function merge(left, right): result = [] while left and right not empty: if left[0] <= right[0]: append left[0] to result else : append right[0] to result append remaining elements return result"
+  },
+  {
+    "title": "Common Algorithms",
+    "section": "\ud83c\udfd4\ufe0f Heapsort",
+    "url": "cheatsheets/algorithms.html#heapsort",
+    "content": "function heapsort(arr): n = length(arr) // Build max heap for i = n/2 - 1 down to 0: heapify(arr, n, i) // Extract elements from heap for i = n - 1 down to 1: swap(arr[0], arr[i]) heapify(arr, i, 0) function heapify(arr, n, i): largest = i left = 2 * i + 1 right = 2 * i + 2 if left < n and arr[left] > arr[largest]: largest = left if right < n and arr[right] > arr[largest]: largest = right if largest != i: swap(arr[i], arr[largest]) heapify(arr, n, largest)"
+  },
+  {
+    "title": "Common Algorithms",
+    "section": "\ud83d\udd0d Binary Search",
+    "url": "cheatsheets/algorithms.html#binary-search",
+    "content": "// Iterative approach function binarySearch(arr, target): left = 0 right = length(arr) - 1 while left <= right: mid = left + (right - left) / 2 if arr[mid] == target: return mid else if arr[mid] < target: left = mid + 1 else : right = mid - 1 return -1 // Not found"
+  },
+  {
+    "title": "Common Algorithms",
+    "section": "\ud83c\udf33 Depth-First Search (DFS)",
+    "url": "cheatsheets/algorithms.html#depth-first-search-dfs",
+    "content": "// Recursive approach function dfs(node, visited): if node is null or node in visited: return add node to visited process(node) for each neighbor in node.neighbors: dfs(neighbor, visited) // Iterative with stack function dfsIterative(start): stack = [start] visited = set() while stack not empty: node = stack.pop() if node not in visited: add node to visited process(node) for each neighbor in node.neighbors: stack.push(neighbor)"
+  },
+  {
+    "title": "Common Algorithms",
+    "section": "\ud83d\udcca Breadth-First Search (BFS)",
+    "url": "cheatsheets/algorithms.html#breadth-first-search-bfs",
+    "content": "function bfs(start): queue = [start] visited = set([start]) while queue not empty: node = queue.dequeue() process(node) for each neighbor in node.neighbors: if neighbor not in visited: add neighbor to visited queue.enqueue(neighbor) // With distance tracking function bfsWithDistance(start): queue = [(start, 0)] visited = set([start]) while queue not empty: node, distance = queue.dequeue() process(node, distance) for each neighbor in node.neighbors: if neighbor not in visited: add neighbor to visited queue.enqueue((neighbor, distance + 1))"
+  },
+  {
+    "title": "Common Algorithms",
+    "section": "\ud83d\udcc8 Complexity Comparison",
+    "url": "cheatsheets/algorithms.html#complexity-comparison",
+    "content": "Algorithm      | Best       | Average    | Worst      | Space  | Stable ---------------|------------|------------|------------|--------|-------- Quicksort      | O(n log n) | O(n log n) | O(n\u00b2)      | O(log n)| No Mergesort      | O(n log n) | O(n log n) | O(n log n) | O(n)   | Yes Heapsort       | O(n log n) | O(n log n) | O(n log n) | O(1)   | No Bubble Sort    | O(n)       | O(n\u00b2)      | O(n\u00b2)      | O(1)   | Yes Insertion Sort | O(n)       | O(n\u00b2)      | O(n\u00b2)      | O(1)   | Yes Selection Sort | O(n\u00b2)      | O(n\u00b2)      | O(n\u00b2)      | O(1)   | No"
+  },
+  {
+    "title": "Common Algorithms",
+    "section": "\ud83d\udca1 Algorithm Selection Guide",
+    "url": "cheatsheets/algorithms.html#algorithm-selection-guide",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd27 Network Troubleshooting",
+    "section": "\ud83d\udce1 ping - Test Connectivity",
+    "url": "cheatsheets/network-troubleshooting.html#ping-test-connectivity",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd27 Network Troubleshooting",
+    "section": "\ud83d\uddfa\ufe0f traceroute - Trace Network Path",
+    "url": "cheatsheets/network-troubleshooting.html#traceroute-trace-network-path",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd27 Network Troubleshooting",
+    "section": "\ud83d\udcca netstat - Network Statistics",
+    "url": "cheatsheets/network-troubleshooting.html#netstat-network-statistics",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd27 Network Troubleshooting",
+    "section": "\ud83d\udd0d nslookup - DNS Lookup",
+    "url": "cheatsheets/network-troubleshooting.html#nslookup-dns-lookup",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd27 Network Troubleshooting",
+    "section": "\ud83d\udd0e dig - DNS Information Groper",
+    "url": "cheatsheets/network-troubleshooting.html#dig-dns-information-groper",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd27 Network Troubleshooting",
+    "section": "\ud83d\udce6 tcpdump - Packet Capture",
+    "url": "cheatsheets/network-troubleshooting.html#tcpdump-packet-capture",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd27 Network Troubleshooting",
+    "section": "\ud83e\udd88 Wireshark Basics",
+    "url": "cheatsheets/network-troubleshooting.html#wireshark-basics",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd27 Network Troubleshooting",
+    "section": "\ud83d\udd27 Additional Tools",
+    "url": "cheatsheets/network-troubleshooting.html#additional-tools",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd27 Network Troubleshooting",
+    "section": "\ud83d\udcc8 Performance Testing",
+    "url": "cheatsheets/network-troubleshooting.html#performance-testing",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd27 Network Troubleshooting",
+    "section": "\ud83d\udd04 Common Troubleshooting Workflows",
+    "url": "cheatsheets/network-troubleshooting.html#common-troubleshooting-workflows",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd27 Network Troubleshooting",
+    "section": "\ud83c\udfaf tcpdump Filter Examples",
+    "url": "cheatsheets/network-troubleshooting.html#tcpdump-filter-examples",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd27 Network Troubleshooting",
+    "section": "\u26a0\ufe0f Common Network Issues",
+    "url": "cheatsheets/network-troubleshooting.html#common-network-issues",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd27 Network Troubleshooting",
+    "section": "\ud83d\udca1 Best Practices",
+    "url": "cheatsheets/network-troubleshooting.html#best-practices",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd27 Network Troubleshooting",
+    "section": "\ud83d\udcda Quick Reference - Error Messages",
+    "url": "cheatsheets/network-troubleshooting.html#quick-reference-error-messages",
+    "content": ""
+  },
+  {
+    "title": "\u2638\ufe0f Kubernetes kubectl",
+    "section": "\ud83d\ude80 Getting Started",
+    "url": "cheatsheets/kubernetes.html#getting-started",
+    "content": ""
+  },
+  {
+    "title": "\u2638\ufe0f Kubernetes kubectl",
+    "section": "\ud83d\udce6 Pod Management",
+    "url": "cheatsheets/kubernetes.html#pod-management",
+    "content": ""
+  },
+  {
+    "title": "\u2638\ufe0f Kubernetes kubectl",
+    "section": "\ud83c\udfaf Resource Creation",
+    "url": "cheatsheets/kubernetes.html#resource-creation",
+    "content": ""
+  },
+  {
+    "title": "\u2638\ufe0f Kubernetes kubectl",
+    "section": "\ud83d\udd04 Deployments",
+    "url": "cheatsheets/kubernetes.html#deployments",
+    "content": ""
+  },
+  {
+    "title": "\u2638\ufe0f Kubernetes kubectl",
+    "section": "\ud83c\udf10 Services",
+    "url": "cheatsheets/kubernetes.html#services",
+    "content": ""
+  },
+  {
+    "title": "\u2638\ufe0f Kubernetes kubectl",
+    "section": "\ud83d\udcdb Namespaces",
+    "url": "cheatsheets/kubernetes.html#namespaces",
+    "content": ""
+  },
+  {
+    "title": "\u2638\ufe0f Kubernetes kubectl",
+    "section": "\ud83d\udd0d Debugging & Inspection",
+    "url": "cheatsheets/kubernetes.html#debugging-inspection",
+    "content": ""
+  },
+  {
+    "title": "\u2638\ufe0f Kubernetes kubectl",
+    "section": "\u2699\ufe0f ConfigMaps & Secrets",
+    "url": "cheatsheets/kubernetes.html#configmaps-secrets",
+    "content": ""
+  },
+  {
+    "title": "\u2638\ufe0f Kubernetes kubectl",
+    "section": "\ud83d\udcbe Persistent Volumes",
+    "url": "cheatsheets/kubernetes.html#persistent-volumes",
+    "content": ""
+  },
+  {
+    "title": "\u2638\ufe0f Kubernetes kubectl",
+    "section": "\ud83d\udcca Resource Queries",
+    "url": "cheatsheets/kubernetes.html#resource-queries",
+    "content": ""
+  },
+  {
+    "title": "\u2638\ufe0f Kubernetes kubectl",
+    "section": "\ud83c\udff7\ufe0f Labels & Annotations",
+    "url": "cheatsheets/kubernetes.html#labels-annotations",
+    "content": ""
+  },
+  {
+    "title": "\u2638\ufe0f Kubernetes kubectl",
+    "section": "\ud83d\udcdd Editing Resources",
+    "url": "cheatsheets/kubernetes.html#editing-resources",
+    "content": ""
+  },
+  {
+    "title": "\u2638\ufe0f Kubernetes kubectl",
+    "section": "\ud83d\udcc4 Example Pod YAML",
+    "url": "cheatsheets/kubernetes.html#example-pod-yaml",
+    "content": "apiVersion: v1 kind: Pod metadata: name: nginx-pod labels: app: nginx env: production spec: containers: - name: nginx image: nginx:1.21 ports: - containerPort: 80 env: - name: ENV_VAR value: \"production\" resources: requests: memory: \"64Mi\" cpu: \"250m\" limits: memory: \"128Mi\" cpu: \"500m\""
+  },
+  {
+    "title": "\u2638\ufe0f Kubernetes kubectl",
+    "section": "\ud83d\ude80 Example Deployment YAML",
+    "url": "cheatsheets/kubernetes.html#example-deployment-yaml",
+    "content": "apiVersion: apps/v1 kind: Deployment metadata: name: nginx-deployment spec: replicas: 3 selector: matchLabels: app: nginx template: metadata: labels: app: nginx spec: containers: - name: nginx image: nginx:1.21 ports: - containerPort: 80"
+  },
+  {
+    "title": "\u2638\ufe0f Kubernetes kubectl",
+    "section": "\ud83c\udf10 Example Service YAML",
+    "url": "cheatsheets/kubernetes.html#example-service-yaml",
+    "content": "apiVersion: v1 kind: Service metadata: name: nginx-service spec: type: LoadBalancer selector: app: nginx ports: - protocol: TCP port: 80 targetPort: 80"
+  },
+  {
+    "title": "\u2638\ufe0f Kubernetes kubectl",
+    "section": "\ud83d\udca1 Useful Tips",
+    "url": "cheatsheets/kubernetes.html#useful-tips",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 HTTP Status Codes & Methods",
+    "section": "\ud83d\udd35 1xx Informational",
+    "url": "cheatsheets/http.html#1xx-informational",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 HTTP Status Codes & Methods",
+    "section": "\u2705 2xx Success",
+    "url": "cheatsheets/http.html#2xx-success",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 HTTP Status Codes & Methods",
+    "section": "\ud83d\udd00 3xx Redirection",
+    "url": "cheatsheets/http.html#3xx-redirection",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 HTTP Status Codes & Methods",
+    "section": "\u274c 4xx Client Errors",
+    "url": "cheatsheets/http.html#4xx-client-errors",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 HTTP Status Codes & Methods",
+    "section": "\u26a0\ufe0f 5xx Server Errors",
+    "url": "cheatsheets/http.html#5xx-server-errors",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 HTTP Status Codes & Methods",
+    "section": "\ud83d\udce4 HTTP Request Methods",
+    "url": "cheatsheets/http.html#http-request-methods",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 HTTP Status Codes & Methods",
+    "section": "\ud83d\udccb Common Request Headers",
+    "url": "cheatsheets/http.html#common-request-headers",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 HTTP Status Codes & Methods",
+    "section": "\ud83d\udce8 Common Response Headers",
+    "url": "cheatsheets/http.html#common-response-headers",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 HTTP Status Codes & Methods",
+    "section": "\ud83d\udd12 Security Headers",
+    "url": "cheatsheets/http.html#security-headers",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 HTTP Status Codes & Methods",
+    "section": "\ud83d\udd04 Caching Headers",
+    "url": "cheatsheets/http.html#caching-headers",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 HTTP Status Codes & Methods",
+    "section": "\ud83c\udfaf Content Negotiation",
+    "url": "cheatsheets/http.html#content-negotiation",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 HTTP Status Codes & Methods",
+    "section": "\ud83d\udcca REST API Status Code Usage",
+    "url": "cheatsheets/http.html#rest-api-status-code-usage",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 HTTP Status Codes & Methods",
+    "section": "\ud83d\udd10 Authentication Methods",
+    "url": "cheatsheets/http.html#authentication-methods",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 HTTP Status Codes & Methods",
+    "section": "\ud83d\udca1 HTTP Best Practices",
+    "url": "cheatsheets/http.html#http-best-practices",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 Network Protocols",
+    "section": "\ud83d\udcda OSI Model (7 Layers)",
+    "url": "cheatsheets/network-protocols.html#osi-model-7-layers",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 Network Protocols",
+    "section": "\ud83d\udd17 TCP/IP Model (4 Layers)",
+    "url": "cheatsheets/network-protocols.html#tcpip-model-4-layers",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 Network Protocols",
+    "section": "\ud83c\udf0d Application Layer Protocols",
+    "url": "cheatsheets/network-protocols.html#application-layer-protocols",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 Network Protocols",
+    "section": "\ud83d\ude9a Transport Layer Protocols",
+    "url": "cheatsheets/network-protocols.html#transport-layer-protocols",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 Network Protocols",
+    "section": "\ud83d\udd00 Network Layer Protocols",
+    "url": "cheatsheets/network-protocols.html#network-layer-protocols",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 Network Protocols",
+    "section": "\ud83d\udd12 Security Protocols",
+    "url": "cheatsheets/network-protocols.html#security-protocols",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 Network Protocols",
+    "section": "\ud83d\udce1 Data Link Layer Protocols",
+    "url": "cheatsheets/network-protocols.html#data-link-layer-protocols",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 Network Protocols",
+    "section": "\ud83c\udfaf Common Port Numbers",
+    "url": "cheatsheets/network-protocols.html#common-port-numbers",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 Network Protocols",
+    "section": "\ud83c\udfae Real-Time Protocols",
+    "url": "cheatsheets/network-protocols.html#real-time-protocols",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 Network Protocols",
+    "section": "\ud83d\udd04 Routing Protocols",
+    "url": "cheatsheets/network-protocols.html#routing-protocols",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 Network Protocols",
+    "section": "\ud83d\udce6 Modern Web Protocols",
+    "url": "cheatsheets/network-protocols.html#modern-web-protocols",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 Network Protocols",
+    "section": "\ud83c\udfe2 Enterprise Protocols",
+    "url": "cheatsheets/network-protocols.html#enterprise-protocols",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 Network Protocols",
+    "section": "\ud83d\udd0d Protocol Selection Guide",
+    "url": "cheatsheets/network-protocols.html#protocol-selection-guide",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 Network Protocols",
+    "section": "\ud83d\udca1 Protocol Comparison",
+    "url": "cheatsheets/network-protocols.html#protocol-comparison",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 Network Protocols",
+    "section": "\u26a0\ufe0f Security Considerations",
+    "url": "cheatsheets/network-protocols.html#security-considerations",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 DNS (Domain Name System)",
+    "section": "\ud83d\udccb Common DNS Record Types",
+    "url": "cheatsheets/dns.html#common-dns-record-types",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 DNS (Domain Name System)",
+    "section": "\ud83d\udcdd Additional Record Types",
+    "url": "cheatsheets/dns.html#additional-record-types",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 DNS (Domain Name System)",
+    "section": "\ud83d\udd0d dig Command (DNS Lookup)",
+    "url": "cheatsheets/dns.html#dig-command-dns-lookup",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 DNS (Domain Name System)",
+    "section": "\ud83d\udd0e nslookup Command",
+    "url": "cheatsheets/dns.html#nslookup-command",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 DNS (Domain Name System)",
+    "section": "\ud83d\udda5\ufe0f host Command",
+    "url": "cheatsheets/dns.html#host-command",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 DNS (Domain Name System)",
+    "section": "\u2699\ufe0f System DNS Commands",
+    "url": "cheatsheets/dns.html#system-dns-commands",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 DNS (Domain Name System)",
+    "section": "\ud83c\udf0d Public DNS Servers",
+    "url": "cheatsheets/dns.html#public-dns-servers",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 DNS (Domain Name System)",
+    "section": "\ud83d\udd27 DNS Troubleshooting",
+    "url": "cheatsheets/dns.html#dns-troubleshooting",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 DNS (Domain Name System)",
+    "section": "\ud83d\udcca DNS Record Syntax",
+    "url": "cheatsheets/dns.html#dns-record-syntax",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 DNS (Domain Name System)",
+    "section": "\ud83d\udd04 DNS Resolution Process",
+    "url": "cheatsheets/dns.html#dns-resolution-process",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 DNS (Domain Name System)",
+    "section": "\ud83c\udfaf DNS Query Types",
+    "url": "cheatsheets/dns.html#dns-query-types",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 DNS (Domain Name System)",
+    "section": "\ud83d\udd10 DNS Security (DNSSEC)",
+    "url": "cheatsheets/dns.html#dns-security-dnssec",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 DNS (Domain Name System)",
+    "section": "\ud83d\udca1 DNS Best Practices",
+    "url": "cheatsheets/dns.html#dns-best-practices",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 DNS (Domain Name System)",
+    "section": "\u26a0\ufe0f Common DNS Issues & Solutions",
+    "url": "cheatsheets/dns.html#common-dns-issues-solutions",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udf10 DNS (Domain Name System)",
+    "section": "\ud83d\udcda DNS Response Codes",
+    "url": "cheatsheets/dns.html#dns-response-codes",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcc4 JavaScript DOM Manipulation",
+    "section": "\ud83d\udd0d Element Selection",
+    "url": "cheatsheets/javascript-dom.html#element-selection",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcc4 JavaScript DOM Manipulation",
+    "section": "\u270f\ufe0f Content Manipulation",
+    "url": "cheatsheets/javascript-dom.html#content-manipulation",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcc4 JavaScript DOM Manipulation",
+    "section": "\ud83c\udfa8 Attribute Manipulation",
+    "url": "cheatsheets/javascript-dom.html#attribute-manipulation",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcc4 JavaScript DOM Manipulation",
+    "section": "\ud83c\udfad Class Manipulation",
+    "url": "cheatsheets/javascript-dom.html#class-manipulation",
+    "content": "// Example: Toggle active state const btn = document.querySelector( '.btn' ); btn.classList.toggle( 'active' );"
+  },
+  {
+    "title": "\ud83d\udcc4 JavaScript DOM Manipulation",
+    "section": "\ud83d\udc85 Style Manipulation",
+    "url": "cheatsheets/javascript-dom.html#style-manipulation",
+    "content": "// Example: Change background color element.style.backgroundColor = '#3b82f6' ; element.style.padding = '20px' ;"
+  },
+  {
+    "title": "\ud83d\udcc4 JavaScript DOM Manipulation",
+    "section": "\u2795 Creating Elements",
+    "url": "cheatsheets/javascript-dom.html#creating-elements",
+    "content": "// Example: Create and append element const div = document.createElement( 'div' ); div.textContent = 'Hello World' ; div.className = 'message' ; document.body.appendChild(div);"
+  },
+  {
+    "title": "\ud83d\udcc4 JavaScript DOM Manipulation",
+    "section": "\ud83d\udd17 Adding/Removing Elements",
+    "url": "cheatsheets/javascript-dom.html#addingremoving-elements",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcc4 JavaScript DOM Manipulation",
+    "section": "\ud83e\udded DOM Traversal",
+    "url": "cheatsheets/javascript-dom.html#dom-traversal",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcc4 JavaScript DOM Manipulation",
+    "section": "\ud83c\udfaf Event Handling",
+    "url": "cheatsheets/javascript-dom.html#event-handling",
+    "content": "// Example: Event delegation document.querySelector( '.list' ).addEventListener( 'click' , (e) => { if (e.target.matches( '.item' )) { console.log( 'Item clicked:' , e.target); } });"
+  },
+  {
+    "title": "\ud83d\udcc4 JavaScript DOM Manipulation",
+    "section": "\ud83d\udccf Element Dimensions",
+    "url": "cheatsheets/javascript-dom.html#element-dimensions",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcc4 JavaScript DOM Manipulation",
+    "section": "\ud83d\udcdc Scrolling",
+    "url": "cheatsheets/javascript-dom.html#scrolling",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcc4 JavaScript DOM Manipulation",
+    "section": "\ud83d\udd0e Element Queries",
+    "url": "cheatsheets/javascript-dom.html#element-queries",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcc4 JavaScript DOM Manipulation",
+    "section": "\ud83d\udccb Form Elements",
+    "url": "cheatsheets/javascript-dom.html#form-elements",
+    "content": "// Example: Get form data const formData = new FormData(form); const data = Object.fromEntries(formData);"
+  },
+  {
+    "title": "\ud83d\udcc4 JavaScript DOM Manipulation",
+    "section": "\ud83d\udca1 Common Patterns",
+    "url": "cheatsheets/javascript-dom.html#common-patterns",
+    "content": "// Pattern 1: Create and append multiple elements const fragment = document.createDocumentFragment(); for ( let i = 0 ; i < 100 ; i++) { const li = document.createElement( 'li' ); li.textContent = `Item ${i}` ; fragment.appendChild(li); } list.appendChild(fragment); // Single reflow!"
+  },
+  {
+    "title": "\ud83d\udcc4 JavaScript DOM Manipulation",
+    "section": "\u26a1 Performance Tips",
+    "url": "cheatsheets/javascript-dom.html#performance-tips",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udcc4 JavaScript DOM Manipulation",
+    "section": "\ud83c\udfaa Common Events",
+    "url": "cheatsheets/javascript-dom.html#common-events",
+    "content": ""
+  },
+  {
+    "title": "Linux grep Cheatsheet",
+    "section": "\ud83d\udcd6 Basic Usage",
+    "url": "cheatsheets/grep.html#basic-usage",
+    "content": ""
+  },
+  {
+    "title": "Linux grep Cheatsheet",
+    "section": "\ud83d\udd27 Essential Options",
+    "url": "cheatsheets/grep.html#essential-options",
+    "content": ""
+  },
+  {
+    "title": "Linux grep Cheatsheet",
+    "section": "\ud83c\udfaf Context Options",
+    "url": "cheatsheets/grep.html#context-options",
+    "content": ""
+  },
+  {
+    "title": "Linux grep Cheatsheet",
+    "section": "\ud83d\ude80 Advanced Options",
+    "url": "cheatsheets/grep.html#advanced-options",
+    "content": ""
+  },
+  {
+    "title": "Linux grep Cheatsheet",
+    "section": "\ud83d\udd22 Quantifiers",
+    "url": "cheatsheets/grep.html#quantifiers",
+    "content": ""
+  },
+  {
+    "title": "Linux grep Cheatsheet",
+    "section": "\ud83c\udfad Wildcards & Anchors",
+    "url": "cheatsheets/grep.html#wildcards-anchors",
+    "content": ""
+  },
+  {
+    "title": "Linux grep Cheatsheet",
+    "section": "\ud83d\udcdd Character Classes",
+    "url": "cheatsheets/grep.html#character-classes",
+    "content": ""
+  },
+  {
+    "title": "Linux grep Cheatsheet",
+    "section": "\ud83d\udd24 POSIX Character Classes",
+    "url": "cheatsheets/grep.html#posix-character-classes",
+    "content": ""
+  },
+  {
+    "title": "Linux grep Cheatsheet",
+    "section": "\u2728 Special Escape Sequences",
+    "url": "cheatsheets/grep.html#special-escape-sequences",
+    "content": ""
+  },
+  {
+    "title": "Linux grep Cheatsheet",
+    "section": "\ud83d\udca1 Practical Examples",
+    "url": "cheatsheets/grep.html#practical-examples",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc39 Go Language",
+    "section": "\ud83c\udfaf Basic Syntax",
+    "url": "cheatsheets/go.html#basic-syntax",
+    "content": "// Hello World package main import \"fmt\" func main() { fmt.Println( \"Hello, World!\" ) }"
+  },
+  {
+    "title": "\ud83d\udc39 Go Language",
+    "section": "\ud83d\udcdd Variables & Types",
+    "url": "cheatsheets/go.html#variables-types",
+    "content": "// Variable declarations var name string = \"Alice\" var age int = 25 var isActive bool = true // Short declaration (inside functions) count := 42 price := 19.99 // Multiple declarations var ( x int = 10 y int = 20 ) // Constants const Pi = 3.14159 const MaxUsers = 100"
+  },
+  {
+    "title": "\ud83d\udc39 Go Language",
+    "section": "\ud83d\udd27 Functions",
+    "url": "cheatsheets/go.html#functions",
+    "content": "// Basic function func add(a int , b int ) int { return a + b } // Multiple return values func divide(a, b int ) ( int , error ) { if b == 0 { return 0, fmt.Errorf( \"division by zero\" ) } return a / b, nil } // Named return values func split(sum int ) (x, y int ) { x = sum * 4 / 9 y = sum - x return // naked return } // Variadic function func sum(nums ... int ) int { total := 0 for _, num := range nums { total += num } return total }"
+  },
+  {
+    "title": "\ud83d\udc39 Go Language",
+    "section": "\ud83d\udd04 Control Flow",
+    "url": "cheatsheets/go.html#control-flow",
+    "content": "// If statement (no parentheses needed) if x > 10 { fmt.Println( \"x is large\" ) } else if x > 5 { fmt.Println( \"x is medium\" ) } else { fmt.Println( \"x is small\" ) } // If with initialization if val := compute(); val > 0 { fmt.Println(val) } // Switch switch day { case \"Monday\" : fmt.Println( \"Start of week\" ) case \"Friday\" : fmt.Println( \"End of week\" ) default : fmt.Println( \"Midweek\" ) } // Switch without condition (like if-else) switch { case x < 0: fmt.Println( \"negative\" ) case x == 0: fmt.Println( \"zero\" ) default : fmt.Println( \"positive\" ) }"
+  },
+  {
+    "title": "\ud83d\udc39 Go Language",
+    "section": "\ud83d\udd01 Loops",
+    "url": "cheatsheets/go.html#loops",
+    "content": "// For loop (only loop in Go) for i := 0; i < 10; i++ { fmt.Println(i) } // While-style loop for count < 100 { count++ } // Infinite loop for { // break to exit } // Range over slice for index, value := range slice { fmt.Println(index, value) } // Range over map for key, value := range myMap { fmt.Println(key, value) } // Ignore index/key with _ for _, value := range slice { fmt.Println(value) }"
+  },
+  {
+    "title": "\ud83d\udc39 Go Language",
+    "section": "\ud83d\udce6 Data Structures",
+    "url": "cheatsheets/go.html#data-structures",
+    "content": "// Arrays (fixed size) var arr [5] int arr[0] = 1 arr2 := [3] string { \"a\" , \"b\" , \"c\" } // Slices (dynamic arrays) slice := [] int {1, 2, 3} slice = append (slice, 4, 5) slice2 := make ([] int , 5) // length 5 slice3 := make ([] int , 0, 10) // len 0, cap 10 // Maps m := make ( map [ string ] int ) m[ \"age\" ] = 25 value, exists := m[ \"age\" ] // check existence delete (m, \"age\" ) // delete key // Map literal scores := map [ string ] int { \"Alice\" : 90, \"Bob\" :   85, }"
+  },
+  {
+    "title": "\ud83d\udc39 Go Language",
+    "section": "\ud83c\udfd7\ufe0f Structs",
+    "url": "cheatsheets/go.html#structs",
+    "content": "// Define struct type Person struct { Name string Age int } // Create instance p1 := Person{Name: \"Alice\" , Age: 25} p2 := Person{ \"Bob\" , 30} // Pointer to struct p3 := &Person{ \"Charlie\" , 35} p3.Age = 36 // auto-dereference // Method on struct func (p Person) Greet() string { return \"Hello, \" + p.Name } // Pointer receiver (can modify) func (p *Person) Birthday() { p.Age++ }"
+  },
+  {
+    "title": "\ud83d\udc39 Go Language",
+    "section": "\ud83d\udccb Interfaces",
+    "url": "cheatsheets/go.html#interfaces",
+    "content": "// Define interface type Shape interface { Area() float64 Perimeter() float64 } // Implement interface (implicit) type Rectangle struct { Width, Height float64 } func (r Rectangle) Area() float64 { return r.Width * r.Height } func (r Rectangle) Perimeter() float64 { return 2 * (r.Width + r.Height) } // Empty interface (any type) var anything interface {} anything = 42 anything = \"hello\" // Type assertion str, ok := anything.( string ) if ok { fmt.Println(str) } // Type switch switch v := anything.( type ) { case int : fmt.Println( \"int:\" , v) case string : fmt.Println( \"string:\" , v) }"
+  },
+  {
+    "title": "\ud83d\udc39 Go Language",
+    "section": "\u26a0\ufe0f Error Handling",
+    "url": "cheatsheets/go.html#error-handling",
+    "content": "// Functions return errors func readFile(path string ) ([] byte , error ) { data, err := os.ReadFile(path) if err != nil { return nil , err } return data, nil } // Create custom error import \"errors\" err := errors.New( \"something went wrong\" ) // Formatted error err := fmt.Errorf( \"failed to open %s: %w\" , path, err) // Custom error type type MyError struct { Code int Message string } func (e *MyError) Error() string { return fmt.Sprintf( \"error %d: %s\" , e.Code, e.Message) } // Check error type if errors.Is(err, os.ErrNotExist) { fmt.Println( \"file not found\" ) }"
+  },
+  {
+    "title": "\ud83d\udc39 Go Language",
+    "section": "\ud83d\ude80 Goroutines",
+    "url": "cheatsheets/go.html#goroutines",
+    "content": "// Start goroutine with go keyword go doSomething() // Anonymous goroutine go func () { fmt.Println( \"Running in goroutine\" ) }() // Goroutine with parameters go func (msg string ) { fmt.Println(msg) }( \"Hello from goroutine\" ) // Wait for goroutines with WaitGroup var wg sync.WaitGroup for i := 0; i < 5; i++ { wg.Add(1) go func (id int ) { defer wg.Done() fmt.Println( \"Worker\" , id) }(i) } wg.Wait() // Wait for all goroutines"
+  },
+  {
+    "title": "\ud83d\udc39 Go Language",
+    "section": "\ud83d\udce1 Channels",
+    "url": "cheatsheets/go.html#channels",
+    "content": "// Create channel ch := make ( chan int ) // Send to channel ch <- 42 // Receive from channel value := <-ch // Buffered channel ch := make ( chan int , 10) // buffer size 10 // Close channel close (ch) // Check if channel is closed value, ok := <-ch if !ok { fmt.Println( \"Channel closed\" ) } // Range over channel for value := range ch { fmt.Println(value) } // Directional channels func send(ch chan <- int ) { // send-only ch <- 42 } func receive(ch <- chan int ) { // receive-only value := <-ch }"
+  },
+  {
+    "title": "\ud83d\udc39 Go Language",
+    "section": "\ud83d\udd00 Select Statement",
+    "url": "cheatsheets/go.html#select-statement",
+    "content": "// Select waits on multiple channels select { case msg1 := <-ch1: fmt.Println( \"Received from ch1:\" , msg1) case msg2 := <-ch2: fmt.Println( \"Received from ch2:\" , msg2) case ch3 <- 42: fmt.Println( \"Sent to ch3\" ) default : fmt.Println( \"No channel ready\" ) } // Timeout pattern select { case result := <-ch: fmt.Println(result) case <-time.After(5 * time.Second): fmt.Println( \"Timeout!\" ) } // Non-blocking receive select { case msg := <-ch: fmt.Println(msg) default : fmt.Println( \"No message\" ) }"
+  },
+  {
+    "title": "\ud83d\udc39 Go Language",
+    "section": "\ud83d\udd12 Mutex & Synchronization",
+    "url": "cheatsheets/go.html#mutex-synchronization",
+    "content": "import \"sync\" // Mutex for safe concurrent access type SafeCounter struct { mu    sync.Mutex count int } func (c *SafeCounter) Inc() { c.mu.Lock() defer c.mu.Unlock() c.count++ } func (c *SafeCounter) Value() int { c.mu.Lock() defer c.mu.Unlock() return c.count } // RWMutex for read-heavy workloads var rwMutex sync.RWMutex // Multiple readers allowed rwMutex.RLock() defer rwMutex.RUnlock() // Exclusive writer rwMutex.Lock() defer rwMutex.Unlock()"
+  },
+  {
+    "title": "\ud83d\udc39 Go Language",
+    "section": "\ud83c\udfaf Concurrency Patterns",
+    "url": "cheatsheets/go.html#concurrency-patterns",
+    "content": "// Worker Pool Pattern func worker(id int , jobs <- chan int , results chan <- int ) { for job := range jobs { results <- job * 2 } } jobs := make ( chan int , 100) results := make ( chan int , 100) // Start workers for w := 1; w <= 3; w++ { go worker(w, jobs, results) } // Pipeline Pattern func gen(nums ... int ) <- chan int { out := make ( chan int ) go func () { for _, n := range nums { out <- n } close (out) }() return out } func square(in <- chan int ) <- chan int { out := make ( chan int ) go func () { for n := range in { out <- n * n } close (out) }() return out }"
+  },
+  {
+    "title": "\ud83d\udc39 Go Language",
+    "section": "\ud83d\udcda Standard Library Highlights",
+    "url": "cheatsheets/go.html#standard-library-highlights",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc39 Go Language",
+    "section": "\ud83c\udf10 HTTP Server Example",
+    "url": "cheatsheets/go.html#http-server-example",
+    "content": "package main import ( \"fmt\" \"net/http\" ) func handler(w http.ResponseWriter, r *http.Request) { fmt.Fprintf(w, \"Hello, %s!\" , r.URL.Path[1:]) } func main() { http.HandleFunc( \"/\" , handler) http.ListenAndServe( \":8080\" , nil ) }"
+  },
+  {
+    "title": "\ud83d\udc39 Go Language",
+    "section": "\ud83d\udcc4 JSON Handling",
+    "url": "cheatsheets/go.html#json-handling",
+    "content": "import \"encoding/json\" type User struct { Name string `json: \"name\" ` Email string `json: \"email\" ` Age int `json: \"age,omitempty\" ` } // Marshal (struct to JSON) user := User{ \"Alice\" , \"alice@example.com\" , 25} jsonData, err := json.Marshal(user) // Unmarshal (JSON to struct) var user2 User err = json.Unmarshal(jsonData, &user2) // Pretty print jsonData, err = json.MarshalIndent(user, \"\" , \"  \" )"
+  },
+  {
+    "title": "\ud83d\udc39 Go Language",
+    "section": "\u23f0 Context Package",
+    "url": "cheatsheets/go.html#context-package",
+    "content": "import \"context\" // Background context ctx := context.Background() // With timeout ctx, cancel := context.WithTimeout( context.Background(), 5*time.Second, ) defer cancel() // With cancellation ctx, cancel := context.WithCancel(context.Background()) go func () { <-time.After(2 * time.Second) cancel() // Cancel after 2 seconds }() // With value ctx = context.WithValue(ctx, \"userID\" , 123) userID := ctx.Value( \"userID\" ).( int ) // Check cancellation select { case <-ctx.Done(): fmt.Println( \"Context cancelled\" ) return default : // Continue work }"
+  },
+  {
+    "title": "\ud83d\udc39 Go Language",
+    "section": "\ud83d\udd0d Testing",
+    "url": "cheatsheets/go.html#testing",
+    "content": "// File: math_test.go package math import \"testing\" func TestAdd(t *testing.T) { result := Add(2, 3) if result != 5 { t.Errorf( \"Expected 5, got %d\" , result) } } // Table-driven tests func TestAddTable(t *testing.T) { tests := [] struct { a, b, want int }{ {1, 2, 3}, {0, 0, 0}, {-1, 1, 0}, } for _, tt := range tests { got := Add(tt.a, tt.b) if got != tt.want { t.Errorf( \"Add(%d, %d) = %d; want %d\" , tt.a, tt.b, got, tt.want) } } } // Benchmark func BenchmarkAdd(b *testing.B) { for i := 0; i < b.N; i++ { Add(2, 3) } }"
+  },
+  {
+    "title": "\ud83d\udc39 Go Language",
+    "section": "\ud83d\udee0\ufe0f Common Commands",
+    "url": "cheatsheets/go.html#common-commands",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc39 Go Language",
+    "section": "\ud83d\udca1 Best Practices",
+    "url": "cheatsheets/go.html#best-practices",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\uddc4\ufe0f Database Design Patterns",
+    "section": "\ud83d\udcca Normalization Forms",
+    "url": "cheatsheets/database-design-patterns.html#normalization-forms",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\uddc4\ufe0f Database Design Patterns",
+    "section": "\ud83d\udd11 Primary Key Strategies",
+    "url": "cheatsheets/database-design-patterns.html#primary-key-strategies",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\uddc4\ufe0f Database Design Patterns",
+    "section": "\ud83d\udd17 Relationship Patterns",
+    "url": "cheatsheets/database-design-patterns.html#relationship-patterns",
+    "content": "CREATE TABLE users (id INT PRIMARY KEY ); CREATE TABLE posts ( id INT PRIMARY KEY , user_id INT , FOREIGN KEY (user_id) REFERENCES users(id) );"
+  },
+  {
+    "title": "\ud83d\uddc4\ufe0f Database Design Patterns",
+    "section": "\ud83d\udcc7 Index Types & Strategies",
+    "url": "cheatsheets/database-design-patterns.html#index-types-strategies",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\uddc4\ufe0f Database Design Patterns",
+    "section": "\ud83c\udfaf Indexing Best Practices",
+    "url": "cheatsheets/database-design-patterns.html#indexing-best-practices",
+    "content": "-- Good: Index can be used WHERE created_at >= '2024-01-01' -- Bad: Function prevents index use WHERE DATE (created_at) = '2024-01-01'"
+  },
+  {
+    "title": "\ud83d\uddc4\ufe0f Database Design Patterns",
+    "section": "\ud83c\udfd7\ufe0f Common Schema Patterns",
+    "url": "cheatsheets/database-design-patterns.html#common-schema-patterns",
+    "content": "deleted_at TIMESTAMP NULL WHERE deleted_at IS NULL"
+  },
+  {
+    "title": "\ud83d\uddc4\ufe0f Database Design Patterns",
+    "section": "\ud83d\udcc8 Denormalization Patterns",
+    "url": "cheatsheets/database-design-patterns.html#denormalization-patterns",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\uddc4\ufe0f Database Design Patterns",
+    "section": "\u26a1 Query Optimization Techniques",
+    "url": "cheatsheets/database-design-patterns.html#query-optimization-techniques",
+    "content": "-- Good: Single query with JOIN SELECT u.name, p.title FROM users u JOIN posts p ON u.id = p.user_id;"
+  },
+  {
+    "title": "\ud83d\uddc4\ufe0f Database Design Patterns",
+    "section": "\ud83d\udd04 Partitioning Strategies",
+    "url": "cheatsheets/database-design-patterns.html#partitioning-strategies",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\uddc4\ufe0f Database Design Patterns",
+    "section": "\ud83c\udfa8 Design Anti-Patterns to Avoid",
+    "url": "cheatsheets/database-design-patterns.html#design-anti-patterns-to-avoid",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\uddc4\ufe0f Database Design Patterns",
+    "section": "\ud83d\udcca Data Types Best Practices",
+    "url": "cheatsheets/database-design-patterns.html#data-types-best-practices",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\uddc4\ufe0f Database Design Patterns",
+    "section": "\ud83d\udd10 Security Patterns",
+    "url": "cheatsheets/database-design-patterns.html#security-patterns",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\uddc4\ufe0f Database Design Patterns",
+    "section": "\ud83c\udfaf Schema Design Workflow",
+    "url": "cheatsheets/database-design-patterns.html#schema-design-workflow",
+    "content": "1. Identify Entities List all nouns in requirements (User, Order, Product) 2. Define Relationships Determine cardinality (1:1, 1:N, M:N) 3. Identify Attributes List properties for each entity 4. Choose Primary Keys Select appropriate key strategy 5. Normalize to 3NF Eliminate redundancy and dependencies 6. Add Constraints Foreign keys, unique, not null, check constraints 7. Plan Indexes Index foreign keys and query columns 8. Consider Denormalization Optimize for read-heavy patterns if needed 9. Review and Test Validate with sample queries and data"
+  },
+  {
+    "title": "\ud83d\uddc4\ufe0f Database Design Patterns",
+    "section": "\ud83d\udca1 Performance Optimization Checklist",
+    "url": "cheatsheets/database-design-patterns.html#performance-optimization-checklist",
+    "content": "\u2713 Index foreign keys and WHERE/JOIN columns \u2713 Use EXPLAIN to analyze slow queries \u2713 Avoid SELECT * in production code \u2713 Use appropriate data types (smallest that fits) \u2713 Implement pagination for large result sets \u2713 Use connection pooling \u2713 Cache frequently accessed data \u2713 Batch INSERT/UPDATE operations \u2713 Monitor and remove unused indexes \u2713 Consider read replicas for read-heavy workloads \u2713 Partition very large tables (>100GB) \u2713 Use covering indexes for common queries \u2713 Avoid N+1 query problems \u2713 Set appropriate timeout values \u2713 Regular VACUUM/ANALYZE (PostgreSQL) or OPTIMIZE (MySQL)"
+  },
+  {
+    "title": "\ud83d\udccb ASCII Symbols Reference",
+    "section": "\ud83d\udcac Common Punctuation",
+    "url": "cheatsheets/ascii-symbols.html#common-punctuation",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udccb ASCII Symbols Reference",
+    "section": "\ud83d\udd24 Brackets & Delimiters",
+    "url": "cheatsheets/ascii-symbols.html#brackets-delimiters",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udccb ASCII Symbols Reference",
+    "section": "\u2795 Mathematical Symbols",
+    "url": "cheatsheets/ascii-symbols.html#mathematical-symbols",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udccb ASCII Symbols Reference",
+    "section": "\ud83d\udcd0 Box Drawing Characters",
+    "url": "cheatsheets/ascii-symbols.html#box-drawing-characters",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udccb ASCII Symbols Reference",
+    "section": "\u2b06\ufe0f Arrow Symbols",
+    "url": "cheatsheets/ascii-symbols.html#arrow-symbols",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udccb ASCII Symbols Reference",
+    "section": "\u2728 Special Characters",
+    "url": "cheatsheets/ascii-symbols.html#special-characters",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udccb ASCII Symbols Reference",
+    "section": "\ud83d\udcb1 Currency Symbols",
+    "url": "cheatsheets/ascii-symbols.html#currency-symbols",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udccb ASCII Symbols Reference",
+    "section": "\ud83d\udd23 Greek Letters (Common)",
+    "url": "cheatsheets/ascii-symbols.html#greek-letters-common",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udccb ASCII Symbols Reference",
+    "section": "\ud83d\udd22 Superscripts & Subscripts",
+    "url": "cheatsheets/ascii-symbols.html#superscripts-subscripts",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udccb ASCII Symbols Reference",
+    "section": "\ud83d\udcdd Quotation Marks",
+    "url": "cheatsheets/ascii-symbols.html#quotation-marks",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udccb ASCII Symbols Reference",
+    "section": "\ud83d\udca1 Usage Tips",
+    "url": "cheatsheets/ascii-symbols.html#usage-tips",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udccb ASCII Symbols Reference",
+    "section": "\ud83c\udfa8 Common ASCII Art Patterns",
+    "url": "cheatsheets/ascii-symbols.html#common-ascii-art-patterns",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Material Design Tokens",
+    "section": "\ud83c\udfa8 Primary Colors",
+    "url": "cheatsheets/material-design.html#primary-colors",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Material Design Tokens",
+    "section": "\u26a0\ufe0f Status Colors",
+    "url": "cheatsheets/material-design.html#status-colors",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Material Design Tokens",
+    "section": "\ud83c\udf13 Surface Colors",
+    "url": "cheatsheets/material-design.html#surface-colors",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Material Design Tokens",
+    "section": "\ud83d\udcdd Text Colors",
+    "url": "cheatsheets/material-design.html#text-colors",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Material Design Tokens",
+    "section": "\ud83d\udccf Typography Scale",
+    "url": "cheatsheets/material-design.html#typography-scale",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Material Design Tokens",
+    "section": "\ud83d\udcd0 Spacing System",
+    "url": "cheatsheets/material-design.html#spacing-system",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Material Design Tokens",
+    "section": "\ud83c\udfd4\ufe0f Elevation Levels",
+    "url": "cheatsheets/material-design.html#elevation-levels",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Material Design Tokens",
+    "section": "\ud83d\udd18 Button Tokens",
+    "url": "cheatsheets/material-design.html#button-tokens",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Material Design Tokens",
+    "section": "\ud83d\udcc4 Card Tokens",
+    "url": "cheatsheets/material-design.html#card-tokens",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Material Design Tokens",
+    "section": "\ud83d\udcf1 App Bar Tokens",
+    "url": "cheatsheets/material-design.html#app-bar-tokens",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Material Design Tokens",
+    "section": "\ud83d\udccb List Item Tokens",
+    "url": "cheatsheets/material-design.html#list-item-tokens",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Material Design Tokens",
+    "section": "\ud83c\udfaf Icon Sizes",
+    "url": "cheatsheets/material-design.html#icon-sizes",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Material Design Tokens",
+    "section": "\u23f1\ufe0f Motion Tokens",
+    "url": "cheatsheets/material-design.html#motion-tokens",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Material Design Tokens",
+    "section": "\ud83d\udccf Border Radius Tokens",
+    "url": "cheatsheets/material-design.html#border-radius-tokens",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Material Design Tokens",
+    "section": "\ud83d\udcd0 Grid System",
+    "url": "cheatsheets/material-design.html#grid-system",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Material Design Tokens",
+    "section": "\ud83c\udfa8 Opacity Levels",
+    "url": "cheatsheets/material-design.html#opacity-levels",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Material Design Tokens",
+    "section": "\ud83d\udd32 Input Field Tokens",
+    "url": "cheatsheets/material-design.html#input-field-tokens",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfa8 Material Design Tokens",
+    "section": "\ud83d\udca1 Design Token Best Practices",
+    "url": "cheatsheets/material-design.html#design-token-best-practices",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udce6 Data Structures",
+    "section": "\ud83d\udcca Array",
+    "url": "cheatsheets/data-structures.html#array",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udce6 Data Structures",
+    "section": "\ud83d\udd17 Linked List",
+    "url": "cheatsheets/data-structures.html#linked-list",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udce6 Data Structures",
+    "section": "\ud83d\udcda Stack",
+    "url": "cheatsheets/data-structures.html#stack",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udce6 Data Structures",
+    "section": "\ud83c\udfab Queue",
+    "url": "cheatsheets/data-structures.html#queue",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udce6 Data Structures",
+    "section": "\ud83c\udf33 Binary Tree",
+    "url": "cheatsheets/data-structures.html#binary-tree",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udce6 Data Structures",
+    "section": "\ud83d\udd0d Binary Search Tree (BST)",
+    "url": "cheatsheets/data-structures.html#binary-search-tree-bst",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udce6 Data Structures",
+    "section": "\ud83c\udfd4\ufe0f Heap",
+    "url": "cheatsheets/data-structures.html#heap",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udce6 Data Structures",
+    "section": "\ud83d\udd78\ufe0f Graph",
+    "url": "cheatsheets/data-structures.html#graph",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udce6 Data Structures",
+    "section": "\ud83d\uddc2\ufe0f Hash Table",
+    "url": "cheatsheets/data-structures.html#hash-table",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udce6 Data Structures",
+    "section": "\ud83d\udcca Complexity Comparison Table",
+    "url": "cheatsheets/data-structures.html#complexity-comparison-table",
+    "content": "Data Structure | Access  | Search  | Insert  | Delete  | Space ---------------|---------|---------|---------|---------|------- Array          | O(1)    | O(n)    | O(n)    | O(n)    | O(n) Linked List    | O(n)    | O(n)    | O(1)*   | O(1)*   | O(n) Stack          | O(n)    | O(n)    | O(1)    | O(1)    | O(n) Queue          | O(n)    | O(n)    | O(1)    | O(1)    | O(n) Hash Table     | N/A     | O(1)\u2020   | O(1)\u2020   | O(1)\u2020   | O(n) Binary Tree    | O(n)    | O(n)    | O(n)    | O(n)    | O(n) BST            | O(log n)| O(log n)| O(log n)| O(log n)| O(n) Heap           | O(n)    | O(n)    | O(log n)| O(log n)| O(n) Graph (List)   | N/A     | O(V+E)  | O(1)    | O(V+E)  | O(V+E) Graph (Matrix) | N/A     | O(1)    | O(1)    | O(V\u00b2)   | O(V\u00b2)"
+  },
+  {
+    "title": "\ud83d\udce6 Data Structures",
+    "section": "\ud83d\udca1 Data Structure Selection Guide",
+    "url": "cheatsheets/data-structures.html#data-structure-selection-guide",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd10 SSH & SCP Commands",
+    "section": "\ud83d\ude80 Basic SSH Connections",
+    "url": "cheatsheets/ssh-scp.html#basic-ssh-connections",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd10 SSH & SCP Commands",
+    "section": "\ud83d\udd11 SSH Key Management",
+    "url": "cheatsheets/ssh-scp.html#ssh-key-management",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd10 SSH & SCP Commands",
+    "section": "\u2699\ufe0f SSH Config File",
+    "url": "cheatsheets/ssh-scp.html#ssh-config-file",
+    "content": "# ~/.ssh/config Host myserver HostName example.com User username Port 22 IdentityFile ~/.ssh/id_rsa Host * ServerAliveInterval 60 ServerAliveCountMax 3"
+  },
+  {
+    "title": "\ud83d\udd10 SSH & SCP Commands",
+    "section": "\ud83d\udd00 Port Forwarding",
+    "url": "cheatsheets/ssh-scp.html#port-forwarding",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd10 SSH & SCP Commands",
+    "section": "\ud83d\udcc1 SCP File Transfer",
+    "url": "cheatsheets/ssh-scp.html#scp-file-transfer",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd10 SSH & SCP Commands",
+    "section": "\ud83d\udd27 Advanced SCP Options",
+    "url": "cheatsheets/ssh-scp.html#advanced-scp-options",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd10 SSH & SCP Commands",
+    "section": "\ud83d\udd0d SSH Connection Testing",
+    "url": "cheatsheets/ssh-scp.html#ssh-connection-testing",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd10 SSH & SCP Commands",
+    "section": "\ud83d\udee1\ufe0f Security Best Practices",
+    "url": "cheatsheets/ssh-scp.html#security-best-practices",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd10 SSH & SCP Commands",
+    "section": "\ud83c\udf10 Jump Hosts & ProxyJump",
+    "url": "cheatsheets/ssh-scp.html#jump-hosts-proxyjump",
+    "content": "# ~/.ssh/config with ProxyJump Host target HostName target.internal User targetuser ProxyJump jumphost Host jumphost HostName jump.example.com User jumpuser"
+  },
+  {
+    "title": "\ud83d\udd10 SSH & SCP Commands",
+    "section": "\ud83d\udccb SSH Agent Management",
+    "url": "cheatsheets/ssh-scp.html#ssh-agent-management",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd10 SSH & SCP Commands",
+    "section": "\ud83d\udd10 SSH Tunneling & SOCKS",
+    "url": "cheatsheets/ssh-scp.html#ssh-tunneling-socks",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udd10 SSH & SCP Commands",
+    "section": "\u26a1 SSH Performance & Optimization",
+    "url": "cheatsheets/ssh-scp.html#ssh-performance-optimization",
+    "content": "# ~/.ssh/config for performance Host * ControlMaster auto ControlPath ~/.ssh/cm-%r@%h:%p ControlPersist 10m Compression yes ServerAliveInterval 60"
+  },
+  {
+    "title": "\ud83d\udd10 SSH & SCP Commands",
+    "section": "\ud83d\udcdd Common SSH Config Examples",
+    "url": "cheatsheets/ssh-scp.html#common-ssh-config-examples",
+    "content": "# GitHub Host github.com HostName github.com User git IdentityFile ~/.ssh/github_rsa # AWS EC2 Instance Host aws-prod HostName ec2-xx-xx-xx-xx.compute.amazonaws.com User ec2-user IdentityFile ~/.ssh/aws-key.pem # Internal Server via Jump Host Host internal-db HostName db.internal.company.com User dbadmin ProxyJump bastion LocalForward 5432 localhost:5432 Host bastion HostName bastion.company.com User admin IdentityFile ~/.ssh/company_rsa"
+  },
+  {
+    "title": "\ud83d\udd78\ufe0f Graph Algorithms",
+    "section": "\ud83c\udf33 Depth-First Search (DFS)",
+    "url": "cheatsheets/graph-algorithms.html#depth-first-search-dfs",
+    "content": "// Recursive approach function dfs(graph, node, visited): if node in visited: return add node to visited process(node) for each neighbor in graph[node]: dfs(graph, neighbor, visited)"
+  },
+  {
+    "title": "\ud83d\udd78\ufe0f Graph Algorithms",
+    "section": "\ud83d\udcca Breadth-First Search (BFS)",
+    "url": "cheatsheets/graph-algorithms.html#breadth-first-search-bfs",
+    "content": "function bfs(graph, start): queue = [start] visited = set([start]) while queue not empty: node = queue.dequeue() process(node) for each neighbor in graph[node]: if neighbor not in visited: add neighbor to visited queue.enqueue(neighbor)"
+  },
+  {
+    "title": "\ud83d\udd78\ufe0f Graph Algorithms",
+    "section": "\ud83c\udfaf Dijkstra's Algorithm",
+    "url": "cheatsheets/graph-algorithms.html#dijkstras-algorithm",
+    "content": "function dijkstra(graph, start): dist = array of size V, initialized to \u221e dist[start] = 0 pq = min-heap with (0, start) while pq not empty: d, u = pq.extractMin() if d > dist[u]: continue for each (v, weight) in graph[u]: if dist[u] + weight < dist[v]: dist[v] = dist[u] + weight pq.insert((dist[v], v)) return dist"
+  },
+  {
+    "title": "\ud83d\udd78\ufe0f Graph Algorithms",
+    "section": "\u26a1 Bellman-Ford Algorithm",
+    "url": "cheatsheets/graph-algorithms.html#bellman-ford-algorithm",
+    "content": "function bellmanFord(graph, start, V, E): dist = array of size V, initialized to \u221e dist[start] = 0 // Relax edges V-1 times for i = 1 to V - 1: for each edge (u, v, weight) in E: if dist[u] != \u221e and dist[u] + weight < dist[v]: dist[v] = dist[u] + weight // Check for negative cycles for each edge (u, v, weight) in E: if dist[u] != \u221e and dist[u] + weight < dist[v]: return \"Negative cycle detected\" return dist"
+  },
+  {
+    "title": "\ud83d\udd78\ufe0f Graph Algorithms",
+    "section": "\ud83c\udf10 Floyd-Warshall Algorithm",
+    "url": "cheatsheets/graph-algorithms.html#floyd-warshall-algorithm",
+    "content": "function floydWarshall(graph, V): // Initialize distance matrix dist = V \u00d7 V matrix, initialized to \u221e for i = 0 to V - 1: dist[i][i] = 0 for each edge (u, v, weight): dist[u][v] = weight // Dynamic programming for k = 0 to V - 1: for i = 0 to V - 1: for j = 0 to V - 1: if dist[i][k] + dist[k][j] < dist[i][j]: dist[i][j] = dist[i][k] + dist[k][j] return dist"
+  },
+  {
+    "title": "\ud83d\udd78\ufe0f Graph Algorithms",
+    "section": "\ud83c\udf32 Kruskal's Algorithm",
+    "url": "cheatsheets/graph-algorithms.html#kruskals-algorithm",
+    "content": "function kruskal(graph, V, E): result = [] // MST edges uf = UnionFind(V) // Sort edges by weight edges = sort(E by weight) for each edge (u, v, weight) in edges: if uf.find(u) != uf.find(v): uf.union(u, v) add edge to result if length(result) == V - 1: break return result"
+  },
+  {
+    "title": "\ud83d\udd78\ufe0f Graph Algorithms",
+    "section": "\ud83c\udf3f Prim's Algorithm",
+    "url": "cheatsheets/graph-algorithms.html#prims-algorithm",
+    "content": "function prim(graph, start, V): inMST = array of size V, initialized to false key = array of size V, initialized to \u221e parent = array of size V, initialized to -1 pq = min-heap with (0, start) key[start] = 0 while pq not empty: weight, u = pq.extractMin() if inMST[u]: continue inMST[u] = true for each (v, w) in graph[u]: if not inMST[v] and w < key[v]: key[v] = w parent[v] = u pq.insert((w, v)) return parent // MST structure"
+  },
+  {
+    "title": "\ud83d\udd78\ufe0f Graph Algorithms",
+    "section": "\ud83d\udccb Topological Sort",
+    "url": "cheatsheets/graph-algorithms.html#topological-sort",
+    "content": "// DFS-based approach function topologicalSort(graph, V): visited = set() stack = [] function dfs(node): add node to visited for each neighbor in graph[node]: if neighbor not in visited: dfs(neighbor) stack.push(node) for each vertex v in V: if v not in visited: dfs(v) return reverse(stack)"
+  },
+  {
+    "title": "\ud83d\udd78\ufe0f Graph Algorithms",
+    "section": "\ud83d\udcc8 Algorithm Comparison",
+    "url": "cheatsheets/graph-algorithms.html#algorithm-comparison",
+    "content": "Algorithm      | Time Complexity    | Space  | Negative Weights | Use Case ---------------|-------------------|--------|------------------|--------------------------- BFS            | O(V + E)          | O(V)   | No               | Unweighted graphs Dijkstra       | O((V+E) log V)    | O(V)   | No               | Non-negative weights Bellman-Ford   | O(V \u00d7 E)          | O(V)   | Yes              | Negative weights, cycles Floyd-Warshall | O(V\u00b3)             | O(V\u00b2)  | Yes              | All-pairs shortest path"
+  },
+  {
+    "title": "\ud83d\udd78\ufe0f Graph Algorithms",
+    "section": "\ud83d\udca1 Algorithm Selection Guide",
+    "url": "cheatsheets/graph-algorithms.html#algorithm-selection-guide",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc27 Linux/Unix Commands",
+    "section": "\ud83d\udcc1 File & Directory Operations",
+    "url": "cheatsheets/linux-commands.html#file-directory-operations",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc27 Linux/Unix Commands",
+    "section": "\ud83d\udcc4 File Operations",
+    "url": "cheatsheets/linux-commands.html#file-operations",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc27 Linux/Unix Commands",
+    "section": "\ud83d\udc41\ufe0f Viewing Files",
+    "url": "cheatsheets/linux-commands.html#viewing-files",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc27 Linux/Unix Commands",
+    "section": "\ud83d\udd10 Permissions & Ownership",
+    "url": "cheatsheets/linux-commands.html#permissions-ownership",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc27 Linux/Unix Commands",
+    "section": "\u2699\ufe0f Process Management",
+    "url": "cheatsheets/linux-commands.html#process-management",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc27 Linux/Unix Commands",
+    "section": "\ud83c\udf10 Network Commands",
+    "url": "cheatsheets/linux-commands.html#network-commands",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc27 Linux/Unix Commands",
+    "section": "\ud83d\udd0d Search & Filter",
+    "url": "cheatsheets/linux-commands.html#search-filter",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc27 Linux/Unix Commands",
+    "section": "\ud83d\udcbe Disk & System Info",
+    "url": "cheatsheets/linux-commands.html#disk-system-info",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc27 Linux/Unix Commands",
+    "section": "\ud83d\udce6 Archive & Compression",
+    "url": "cheatsheets/linux-commands.html#archive-compression",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc27 Linux/Unix Commands",
+    "section": "\ud83d\udc64 User Management",
+    "url": "cheatsheets/linux-commands.html#user-management",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc27 Linux/Unix Commands",
+    "section": "\ud83d\udd17 Pipes & Redirection",
+    "url": "cheatsheets/linux-commands.html#pipes-redirection",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc27 Linux/Unix Commands",
+    "section": "\u23f0 Scheduling & Cron",
+    "url": "cheatsheets/linux-commands.html#scheduling-cron",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udc27 Linux/Unix Commands",
+    "section": "\ud83d\udca1 Common Command Combinations",
+    "url": "cheatsheets/linux-commands.html#common-command-combinations",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udda5\ufe0f tmux & screen Commands",
+    "section": "\ud83d\udccb Quick Reference",
+    "url": "cheatsheets/tmux-screen.html#quick-reference",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udda5\ufe0f tmux & screen Commands",
+    "section": "\ud83d\ude80 Starting Sessions",
+    "url": "cheatsheets/tmux-screen.html#starting-sessions",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udda5\ufe0f tmux & screen Commands",
+    "section": "\ud83d\udd0c Attaching & Detaching",
+    "url": "cheatsheets/tmux-screen.html#attaching-detaching",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udda5\ufe0f tmux & screen Commands",
+    "section": "\ud83d\udcca Session Management",
+    "url": "cheatsheets/tmux-screen.html#session-management",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udda5\ufe0f tmux & screen Commands",
+    "section": "\ud83e\ude9f Window Management",
+    "url": "cheatsheets/tmux-screen.html#window-management",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udda5\ufe0f tmux & screen Commands",
+    "section": "\ud83d\udd32 Pane Splitting (tmux)",
+    "url": "cheatsheets/tmux-screen.html#pane-splitting-tmux",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udda5\ufe0f tmux & screen Commands",
+    "section": "\ud83d\udd32 Region Splitting (screen)",
+    "url": "cheatsheets/tmux-screen.html#region-splitting-screen",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udda5\ufe0f tmux & screen Commands",
+    "section": "\ud83d\udccb Copy Mode & Scrollback",
+    "url": "cheatsheets/tmux-screen.html#copy-mode-scrollback",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udda5\ufe0f tmux & screen Commands",
+    "section": "\u2328\ufe0f Command Mode",
+    "url": "cheatsheets/tmux-screen.html#command-mode",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udda5\ufe0f tmux & screen Commands",
+    "section": "\u2139\ufe0f Information & Help",
+    "url": "cheatsheets/tmux-screen.html#\u2139-information-help",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udda5\ufe0f tmux & screen Commands",
+    "section": "\ud83d\udd04 Miscellaneous Commands",
+    "url": "cheatsheets/tmux-screen.html#miscellaneous-commands",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udda5\ufe0f tmux & screen Commands",
+    "section": "\u2699\ufe0f Configuration Files",
+    "url": "cheatsheets/tmux-screen.html#configuration-files",
+    "content": "# ~/.tmux.conf # Change prefix to Ctrl+a unbind C-b set -g prefix C-a bind C-a send-prefix # Enable mouse support set -g mouse on # Start windows at 1 set -g base-index 1 # Split panes with | and - bind | split-window -h bind - split-window -v # Reload config bind r source-file ~/.tmux.conf"
+  },
+  {
+    "title": "\ud83d\udda5\ufe0f tmux & screen Commands",
+    "section": "\ud83c\udfa8 Customization Examples (tmux)",
+    "url": "cheatsheets/tmux-screen.html#customization-examples-tmux",
+    "content": "# Status bar styling set -g status-bg black set -g status-fg white set -g status-left '#[fg=green]#S ' set -g status-right '#[fg=yellow]%H:%M' # Pane border colors set -g pane-border-style fg=magenta set -g pane-active-border-style fg=green # Vi mode for copy setw -g mode-keys vi bind-key -T copy-mode-vi v send -X begin-selection bind-key -T copy-mode-vi y send -X copy-selection"
+  },
+  {
+    "title": "\ud83d\udda5\ufe0f tmux & screen Commands",
+    "section": "\ud83d\ude80 Advanced tmux Features",
+    "url": "cheatsheets/tmux-screen.html#advanced-tmux-features",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udda5\ufe0f tmux & screen Commands",
+    "section": "\ud83d\ude80 Advanced screen Features",
+    "url": "cheatsheets/tmux-screen.html#advanced-screen-features",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udda5\ufe0f tmux & screen Commands",
+    "section": "\ud83d\udca1 Tips & Best Practices",
+    "url": "cheatsheets/tmux-screen.html#tips-best-practices",
+    "content": ""
+  },
+  {
+    "title": "\ud83d\udda5\ufe0f tmux & screen Commands",
+    "section": "\ud83d\udd27 Quick Setup Commands",
+    "url": "cheatsheets/tmux-screen.html#quick-setup-commands",
+    "content": "# Install tmux sudo apt install tmux          # Debian/Ubuntu brew install tmux              # macOS sudo yum install tmux          # RHEL/CentOS # Install screen sudo apt install screen        # Debian/Ubuntu brew install screen            # macOS sudo yum install screen        # RHEL/CentOS # Create basic tmux config cat > ~/.tmux.conf << 'EOF' set -g mouse on set -g base-index 1 bind | split-window -h bind - split-window -v EOF"
+  },
+  {
+    "title": "Java Fundamentals",
+    "section": "\ud83c\udfaf Basic Syntax",
+    "url": "cheatsheets/java.html#basic-syntax",
+    "content": "// Hello World public class HelloWorld { public static void main(String[] args) { System.out.println( \"Hello, World!\" ); } }"
+  },
+  {
+    "title": "Java Fundamentals",
+    "section": "\ud83d\udcdd Data Types & Variables",
+    "url": "cheatsheets/java.html#data-types-variables",
+    "content": "// Primitive types byte b = 127; // 8-bit short s = 32000; // 16-bit int i = 100000; // 32-bit long l = 100000L; // 64-bit float f = 3.14f; // 32-bit double d = 3.14159; // 64-bit boolean bool = true ; // true/false char c = 'A' ; // 16-bit Unicode"
+  },
+  {
+    "title": "Java Fundamentals",
+    "section": "\ud83d\udd27 Operators",
+    "url": "cheatsheets/java.html#operators",
+    "content": ""
+  },
+  {
+    "title": "Java Fundamentals",
+    "section": "\ud83d\udd04 Control Flow",
+    "url": "cheatsheets/java.html#control-flow",
+    "content": "// If-else if (condition) { // code } else if (condition2) { // code } else { // code }"
+  },
+  {
+    "title": "Java Fundamentals",
+    "section": "\ud83d\udd01 Loops",
+    "url": "cheatsheets/java.html#loops",
+    "content": "// For loop for ( int i = 0; i < 10; i++) { System.out.println(i); }"
+  },
+  {
+    "title": "Java Fundamentals",
+    "section": "\ud83c\udfd7\ufe0f Classes & Objects",
+    "url": "cheatsheets/java.html#classes-objects",
+    "content": "public class Person { // Fields private String name; private int age; // Constructor public Person(String name, int age) { this .name = name; this .age = age; } // Getter public String getName() { return name; } // Setter public void setName(String name) { this .name = name; } }"
+  },
+  {
+    "title": "Java Fundamentals",
+    "section": "\ud83d\udd17 Inheritance",
+    "url": "cheatsheets/java.html#inheritance",
+    "content": "public class Employee extends Person { private String employeeId; public Employee(String name, int age, String id) { super (name, age); // Call parent constructor this .employeeId = id; } // Override method @Override public String toString() { return \"Employee: \" + getName(); } }"
+  },
+  {
+    "title": "Java Fundamentals",
+    "section": "\ud83d\udccb Interfaces",
+    "url": "cheatsheets/java.html#interfaces",
+    "content": "public interface Drawable { // Abstract method void draw(); // Default method (Java 8+) default void display() { System.out.println( \"Displaying...\" ); } // Static method (Java 8+) static void info() { System.out.println( \"Drawable interface\" ); } }"
+  },
+  {
+    "title": "Java Fundamentals",
+    "section": "\ud83c\udfad Abstract Classes",
+    "url": "cheatsheets/java.html#abstract-classes",
+    "content": "public abstract class Animal { protected String name; public Animal(String name) { this .name = name; } // Abstract method public abstract void makeSound(); // Concrete method public void sleep() { System.out.println(name + \" is sleeping\" ); } }"
+  },
+  {
+    "title": "Java Fundamentals",
+    "section": "\ud83d\udce6 Collections Framework",
+    "url": "cheatsheets/java.html#collections-framework",
+    "content": "import java.util.*; // List - ordered, allows duplicates List<String> list = new ArrayList<>(); list.add( \"Apple\" ); list.add( \"Banana\" ); list.get(0); // Access by index // Set - no duplicates Set<Integer> set = new HashSet<>(); set.add(1); set.add(2); set.contains(1); // true // Map - key-value pairs Map<String, Integer> map = new HashMap<>(); map.put( \"Alice\" , 25); map.put( \"Bob\" , 30); map.get( \"Alice\" ); // 25 // Queue - FIFO Queue<String> queue = new LinkedList<>(); queue.offer( \"First\" ); queue.poll(); // Remove and return head"
+  },
+  {
+    "title": "Java Fundamentals",
+    "section": "\ud83d\udd04 Collection Operations",
+    "url": "cheatsheets/java.html#collection-operations",
+    "content": ""
+  },
+  {
+    "title": "Java Fundamentals",
+    "section": "\ud83c\udf0a Streams API (Java 8+)",
+    "url": "cheatsheets/java.html#streams-api-java-8",
+    "content": "import java.util.stream.*; List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5); // Filter and map List<Integer> result = numbers.stream() .filter(n -> n % 2 == 0) // Keep even numbers .map(n -> n * 2) // Double each .collect(Collectors.toList()); // Reduce int sum = numbers.stream() .reduce(0, (a, b) -> a + b); // Find operations Optional<Integer> first = numbers.stream() .filter(n -> n > 3) .findFirst(); // Count long count = numbers.stream() .filter(n -> n > 2) .count();"
+  },
+  {
+    "title": "Java Fundamentals",
+    "section": "\ud83d\udd0d Stream Operations",
+    "url": "cheatsheets/java.html#stream-operations",
+    "content": ""
+  },
+  {
+    "title": "Java Fundamentals",
+    "section": "\u26a0\ufe0f Exception Handling",
+    "url": "cheatsheets/java.html#exception-handling",
+    "content": "try { // Code that may throw exception int result = 10 / 0; } catch (ArithmeticException e) { // Handle specific exception System.err.println( \"Division by zero!\" ); } catch (Exception e) { // Handle general exception e.printStackTrace(); } finally { // Always executes System.out.println( \"Cleanup\" ); }"
+  },
+  {
+    "title": "Java Fundamentals",
+    "section": "\ud83c\udfaf Common Exceptions",
+    "url": "cheatsheets/java.html#common-exceptions",
+    "content": ""
+  },
+  {
+    "title": "Java Fundamentals",
+    "section": "\ud83d\udd12 String Methods",
+    "url": "cheatsheets/java.html#string-methods",
+    "content": ""
+  },
+  {
+    "title": "Java Fundamentals",
+    "section": "\ud83e\uddf5 Lambda Expressions (Java 8+)",
+    "url": "cheatsheets/java.html#lambda-expressions-java-8",
+    "content": "// Basic syntax: (parameters) -> expression // No parameters () -> System.out.println( \"Hello\" ) // One parameter x -> x * x // Multiple parameters (a, b) -> a + b // With block (x, y) -> { int sum = x + y; return sum; }"
+  },
+  {
+    "title": "Java Fundamentals",
+    "section": "\ud83d\udccc Common Patterns",
+    "url": "cheatsheets/java.html#common-patterns",
+    "content": "// Singleton Pattern public class Singleton { private static Singleton instance; private Singleton() {} public static Singleton getInstance() { if (instance == null ) { instance = new Singleton(); } return instance; } }"
+  },
+  {
+    "title": "Java Fundamentals",
+    "section": "\ud83d\udd22 Generics",
+    "url": "cheatsheets/java.html#generics",
+    "content": "// Generic class public class Box<T> { private T content; public void set(T content) { this .content = content; } public T get() { return content; } } // Usage Box<String> stringBox = new Box<>(); stringBox.set( \"Hello\" );"
+  },
+  {
+    "title": "Java Fundamentals",
+    "section": "\ud83d\udcc2 File I/O",
+    "url": "cheatsheets/java.html#file-io",
+    "content": "import java.io.*; import java.nio.file.*; // Read file (Java 11+) String content = Files.readString( Paths.get( \"file.txt\" )); // Write file Files.writeString( Paths.get( \"file.txt\" ), \"Hello, World!\" ); // Read lines List<String> lines = Files.readAllLines( Paths.get( \"file.txt\" )); // Stream lines try (Stream<String> stream = Files.lines(Paths.get( \"file.txt\" ))) { stream.forEach(System.out::println); }"
+  },
+  {
+    "title": "Java Fundamentals",
+    "section": "\ud83d\udca1 Best Practices",
+    "url": "cheatsheets/java.html#best-practices",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfaf API Design Patterns",
+    "section": "\ud83d\udcc4 Pagination Patterns",
+    "url": "cheatsheets/api-design-patterns.html#pagination-patterns",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfaf API Design Patterns",
+    "section": "\ud83d\udd0d Filtering Patterns",
+    "url": "cheatsheets/api-design-patterns.html#filtering-patterns",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfaf API Design Patterns",
+    "section": "\ud83d\udd04 Sorting Patterns",
+    "url": "cheatsheets/api-design-patterns.html#sorting-patterns",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfaf API Design Patterns",
+    "section": "\ud83d\udd22 API Versioning Patterns",
+    "url": "cheatsheets/api-design-patterns.html#api-versioning-patterns",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfaf API Design Patterns",
+    "section": "\ud83d\udd10 Authentication Patterns",
+    "url": "cheatsheets/api-design-patterns.html#authentication-patterns",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfaf API Design Patterns",
+    "section": "\u26a1 Rate Limiting Patterns",
+    "url": "cheatsheets/api-design-patterns.html#rate-limiting-patterns",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfaf API Design Patterns",
+    "section": "\u274c Error Handling Patterns",
+    "url": "cheatsheets/api-design-patterns.html#error-handling-patterns",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfaf API Design Patterns",
+    "section": "\ud83d\udd17 HATEOAS Patterns",
+    "url": "cheatsheets/api-design-patterns.html#hateoas-patterns",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfaf API Design Patterns",
+    "section": "\ud83d\udd0e Search Patterns",
+    "url": "cheatsheets/api-design-patterns.html#search-patterns",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfaf API Design Patterns",
+    "section": "\ud83d\udce6 Bulk Operations Patterns",
+    "url": "cheatsheets/api-design-patterns.html#bulk-operations-patterns",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfaf API Design Patterns",
+    "section": "\u23f1\ufe0f Async Operation Patterns",
+    "url": "cheatsheets/api-design-patterns.html#async-operation-patterns",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfaf API Design Patterns",
+    "section": "\ud83c\udfad Content Negotiation Patterns",
+    "url": "cheatsheets/api-design-patterns.html#content-negotiation-patterns",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfaf API Design Patterns",
+    "section": "\ud83d\udd04 Caching Patterns",
+    "url": "cheatsheets/api-design-patterns.html#caching-patterns",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfaf API Design Patterns",
+    "section": "\ud83d\udd12 Security Patterns",
+    "url": "cheatsheets/api-design-patterns.html#security-patterns",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfaf API Design Patterns",
+    "section": "\ud83d\udca1 Implementation Examples",
+    "url": "cheatsheets/api-design-patterns.html#implementation-examples",
+    "content": ""
+  },
+  {
+    "title": "\ud83c\udfaf API Design Patterns",
+    "section": "\u2705 API Design Checklist",
+    "url": "cheatsheets/api-design-patterns.html#api-design-checklist",
+    "content": ""
+  },
+  {
+    "title": "\u2601\ufe0f AWS CLI",
+    "section": "\ud83d\ude80 Getting Started",
+    "url": "cheatsheets/aws-cli.html#getting-started",
+    "content": ""
+  },
+  {
+    "title": "\u2601\ufe0f AWS CLI",
+    "section": "\ud83d\udda5\ufe0f EC2 Instances",
+    "url": "cheatsheets/aws-cli.html#ec2-instances",
+    "content": ""
+  },
+  {
+    "title": "\u2601\ufe0f AWS CLI",
+    "section": "\ud83d\udd10 EC2 Security & Networking",
+    "url": "cheatsheets/aws-cli.html#ec2-security-networking",
+    "content": ""
+  },
+  {
+    "title": "\u2601\ufe0f AWS CLI",
+    "section": "\ud83d\udce6 S3 Buckets",
+    "url": "cheatsheets/aws-cli.html#s3-buckets",
+    "content": ""
+  },
+  {
+    "title": "\u2601\ufe0f AWS CLI",
+    "section": "\ud83d\udd11 IAM Users & Roles",
+    "url": "cheatsheets/aws-cli.html#iam-users-roles",
+    "content": ""
+  },
+  {
+    "title": "\u2601\ufe0f AWS CLI",
+    "section": "\u26a1 Lambda Functions",
+    "url": "cheatsheets/aws-cli.html#lambda-functions",
+    "content": ""
+  },
+  {
+    "title": "\u2601\ufe0f AWS CLI",
+    "section": "\ud83d\udcda CloudFormation Stacks",
+    "url": "cheatsheets/aws-cli.html#cloudformation-stacks",
+    "content": ""
+  },
+  {
+    "title": "\u2601\ufe0f AWS CLI",
+    "section": "\ud83d\udd0d CloudWatch Logs",
+    "url": "cheatsheets/aws-cli.html#cloudwatch-logs",
+    "content": ""
+  },
+  {
+    "title": "\u2601\ufe0f AWS CLI",
+    "section": "\ud83d\uddc4\ufe0f RDS Databases",
+    "url": "cheatsheets/aws-cli.html#rds-databases",
+    "content": ""
+  },
+  {
+    "title": "\u2601\ufe0f AWS CLI",
+    "section": "\ud83c\udf10 Route 53 DNS",
+    "url": "cheatsheets/aws-cli.html#route-53-dns",
+    "content": ""
+  },
+  {
+    "title": "\u2601\ufe0f AWS CLI",
+    "section": "\u2699\ufe0f Common Options",
+    "url": "cheatsheets/aws-cli.html#common-options",
+    "content": ""
+  },
+  {
+    "title": "\u2601\ufe0f AWS CLI",
+    "section": "\ud83d\udcca ECS & ECR",
+    "url": "cheatsheets/aws-cli.html#ecs-ecr",
+    "content": ""
+  },
+  {
+    "title": "\u2601\ufe0f AWS CLI",
+    "section": "\ud83d\udcdd Example: Launch EC2 Instance",
+    "url": "cheatsheets/aws-cli.html#example-launch-ec2-instance",
+    "content": "# Launch t2.micro instance with Amazon Linux 2 aws ec2 run-instances \\ --image-id ami-0c55b159cbfafe1f0 \\ --instance-type t2.micro \\ --key-name my-key-pair \\ --security-group-ids sg-0123456789abcdef0 \\ --subnet-id subnet-0123456789abcdef0 \\ --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=MyInstance}]' # Get instance public IP aws ec2 describe-instances \\ --instance-ids i-0123456789abcdef0 \\ --query 'Reservations[0].Instances[0].PublicIpAddress'"
+  },
+  {
+    "title": "\u2601\ufe0f AWS CLI",
+    "section": "\ud83d\udce6 Example: S3 Operations",
+    "url": "cheatsheets/aws-cli.html#example-s3-operations",
+    "content": "# Create bucket with versioning aws s3api create-bucket \\ --bucket my-bucket \\ --region us-west-2 \\ --create-bucket-configuration LocationConstraint=us-west-2 aws s3api put-bucket-versioning \\ --bucket my-bucket \\ --versioning-configuration Status=Enabled # Sync local directory to S3 aws s3 sync ./local-dir s3://my-bucket/path/ \\ --exclude \"*.tmp\" \\ --delete"
+  },
+  {
+    "title": "\u2601\ufe0f AWS CLI",
+    "section": "\u26a1 Example: Lambda Deployment",
+    "url": "cheatsheets/aws-cli.html#example-lambda-deployment",
+    "content": "# Create Lambda function aws lambda create-function \\ --function-name my-function \\ --runtime python3.9 \\ --role arn:aws:iam::123456789012:role/lambda-role \\ --handler lambda_function.lambda_handler \\ --zip-file fileb://function.zip \\ --timeout 30 \\ --memory-size 256 # Invoke function aws lambda invoke \\ --function-name my-function \\ --payload '{\"key\":\"value\"}' \\ response.json"
+  },
+  {
+    "title": "\u2601\ufe0f AWS CLI",
+    "section": "\ud83d\udcda Example: CloudFormation Stack",
+    "url": "cheatsheets/aws-cli.html#example-cloudformation-stack",
+    "content": "# Create stack with parameters aws cloudformation create-stack \\ --stack-name my-stack \\ --template-body file://template.yaml \\ --parameters ParameterKey=KeyName,ParameterValue=my-key \\ --capabilities CAPABILITY_IAM # Wait for stack creation aws cloudformation wait stack-create-complete \\ --stack-name my-stack # Get stack outputs aws cloudformation describe-stacks \\ --stack-name my-stack \\ --query 'Stacks[0].Outputs'"
+  },
+  {
+    "title": "\u2601\ufe0f AWS CLI",
+    "section": "\ud83d\udd0d Example: JMESPath Queries",
+    "url": "cheatsheets/aws-cli.html#example-jmespath-queries",
+    "content": "# Get all running instance IDs aws ec2 describe-instances \\ --query 'Reservations[*].Instances[?State.Name==`running`].InstanceId' \\ --output text # Get instance names and IPs aws ec2 describe-instances \\ --query 'Reservations[*].Instances[*].[Tags[?Key==`Name`].Value|[0],PublicIpAddress]' \\ --output table # List S3 buckets created after date aws s3api list-buckets \\ --query \"Buckets[?CreationDate>=`2024-01-01`].Name\""
+  },
+  {
+    "title": "\u2601\ufe0f AWS CLI",
+    "section": "\ud83d\udca1 Useful Tips",
+    "url": "cheatsheets/aws-cli.html#useful-tips",
+    "content": ""
+  },
+  {
+    "title": "\u2601\ufe0f AWS CLI",
+    "section": "\ud83d\udd10 IAM Best Practices",
+    "url": "cheatsheets/aws-cli.html#iam-best-practices",
+    "content": ""
+  }
+]

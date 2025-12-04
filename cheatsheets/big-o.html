@@ -3,601 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Big O notation reference guide for analyzing algorithm time and space complexity.">
     <title>Big O Notation Complexity Cheatsheet</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: linear-gradient(135deg, #ec4899 0%, #f97316 100%);
-            color: #1a202c;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 2rem;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            font-size: 3rem;
-            color: white;
-            margin-bottom: 0.5rem;
-            text-align: center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .subtitle {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.95);
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.95);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-        }
-
-        .card-header {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #ec4899;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #ec4899;
-        }
-
-        .complexity-box {
-            padding: 1rem;
-            margin: 0.5rem 0;
-            border-radius: 8px;
-            border-left: 4px solid;
-        }
-
-        .excellent {
-            background: rgba(16, 185, 129, 0.1);
-            border-color: #10b981;
-        }
-
-        .good {
-            background: rgba(132, 204, 22, 0.1);
-            border-color: #84cc16;
-        }
-
-        .fair {
-            background: rgba(251, 191, 36, 0.1);
-            border-color: #fbbf24;
-        }
-
-        .bad {
-            background: rgba(249, 115, 22, 0.1);
-            border-color: #f97316;
-        }
-
-        .terrible {
-            background: rgba(239, 68, 68, 0.1);
-            border-color: #ef4444;
-        }
-
-        .complexity-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .complexity-name {
-            font-family: 'Courier New', monospace;
-            font-size: 1rem;
-            font-weight: 600;
-        }
-
-        .complexity-desc {
-            font-size: 0.9rem;
-            color: #4a5568;
-            margin: 0.3rem 0;
-        }
-
-        .code-block {
-            background: rgba(26, 32, 44, 0.95);
-            padding: 1rem;
-            border-radius: 6px;
-            font-family: 'Courier New', monospace;
-            color: #a5d6ff;
-            margin: 0.5rem 0;
-            border-left: 3px solid #ec4899;
-            overflow-x: auto;
-            font-size: 0.85rem;
-        }
-
-        .code-line {
-            margin: 0.2rem 0;
-        }
-
-        .keyword {
-            color: #fbbf24;
-        }
-
-        .comment {
-            color: #86efac;
-        }
-
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1rem 0;
-            font-size: 0.9rem;
-        }
-
-        .comparison-table th,
-        .comparison-table td {
-            padding: 0.75rem;
-            text-align: left;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .comparison-table th {
-            background: rgba(236, 72, 153, 0.1);
-            font-weight: 600;
-            color: #ec4899;
-        }
-
-        .comparison-table tr:hover {
-            background: rgba(236, 72, 153, 0.05);
-        }
-
-        .note {
-            background: rgba(59, 130, 246, 0.1);
-            border-left: 4px solid #3b82f6;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .tip {
-            background: rgba(16, 185, 129, 0.1);
-            border-left: 4px solid #10b981;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 2px solid rgba(255, 255, 255, 0.5);
-            color: white;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../script.js" defer></script>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-brand">
+                <i class="ph ph-books"></i> Cheatsheets
+            </a>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="btn-icon" aria-label="Toggle theme">
+                    <i class="ph ph-moon"></i>
+                </button>
+                <button id="download-btn" class="btn-icon" aria-label="Download PDF">
+                    <i class="ph ph-download-simple"></i>
+                </button>
+                <a href="https://github.com/keyurgolani/Cheatsheets" class="btn-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                    <i class="ph ph-github-logo"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
-        <h1>📊 Big O Notation</h1>
-        <p class="subtitle">Algorithm Time & Space Complexity Analysis</p>
+        <header class="cheatsheet-header">
+            <h1>📊 Big O Notation</h1>
+            <p>Algorithm Time & Space Complexity Analysis</p>
+            <div class="search-container" style="margin-top: 1.5rem; margin-bottom: 0;">
+                <span class="search-icon"><i class="ph ph-magnifying-glass"></i></span>
+                <input type="text" class="search-input" id="cheatsheet-search" placeholder="Filter this cheatsheet..." aria-label="Filter cheatsheet">
+            </div>
+        </header>
 
-        <div class="card" style="margin-bottom: 2rem;">
-            <div class="card-header">⏱️ Common Time Complexities (Best to Worst)</div>
+        <div class="masonry-grid" id="cheatsheet-grid">
             
-            <div class="complexity-box excellent">
-                <div class="complexity-title">
-                    <span class="complexity-name">O(1)</span> - Constant Time
-                </div>
-                <div class="complexity-desc">
-                    <strong>✅ Excellent:</strong> Execution time doesn't change with input size.<br>
-                    <strong>Examples:</strong> Array access, hash table lookup, simple arithmetic
+            <div class="card" id="common-time-complexities-best-to-worst">
+                <div class="card-header">⏱️ Common Time Complexities (Best to Worst)</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="complexity-box excellent">
-                <div class="complexity-title">
-                    <span class="complexity-name">O(log n)</span> - Logarithmic Time
-                </div>
-                <div class="complexity-desc">
-                    <strong>✅ Excellent:</strong> Splits problem in half each step.<br>
-                    <strong>Examples:</strong> Binary search, balanced tree operations
-                </div>
-            </div>
-
-            <div class="complexity-box good">
-                <div class="complexity-title">
-                    <span class="complexity-name">O(n)</span> - Linear Time
-                </div>
-                <div class="complexity-desc">
-                    <strong>👍 Good:</strong> Time grows proportionally with input.<br>
-                    <strong>Examples:</strong> Linear search, single loop, array traversal
-                </div>
-            </div>
-
-            <div class="complexity-box fair">
-                <div class="complexity-title">
-                    <span class="complexity-name">O(n log n)</span> - Linearithmic Time
-                </div>
-                <div class="complexity-desc">
-                    <strong>⚠️ Fair:</strong> Efficient sorting algorithms.<br>
-                    <strong>Examples:</strong> Merge sort, quicksort (average), heap sort
-                </div>
-            </div>
-
-            <div class="complexity-box bad">
-                <div class="complexity-title">
-                    <span class="complexity-name">O(n²)</span> - Quadratic Time
-                </div>
-                <div class="complexity-desc">
-                    <strong>❌ Bad:</strong> Nested loops over input.<br>
-                    <strong>Examples:</strong> Bubble sort, selection sort, insertion sort
-                </div>
-            </div>
-
-            <div class="complexity-box bad">
-                <div class="complexity-title">
-                    <span class="complexity-name">O(n³)</span> - Cubic Time
-                </div>
-                <div class="complexity-desc">
-                    <strong>❌ Bad:</strong> Triple nested loops.<br>
-                    <strong>Examples:</strong> Matrix multiplication (naive), some graph algorithms
-                </div>
-            </div>
-
-            <div class="complexity-box terrible">
-                <div class="complexity-title">
-                    <span class="complexity-name">O(2ⁿ)</span> - Exponential Time
-                </div>
-                <div class="complexity-desc">
-                    <strong>🔥 Terrible:</strong> Doubles with each additional input.<br>
-                    <strong>Examples:</strong> Recursive fibonacci, power set generation
-                </div>
-            </div>
-
-            <div class="complexity-box terrible">
-                <div class="complexity-title">
-                    <span class="complexity-name">O(n!)</span> - Factorial Time
-                </div>
-                <div class="complexity-desc">
-                    <strong>🔥 Terrible:</strong> Generates all permutations.<br>
-                    <strong>Examples:</strong> Traveling salesman (brute force), permutation generation
-                </div>
-            </div>
-        </div>
-
-        <div class="grid">
-            <div class="card">
+            <div class="card" id="growth-comparison">
                 <div class="card-header">🔢 Growth Comparison</div>
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th>n</th>
-                            <th>O(1)</th>
-                            <th>O(log n)</th>
-                            <th>O(n)</th>
-                            <th>O(n log n)</th>
-                            <th>O(n²)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>10</td>
-                            <td>1</td>
-                            <td>3</td>
-                            <td>10</td>
-                            <td>33</td>
-                            <td>100</td>
-                        </tr>
-                        <tr>
-                            <td>100</td>
-                            <td>1</td>
-                            <td>7</td>
-                            <td>100</td>
-                            <td>664</td>
-                            <td>10,000</td>
-                        </tr>
-                        <tr>
-                            <td>1,000</td>
-                            <td>1</td>
-                            <td>10</td>
-                            <td>1,000</td>
-                            <td>9,966</td>
-                            <td>1,000,000</td>
-                        </tr>
-                        <tr>
-                            <td>10,000</td>
-                            <td>1</td>
-                            <td>13</td>
-                            <td>10,000</td>
-                            <td>132,877</td>
-                            <td>100,000,000</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="code-block">
+                    
+                </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="visual-scale">
                 <div class="card-header">📈 Visual Scale</div>
-                <div class="note">
-                    If an O(n) algorithm takes 1 second for n=1000:<br><br>
-                    <strong>O(1):</strong> Still 1 second for any n<br>
-                    <strong>O(log n):</strong> ~0.003 seconds<br>
-                    <strong>O(n):</strong> 1 second<br>
-                    <strong>O(n log n):</strong> ~10 seconds<br>
-                    <strong>O(n²):</strong> ~17 minutes<br>
-                    <strong>O(2ⁿ):</strong> Beyond human lifespan!
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="code-examples">
+                <div class="card-header">💻 Code Examples</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Array access</span></div><div class="code-line"><span class="keyword">int</span> value = arr[5];</div><div class="code-line"></div><div class="code-line"><span class="comment">// Hash map lookup</span></div><div class="code-line"><span class="keyword">var</span> value = map.get(key);</div>
+                </div>
+            </div>
+            <div class="card" id="data-structure-operations">
+                <div class="card-header">🗄️ Data Structure Operations</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="sorting-algorithms">
+                <div class="card-header">🎯 Sorting Algorithms</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="analysis-tips">
+                <div class="card-header">💡 Analysis Tips</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header">💻 Code Examples</div>
-            
-            <div class="complexity-box excellent">
-                <div class="complexity-name">O(1) - Constant</div>
-                <div class="code-block">
-                    <div class="code-line"><span class="comment">// Array access</span></div>
-                    <div class="code-line"><span class="keyword">int</span> value = arr[5];</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Hash map lookup</span></div>
-                    <div class="code-line"><span class="keyword">var</span> value = map.get(key);</div>
-                </div>
-            </div>
-
-            <div class="complexity-box excellent">
-                <div class="complexity-name">O(log n) - Logarithmic</div>
-                <div class="code-block">
-                    <div class="code-line"><span class="comment">// Binary search</span></div>
-                    <div class="code-line"><span class="keyword">function</span> binarySearch(arr, target) {</div>
-                    <div class="code-line">    <span class="keyword">let</span> left = 0, right = arr.length - 1;</div>
-                    <div class="code-line">    <span class="keyword">while</span> (left <= right) {</div>
-                    <div class="code-line">        <span class="keyword">let</span> mid = Math.floor((left + right) / 2);</div>
-                    <div class="code-line">        <span class="keyword">if</span> (arr[mid] === target) <span class="keyword">return</span> mid;</div>
-                    <div class="code-line">        <span class="keyword">if</span> (arr[mid] < target) left = mid + 1;</div>
-                    <div class="code-line">        <span class="keyword">else</span> right = mid - 1;</div>
-                    <div class="code-line">    }</div>
-                    <div class="code-line">    <span class="keyword">return</span> -1;</div>
-                    <div class="code-line">}</div>
-                </div>
-            </div>
-
-            <div class="complexity-box good">
-                <div class="complexity-name">O(n) - Linear</div>
-                <div class="code-block">
-                    <div class="code-line"><span class="comment">// Linear search</span></div>
-                    <div class="code-line"><span class="keyword">for</span> (<span class="keyword">let</span> i = 0; i < arr.length; i++) {</div>
-                    <div class="code-line">    <span class="keyword">if</span> (arr[i] === target) <span class="keyword">return</span> i;</div>
-                    <div class="code-line">}</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Sum array</span></div>
-                    <div class="code-line"><span class="keyword">let</span> sum = 0;</div>
-                    <div class="code-line"><span class="keyword">for</span> (<span class="keyword">let</span> num of arr) sum += num;</div>
-                </div>
-            </div>
-
-            <div class="complexity-box fair">
-                <div class="complexity-name">O(n log n) - Linearithmic</div>
-                <div class="code-block">
-                    <div class="code-line"><span class="comment">// Merge sort</span></div>
-                    <div class="code-line"><span class="keyword">function</span> mergeSort(arr) {</div>
-                    <div class="code-line">    <span class="keyword">if</span> (arr.length <= 1) <span class="keyword">return</span> arr;</div>
-                    <div class="code-line">    <span class="keyword">const</span> mid = Math.floor(arr.length / 2);</div>
-                    <div class="code-line">    <span class="keyword">const</span> left = mergeSort(arr.slice(0, mid));</div>
-                    <div class="code-line">    <span class="keyword">const</span> right = mergeSort(arr.slice(mid));</div>
-                    <div class="code-line">    <span class="keyword">return</span> merge(left, right);</div>
-                    <div class="code-line">}</div>
-                </div>
-            </div>
-
-            <div class="complexity-box bad">
-                <div class="complexity-name">O(n²) - Quadratic</div>
-                <div class="code-block">
-                    <div class="code-line"><span class="comment">// Bubble sort</span></div>
-                    <div class="code-line"><span class="keyword">for</span> (<span class="keyword">let</span> i = 0; i < arr.length; i++) {</div>
-                    <div class="code-line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = 0; j < arr.length - 1; j++) {</div>
-                    <div class="code-line">        <span class="keyword">if</span> (arr[j] > arr[j + 1]) {</div>
-                    <div class="code-line">            [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];</div>
-                    <div class="code-line">        }</div>
-                    <div class="code-line">    }</div>
-                    <div class="code-line">}</div>
-                </div>
-            </div>
-
-            <div class="complexity-box terrible">
-                <div class="complexity-name">O(2ⁿ) - Exponential</div>
-                <div class="code-block">
-                    <div class="code-line"><span class="comment">// Recursive Fibonacci (inefficient)</span></div>
-                    <div class="code-line"><span class="keyword">function</span> fibonacci(n) {</div>
-                    <div class="code-line">    <span class="keyword">if</span> (n <= 1) <span class="keyword">return</span> n;</div>
-                    <div class="code-line">    <span class="keyword">return</span> fibonacci(n - 1) + fibonacci(n - 2);</div>
-                    <div class="code-line">}</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">🗄️ Data Structure Operations</div>
-            <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>Data Structure</th>
-                        <th>Access</th>
-                        <th>Search</th>
-                        <th>Insert</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Array</strong></td>
-                        <td>O(1)</td>
-                        <td>O(n)</td>
-                        <td>O(n)</td>
-                        <td>O(n)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Linked List</strong></td>
-                        <td>O(n)</td>
-                        <td>O(n)</td>
-                        <td>O(1)</td>
-                        <td>O(1)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Stack</strong></td>
-                        <td>O(n)</td>
-                        <td>O(n)</td>
-                        <td>O(1)</td>
-                        <td>O(1)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Queue</strong></td>
-                        <td>O(n)</td>
-                        <td>O(n)</td>
-                        <td>O(1)</td>
-                        <td>O(1)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Hash Table</strong></td>
-                        <td>N/A</td>
-                        <td>O(1)</td>
-                        <td>O(1)</td>
-                        <td>O(1)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Binary Search Tree</strong></td>
-                        <td>O(log n)</td>
-                        <td>O(log n)</td>
-                        <td>O(log n)</td>
-                        <td>O(log n)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Heap</strong></td>
-                        <td>N/A</td>
-                        <td>O(n)</td>
-                        <td>O(log n)</td>
-                        <td>O(log n)</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="note">
-                <strong>Note:</strong> Times shown are average case. Worst case may differ (e.g., unbalanced BST is O(n)).
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">🎯 Sorting Algorithms</div>
-            <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>Algorithm</th>
-                        <th>Best</th>
-                        <th>Average</th>
-                        <th>Worst</th>
-                        <th>Space</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Bubble Sort</strong></td>
-                        <td>O(n)</td>
-                        <td>O(n²)</td>
-                        <td>O(n²)</td>
-                        <td>O(1)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Selection Sort</strong></td>
-                        <td>O(n²)</td>
-                        <td>O(n²)</td>
-                        <td>O(n²)</td>
-                        <td>O(1)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Insertion Sort</strong></td>
-                        <td>O(n)</td>
-                        <td>O(n²)</td>
-                        <td>O(n²)</td>
-                        <td>O(1)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Merge Sort</strong></td>
-                        <td>O(n log n)</td>
-                        <td>O(n log n)</td>
-                        <td>O(n log n)</td>
-                        <td>O(n)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Quick Sort</strong></td>
-                        <td>O(n log n)</td>
-                        <td>O(n log n)</td>
-                        <td>O(n²)</td>
-                        <td>O(log n)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Heap Sort</strong></td>
-                        <td>O(n log n)</td>
-                        <td>O(n log n)</td>
-                        <td>O(n log n)</td>
-                        <td>O(1)</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="card">
-            <div class="card-header">💡 Analysis Tips</div>
-            <div class="tip">
-                <strong>How to Calculate:</strong><br>
-                • Drop constants: O(2n) → O(n)<br>
-                • Drop lower terms: O(n² + n) → O(n²)<br>
-                • Different inputs use different variables: O(a + b)<br>
-                • Nested loops multiply: O(n × m)<br>
-                • Sequential steps add: O(a + b)<br><br>
-                
-                <strong>Common Patterns:</strong><br>
-                • Single loop = O(n)<br>
-                • Nested loops = O(n²) or O(n × m)<br>
-                • Dividing problem in half = O(log n)<br>
-                • Recursion with branching = O(branches^depth)<br><br>
-                
-                <strong>Space Complexity:</strong><br>
-                • Consider auxiliary space used by algorithm<br>
-                • Recursive calls use stack space<br>
-                • Creating new data structures increases space
-            </div>
-        </div>
-
-        <div class="footer">
-            <p>Big O Notation Complexity Reference</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">📊 Understanding algorithm efficiency</p>
-        </div>
+        <footer>
+            <p>&copy; 2025 Cheatsheets Collection. Open source and community driven.</p>
+        </footer>
     </div>
 </body>
 </html>

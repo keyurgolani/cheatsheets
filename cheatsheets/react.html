@@ -3,831 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="React JavaScript library reference with hooks, components, state management, and best practices.">
     <title>React Cheatsheet</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #e0e6ed;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 2rem;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            font-size: 3rem;
-            background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #8b95a5;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .card {
-            background: rgba(30, 41, 59, 0.6);
-            border: 1px solid rgba(100, 116, 139, 0.3);
-            border-radius: 12px;
-            padding: 1.5rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: rgba(6, 182, 212, 0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(6, 182, 212, 0.15);
-        }
-
-        .card-header {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #06b6d4;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid rgba(6, 182, 212, 0.3);
-        }
-
-        .cmd-row {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.5rem;
-            margin-bottom: 0.75rem;
-            padding: 0.5rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 6px;
-            transition: background 0.2s ease;
-        }
-
-        .cmd-row:hover {
-            background: rgba(6, 182, 212, 0.1);
-        }
-
-        .cmd-name {
-            color: #06b6d4;
-            font-weight: 600;
-            font-family: 'Courier New', monospace;
-            font-size: 0.95rem;
-        }
-
-        .cmd-desc {
-            color: #cbd5e1;
-            padding-left: 1rem;
-            font-size: 0.9rem;
-        }
-
-        code {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            color: #a5d6ff;
-            font-size: 0.9em;
-        }
-
-        .code-block {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 1rem;
-            border-radius: 6px;
-            margin: 0.75rem 0;
-            overflow-x: auto;
-        }
-
-        .code-line {
-            font-family: 'Courier New', monospace;
-            color: #e0e6ed;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        .comment {
-            color: #10b981;
-        }
-
-        .keyword {
-            color: #fbbf24;
-        }
-
-        .string {
-            color: #ec4899;
-        }
-
-        .note {
-            background: rgba(59, 130, 246, 0.1);
-            border-left: 4px solid #3b82f6;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .tip {
-            background: rgba(16, 185, 129, 0.1);
-            border-left: 4px solid #10b981;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .warning {
-            background: rgba(239, 68, 68, 0.1);
-            border-left: 4px solid #ef4444;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(100, 116, 139, 0.3);
-            color: #8b95a5;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../script.js" defer></script>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-brand">
+                <i class="ph ph-books"></i> Cheatsheets
+            </a>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="btn-icon" aria-label="Toggle theme">
+                    <i class="ph ph-moon"></i>
+                </button>
+                <button id="download-btn" class="btn-icon" aria-label="Download PDF">
+                    <i class="ph ph-download-simple"></i>
+                </button>
+                <a href="https://github.com/keyurgolani/Cheatsheets" class="btn-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                    <i class="ph ph-github-logo"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
-        <h1>⚛️ React Cheatsheet</h1>
-        <p class="subtitle">Essential hooks, patterns, and concepts for modern React development</p>
+        <header class="cheatsheet-header">
+            <h1>⚛️ React Cheatsheet</h1>
+            <p>Essential hooks, patterns, and concepts for modern React development</p>
+            <div class="search-container" style="margin-top: 1.5rem; margin-bottom: 0;">
+                <span class="search-icon"><i class="ph ph-magnifying-glass"></i></span>
+                <input type="text" class="search-input" id="cheatsheet-search" placeholder="Filter this cheatsheet..." aria-label="Filter cheatsheet">
+            </div>
+        </header>
 
-        <div class="grid">
-            <div class="card">
+        <div class="masonry-grid" id="cheatsheet-grid">
+            
+            <div class="card" id="usestate-hook">
                 <div class="card-header">🪝 useState Hook</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">const [state, setState] = useState(initialValue)</div>
-                    <div class="cmd-desc">Declare state variable with initial value</div>
-                </div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// Basic usage</span></div>
-                    <div class="code-line"><span class="keyword">const</span> [count, setCount] = useState(<span class="string">0</span>);</div>
-                    <div class="code-line">setCount(count + <span class="string">1</span>);</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Functional update (when new state depends on previous)</span></div>
-                    <div class="code-line">setCount(prevCount => prevCount + <span class="string">1</span>);</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Lazy initialization (expensive computation)</span></div>
-                    <div class="code-line"><span class="keyword">const</span> [state, setState] = useState(() => {</div>
-                    <div class="code-line">  <span class="keyword">return</span> expensiveComputation();</div>
-                    <div class="code-line">});</div>
-                </div>
-                <div class="tip">
-                    💡 Use functional updates when new state depends on previous state to avoid stale closures!
+                    <div class="code-line"><span class="comment">// Basic usage</span></div><div class="code-line"><span class="keyword">const</span> [count, setCount] = useState(<span class="string">0</span>);</div><div class="code-line">setCount(count + <span class="string">1</span>);</div><div class="code-line"></div><div class="code-line"><span class="comment">// Functional update (when new state depends on previous)</span></div><div class="code-line">setCount(prevCount =&gt; prevCount + <span class="string">1</span>);</div><div class="code-line"></div><div class="code-line"><span class="comment">// Lazy initialization (expensive computation)</span></div><div class="code-line"><span class="keyword">const</span> [state, setState] = useState(() =&gt; {</div><div class="code-line"> <span class="keyword">return</span> expensiveComputation();</div><div class="code-line">});</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="useeffect-hook">
                 <div class="card-header">⚡ useEffect Hook</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">useEffect(() => { /* effect */ }, [deps])</div>
-                    <div class="cmd-desc">Run side effects after render</div>
-                </div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// Run on every render</span></div>
-                    <div class="code-line">useEffect(() => {</div>
-                    <div class="code-line">  console.log(<span class="string">'Runs after every render'</span>);</div>
-                    <div class="code-line">});</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Run only once (on mount)</span></div>
-                    <div class="code-line">useEffect(() => {</div>
-                    <div class="code-line">  console.log(<span class="string">'Runs once on mount'</span>);</div>
-                    <div class="code-line">}, []);</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Run when dependencies change</span></div>
-                    <div class="code-line">useEffect(() => {</div>
-                    <div class="code-line">  console.log(<span class="string">'Count changed:'</span>, count);</div>
-                    <div class="code-line">}, [count]);</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Cleanup function</span></div>
-                    <div class="code-line">useEffect(() => {</div>
-                    <div class="code-line">  <span class="keyword">const</span> timer = setInterval(() => {}, <span class="string">1000</span>);</div>
-                    <div class="code-line">  <span class="keyword">return</span> () => clearInterval(timer);</div>
-                    <div class="code-line">}, []);</div>
-                </div>
-                <div class="warning">
-                    ⚠️ Always include all dependencies in the dependency array to avoid bugs!
+                    <div class="code-line"><span class="comment">// Run on every render</span></div><div class="code-line">useEffect(() =&gt; {</div><div class="code-line">  console.log(<span class="string">'Runs after every render'</span>);</div><div class="code-line">});</div><div class="code-line"></div><div class="code-line"><span class="comment">// Run only once (on mount)</span></div><div class="code-line">useEffect(() =&gt; {</div><div class="code-line">  console.log(<span class="string">'Runs once on mount'</span>);</div><div class="code-line">}, []);</div><div class="code-line"></div><div class="code-line"><span class="comment">// Run when dependencies change</span></div><div class="code-line">useEffect(() =&gt; {</div><div class="code-line">  console.log(<span class="string">'Count changed:'</span>, count);</div><div class="code-line">}, [count]);</div><div class="code-line"></div><div class="code-line"><span class="comment">// Cleanup function</span></div><div class="code-line">useEffect(() =&gt; {</div><div class="code-line"> <span class="keyword">const</span> timer = setInterval(() =&gt; {}, <span class="string">1000</span>);</div><div class="code-line"> <span class="keyword">return</span> () =&gt; clearInterval(timer);</div><div class="code-line">}, []);</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="usecontext-hook">
                 <div class="card-header">🎯 useContext Hook</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">const value = useContext(MyContext)</div>
-                    <div class="cmd-desc">Access context value without Consumer</div>
-                </div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// Create context</span></div>
-                    <div class="code-line"><span class="keyword">const</span> ThemeContext = React.createContext(<span class="string">'light'</span>);</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Provider component</span></div>
-                    <div class="code-line"><span class="keyword">function</span> App() {</div>
-                    <div class="code-line">  <span class="keyword">return</span> (</div>
-                    <div class="code-line">    &lt;ThemeContext.Provider value=<span class="string">"dark"</span>&gt;</div>
-                    <div class="code-line">      &lt;Toolbar /&gt;</div>
-                    <div class="code-line">    &lt;/ThemeContext.Provider&gt;</div>
-                    <div class="code-line">  );</div>
-                    <div class="code-line">}</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Consumer component</span></div>
-                    <div class="code-line"><span class="keyword">function</span> ThemedButton() {</div>
-                    <div class="code-line">  <span class="keyword">const</span> theme = useContext(ThemeContext);</div>
-                    <div class="code-line">  <span class="keyword">return</span> &lt;button className={theme}&gt;Click&lt;/button&gt;;</div>
-                    <div class="code-line">}</div>
+                    <div class="code-line"><span class="comment">// Create context</span></div><div class="code-line"><span class="keyword">const</span> ThemeContext = React.createContext(<span class="string">'light'</span>);</div><div class="code-line"></div><div class="code-line"><span class="comment">// Provider component</span></div><div class="code-line"><span class="keyword">function</span> App() {</div><div class="code-line"> <span class="keyword">return</span> (</div><div class="code-line">    &lt;ThemeContext.Provider value=<span class="string">"dark"</span>&gt;</div><div class="code-line">      &lt;Toolbar /&gt;</div><div class="code-line">    &lt;/ThemeContext.Provider&gt;</div><div class="code-line">  );</div><div class="code-line">}</div><div class="code-line"></div><div class="code-line"><span class="comment">// Consumer component</span></div><div class="code-line"><span class="keyword">function</span> ThemedButton() {</div><div class="code-line"> <span class="keyword">const</span> theme = useContext(ThemeContext);</div><div class="code-line"> <span class="keyword">return</span> &lt;button className={theme}&gt;Click&lt;/button&gt;;</div><div class="code-line">}</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="usereducer-hook">
                 <div class="card-header">🔄 useReducer Hook</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">const [state, dispatch] = useReducer(reducer, initialState)</div>
-                    <div class="cmd-desc">Manage complex state logic with reducer pattern</div>
-                </div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// Reducer function</span></div>
-                    <div class="code-line"><span class="keyword">function</span> reducer(state, action) {</div>
-                    <div class="code-line">  <span class="keyword">switch</span> (action.type) {</div>
-                    <div class="code-line">    <span class="keyword">case</span> <span class="string">'increment'</span>:</div>
-                    <div class="code-line">      <span class="keyword">return</span> { count: state.count + <span class="string">1</span> };</div>
-                    <div class="code-line">    <span class="keyword">case</span> <span class="string">'decrement'</span>:</div>
-                    <div class="code-line">      <span class="keyword">return</span> { count: state.count - <span class="string">1</span> };</div>
-                    <div class="code-line">    <span class="keyword">default</span>:</div>
-                    <div class="code-line">      <span class="keyword">return</span> state;</div>
-                    <div class="code-line">  }</div>
-                    <div class="code-line">}</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Usage</span></div>
-                    <div class="code-line"><span class="keyword">const</span> [state, dispatch] = useReducer(reducer, { count: <span class="string">0</span> });</div>
-                    <div class="code-line">dispatch({ type: <span class="string">'increment'</span> });</div>
-                </div>
-                <div class="tip">
-                    💡 Use useReducer for complex state logic or when next state depends on previous state!
+                    <div class="code-line"><span class="comment">// Reducer function</span></div><div class="code-line"><span class="keyword">function</span> reducer(state, action) {</div><div class="code-line"> <span class="keyword">switch</span> (action.type) {</div><div class="code-line"> <span class="keyword">case</span> <span class="string">'increment'</span>:</div><div class="code-line"> <span class="keyword">return</span> { count: state.count + <span class="string">1</span> };</div><div class="code-line"> <span class="keyword">case</span> <span class="string">'decrement'</span>:</div><div class="code-line"> <span class="keyword">return</span> { count: state.count - <span class="string">1</span> };</div><div class="code-line"> <span class="keyword">default</span>:</div><div class="code-line"> <span class="keyword">return</span> state;</div><div class="code-line">  }</div><div class="code-line">}</div><div class="code-line"></div><div class="code-line"><span class="comment">// Usage</span></div><div class="code-line"><span class="keyword">const</span> [state, dispatch] = useReducer(reducer, { count: <span class="string">0</span> });</div><div class="code-line">dispatch({ type: <span class="string">'increment'</span> });</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="useref-hook">
                 <div class="card-header">📝 useRef Hook</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">const ref = useRef(initialValue)</div>
-                    <div class="cmd-desc">Create mutable ref object that persists across renders</div>
-                </div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// Access DOM element</span></div>
-                    <div class="code-line"><span class="keyword">const</span> inputRef = useRef(<span class="keyword">null</span>);</div>
-                    <div class="code-line">inputRef.current.focus();</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Store mutable value (doesn't trigger re-render)</span></div>
-                    <div class="code-line"><span class="keyword">const</span> countRef = useRef(<span class="string">0</span>);</div>
-                    <div class="code-line">countRef.current += <span class="string">1</span>;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Store previous value</span></div>
-                    <div class="code-line"><span class="keyword">const</span> prevValue = useRef();</div>
-                    <div class="code-line">useEffect(() => {</div>
-                    <div class="code-line">  prevValue.current = value;</div>
-                    <div class="code-line">}, [value]);</div>
+                    <div class="code-line"><span class="comment">// Access DOM element</span></div><div class="code-line"><span class="keyword">const</span> inputRef = useRef(<span class="keyword">null</span>);</div><div class="code-line">inputRef.current.focus();</div><div class="code-line"></div><div class="code-line"><span class="comment">// Store mutable value (doesn't trigger re-render)</span></div><div class="code-line"><span class="keyword">const</span> countRef = useRef(<span class="string">0</span>);</div><div class="code-line">countRef.current += <span class="string">1</span>;</div><div class="code-line"></div><div class="code-line"><span class="comment">// Store previous value</span></div><div class="code-line"><span class="keyword">const</span> prevValue = useRef();</div><div class="code-line">useEffect(() =&gt; {</div><div class="code-line">  prevValue.current = value;</div><div class="code-line">}, [value]);</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="usememo-hook">
                 <div class="card-header">🎨 useMemo Hook</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">const memoizedValue = useMemo(() => compute(), [deps])</div>
-                    <div class="cmd-desc">Memoize expensive computations</div>
-                </div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// Expensive calculation</span></div>
-                    <div class="code-line"><span class="keyword">const</span> expensiveValue = useMemo(() => {</div>
-                    <div class="code-line">  <span class="keyword">return</span> computeExpensiveValue(a, b);</div>
-                    <div class="code-line">}, [a, b]);</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Memoize filtered list</span></div>
-                    <div class="code-line"><span class="keyword">const</span> filteredList = useMemo(() => {</div>
-                    <div class="code-line">  <span class="keyword">return</span> list.filter(item => item.includes(query));</div>
-                    <div class="code-line">}, [list, query]);</div>
-                </div>
-                <div class="note">
-                    <strong>Note:</strong> Only use useMemo for expensive computations. Premature optimization can hurt performance!
+                    <div class="code-line"><span class="comment">// Expensive calculation</span></div><div class="code-line"><span class="keyword">const</span> expensiveValue = useMemo(() =&gt; {</div><div class="code-line"> <span class="keyword">return</span> computeExpensiveValue(a, b);</div><div class="code-line">}, [a, b]);</div><div class="code-line"></div><div class="code-line"><span class="comment">// Memoize filtered list</span></div><div class="code-line"><span class="keyword">const</span> filteredList = useMemo(() =&gt; {</div><div class="code-line"> <span class="keyword">return</span> list.filter(item =&gt; item.includes(query));</div><div class="code-line">}, [list, query]);</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="usecallback-hook">
                 <div class="card-header">⚙️ useCallback Hook</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">const memoizedFn = useCallback(() => {}, [deps])</div>
-                    <div class="cmd-desc">Memoize callback functions to prevent unnecessary re-renders</div>
-                </div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// Memoize callback</span></div>
-                    <div class="code-line"><span class="keyword">const</span> handleClick = useCallback(() => {</div>
-                    <div class="code-line">  console.log(<span class="string">'Clicked with count:'</span>, count);</div>
-                    <div class="code-line">}, [count]);</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Pass to child component</span></div>
-                    <div class="code-line">&lt;ChildComponent onClick={handleClick} /&gt;</div>
-                </div>
-                <div class="tip">
-                    💡 Use useCallback when passing callbacks to optimized child components wrapped in React.memo!
+                    <div class="code-line"><span class="comment">// Memoize callback</span></div><div class="code-line"><span class="keyword">const</span> handleClick = useCallback(() =&gt; {</div><div class="code-line">  console.log(<span class="string">'Clicked with count:'</span>, count);</div><div class="code-line">}, [count]);</div><div class="code-line"></div><div class="code-line"><span class="comment">// Pass to child component</span></div><div class="code-line">&lt;ChildComponent onClick={handleClick} /&gt;</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="uselayouteffect-hook">
                 <div class="card-header">🔧 useLayoutEffect Hook</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">useLayoutEffect(() => { /* effect */ }, [deps])</div>
-                    <div class="cmd-desc">Run effects synchronously after DOM mutations</div>
-                </div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// Measure DOM before paint</span></div>
-                    <div class="code-line">useLayoutEffect(() => {</div>
-                    <div class="code-line">  <span class="keyword">const</span> rect = divRef.current.getBoundingClientRect();</div>
-                    <div class="code-line">  setHeight(rect.height);</div>
-                    <div class="code-line">}, []);</div>
-                </div>
-                <div class="warning">
-                    ⚠️ useLayoutEffect blocks visual updates. Use useEffect unless you need to measure/mutate DOM before paint!
+                    <div class="code-line"><span class="comment">// Measure DOM before paint</span></div><div class="code-line">useLayoutEffect(() =&gt; {</div><div class="code-line"> <span class="keyword">const</span> rect = divRef.current.getBoundingClientRect();</div><div class="code-line">  setHeight(rect.height);</div><div class="code-line">}, []);</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="useid-hook">
                 <div class="card-header">🆔 useId Hook</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">const id = useId()</div>
-                    <div class="cmd-desc">Generate unique IDs for accessibility attributes (React 18+)</div>
-                </div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// Generate unique ID for form elements</span></div>
-                    <div class="code-line"><span class="keyword">const</span> id = useId();</div>
-                    <div class="code-line"><span class="keyword">return</span> (</div>
-                    <div class="code-line">  &lt;&gt;</div>
-                    <div class="code-line">    &lt;label htmlFor={id}&gt;Name:&lt;/label&gt;</div>
-                    <div class="code-line">    &lt;input id={id} type=<span class="string">"text"</span> /&gt;</div>
-                    <div class="code-line">  &lt;/&gt;</div>
-                    <div class="code-line">);</div>
+                    <div class="code-line"><span class="comment">// Generate unique ID for form elements</span></div><div class="code-line"><span class="keyword">const</span> id = useId();</div><div class="code-line"><span class="keyword">return</span> (</div><div class="code-line">  &lt;&gt;</div><div class="code-line">    &lt;label htmlFor={id}&gt;Name:&lt;/label&gt;</div><div class="code-line">    &lt;input id={id} type=<span class="string">"text"</span> /&gt;</div><div class="code-line">  &lt;/&gt;</div><div class="code-line">);</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="component-patterns">
                 <div class="card-header">🎭 Component Patterns</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// Functional Component</span></div>
-                    <div class="code-line"><span class="keyword">function</span> MyComponent({ name, age }) {</div>
-                    <div class="code-line">  <span class="keyword">return</span> &lt;div&gt;{name} is {age}&lt;/div&gt;;</div>
-                    <div class="code-line">}</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Arrow Function Component</span></div>
-                    <div class="code-line"><span class="keyword">const</span> MyComponent = ({ name, age }) => (</div>
-                    <div class="code-line">  &lt;div&gt;{name} is {age}&lt;/div&gt;</div>
-                    <div class="code-line">);</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Component with default props</span></div>
-                    <div class="code-line"><span class="keyword">function</span> Button({ text = <span class="string">'Click me'</span>, onClick }) {</div>
-                    <div class="code-line">  <span class="keyword">return</span> &lt;button onClick={onClick}&gt;{text}&lt;/button&gt;;</div>
-                    <div class="code-line">}</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Component with children</span></div>
-                    <div class="code-line"><span class="keyword">function</span> Card({ children, title }) {</div>
-                    <div class="code-line">  <span class="keyword">return</span> (</div>
-                    <div class="code-line">    &lt;div className=<span class="string">"card"</span>&gt;</div>
-                    <div class="code-line">      &lt;h2&gt;{title}&lt;/h2&gt;</div>
-                    <div class="code-line">      {children}</div>
-                    <div class="code-line">    &lt;/div&gt;</div>
-                    <div class="code-line">  );</div>
-                    <div class="code-line">}</div>
+                    <div class="code-line"><span class="comment">// Functional Component</span></div><div class="code-line"><span class="keyword">function</span> MyComponent({ name, age }) {</div><div class="code-line"> <span class="keyword">return</span> &lt;div&gt;{name} is {age}&lt;/div&gt;;</div><div class="code-line">}</div><div class="code-line"></div><div class="code-line"><span class="comment">// Arrow Function Component</span></div><div class="code-line"><span class="keyword">const</span> MyComponent = ({ name, age }) =&gt; (</div><div class="code-line">  &lt;div&gt;{name} is {age}&lt;/div&gt;</div><div class="code-line">);</div><div class="code-line"></div><div class="code-line"><span class="comment">// Component with default props</span></div><div class="code-line"><span class="keyword">function</span> Button({ text = <span class="string">'Click me'</span>, onClick }) {</div><div class="code-line"> <span class="keyword">return</span> &lt;button onClick={onClick}&gt;{text}&lt;/button&gt;;</div><div class="code-line">}</div><div class="code-line"></div><div class="code-line"><span class="comment">// Component with children</span></div><div class="code-line"><span class="keyword">function</span> Card({ children, title }) {</div><div class="code-line"> <span class="keyword">return</span> (</div><div class="code-line">    &lt;div className=<span class="string">"card"</span>&gt;</div><div class="code-line">      &lt;h2&gt;{title}&lt;/h2&gt;</div><div class="code-line">      {children}</div><div class="code-line">    &lt;/div&gt;</div><div class="code-line">  );</div><div class="code-line">}</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="conditional-rendering">
                 <div class="card-header">🔄 Conditional Rendering</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// If-else with ternary</span></div>
-                    <div class="code-line">{isLoggedIn ? &lt;Dashboard /&gt; : &lt;Login /&gt;}</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Logical AND for conditional rendering</span></div>
-                    <div class="code-line">{showMessage && &lt;Message text=<span class="string">"Hello"</span> /&gt;}</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Nullish coalescing for default values</span></div>
-                    <div class="code-line">{user?.name ?? <span class="string">'Guest'</span>}</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Early return pattern</span></div>
-                    <div class="code-line"><span class="keyword">if</span> (!data) <span class="keyword">return</span> &lt;Loading /&gt;;</div>
-                    <div class="code-line"><span class="keyword">if</span> (error) <span class="keyword">return</span> &lt;Error message={error} /&gt;;</div>
-                    <div class="code-line"><span class="keyword">return</span> &lt;DataDisplay data={data} /&gt;;</div>
+                    <div class="code-line"><span class="comment">// If-else with ternary</span></div><div class="code-line">{isLoggedIn ? &lt;Dashboard /&gt; : &lt;Login /&gt;}</div><div class="code-line"></div><div class="code-line"><span class="comment">// Logical AND for conditional rendering</span></div><div class="code-line">{showMessage &amp;&amp; &lt;Message text=<span class="string">"Hello"</span> /&gt;}</div><div class="code-line"></div><div class="code-line"><span class="comment">// Nullish coalescing for default values</span></div><div class="code-line">{user?.name ?? <span class="string">'Guest'</span>}</div><div class="code-line"></div><div class="code-line"><span class="comment">// Early return pattern</span></div><div class="code-line"><span class="keyword">if</span> (!data) <span class="keyword">return</span> &lt;Loading /&gt;;</div><div class="code-line"><span class="keyword">if</span> (error) <span class="keyword">return</span> &lt;Error message={error} /&gt;;</div><div class="code-line"><span class="keyword">return</span> &lt;DataDisplay data={data} /&gt;;</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="lists-and-keys">
                 <div class="card-header">📋 Lists and Keys</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// Render list with map</span></div>
-                    <div class="code-line"><span class="keyword">const</span> items = [<span class="string">'Apple'</span>, <span class="string">'Banana'</span>, <span class="string">'Orange'</span>];</div>
-                    <div class="code-line"><span class="keyword">return</span> (</div>
-                    <div class="code-line">  &lt;ul&gt;</div>
-                    <div class="code-line">    {items.map((item, index) => (</div>
-                    <div class="code-line">      &lt;li key={index}&gt;{item}&lt;/li&gt;</div>
-                    <div class="code-line">    ))}</div>
-                    <div class="code-line">  &lt;/ul&gt;</div>
-                    <div class="code-line">);</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Better: Use unique ID as key</span></div>
-                    <div class="code-line">{users.map(user => (</div>
-                    <div class="code-line">  &lt;UserCard key={user.id} user={user} /&gt;</div>
-                    <div class="code-line">))}</div>
-                </div>
-                <div class="warning">
-                    ⚠️ Avoid using array index as key if list can be reordered or items can be added/removed!
+                    <div class="code-line"><span class="comment">// Render list with map</span></div><div class="code-line"><span class="keyword">const</span> items = [<span class="string">'Apple'</span>, <span class="string">'Banana'</span>, <span class="string">'Orange'</span>];</div><div class="code-line"><span class="keyword">return</span> (</div><div class="code-line">  &lt;ul&gt;</div><div class="code-line">    {items.map((item, index) =&gt; (</div><div class="code-line">      &lt;li key={index}&gt;{item}&lt;/li&gt;</div><div class="code-line">    ))}</div><div class="code-line">  &lt;/ul&gt;</div><div class="code-line">);</div><div class="code-line"></div><div class="code-line"><span class="comment">// Better: Use unique ID as key</span></div><div class="code-line">{users.map(user =&gt; (</div><div class="code-line">  &lt;UserCard key={user.id} user={user} /&gt;</div><div class="code-line">))}</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="forms-and-controlled-components">
                 <div class="card-header">📝 Forms and Controlled Components</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// Controlled input</span></div>
-                    <div class="code-line"><span class="keyword">const</span> [value, setValue] = useState(<span class="string">''</span>);</div>
-                    <div class="code-line">&lt;input</div>
-                    <div class="code-line">  value={value}</div>
-                    <div class="code-line">  onChange={(e) => setValue(e.target.value)}</div>
-                    <div class="code-line">/&gt;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Form submission</span></div>
-                    <div class="code-line"><span class="keyword">const</span> handleSubmit = (e) => {</div>
-                    <div class="code-line">  e.preventDefault();</div>
-                    <div class="code-line">  console.log(<span class="string">'Submitted:'</span>, value);</div>
-                    <div class="code-line">};</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Checkbox</span></div>
-                    <div class="code-line"><span class="keyword">const</span> [checked, setChecked] = useState(<span class="keyword">false</span>);</div>
-                    <div class="code-line">&lt;input</div>
-                    <div class="code-line">  type=<span class="string">"checkbox"</span></div>
-                    <div class="code-line">  checked={checked}</div>
-                    <div class="code-line">  onChange={(e) => setChecked(e.target.checked)}</div>
-                    <div class="code-line">/&gt;</div>
+                    <div class="code-line"><span class="comment">// Controlled input</span></div><div class="code-line"><span class="keyword">const</span> [value, setValue] = useState(<span class="string">''</span>);</div><div class="code-line">&lt;input</div><div class="code-line">  value={value}</div><div class="code-line">  onChange={(e) =&gt; setValue(e.target.value)}</div><div class="code-line">/&gt;</div><div class="code-line"></div><div class="code-line"><span class="comment">// Form submission</span></div><div class="code-line"><span class="keyword">const</span> handleSubmit = (e) =&gt; {</div><div class="code-line">  e.preventDefault();</div><div class="code-line">  console.log(<span class="string">'Submitted:'</span>, value);</div><div class="code-line">};</div><div class="code-line"></div><div class="code-line"><span class="comment">// Checkbox</span></div><div class="code-line"><span class="keyword">const</span> [checked, setChecked] = useState(<span class="keyword">false</span>);</div><div class="code-line">&lt;input</div><div class="code-line">  type=<span class="string">"checkbox"</span></div><div class="code-line">  checked={checked}</div><div class="code-line">  onChange={(e) =&gt; setChecked(e.target.checked)}</div><div class="code-line">/&gt;</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="event-handling">
                 <div class="card-header">🎯 Event Handling</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// Click handler</span></div>
-                    <div class="code-line">&lt;button onClick={() => console.log(<span class="string">'Clicked'</span>)}&gt;</div>
-                    <div class="code-line">  Click me</div>
-                    <div class="code-line">&lt;/button&gt;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Handler with parameters</span></div>
-                    <div class="code-line"><span class="keyword">const</span> handleClick = (id) => {</div>
-                    <div class="code-line">  console.log(<span class="string">'Clicked item:'</span>, id);</div>
-                    <div class="code-line">};</div>
-                    <div class="code-line">&lt;button onClick={() => handleClick(item.id)}&gt;Click&lt;/button&gt;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Prevent default</span></div>
-                    <div class="code-line"><span class="keyword">const</span> handleSubmit = (e) => {</div>
-                    <div class="code-line">  e.preventDefault();</div>
-                    <div class="code-line">  <span class="comment">// Handle form submission</span></div>
-                    <div class="code-line">};</div>
+                    <div class="code-line"><span class="comment">// Click handler</span></div><div class="code-line">&lt;button onClick={() =&gt; console.log(<span class="string">'Clicked'</span>)}&gt;</div><div class="code-line">  Click me</div><div class="code-line">&lt;/button&gt;</div><div class="code-line"></div><div class="code-line"><span class="comment">// Handler with parameters</span></div><div class="code-line"><span class="keyword">const</span> handleClick = (id) =&gt; {</div><div class="code-line">  console.log(<span class="string">'Clicked item:'</span>, id);</div><div class="code-line">};</div><div class="code-line">&lt;button onClick={() =&gt; handleClick(item.id)}&gt;Click&lt;/button&gt;</div><div class="code-line"></div><div class="code-line"><span class="comment">// Prevent default</span></div><div class="code-line"><span class="keyword">const</span> handleSubmit = (e) =&gt; {</div><div class="code-line">  e.preventDefault();</div><div class="code-line"> <span class="comment">// Handle form submission</span></div><div class="code-line">};</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="component-composition">
                 <div class="card-header">🧩 Component Composition</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// Render props pattern</span></div>
-                    <div class="code-line"><span class="keyword">function</span> DataProvider({ render }) {</div>
-                    <div class="code-line">  <span class="keyword">const</span> [data, setData] = useState(<span class="keyword">null</span>);</div>
-                    <div class="code-line">  <span class="keyword">return</span> render(data);</div>
-                    <div class="code-line">}</div>
-                    <div class="code-line">&lt;DataProvider render={(data) => &lt;Display data={data} /&gt;} /&gt;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Higher-Order Component (HOC)</span></div>
-                    <div class="code-line"><span class="keyword">function</span> withLoading(Component) {</div>
-                    <div class="code-line">  <span class="keyword">return</span> <span class="keyword">function</span> WithLoadingComponent({ isLoading, ...props }) {</div>
-                    <div class="code-line">    <span class="keyword">if</span> (isLoading) <span class="keyword">return</span> &lt;Loading /&gt;;</div>
-                    <div class="code-line">    <span class="keyword">return</span> &lt;Component {...props} /&gt;;</div>
-                    <div class="code-line">  };</div>
-                    <div class="code-line">}</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Custom Hook pattern</span></div>
-                    <div class="code-line"><span class="keyword">function</span> useLocalStorage(key, initialValue) {</div>
-                    <div class="code-line">  <span class="keyword">const</span> [value, setValue] = useState(() => {</div>
-                    <div class="code-line">    <span class="keyword">const</span> item = localStorage.getItem(key);</div>
-                    <div class="code-line">    <span class="keyword">return</span> item ? JSON.parse(item) : initialValue;</div>
-                    <div class="code-line">  });</div>
-                    <div class="code-line"></div>
-                    <div class="code-line">  useEffect(() => {</div>
-                    <div class="code-line">    localStorage.setItem(key, JSON.stringify(value));</div>
-                    <div class="code-line">  }, [key, value]);</div>
-                    <div class="code-line"></div>
-                    <div class="code-line">  <span class="keyword">return</span> [value, setValue];</div>
-                    <div class="code-line">}</div>
+                    <div class="code-line"><span class="comment">// Render props pattern</span></div><div class="code-line"><span class="keyword">function</span> DataProvider({ render }) {</div><div class="code-line"> <span class="keyword">const</span> [data, setData] = useState(<span class="keyword">null</span>);</div><div class="code-line"> <span class="keyword">return</span> render(data);</div><div class="code-line">}</div><div class="code-line">&lt;DataProvider render={(data) =&gt; &lt;Display data={data} /&gt;} /&gt;</div><div class="code-line"></div><div class="code-line"><span class="comment">// Higher-Order Component (HOC)</span></div><div class="code-line"><span class="keyword">function</span> withLoading(Component) {</div><div class="code-line"> <span class="keyword">return</span> <span class="keyword">function</span> WithLoadingComponent({ isLoading, ...props }) {</div><div class="code-line"> <span class="keyword">if</span> (isLoading) <span class="keyword">return</span> &lt;Loading /&gt;;</div><div class="code-line"> <span class="keyword">return</span> &lt;Component {...props} /&gt;;</div><div class="code-line">  };</div><div class="code-line">}</div><div class="code-line"></div><div class="code-line"><span class="comment">// Custom Hook pattern</span></div><div class="code-line"><span class="keyword">function</span> useLocalStorage(key, initialValue) {</div><div class="code-line"> <span class="keyword">const</span> [value, setValue] = useState(() =&gt; {</div><div class="code-line"> <span class="keyword">const</span> item = localStorage.getItem(key);</div><div class="code-line"> <span class="keyword">return</span> item ? JSON.parse(item) : initialValue;</div><div class="code-line">  });</div><div class="code-line"></div><div class="code-line">  useEffect(() =&gt; {</div><div class="code-line">    localStorage.setItem(key, JSON.stringify(value));</div><div class="code-line">  }, [key, value]);</div><div class="code-line"></div><div class="code-line"> <span class="keyword">return</span> [value, setValue];</div><div class="code-line">}</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="performance-optimization">
                 <div class="card-header">⚡ Performance Optimization</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// React.memo - prevent unnecessary re-renders</span></div>
-                    <div class="code-line"><span class="keyword">const</span> MemoizedComponent = React.memo(<span class="keyword">function</span> MyComponent({ data }) {</div>
-                    <div class="code-line">  <span class="keyword">return</span> &lt;div&gt;{data}&lt;/div&gt;;</div>
-                    <div class="code-line">});</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Custom comparison function</span></div>
-                    <div class="code-line"><span class="keyword">const</span> MemoizedComponent = React.memo(MyComponent, (prevProps, nextProps) => {</div>
-                    <div class="code-line">  <span class="keyword">return</span> prevProps.id === nextProps.id;</div>
-                    <div class="code-line">});</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Lazy loading components</span></div>
-                    <div class="code-line"><span class="keyword">const</span> LazyComponent = React.lazy(() => <span class="keyword">import</span>(<span class="string">'./Component'</span>));</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="keyword">function</span> App() {</div>
-                    <div class="code-line">  <span class="keyword">return</span> (</div>
-                    <div class="code-line">    &lt;Suspense fallback={&lt;Loading /&gt;}&gt;</div>
-                    <div class="code-line">      &lt;LazyComponent /&gt;</div>
-                    <div class="code-line">    &lt;/Suspense&gt;</div>
-                    <div class="code-line">  );</div>
-                    <div class="code-line">}</div>
+                    <div class="code-line"><span class="comment">// React.memo - prevent unnecessary re-renders</span></div><div class="code-line"><span class="keyword">const</span> MemoizedComponent = React.memo(<span class="keyword">function</span> MyComponent({ data }) {</div><div class="code-line"> <span class="keyword">return</span> &lt;div&gt;{data}&lt;/div&gt;;</div><div class="code-line">});</div><div class="code-line"></div><div class="code-line"><span class="comment">// Custom comparison function</span></div><div class="code-line"><span class="keyword">const</span> MemoizedComponent = React.memo(MyComponent, (prevProps, nextProps) =&gt; {</div><div class="code-line"> <span class="keyword">return</span> prevProps.id === nextProps.id;</div><div class="code-line">});</div><div class="code-line"></div><div class="code-line"><span class="comment">// Lazy loading components</span></div><div class="code-line"><span class="keyword">const</span> LazyComponent = React.lazy(() =&gt; <span class="keyword">import</span>(<span class="string">'./Component'</span>));</div><div class="code-line"></div><div class="code-line"><span class="keyword">function</span> App() {</div><div class="code-line"> <span class="keyword">return</span> (</div><div class="code-line">    &lt;Suspense fallback={&lt;Loading /&gt;}&gt;</div><div class="code-line">      &lt;LazyComponent /&gt;</div><div class="code-line">    &lt;/Suspense&gt;</div><div class="code-line">  );</div><div class="code-line">}</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="state-management-patterns">
                 <div class="card-header">🔀 State Management Patterns</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// Lifting state up</span></div>
-                    <div class="code-line"><span class="keyword">function</span> Parent() {</div>
-                    <div class="code-line">  <span class="keyword">const</span> [value, setValue] = useState(<span class="string">''</span>);</div>
-                    <div class="code-line">  <span class="keyword">return</span> (</div>
-                    <div class="code-line">    &lt;&gt;</div>
-                    <div class="code-line">      &lt;ChildA value={value} onChange={setValue} /&gt;</div>
-                    <div class="code-line">      &lt;ChildB value={value} /&gt;</div>
-                    <div class="code-line">    &lt;/&gt;</div>
-                    <div class="code-line">  );</div>
-                    <div class="code-line">}</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Context for global state</span></div>
-                    <div class="code-line"><span class="keyword">const</span> AppContext = React.createContext();</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="keyword">function</span> AppProvider({ children }) {</div>
-                    <div class="code-line">  <span class="keyword">const</span> [state, setState] = useState(initialState);</div>
-                    <div class="code-line">  <span class="keyword">return</span> (</div>
-                    <div class="code-line">    &lt;AppContext.Provider value={{ state, setState }}&gt;</div>
-                    <div class="code-line">      {children}</div>
-                    <div class="code-line">    &lt;/AppContext.Provider&gt;</div>
-                    <div class="code-line">  );</div>
-                    <div class="code-line">}</div>
+                    <div class="code-line"><span class="comment">// Lifting state up</span></div><div class="code-line"><span class="keyword">function</span> Parent() {</div><div class="code-line"> <span class="keyword">const</span> [value, setValue] = useState(<span class="string">''</span>);</div><div class="code-line"> <span class="keyword">return</span> (</div><div class="code-line">    &lt;&gt;</div><div class="code-line">      &lt;ChildA value={value} onChange={setValue} /&gt;</div><div class="code-line">      &lt;ChildB value={value} /&gt;</div><div class="code-line">    &lt;/&gt;</div><div class="code-line">  );</div><div class="code-line">}</div><div class="code-line"></div><div class="code-line"><span class="comment">// Context for global state</span></div><div class="code-line"><span class="keyword">const</span> AppContext = React.createContext();</div><div class="code-line"></div><div class="code-line"><span class="keyword">function</span> AppProvider({ children }) {</div><div class="code-line"> <span class="keyword">const</span> [state, setState] = useState(initialState);</div><div class="code-line"> <span class="keyword">return</span> (</div><div class="code-line">    &lt;AppContext.Provider value={{ state, setState }}&gt;</div><div class="code-line">      {children}</div><div class="code-line">    &lt;/AppContext.Provider&gt;</div><div class="code-line">  );</div><div class="code-line">}</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="error-boundaries">
                 <div class="card-header">🛡️ Error Boundaries</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// Error boundary class component</span></div>
-                    <div class="code-line"><span class="keyword">class</span> ErrorBoundary <span class="keyword">extends</span> React.Component {</div>
-                    <div class="code-line">  constructor(props) {</div>
-                    <div class="code-line">    <span class="keyword">super</span>(props);</div>
-                    <div class="code-line">    <span class="keyword">this</span>.state = { hasError: <span class="keyword">false</span> };</div>
-                    <div class="code-line">  }</div>
-                    <div class="code-line"></div>
-                    <div class="code-line">  <span class="keyword">static</span> getDerivedStateFromError(error) {</div>
-                    <div class="code-line">    <span class="keyword">return</span> { hasError: <span class="keyword">true</span> };</div>
-                    <div class="code-line">  }</div>
-                    <div class="code-line"></div>
-                    <div class="code-line">  componentDidCatch(error, errorInfo) {</div>
-                    <div class="code-line">    console.error(<span class="string">'Error:'</span>, error, errorInfo);</div>
-                    <div class="code-line">  }</div>
-                    <div class="code-line"></div>
-                    <div class="code-line">  render() {</div>
-                    <div class="code-line">    <span class="keyword">if</span> (<span class="keyword">this</span>.state.hasError) {</div>
-                    <div class="code-line">      <span class="keyword">return</span> &lt;h1&gt;Something went wrong.&lt;/h1&gt;;</div>
-                    <div class="code-line">    }</div>
-                    <div class="code-line">    <span class="keyword">return</span> <span class="keyword">this</span>.props.children;</div>
-                    <div class="code-line">  }</div>
-                    <div class="code-line">}</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Usage</span></div>
-                    <div class="code-line">&lt;ErrorBoundary&gt;</div>
-                    <div class="code-line">  &lt;MyComponent /&gt;</div>
-                    <div class="code-line">&lt;/ErrorBoundary&gt;</div>
-                </div>
-                <div class="note">
-                    <strong>Note:</strong> Error boundaries only catch errors in child components, not in event handlers or async code.
+                    <div class="code-line"><span class="comment">// Error boundary class component</span></div><div class="code-line"><span class="keyword">class</span> ErrorBoundary <span class="keyword">extends</span> React.Component {</div><div class="code-line">  constructor(props) {</div><div class="code-line"> <span class="keyword">super</span>(props);</div><div class="code-line"> <span class="keyword">this</span>.state = { hasError: <span class="keyword">false</span> };</div><div class="code-line">  }</div><div class="code-line"></div><div class="code-line"> <span class="keyword">static</span> getDerivedStateFromError(error) {</div><div class="code-line"> <span class="keyword">return</span> { hasError: <span class="keyword">true</span> };</div><div class="code-line">  }</div><div class="code-line"></div><div class="code-line">  componentDidCatch(error, errorInfo) {</div><div class="code-line">    console.error(<span class="string">'Error:'</span>, error, errorInfo);</div><div class="code-line">  }</div><div class="code-line"></div><div class="code-line">  render() {</div><div class="code-line"> <span class="keyword">if</span> (<span class="keyword">this</span>.state.hasError) {</div><div class="code-line"> <span class="keyword">return</span> &lt;h1&gt;Something went wrong.&lt;/h1&gt;;</div><div class="code-line">    }</div><div class="code-line"> <span class="keyword">return</span> <span class="keyword">this</span>.props.children;</div><div class="code-line">  }</div><div class="code-line">}</div><div class="code-line"></div><div class="code-line"><span class="comment">// Usage</span></div><div class="code-line">&lt;ErrorBoundary&gt;</div><div class="code-line">  &lt;MyComponent /&gt;</div><div class="code-line">&lt;/ErrorBoundary&gt;</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="component-lifecycle-class-components">
                 <div class="card-header">🎬 Component Lifecycle (Class Components)</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">componentDidMount()</div>
-                    <div class="cmd-desc">Called after component is mounted (similar to useEffect with [])</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">componentDidUpdate(prevProps, prevState)</div>
-                    <div class="cmd-desc">Called after component updates (similar to useEffect with deps)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">componentWillUnmount()</div>
-                    <div class="cmd-desc">Called before component is unmounted (similar to useEffect cleanup)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">shouldComponentUpdate(nextProps, nextState)</div>
-                    <div class="cmd-desc">Return false to prevent re-render (similar to React.memo)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">getDerivedStateFromProps(props, state)</div>
-                    <div class="cmd-desc">Update state based on props changes (rarely needed)</div>
-                </div>
-                <div class="tip">
-                    💡 Functional components with hooks are now preferred over class components!
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="refs-and-dom-access">
                 <div class="card-header">🔗 Refs and DOM Access</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// Create ref</span></div>
-                    <div class="code-line"><span class="keyword">const</span> inputRef = useRef(<span class="keyword">null</span>);</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Attach to element</span></div>
-                    <div class="code-line">&lt;input ref={inputRef} /&gt;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Access DOM element</span></div>
-                    <div class="code-line">inputRef.current.focus();</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Forward ref to child component</span></div>
-                    <div class="code-line"><span class="keyword">const</span> FancyInput = React.forwardRef((props, ref) => (</div>
-                    <div class="code-line">  &lt;input ref={ref} {...props} /&gt;</div>
-                    <div class="code-line">));</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Usage</span></div>
-                    <div class="code-line"><span class="keyword">const</span> ref = useRef();</div>
-                    <div class="code-line">&lt;FancyInput ref={ref} /&gt;</div>
+                    <div class="code-line"><span class="comment">// Create ref</span></div><div class="code-line"><span class="keyword">const</span> inputRef = useRef(<span class="keyword">null</span>);</div><div class="code-line"></div><div class="code-line"><span class="comment">// Attach to element</span></div><div class="code-line">&lt;input ref={inputRef} /&gt;</div><div class="code-line"></div><div class="code-line"><span class="comment">// Access DOM element</span></div><div class="code-line">inputRef.current.focus();</div><div class="code-line"></div><div class="code-line"><span class="comment">// Forward ref to child component</span></div><div class="code-line"><span class="keyword">const</span> FancyInput = React.forwardRef((props, ref) =&gt; (</div><div class="code-line">  &lt;input ref={ref} {...props} /&gt;</div><div class="code-line">));</div><div class="code-line"></div><div class="code-line"><span class="comment">// Usage</span></div><div class="code-line"><span class="keyword">const</span> ref = useRef();</div><div class="code-line">&lt;FancyInput ref={ref} /&gt;</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="styling-approaches">
                 <div class="card-header">🎨 Styling Approaches</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// Inline styles</span></div>
-                    <div class="code-line">&lt;div style={{ color: <span class="string">'red'</span>, fontSize: <span class="string">'16px'</span> }}&gt;Text&lt;/div&gt;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// CSS classes</span></div>
-                    <div class="code-line">&lt;div className=<span class="string">"container active"</span>&gt;Content&lt;/div&gt;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Conditional classes</span></div>
-                    <div class="code-line">&lt;div className={`btn ${isActive ? <span class="string">'active'</span> : <span class="string">''</span>}`}&gt;Button&lt;/div&gt;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// CSS Modules</span></div>
-                    <div class="code-line"><span class="keyword">import</span> styles <span class="keyword">from</span> <span class="string">'./Button.module.css'</span>;</div>
-                    <div class="code-line">&lt;button className={styles.button}&gt;Click&lt;/button&gt;</div>
+                    <div class="code-line"><span class="comment">// Inline styles</span></div><div class="code-line">&lt;div style={{ color: <span class="string">'red'</span>, fontSize: <span class="string">'16px'</span> }}&gt;Text&lt;/div&gt;</div><div class="code-line"></div><div class="code-line"><span class="comment">// CSS classes</span></div><div class="code-line">&lt;div className=<span class="string">"container active"</span>&gt;Content&lt;/div&gt;</div><div class="code-line"></div><div class="code-line"><span class="comment">// Conditional classes</span></div><div class="code-line">&lt;div className={`btn ${isActive ? <span class="string">'active'</span> : <span class="string">''</span>}`}&gt;Button&lt;/div&gt;</div><div class="code-line"></div><div class="code-line"><span class="comment">// CSS Modules</span></div><div class="code-line"><span class="keyword">import</span> styles <span class="keyword">from</span> <span class="string">'./Button.module.css'</span>;</div><div class="code-line">&lt;button className={styles.button}&gt;Click&lt;/button&gt;</div>
+                </div>
+            </div>
+            <div class="card" id="best-practices">
+                <div class="card-header">💡 Best Practices</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="common-patterns">
+                <div class="card-header">🚀 Common Patterns</div>
+                <div class="code-block">
+                    <div class="code-line"><span class="comment">// Pattern 1: Fetch data on mount</span></div><div class="code-line">useEffect(() =&gt; {</div><div class="code-line"> <span class="keyword">async</span> <span class="keyword">function</span> fetchData() {</div><div class="code-line"> <span class="keyword">const</span> response = <span class="keyword">await</span> fetch(<span class="string">'/api/data'</span>);</div><div class="code-line"> <span class="keyword">const</span> data = <span class="keyword">await</span> response.json();</div><div class="code-line">    setData(data);</div><div class="code-line">  }</div><div class="code-line">  fetchData();</div><div class="code-line">}, []);</div>
                 </div>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header">💡 Best Practices</div>
-            <div class="tip">
-                💡 <strong>Keep Components Small:</strong> Break down large components into smaller, reusable pieces for better maintainability.
-            </div>
-            <div class="tip">
-                💡 <strong>Use Functional Components:</strong> Prefer functional components with hooks over class components for cleaner code.
-            </div>
-            <div class="tip">
-                💡 <strong>Avoid Inline Functions in JSX:</strong> Define event handlers outside JSX or use useCallback to prevent unnecessary re-renders.
-            </div>
-            <div class="tip">
-                💡 <strong>Destructure Props:</strong> Destructure props in function parameters for cleaner code and better readability.
-            </div>
-            <div class="tip">
-                💡 <strong>Use Key Prop Correctly:</strong> Always provide stable, unique keys when rendering lists to help React optimize updates.
-            </div>
-            <div class="warning">
-                ⚠️ <strong>Don't Mutate State:</strong> Always create new objects/arrays when updating state. Never modify state directly!
-            </div>
-            <div class="warning">
-                ⚠️ <strong>Avoid Index as Key:</strong> Don't use array index as key if the list can be reordered or items can be added/removed.
-            </div>
-            <div class="warning">
-                ⚠️ <strong>Clean Up Effects:</strong> Always return cleanup functions from useEffect to prevent memory leaks.
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">🚀 Common Patterns</div>
-            
-            <div class="code-block">
-                <div class="code-line"><span class="comment">// Pattern 1: Fetch data on mount</span></div>
-                <div class="code-line">useEffect(() => {</div>
-                <div class="code-line">  <span class="keyword">async</span> <span class="keyword">function</span> fetchData() {</div>
-                <div class="code-line">    <span class="keyword">const</span> response = <span class="keyword">await</span> fetch(<span class="string">'/api/data'</span>);</div>
-                <div class="code-line">    <span class="keyword">const</span> data = <span class="keyword">await</span> response.json();</div>
-                <div class="code-line">    setData(data);</div>
-                <div class="code-line">  }</div>
-                <div class="code-line">  fetchData();</div>
-                <div class="code-line">}, []);</div>
-            </div>
-
-            <div class="code-block">
-                <div class="code-line"><span class="comment">// Pattern 2: Debounced input</span></div>
-                <div class="code-line"><span class="keyword">const</span> [searchTerm, setSearchTerm] = useState(<span class="string">''</span>);</div>
-                <div class="code-line"><span class="keyword">const</span> [debouncedTerm, setDebouncedTerm] = useState(searchTerm);</div>
-                <div class="code-line"></div>
-                <div class="code-line">useEffect(() => {</div>
-                <div class="code-line">  <span class="keyword">const</span> timer = setTimeout(() => {</div>
-                <div class="code-line">    setDebouncedTerm(searchTerm);</div>
-                <div class="code-line">  }, <span class="string">500</span>);</div>
-                <div class="code-line">  <span class="keyword">return</span> () => clearTimeout(timer);</div>
-                <div class="code-line">}, [searchTerm]);</div>
-            </div>
-
-            <div class="code-block">
-                <div class="code-line"><span class="comment">// Pattern 3: Toggle state</span></div>
-                <div class="code-line"><span class="keyword">const</span> [isOpen, setIsOpen] = useState(<span class="keyword">false</span>);</div>
-                <div class="code-line"><span class="keyword">const</span> toggle = () => setIsOpen(prev => !prev);</div>
-            </div>
-
-            <div class="code-block">
-                <div class="code-line"><span class="comment">// Pattern 4: Previous value</span></div>
-                <div class="code-line"><span class="keyword">function</span> usePrevious(value) {</div>
-                <div class="code-line">  <span class="keyword">const</span> ref = useRef();</div>
-                <div class="code-line">  useEffect(() => {</div>
-                <div class="code-line">    ref.current = value;</div>
-                <div class="code-line">  }, [value]);</div>
-                <div class="code-line">  <span class="keyword">return</span> ref.current;</div>
-                <div class="code-line">}</div>
-            </div>
-
-            <div class="code-block">
-                <div class="code-line"><span class="comment">// Pattern 5: Window size hook</span></div>
-                <div class="code-line"><span class="keyword">function</span> useWindowSize() {</div>
-                <div class="code-line">  <span class="keyword">const</span> [size, setSize] = useState({</div>
-                <div class="code-line">    width: window.innerWidth,</div>
-                <div class="code-line">    height: window.innerHeight</div>
-                <div class="code-line">  });</div>
-                <div class="code-line"></div>
-                <div class="code-line">  useEffect(() => {</div>
-                <div class="code-line">    <span class="keyword">const</span> handleResize = () => {</div>
-                <div class="code-line">      setSize({ width: window.innerWidth, height: window.innerHeight });</div>
-                <div class="code-line">    };</div>
-                <div class="code-line">    window.addEventListener(<span class="string">'resize'</span>, handleResize);</div>
-                <div class="code-line">    <span class="keyword">return</span> () => window.removeEventListener(<span class="string">'resize'</span>, handleResize);</div>
-                <div class="code-line">  }, []);</div>
-                <div class="code-line"></div>
-                <div class="code-line">  <span class="keyword">return</span> size;</div>
-                <div class="code-line">}</div>
-            </div>
-
-            <div class="code-block">
-                <div class="code-line"><span class="comment">// Pattern 6: Form with multiple inputs</span></div>
-                <div class="code-line"><span class="keyword">const</span> [formData, setFormData] = useState({</div>
-                <div class="code-line">  name: <span class="string">''</span>,</div>
-                <div class="code-line">  email: <span class="string">''</span>,</div>
-                <div class="code-line">  age: <span class="string">0</span></div>
-                <div class="code-line">});</div>
-                <div class="code-line"></div>
-                <div class="code-line"><span class="keyword">const</span> handleChange = (e) => {</div>
-                <div class="code-line">  setFormData({</div>
-                <div class="code-line">    ...formData,</div>
-                <div class="code-line">    [e.target.name]: e.target.value</div>
-                <div class="code-line">  });</div>
-                <div class="code-line">};</div>
-            </div>
-        </div>
-
-        <div class="footer">
-            <p>React Cheatsheet - Modern React Development</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">⚛️ For React 18+ - Check the official React documentation for the latest features</p>
-        </div>
+        <footer>
+            <p>&copy; 2025 Cheatsheets Collection. Open source and community driven.</p>
+        </footer>
     </div>
 </body>
 </html>

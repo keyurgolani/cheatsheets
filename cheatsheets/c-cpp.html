@@ -3,785 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="C and C++ programming language reference with syntax, STL, pointers, and memory management.">
     <title>C/C++ Cheatsheet</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #e0e6ed;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 2rem;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            font-size: 3rem;
-            background: linear-gradient(135deg, #a8b2c1 0%, #6c7a89 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #8b95a5;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .card {
-            background: rgba(30, 41, 59, 0.6);
-            border: 1px solid rgba(100, 116, 139, 0.3);
-            border-radius: 12px;
-            padding: 1.5rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: rgba(168, 178, 193, 0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(168, 178, 193, 0.15);
-        }
-
-        .card-header {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #a8b2c1;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid rgba(168, 178, 193, 0.3);
-        }
-
-        .code-block {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 1rem;
-            border-radius: 6px;
-            margin: 0.5rem 0;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            overflow-x: auto;
-        }
-
-        .code-line {
-            color: #a5d6ff;
-            line-height: 1.5;
-        }
-
-        .comment {
-            color: #6a9955;
-        }
-
-        .keyword {
-            color: #dcdcaa;
-        }
-
-        .string {
-            color: #ce9178;
-        }
-
-        .cmd-row {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.5rem;
-            margin-bottom: 0.75rem;
-            padding: 0.5rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 6px;
-            transition: background 0.2s ease;
-        }
-
-        .cmd-row:hover {
-            background: rgba(168, 178, 193, 0.1);
-        }
-
-        .cmd-name {
-            color: #a8b2c1;
-            font-weight: 600;
-            font-family: 'Courier New', monospace;
-            font-size: 0.95rem;
-        }
-
-        .cmd-desc {
-            color: #cbd5e1;
-            padding-left: 1rem;
-            font-size: 0.9rem;
-        }
-
-        code {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            color: #a5d6ff;
-            font-size: 0.9em;
-        }
-
-        .note {
-            background: rgba(59, 130, 246, 0.1);
-            border-left: 4px solid #3b82f6;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .tip {
-            background: rgba(16, 185, 129, 0.1);
-            border-left: 4px solid #10b981;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .warning {
-            background: rgba(239, 68, 68, 0.1);
-            border-left: 4px solid #ef4444;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(100, 116, 139, 0.3);
-            color: #8b95a5;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../script.js" defer></script>
 </head>
 <body>
-    <div class="container">
-        <h1>⚙️ C/C++ Essentials</h1>
-        <p class="subtitle">Core C/C++ syntax, pointers, memory management, and STL</p>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-brand">
+                <i class="ph ph-books"></i> Cheatsheets
+            </a>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="btn-icon" aria-label="Toggle theme">
+                    <i class="ph ph-moon"></i>
+                </button>
+                <button id="download-btn" class="btn-icon" aria-label="Download PDF">
+                    <i class="ph ph-download-simple"></i>
+                </button>
+                <a href="https://github.com/keyurgolani/Cheatsheets" class="btn-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                    <i class="ph ph-github-logo"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
 
-        <div class="grid">
-            <div class="card">
+    <div class="container">
+        <header class="cheatsheet-header">
+            <h1>⚙️ C/C++ Essentials</h1>
+            <p>Core C/C++ syntax, pointers, memory management, and STL</p>
+            <div class="search-container" style="margin-top: 1.5rem; margin-bottom: 0;">
+                <span class="search-icon"><i class="ph ph-magnifying-glass"></i></span>
+                <input type="text" class="search-input" id="cheatsheet-search" placeholder="Filter this cheatsheet..." aria-label="Filter cheatsheet">
+            </div>
+        </header>
+
+        <div class="masonry-grid" id="cheatsheet-grid">
+            
+            <div class="card" id="basic-c-syntax">
                 <div class="card-header">🎯 Basic C Syntax</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// Hello World in C</span></div>
-                    <div class="code-line"><span class="keyword">#include</span> &lt;stdio.h&gt;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="keyword">int</span> main() {</div>
-                    <div class="code-line">    printf(<span class="string">"Hello, World!\n"</span>);</div>
-                    <div class="code-line">    <span class="keyword">return</span> 0;</div>
-                    <div class="code-line">}</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">gcc program.c -o program</div>
-                    <div class="cmd-desc">Compile C program</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">g++ program.cpp -o program</div>
-                    <div class="cmd-desc">Compile C++ program</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">./program</div>
-                    <div class="cmd-desc">Run compiled program</div>
+                    <div class="code-line"><span class="comment">// Hello World in C</span></div><div class="code-line"><span class="keyword">#include</span> &lt;stdio.h&gt;</div><div class="code-line"></div><div class="code-line"><span class="keyword">int</span> main() {</div><div class="code-line">    printf(<span class="string">"Hello, World!\n"</span>);</div><div class="code-line"> <span class="keyword">return</span> 0;</div><div class="code-line">}</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="data-types">
                 <div class="card-header">📝 Data Types</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// Integer types</span></div>
-                    <div class="code-line"><span class="keyword">char</span> c = <span class="string">'A'</span>;           <span class="comment">// 1 byte</span></div>
-                    <div class="code-line"><span class="keyword">short</span> s = 32000;        <span class="comment">// 2 bytes</span></div>
-                    <div class="code-line"><span class="keyword">int</span> i = 100000;         <span class="comment">// 4 bytes</span></div>
-                    <div class="code-line"><span class="keyword">long</span> l = 100000L;       <span class="comment">// 4/8 bytes</span></div>
-                    <div class="code-line"><span class="keyword">long long</span> ll = 100000LL; <span class="comment">// 8 bytes</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Floating point</span></div>
-                    <div class="code-line"><span class="keyword">float</span> f = 3.14f;        <span class="comment">// 4 bytes</span></div>
-                    <div class="code-line"><span class="keyword">double</span> d = 3.14159;     <span class="comment">// 8 bytes</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Modifiers</span></div>
-                    <div class="code-line"><span class="keyword">unsigned int</span> ui = 100;  <span class="comment">// Only positive</span></div>
-                    <div class="code-line"><span class="keyword">signed int</span> si = -100;   <span class="comment">// Positive/negative</span></div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">sizeof(type)</div>
-                    <div class="cmd-desc">Get size of type in bytes</div>
+                    <div class="code-line"><span class="comment">// Integer types</span></div><div class="code-line"><span class="keyword">char</span> c = <span class="string">'A'</span>;           <span class="comment">// 1 byte</span></div><div class="code-line"><span class="keyword">short</span> s = 32000;        <span class="comment">// 2 bytes</span></div><div class="code-line"><span class="keyword">int</span> i = 100000;         <span class="comment">// 4 bytes</span></div><div class="code-line"><span class="keyword">long</span> l = 100000L;       <span class="comment">// 4/8 bytes</span></div><div class="code-line"><span class="keyword">long long</span> ll = 100000LL; <span class="comment">// 8 bytes</span></div><div class="code-line"></div><div class="code-line"><span class="comment">// Floating point</span></div><div class="code-line"><span class="keyword">float</span> f = 3.14f;        <span class="comment">// 4 bytes</span></div><div class="code-line"><span class="keyword">double</span> d = 3.14159;     <span class="comment">// 8 bytes</span></div><div class="code-line"></div><div class="code-line"><span class="comment">// Modifiers</span></div><div class="code-line"><span class="keyword">unsigned int</span> ui = 100;  <span class="comment">// Only positive</span></div><div class="code-line"><span class="keyword">signed int</span> si = -100;   <span class="comment">// Positive/negative</span></div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="pointers-basics">
                 <div class="card-header">🔗 Pointers Basics</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// Pointer declaration and usage</span></div>
-                    <div class="code-line"><span class="keyword">int</span> x = 10;</div>
-                    <div class="code-line"><span class="keyword">int</span> *ptr = &x;         <span class="comment">// Pointer to x</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line">printf(<span class="string">"%d"</span>, *ptr);      <span class="comment">// Dereference: prints 10</span></div>
-                    <div class="code-line">printf(<span class="string">"%p"</span>, ptr);       <span class="comment">// Address of x</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line">*ptr = 20;               <span class="comment">// Modify x through pointer</span></div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">&variable</div>
-                    <div class="cmd-desc">Address-of operator (get memory address)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">*pointer</div>
-                    <div class="cmd-desc">Dereference operator (access value at address)</div>
-                </div>
-                <div class="warning">
-                    ⚠️ Always initialize pointers! Uninitialized pointers can cause crashes.
+                    <div class="code-line"><span class="comment">// Pointer declaration and usage</span></div><div class="code-line"><span class="keyword">int</span> x = 10;</div><div class="code-line"><span class="keyword">int</span> *ptr = &amp;x         <span class="comment">// Pointer to x</span></div><div class="code-line"></div><div class="code-line">printf(<span class="string">"%d"</span>, *ptr);      <span class="comment">// Dereference: prints 10</span></div><div class="code-line">printf(<span class="string">"%p"</span>, ptr);       <span class="comment">// Address of x</span></div><div class="code-line"></div><div class="code-line">*ptr = 20;               <span class="comment">// Modify x through pointer</span></div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="pointer-arithmetic">
                 <div class="card-header">🧮 Pointer Arithmetic</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="keyword">int</span> arr[] = {10, 20, 30, 40};</div>
-                    <div class="code-line"><span class="keyword">int</span> *p = arr;           <span class="comment">// Points to arr[0]</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line">printf(<span class="string">"%d"</span>, *p);        <span class="comment">// 10</span></div>
-                    <div class="code-line">printf(<span class="string">"%d"</span>, *(p + 1));  <span class="comment">// 20</span></div>
-                    <div class="code-line">printf(<span class="string">"%d"</span>, *(p + 2));  <span class="comment">// 30</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line">p++;                     <span class="comment">// Move to next element</span></div>
-                    <div class="code-line">printf(<span class="string">"%d"</span>, *p);        <span class="comment">// 20</span></div>
-                </div>
-                <div class="note">
-                    Pointer arithmetic automatically scales by the size of the type. <code>p + 1</code> moves by <code>sizeof(int)</code> bytes, not 1 byte.
+                    <div class="code-line"><span class="keyword">int</span> arr[] = {10, 20, 30, 40};</div><div class="code-line"><span class="keyword">int</span> *p = arr;           <span class="comment">// Points to arr[0]</span></div><div class="code-line"></div><div class="code-line">printf(<span class="string">"%d"</span>, *p);        <span class="comment">// 10</span></div><div class="code-line">printf(<span class="string">"%d"</span>, *(p + 1));  <span class="comment">// 20</span></div><div class="code-line">printf(<span class="string">"%d"</span>, *(p + 2));  <span class="comment">// 30</span></div><div class="code-line"></div><div class="code-line">p++;                     <span class="comment">// Move to next element</span></div><div class="code-line">printf(<span class="string">"%d"</span>, *p);        <span class="comment">// 20</span></div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="pointer-types">
                 <div class="card-header">🔀 Pointer Types</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// Null pointer</span></div>
-                    <div class="code-line"><span class="keyword">int</span> *ptr = NULL;        <span class="comment">// C</span></div>
-                    <div class="code-line"><span class="keyword">int</span> *ptr = nullptr;     <span class="comment">// C++11</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Void pointer (generic)</span></div>
-                    <div class="code-line"><span class="keyword">void</span> *vptr;</div>
-                    <div class="code-line"><span class="keyword">int</span> x = 10;</div>
-                    <div class="code-line">vptr = &x;               <span class="comment">// Can point to any type</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Pointer to pointer</span></div>
-                    <div class="code-line"><span class="keyword">int</span> **pptr = &ptr;     <span class="comment">// Double pointer</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Const pointer</span></div>
-                    <div class="code-line"><span class="keyword">const int</span> *p1;          <span class="comment">// Can't modify value</span></div>
-                    <div class="code-line"><span class="keyword">int</span> *<span class="keyword">const</span> p2;          <span class="comment">// Can't modify pointer</span></div>
-                    <div class="code-line"><span class="keyword">const int</span> *<span class="keyword">const</span> p3;   <span class="comment">// Both constant</span></div>
+                    <div class="code-line"><span class="comment">// Null pointer</span></div><div class="code-line"><span class="keyword">int</span> *ptr = NULL;        <span class="comment">// C</span></div><div class="code-line"><span class="keyword">int</span> *ptr = nullptr;     <span class="comment">// C++11</span></div><div class="code-line"></div><div class="code-line"><span class="comment">// Void pointer (generic)</span></div><div class="code-line"><span class="keyword">void</span> *vptr;</div><div class="code-line"><span class="keyword">int</span> x = 10;</div><div class="code-line">vptr = &amp;x               <span class="comment">// Can point to any type</span></div><div class="code-line"></div><div class="code-line"><span class="comment">// Pointer to pointer</span></div><div class="code-line"><span class="keyword">int</span> **pptr = &amp;ptr     <span class="comment">// Double pointer</span></div><div class="code-line"></div><div class="code-line"><span class="comment">// Const pointer</span></div><div class="code-line"><span class="keyword">const int</span> *p1;          <span class="comment">// Can't modify value</span></div><div class="code-line"><span class="keyword">int</span> *<span class="keyword">const</span> p2;          <span class="comment">// Can't modify pointer</span></div><div class="code-line"><span class="keyword">const int</span> *<span class="keyword">const</span> p3;   <span class="comment">// Both constant</span></div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="dynamic-memory-c">
                 <div class="card-header">💾 Dynamic Memory (C)</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="keyword">#include</span> &lt;stdlib.h&gt;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Allocate memory</span></div>
-                    <div class="code-line"><span class="keyword">int</span> *ptr = (<span class="keyword">int</span>*)malloc(<span class="keyword">sizeof</span>(<span class="keyword">int</span>) * 10);</div>
-                    <div class="code-line"><span class="keyword">if</span> (ptr == NULL) {</div>
-                    <div class="code-line">    <span class="comment">// Handle allocation failure</span></div>
-                    <div class="code-line">}</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Use memory</span></div>
-                    <div class="code-line">ptr[0] = 42;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Free memory</span></div>
-                    <div class="code-line">free(ptr);</div>
-                    <div class="code-line">ptr = NULL;              <span class="comment">// Good practice</span></div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">malloc(size)</div>
-                    <div class="cmd-desc">Allocate uninitialized memory</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">calloc(count, size)</div>
-                    <div class="cmd-desc">Allocate zero-initialized memory</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">realloc(ptr, new_size)</div>
-                    <div class="cmd-desc">Resize allocated memory</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">free(ptr)</div>
-                    <div class="cmd-desc">Deallocate memory</div>
+                    <div class="code-line"><span class="keyword">#include</span> &lt;stdlib.h&gt;</div><div class="code-line"></div><div class="code-line"><span class="comment">// Allocate memory</span></div><div class="code-line"><span class="keyword">int</span> *ptr = (<span class="keyword">int</span>*)malloc(<span class="keyword">sizeof</span>(<span class="keyword">int</span>) * 10);</div><div class="code-line"><span class="keyword">if</span> (ptr == NULL) {</div><div class="code-line"> <span class="comment">// Handle allocation failure</span></div><div class="code-line">}</div><div class="code-line"></div><div class="code-line"><span class="comment">// Use memory</span></div><div class="code-line">ptr[0] = 42;</div><div class="code-line"></div><div class="code-line"><span class="comment">// Free memory</span></div><div class="code-line">free(ptr);</div><div class="code-line">ptr = NULL;              <span class="comment">// Good practice</span></div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="dynamic-memory-c">
                 <div class="card-header">🆕 Dynamic Memory (C++)</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// Single object</span></div>
-                    <div class="code-line"><span class="keyword">int</span> *ptr = <span class="keyword">new int</span>;         <span class="comment">// Allocate</span></div>
-                    <div class="code-line">*ptr = 42;</div>
-                    <div class="code-line"><span class="keyword">delete</span> ptr;                  <span class="comment">// Deallocate</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Array</span></div>
-                    <div class="code-line"><span class="keyword">int</span> *arr = <span class="keyword">new int</span>[10];     <span class="comment">// Allocate array</span></div>
-                    <div class="code-line">arr[0] = 42;</div>
-                    <div class="code-line"><span class="keyword">delete</span>[] arr;                <span class="comment">// Deallocate array</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// With initialization</span></div>
-                    <div class="code-line"><span class="keyword">int</span> *p = <span class="keyword">new int</span>(42);      <span class="comment">// Initialize to 42</span></div>
-                </div>
-                <div class="warning">
-                    ⚠️ Always use <code>delete[]</code> for arrays allocated with <code>new[]</code>. Mismatched new/delete causes undefined behavior!
+                    <div class="code-line"><span class="comment">// Single object</span></div><div class="code-line"><span class="keyword">int</span> *ptr = <span class="keyword">new int</span>;         <span class="comment">// Allocate</span></div><div class="code-line">*ptr = 42;</div><div class="code-line"><span class="keyword">delete</span> ptr;                  <span class="comment">// Deallocate</span></div><div class="code-line"></div><div class="code-line"><span class="comment">// Array</span></div><div class="code-line"><span class="keyword">int</span> *arr = <span class="keyword">new int</span>[10];     <span class="comment">// Allocate array</span></div><div class="code-line">arr[0] = 42;</div><div class="code-line"><span class="keyword">delete</span>[] arr;                <span class="comment">// Deallocate array</span></div><div class="code-line"></div><div class="code-line"><span class="comment">// With initialization</span></div><div class="code-line"><span class="keyword">int</span> *p = <span class="keyword">new int</span>(42);      <span class="comment">// Initialize to 42</span></div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="common-memory-pitfalls">
                 <div class="card-header">⚠️ Common Memory Pitfalls</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Memory Leak</div>
-                    <div class="cmd-desc">Forgetting to free/delete allocated memory</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Dangling Pointer</div>
-                    <div class="cmd-desc">Using pointer after memory is freed</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Double Free</div>
-                    <div class="cmd-desc">Freeing the same memory twice</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Buffer Overflow</div>
-                    <div class="cmd-desc">Writing beyond allocated memory bounds</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Null Pointer Dereference</div>
-                    <div class="cmd-desc">Dereferencing a NULL/nullptr pointer</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">Uninitialized Memory</div>
-                    <div class="cmd-desc">Reading memory before initialization</div>
-                </div>
-                <div class="tip">
-                    💡 Use tools like Valgrind (Linux) or AddressSanitizer to detect memory errors during development.
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="c-classes">
                 <div class="card-header">🏗️ C++ Classes</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="keyword">class</span> Rectangle {</div>
-                    <div class="code-line"><span class="keyword">private</span>:</div>
-                    <div class="code-line">    <span class="keyword">int</span> width, height;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="keyword">public</span>:</div>
-                    <div class="code-line">    <span class="comment">// Constructor</span></div>
-                    <div class="code-line">    Rectangle(<span class="keyword">int</span> w, <span class="keyword">int</span> h) : width(w), height(h) {}</div>
-                    <div class="code-line"></div>
-                    <div class="code-line">    <span class="comment">// Member function</span></div>
-                    <div class="code-line">    <span class="keyword">int</span> area() {</div>
-                    <div class="code-line">        <span class="keyword">return</span> width * height;</div>
-                    <div class="code-line">    }</div>
-                    <div class="code-line"></div>
-                    <div class="code-line">    <span class="comment">// Destructor</span></div>
-                    <div class="code-line">    ~Rectangle() {</div>
-                    <div class="code-line">        <span class="comment">// Cleanup code</span></div>
-                    <div class="code-line">    }</div>
-                    <div class="code-line">};</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Usage</span></div>
-                    <div class="code-line">Rectangle rect(10, 5);</div>
-                    <div class="code-line">cout &lt;&lt; rect.area();    <span class="comment">// 50</span></div>
+                    <div class="code-line"><span class="keyword">class</span> Rectangle {</div><div class="code-line"><span class="keyword">private</span>:</div><div class="code-line"> <span class="keyword">int</span> width, height;</div><div class="code-line"></div><div class="code-line"><span class="keyword">public</span>:</div><div class="code-line"> <span class="comment">// Constructor</span></div><div class="code-line">    Rectangle(<span class="keyword">int</span> w, <span class="keyword">int</span> h) : width(w), height(h) {}</div><div class="code-line"></div><div class="code-line"> <span class="comment">// Member function</span></div><div class="code-line"> <span class="keyword">int</span> area() {</div><div class="code-line"> <span class="keyword">return</span> width * height;</div><div class="code-line">    }</div><div class="code-line"></div><div class="code-line"> <span class="comment">// Destructor</span></div><div class="code-line">    ~Rectangle() {</div><div class="code-line"> <span class="comment">// Cleanup code</span></div><div class="code-line">    }</div><div class="code-line">};</div><div class="code-line"></div><div class="code-line"><span class="comment">// Usage</span></div><div class="code-line">Rectangle rect(10, 5);</div><div class="code-line">cout &lt;&lt; rect.area();    <span class="comment">// 50</span></div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="stl-containers">
                 <div class="card-header">📦 STL Containers</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="keyword">#include</span> &lt;vector&gt;</div>
-                    <div class="code-line"><span class="keyword">#include</span> &lt;map&gt;</div>
-                    <div class="code-line"><span class="keyword">#include</span> &lt;set&gt;</div>
-                    <div class="code-line"><span class="keyword">#include</span> &lt;queue&gt;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Vector - dynamic array</span></div>
-                    <div class="code-line">vector&lt;<span class="keyword">int</span>&gt; vec = {1, 2, 3};</div>
-                    <div class="code-line">vec.push_back(4);</div>
-                    <div class="code-line">vec[0] = 10;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Map - key-value pairs</span></div>
-                    <div class="code-line">map&lt;string, <span class="keyword">int</span>&gt; ages;</div>
-                    <div class="code-line">ages[<span class="string">"Alice"</span>] = 25;</div>
-                    <div class="code-line">ages[<span class="string">"Bob"</span>] = 30;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Set - unique elements</span></div>
-                    <div class="code-line">set&lt;<span class="keyword">int</span>&gt; numbers = {1, 2, 3};</div>
-                    <div class="code-line">numbers.insert(4);</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Queue - FIFO</span></div>
-                    <div class="code-line">queue&lt;<span class="keyword">int</span>&gt; q;</div>
-                    <div class="code-line">q.push(1);</div>
-                    <div class="code-line">q.pop();</div>
+                    <div class="code-line"><span class="keyword">#include</span> &lt;vector&gt;</div><div class="code-line"><span class="keyword">#include</span> &lt;map&gt;</div><div class="code-line"><span class="keyword">#include</span> &lt;set&gt;</div><div class="code-line"><span class="keyword">#include</span> &lt;queue&gt;</div><div class="code-line"></div><div class="code-line"><span class="comment">// Vector - dynamic array</span></div><div class="code-line">vector&lt;<span class="keyword">int</span>&gt; vec = {1, 2, 3};</div><div class="code-line">vec.push_back(4);</div><div class="code-line">vec[0] = 10;</div><div class="code-line"></div><div class="code-line"><span class="comment">// Map - key-value pairs</span></div><div class="code-line">map&lt;string, <span class="keyword">int</span>&gt; ages;</div><div class="code-line">ages[<span class="string">"Alice"</span>] = 25;</div><div class="code-line">ages[<span class="string">"Bob"</span>] = 30;</div><div class="code-line"></div><div class="code-line"><span class="comment">// Set - unique elements</span></div><div class="code-line">set&lt;<span class="keyword">int</span>&gt; numbers = {1, 2, 3};</div><div class="code-line">numbers.insert(4);</div><div class="code-line"></div><div class="code-line"><span class="comment">// Queue - FIFO</span></div><div class="code-line">queue&lt;<span class="keyword">int</span>&gt; q;</div><div class="code-line">q.push(1);</div><div class="code-line">q.pop();</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="stl-container-operations">
                 <div class="card-header">🔄 STL Container Operations</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">vec.push_back(val)</div>
-                    <div class="cmd-desc">Add element to end of vector</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">vec.pop_back()</div>
-                    <div class="cmd-desc">Remove last element</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">vec.size()</div>
-                    <div class="cmd-desc">Get number of elements</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">vec.empty()</div>
-                    <div class="cmd-desc">Check if container is empty</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">vec.clear()</div>
-                    <div class="cmd-desc">Remove all elements</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">map.find(key)</div>
-                    <div class="cmd-desc">Find element by key (returns iterator)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">set.count(val)</div>
-                    <div class="cmd-desc">Check if element exists (0 or 1)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">container.begin() / end()</div>
-                    <div class="cmd-desc">Get iterators to start/end</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="stl-algorithms">
                 <div class="card-header">🔁 STL Algorithms</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="keyword">#include</span> &lt;algorithm&gt;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line">vector&lt;<span class="keyword">int</span>&gt; vec = {3, 1, 4, 1, 5};</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Sort</span></div>
-                    <div class="code-line">sort(vec.begin(), vec.end());</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Find</span></div>
-                    <div class="code-line"><span class="keyword">auto</span> it = find(vec.begin(), vec.end(), 4);</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Count</span></div>
-                    <div class="code-line"><span class="keyword">int</span> cnt = count(vec.begin(), vec.end(), 1);</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Reverse</span></div>
-                    <div class="code-line">reverse(vec.begin(), vec.end());</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Max/Min element</span></div>
-                    <div class="code-line"><span class="keyword">auto</span> max_it = max_element(vec.begin(), vec.end());</div>
+                    <div class="code-line"><span class="keyword">#include</span> &lt;algorithm&gt;</div><div class="code-line"></div><div class="code-line">vector&lt;<span class="keyword">int</span>&gt; vec = {3, 1, 4, 1, 5};</div><div class="code-line"></div><div class="code-line"><span class="comment">// Sort</span></div><div class="code-line">sort(vec.begin(), vec.end());</div><div class="code-line"></div><div class="code-line"><span class="comment">// Find</span></div><div class="code-line"><span class="keyword">auto</span> it = find(vec.begin(), vec.end(), 4);</div><div class="code-line"></div><div class="code-line"><span class="comment">// Count</span></div><div class="code-line"><span class="keyword">int</span> cnt = count(vec.begin(), vec.end(), 1);</div><div class="code-line"></div><div class="code-line"><span class="comment">// Reverse</span></div><div class="code-line">reverse(vec.begin(), vec.end());</div><div class="code-line"></div><div class="code-line"><span class="comment">// Max/Min element</span></div><div class="code-line"><span class="keyword">auto</span> max_it = max_element(vec.begin(), vec.end());</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="smart-pointers-c11">
                 <div class="card-header">🎯 Smart Pointers (C++11)</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="keyword">#include</span> &lt;memory&gt;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// unique_ptr - exclusive ownership</span></div>
-                    <div class="code-line">unique_ptr&lt;<span class="keyword">int</span>&gt; ptr1 = make_unique&lt;<span class="keyword">int</span>&gt;(42);</div>
-                    <div class="code-line"><span class="comment">// Can't copy, only move</span></div>
-                    <div class="code-line">unique_ptr&lt;<span class="keyword">int</span>&gt; ptr2 = move(ptr1);</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// shared_ptr - shared ownership</span></div>
-                    <div class="code-line">shared_ptr&lt;<span class="keyword">int</span>&gt; sp1 = make_shared&lt;<span class="keyword">int</span>&gt;(42);</div>
-                    <div class="code-line">shared_ptr&lt;<span class="keyword">int</span>&gt; sp2 = sp1;  <span class="comment">// Both own the object</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// weak_ptr - non-owning reference</span></div>
-                    <div class="code-line">weak_ptr&lt;<span class="keyword">int</span>&gt; wp = sp1;</div>
-                </div>
-                <div class="tip">
-                    💡 Smart pointers automatically manage memory. Prefer them over raw pointers for dynamic allocation.
+                    <div class="code-line"><span class="keyword">#include</span> &lt;memory&gt;</div><div class="code-line"></div><div class="code-line"><span class="comment">// unique_ptr - exclusive ownership</span></div><div class="code-line">unique_ptr&lt;<span class="keyword">int</span>&gt; ptr1 = make_unique&lt;<span class="keyword">int</span>&gt;(42);</div><div class="code-line"><span class="comment">// Can't copy, only move</span></div><div class="code-line">unique_ptr&lt;<span class="keyword">int</span>&gt; ptr2 = move(ptr1);</div><div class="code-line"></div><div class="code-line"><span class="comment">// shared_ptr - shared ownership</span></div><div class="code-line">shared_ptr&lt;<span class="keyword">int</span>&gt; sp1 = make_shared&lt;<span class="keyword">int</span>&gt;(42);</div><div class="code-line">shared_ptr&lt;<span class="keyword">int</span>&gt; sp2 = sp1;  <span class="comment">// Both own the object</span></div><div class="code-line"></div><div class="code-line"><span class="comment">// weak_ptr - non-owning reference</span></div><div class="code-line">weak_ptr&lt;<span class="keyword">int</span>&gt; wp = sp1;</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="references">
                 <div class="card-header">🔧 References</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// Reference - alias to existing variable</span></div>
-                    <div class="code-line"><span class="keyword">int</span> x = 10;</div>
-                    <div class="code-line"><span class="keyword">int</span> &ref = x;            <span class="comment">// ref is alias for x</span></div>
-                    <div class="code-line">ref = 20;                  <span class="comment">// x is now 20</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Function with reference parameter</span></div>
-                    <div class="code-line"><span class="keyword">void</span> increment(<span class="keyword">int</span> &n) {</div>
-                    <div class="code-line">    n++;                   <span class="comment">// Modifies original</span></div>
-                    <div class="code-line">}</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Const reference (efficient for large objects)</span></div>
-                    <div class="code-line"><span class="keyword">void</span> print(<span class="keyword">const</span> string &str) {</div>
-                    <div class="code-line">    cout &lt;&lt; str;           <span class="comment">// Can't modify str</span></div>
-                    <div class="code-line">}</div>
-                </div>
-                <div class="note">
-                    References must be initialized when declared and cannot be reassigned to refer to a different variable.
+                    <div class="code-line"><span class="comment">// Reference - alias to existing variable</span></div><div class="code-line"><span class="keyword">int</span> x = 10;</div><div class="code-line"><span class="keyword">int</span> &amp;ref = x;            <span class="comment">// ref is alias for x</span></div><div class="code-line">ref = 20;                  <span class="comment">// x is now 20</span></div><div class="code-line"></div><div class="code-line"><span class="comment">// Function with reference parameter</span></div><div class="code-line"><span class="keyword">void</span> increment(<span class="keyword">int</span> &amp;n) {</div><div class="code-line">    n++;                   <span class="comment">// Modifies original</span></div><div class="code-line">}</div><div class="code-line"></div><div class="code-line"><span class="comment">// Const reference (efficient for large objects)</span></div><div class="code-line"><span class="keyword">void</span> print(<span class="keyword">const</span> string &amp;str) {</div><div class="code-line">    cout &lt;&lt; str;           <span class="comment">// Can't modify str</span></div><div class="code-line">}</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="arrays-and-strings">
                 <div class="card-header">🔀 Arrays and Strings</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// C-style array</span></div>
-                    <div class="code-line"><span class="keyword">int</span> arr[5] = {1, 2, 3, 4, 5};</div>
-                    <div class="code-line"><span class="keyword">int</span> size = <span class="keyword">sizeof</span>(arr) / <span class="keyword">sizeof</span>(arr[0]);</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// C-style string</span></div>
-                    <div class="code-line"><span class="keyword">char</span> str[] = <span class="string">"Hello"</span>;     <span class="comment">// Null-terminated</span></div>
-                    <div class="code-line">strlen(str);               <span class="comment">// Length (5)</span></div>
-                    <div class="code-line">strcpy(dest, src);         <span class="comment">// Copy string</span></div>
-                    <div class="code-line">strcat(dest, src);         <span class="comment">// Concatenate</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// C++ string (safer)</span></div>
-                    <div class="code-line">string s = <span class="string">"Hello"</span>;</div>
-                    <div class="code-line">s += <span class="string">" World"</span>;           <span class="comment">// Concatenate</span></div>
-                    <div class="code-line">s.length();                <span class="comment">// Get length</span></div>
-                    <div class="code-line">s.substr(0, 5);            <span class="comment">// Substring</span></div>
+                    <div class="code-line"><span class="comment">// C-style array</span></div><div class="code-line"><span class="keyword">int</span> arr[5] = {1, 2, 3, 4, 5};</div><div class="code-line"><span class="keyword">int</span> size = <span class="keyword">sizeof</span>(arr) / <span class="keyword">sizeof</span>(arr[0]);</div><div class="code-line"></div><div class="code-line"><span class="comment">// C-style string</span></div><div class="code-line"><span class="keyword">char</span> str[] = <span class="string">"Hello"</span>;     <span class="comment">// Null-terminated</span></div><div class="code-line">strlen(str);               <span class="comment">// Length (5)</span></div><div class="code-line">strcpy(dest, src);         <span class="comment">// Copy string</span></div><div class="code-line">strcat(dest, src);         <span class="comment">// Concatenate</span></div><div class="code-line"></div><div class="code-line"><span class="comment">// C++ string (safer)</span></div><div class="code-line">string s = <span class="string">"Hello"</span>;</div><div class="code-line">s += <span class="string">" World"</span>;           <span class="comment">// Concatenate</span></div><div class="code-line">s.length();                <span class="comment">// Get length</span></div><div class="code-line">s.substr(0, 5);            <span class="comment">// Substring</span></div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="structs">
                 <div class="card-header">🏛️ Structs</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// C struct</span></div>
-                    <div class="code-line"><span class="keyword">struct</span> Point {</div>
-                    <div class="code-line">    <span class="keyword">int</span> x;</div>
-                    <div class="code-line">    <span class="keyword">int</span> y;</div>
-                    <div class="code-line">};</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="keyword">struct</span> Point p = {10, 20};</div>
-                    <div class="code-line">p.x = 30;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// C++ struct (can have methods)</span></div>
-                    <div class="code-line"><span class="keyword">struct</span> Rectangle {</div>
-                    <div class="code-line">    <span class="keyword">int</span> width, height;</div>
-                    <div class="code-line"></div>
-                    <div class="code-line">    <span class="keyword">int</span> area() {</div>
-                    <div class="code-line">        <span class="keyword">return</span> width * height;</div>
-                    <div class="code-line">    }</div>
-                    <div class="code-line">};</div>
-                </div>
-                <div class="note">
-                    In C++, the only difference between <code>struct</code> and <code>class</code> is default access: struct members are public by default, class members are private.
+                    <div class="code-line"><span class="comment">// C struct</span></div><div class="code-line"><span class="keyword">struct</span> Point {</div><div class="code-line"> <span class="keyword">int</span> x;</div><div class="code-line"> <span class="keyword">int</span> y;</div><div class="code-line">};</div><div class="code-line"></div><div class="code-line"><span class="keyword">struct</span> Point p = {10, 20};</div><div class="code-line">p.x = 30;</div><div class="code-line"></div><div class="code-line"><span class="comment">// C++ struct (can have methods)</span></div><div class="code-line"><span class="keyword">struct</span> Rectangle {</div><div class="code-line"> <span class="keyword">int</span> width, height;</div><div class="code-line"></div><div class="code-line"> <span class="keyword">int</span> area() {</div><div class="code-line"> <span class="keyword">return</span> width * height;</div><div class="code-line">    }</div><div class="code-line">};</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="compilation-flags">
                 <div class="card-header">⚙️ Compilation Flags</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">-o filename</div>
-                    <div class="cmd-desc">Specify output file name</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">-Wall</div>
-                    <div class="cmd-desc">Enable all warnings</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">-Werror</div>
-                    <div class="cmd-desc">Treat warnings as errors</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">-g</div>
-                    <div class="cmd-desc">Include debug information</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">-O2 / -O3</div>
-                    <div class="cmd-desc">Optimization level (2 or 3)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">-std=c++11 / c++17 / c++20</div>
-                    <div class="cmd-desc">Specify C++ standard version</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">-I/path/to/includes</div>
-                    <div class="cmd-desc">Add include directory</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">-L/path/to/libs -lname</div>
-                    <div class="cmd-desc">Link library</div>
-                </div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// Example compilation</span></div>
-                    <div class="code-line">g++ -std=c++17 -Wall -O2 -o program main.cpp</div>
+                    <div class="code-line"><span class="comment">// Example compilation</span></div><div class="code-line">g++ -std=c++17 -Wall -O2 -o program main.cpp</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="debugging-tools">
                 <div class="card-header">🔍 Debugging Tools</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">gdb program</div>
-                    <div class="cmd-desc">Start GNU debugger</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">valgrind ./program</div>
-                    <div class="cmd-desc">Check for memory leaks</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">break main</div>
-                    <div class="cmd-desc">Set breakpoint (in gdb)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">run</div>
-                    <div class="cmd-desc">Start program execution (in gdb)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">next / step</div>
-                    <div class="cmd-desc">Step over / step into (in gdb)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">print variable</div>
-                    <div class="cmd-desc">Print variable value (in gdb)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">backtrace</div>
-                    <div class="cmd-desc">Show call stack (in gdb)</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="templates-c">
                 <div class="card-header">🎭 Templates (C++)</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// Function template</span></div>
-                    <div class="code-line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-                    <div class="code-line">T max(T a, T b) {</div>
-                    <div class="code-line">    <span class="keyword">return</span> (a &gt; b) ? a : b;</div>
-                    <div class="code-line">}</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Usage</span></div>
-                    <div class="code-line">cout &lt;&lt; max(10, 20);        <span class="comment">// int version</span></div>
-                    <div class="code-line">cout &lt;&lt; max(3.14, 2.71);    <span class="comment">// double version</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Class template</span></div>
-                    <div class="code-line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-                    <div class="code-line"><span class="keyword">class</span> Stack {</div>
-                    <div class="code-line"><span class="keyword">private</span>:</div>
-                    <div class="code-line">    vector&lt;T&gt; elements;</div>
-                    <div class="code-line"><span class="keyword">public</span>:</div>
-                    <div class="code-line">    <span class="keyword">void</span> push(T elem) {</div>
-                    <div class="code-line">        elements.push_back(elem);</div>
-                    <div class="code-line">    }</div>
-                    <div class="code-line">    T pop() {</div>
-                    <div class="code-line">        T elem = elements.back();</div>
-                    <div class="code-line">        elements.pop_back();</div>
-                    <div class="code-line">        <span class="keyword">return</span> elem;</div>
-                    <div class="code-line">    }</div>
-                    <div class="code-line">};</div>
+                    <div class="code-line"><span class="comment">// Function template</span></div><div class="code-line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="code-line">T max(T a, T b) {</div><div class="code-line"> <span class="keyword">return</span> (a &gt; b) ? a : b;</div><div class="code-line">}</div><div class="code-line"></div><div class="code-line"><span class="comment">// Usage</span></div><div class="code-line">cout &lt;&lt; max(10, 20);        <span class="comment">// int version</span></div><div class="code-line">cout &lt;&lt; max(3.14, 2.71);    <span class="comment">// double version</span></div><div class="code-line"></div><div class="code-line"><span class="comment">// Class template</span></div><div class="code-line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div><div class="code-line"><span class="keyword">class</span> Stack {</div><div class="code-line"><span class="keyword">private</span>:</div><div class="code-line">    vector&lt;T&gt; elements;</div><div class="code-line"><span class="keyword">public</span>:</div><div class="code-line"> <span class="keyword">void</span> push(T elem) {</div><div class="code-line">        elements.push_back(elem);</div><div class="code-line">    }</div><div class="code-line">    T pop() {</div><div class="code-line">        T elem = elements.back();</div><div class="code-line">        elements.pop_back();</div><div class="code-line"> <span class="keyword">return</span> elem;</div><div class="code-line">    }</div><div class="code-line">};</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="iterators">
                 <div class="card-header">🔄 Iterators</div>
                 <div class="code-block">
-                    <div class="code-line">vector&lt;<span class="keyword">int</span>&gt; vec = {1, 2, 3, 4, 5};</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Iterator loop</span></div>
-                    <div class="code-line"><span class="keyword">for</span> (<span class="keyword">auto</span> it = vec.begin(); it != vec.end(); ++it) {</div>
-                    <div class="code-line">    cout &lt;&lt; *it &lt;&lt; <span class="string">" "</span>;</div>
-                    <div class="code-line">}</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Range-based for loop (C++11)</span></div>
-                    <div class="code-line"><span class="keyword">for</span> (<span class="keyword">int</span> val : vec) {</div>
-                    <div class="code-line">    cout &lt;&lt; val &lt;&lt; <span class="string">" "</span>;</div>
-                    <div class="code-line">}</div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Reference to modify elements</span></div>
-                    <div class="code-line"><span class="keyword">for</span> (<span class="keyword">int</span> &val : vec) {</div>
-                    <div class="code-line">    val *= 2;</div>
-                    <div class="code-line">}</div>
+                    <div class="code-line">vector&lt;<span class="keyword">int</span>&gt; vec = {1, 2, 3, 4, 5};</div><div class="code-line"></div><div class="code-line"><span class="comment">// Iterator loop</span></div><div class="code-line"><span class="keyword">for</span> (<span class="keyword">auto</span> it = vec.begin(); it != vec.end(); ++it) {</div><div class="code-line">    cout &lt;&lt; *it &lt;&lt; <span class="string">" "</span>;</div><div class="code-line">}</div><div class="code-line"></div><div class="code-line"><span class="comment">// Range-based for loop (C++11)</span></div><div class="code-line"><span class="keyword">for</span> (<span class="keyword">int</span> val : vec) {</div><div class="code-line">    cout &lt;&lt; val &lt;&lt; <span class="string">" "</span>;</div><div class="code-line">}</div><div class="code-line"></div><div class="code-line"><span class="comment">// Reference to modify elements</span></div><div class="code-line"><span class="keyword">for</span> (<span class="keyword">int</span> &amp;val : vec) {</div><div class="code-line">    val *= 2;</div><div class="code-line">}</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="modern-c-features">
                 <div class="card-header">🎯 Modern C++ Features</div>
                 <div class="code-block">
-                    <div class="code-line"><span class="comment">// Auto type deduction (C++11)</span></div>
-                    <div class="code-line"><span class="keyword">auto</span> x = 42;              <span class="comment">// int</span></div>
-                    <div class="code-line"><span class="keyword">auto</span> s = <span class="string">"Hello"</span>;         <span class="comment">// const char*</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Lambda expressions (C++11)</span></div>
-                    <div class="code-line"><span class="keyword">auto</span> add = [](<span class="keyword">int</span> a, <span class="keyword">int</span> b) {</div>
-                    <div class="code-line">    <span class="keyword">return</span> a + b;</div>
-                    <div class="code-line">};</div>
-                    <div class="code-line">cout &lt;&lt; add(3, 4);         <span class="comment">// 7</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Nullptr (C++11)</span></div>
-                    <div class="code-line"><span class="keyword">int</span> *ptr = nullptr;       <span class="comment">// Better than NULL</span></div>
-                    <div class="code-line"></div>
-                    <div class="code-line"><span class="comment">// Move semantics (C++11)</span></div>
-                    <div class="code-line">vector&lt;<span class="keyword">int</span>&gt; v1 = {1, 2, 3};</div>
-                    <div class="code-line">vector&lt;<span class="keyword">int</span>&gt; v2 = move(v1);  <span class="comment">// Transfer ownership</span></div>
+                    <div class="code-line"><span class="comment">// Auto type deduction (C++11)</span></div><div class="code-line"><span class="keyword">auto</span> x = 42;              <span class="comment">// int</span></div><div class="code-line"><span class="keyword">auto</span> s = <span class="string">"Hello"</span>;         <span class="comment">// const char*</span></div><div class="code-line"></div><div class="code-line"><span class="comment">// Lambda expressions (C++11)</span></div><div class="code-line"><span class="keyword">auto</span> add = [](<span class="keyword">int</span> a, <span class="keyword">int</span> b) {</div><div class="code-line"> <span class="keyword">return</span> a + b;</div><div class="code-line">};</div><div class="code-line">cout &lt;&lt; add(3, 4);         <span class="comment">// 7</span></div><div class="code-line"></div><div class="code-line"><span class="comment">// Nullptr (C++11)</span></div><div class="code-line"><span class="keyword">int</span> *ptr = nullptr;       <span class="comment">// Better than NULL</span></div><div class="code-line"></div><div class="code-line"><span class="comment">// Move semantics (C++11)</span></div><div class="code-line">vector&lt;<span class="keyword">int</span>&gt; v1 = {1, 2, 3};</div><div class="code-line">vector&lt;<span class="keyword">int</span>&gt; v2 = move(v1);  <span class="comment">// Transfer ownership</span></div>
+                </div>
+            </div>
+            <div class="card" id="best-practices">
+                <div class="card-header">💡 Best Practices</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header">💡 Best Practices</div>
-            <div class="tip">
-                <strong>Memory Management:</strong><br>
-                • Always initialize pointers<br>
-                • Free/delete every malloc/new<br>
-                • Set pointers to NULL/nullptr after freeing<br>
-                • Use smart pointers in C++ when possible<br>
-                • Check for NULL before dereferencing<br>
-                • Avoid memory leaks with proper cleanup
-            </div>
-            <div class="tip" style="margin-top: 1rem;">
-                <strong>Code Quality:</strong><br>
-                • Use const correctness<br>
-                • Prefer references over pointers when possible<br>
-                • Use RAII (Resource Acquisition Is Initialization)<br>
-                • Avoid raw arrays, use std::vector or std::array<br>
-                • Enable compiler warnings (-Wall -Wextra)<br>
-                • Use modern C++ features (C++11 and later)
-            </div>
-            <div class="warning" style="margin-top: 1rem;">
-                <strong>Common Mistakes to Avoid:</strong><br>
-                • Buffer overflows (use bounds checking)<br>
-                • Dangling pointers (don't use after free)<br>
-                • Memory leaks (always free/delete)<br>
-                • Uninitialized variables<br>
-                • Mixing malloc/free with new/delete<br>
-                • Forgetting array delete[] for new[]
-            </div>
-        </div>
-
-        <div class="footer">
-            <p>C/C++ Essentials Quick Reference</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">⚙️ Master pointers, memory management, and the STL</p>
-        </div>
+        <footer>
+            <p>&copy; 2025 Cheatsheets Collection. Open source and community driven.</p>
+        </footer>
     </div>
 </body>
 </html>

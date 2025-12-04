@@ -3,554 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="SSH and SCP commands for secure remote access and file transfer.">
     <title>SSH & SCP Cheatsheet</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #e0e6ed;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 2rem;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            font-size: 3rem;
-            background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #8b95a5;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .card {
-            background: rgba(30, 41, 59, 0.6);
-            border: 1px solid rgba(100, 116, 139, 0.3);
-            border-radius: 12px;
-            padding: 1.5rem;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: rgba(6, 182, 212, 0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(6, 182, 212, 0.15);
-        }
-
-        .card-header {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #06b6d4;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid rgba(6, 182, 212, 0.3);
-        }
-
-        .cmd-row {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.5rem;
-            margin-bottom: 0.75rem;
-            padding: 0.5rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 6px;
-            transition: background 0.2s ease;
-        }
-
-        .cmd-row:hover {
-            background: rgba(6, 182, 212, 0.1);
-        }
-
-        .cmd-name {
-            color: #3b82f6;
-            font-weight: 600;
-            font-family: 'Courier New', monospace;
-            font-size: 0.95rem;
-        }
-
-        .cmd-desc {
-            color: #cbd5e1;
-            padding-left: 1rem;
-            font-size: 0.9rem;
-        }
-
-        code {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            color: #a5d6ff;
-            font-size: 0.9em;
-        }
-
-        .note {
-            background: rgba(59, 130, 246, 0.1);
-            border-left: 4px solid #3b82f6;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .tip {
-            background: rgba(16, 185, 129, 0.1);
-            border-left: 4px solid #10b981;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .warning {
-            background: rgba(239, 68, 68, 0.1);
-            border-left: 4px solid #ef4444;
-            padding: 0.75rem;
-            border-radius: 6px;
-            margin-top: 0.75rem;
-            font-size: 0.9rem;
-        }
-
-        .code-block {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 1rem;
-            border-radius: 6px;
-            margin: 0.75rem 0;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            overflow-x: auto;
-        }
-
-        .code-line {
-            color: #a5d6ff;
-            margin: 0.25rem 0;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(100, 116, 139, 0.3);
-            color: #8b95a5;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../script.js" defer></script>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="../index.html" class="nav-brand">
+                <i class="ph ph-books"></i> Cheatsheets
+            </a>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="btn-icon" aria-label="Toggle theme">
+                    <i class="ph ph-moon"></i>
+                </button>
+                <button id="download-btn" class="btn-icon" aria-label="Download PDF">
+                    <i class="ph ph-download-simple"></i>
+                </button>
+                <a href="https://github.com/keyurgolani/Cheatsheets" class="btn-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                    <i class="ph ph-github-logo"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
-        <h1>🔐 SSH & SCP Commands</h1>
-        <p class="subtitle">Secure remote access and file transfer essentials</p>
+        <header class="cheatsheet-header">
+            <h1>🔐 SSH & SCP Commands</h1>
+            <p>Secure remote access and file transfer essentials</p>
+            <div class="search-container" style="margin-top: 1.5rem; margin-bottom: 0;">
+                <span class="search-icon"><i class="ph ph-magnifying-glass"></i></span>
+                <input type="text" class="search-input" id="cheatsheet-search" placeholder="Filter this cheatsheet..." aria-label="Filter cheatsheet">
+            </div>
+        </header>
 
-        <div class="grid">
-            <div class="card">
+        <div class="masonry-grid" id="cheatsheet-grid">
+            
+            <div class="card" id="basic-ssh-connections">
                 <div class="card-header">🚀 Basic SSH Connections</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh user@hostname</div>
-                    <div class="cmd-desc">Connect to remote host</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh user@hostname -p 2222</div>
-                    <div class="cmd-desc">Connect on specific port</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh -i ~/.ssh/key.pem user@hostname</div>
-                    <div class="cmd-desc">Connect with specific private key</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh user@hostname command</div>
-                    <div class="cmd-desc">Execute command on remote host</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh -v user@hostname</div>
-                    <div class="cmd-desc">Verbose mode (debugging)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh -X user@hostname</div>
-                    <div class="cmd-desc">Enable X11 forwarding</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh -N -f user@hostname</div>
-                    <div class="cmd-desc">Background connection (no command)</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="ssh-key-management">
                 <div class="card-header">🔑 SSH Key Management</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh-keygen -t rsa -b 4096</div>
-                    <div class="cmd-desc">Generate RSA key pair (4096 bits)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh-keygen -t ed25519</div>
-                    <div class="cmd-desc">Generate Ed25519 key (modern, secure)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh-keygen -t rsa -b 4096 -C "email@example.com"</div>
-                    <div class="cmd-desc">Generate key with comment</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh-copy-id user@hostname</div>
-                    <div class="cmd-desc">Copy public key to remote host</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh-copy-id -i ~/.ssh/key.pub user@hostname</div>
-                    <div class="cmd-desc">Copy specific public key</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh-add ~/.ssh/id_rsa</div>
-                    <div class="cmd-desc">Add key to SSH agent</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh-add -l</div>
-                    <div class="cmd-desc">List keys in SSH agent</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh-add -D</div>
-                    <div class="cmd-desc">Remove all keys from agent</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">chmod 600 ~/.ssh/id_rsa</div>
-                    <div class="cmd-desc">Set correct permissions for private key</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">chmod 644 ~/.ssh/id_rsa.pub</div>
-                    <div class="cmd-desc">Set correct permissions for public key</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="ssh-config-file">
                 <div class="card-header">⚙️ SSH Config File</div>
                 <div class="code-block">
-                    <div class="code-line"># ~/.ssh/config</div>
-                    <div class="code-line">Host myserver</div>
-                    <div class="code-line">    HostName example.com</div>
-                    <div class="code-line">    User username</div>
-                    <div class="code-line">    Port 22</div>
-                    <div class="code-line">    IdentityFile ~/.ssh/id_rsa</div>
-                    <div class="code-line">    </div>
-                    <div class="code-line">Host *</div>
-                    <div class="code-line">    ServerAliveInterval 60</div>
-                    <div class="code-line">    ServerAliveCountMax 3</div>
-                </div>
-                <div class="tip">
-                    💡 After creating config, use: <code>ssh myserver</code><br>
-                    No need to specify user, host, or key!
+                    <div class="code-line"># ~/.ssh/config</div><div class="code-line">Host myserver</div><div class="code-line">    HostName example.com</div><div class="code-line">    User username</div><div class="code-line">    Port 22</div><div class="code-line">    IdentityFile ~/.ssh/id_rsa</div><div class="code-line"> </div><div class="code-line">Host *</div><div class="code-line">    ServerAliveInterval 60</div><div class="code-line">    ServerAliveCountMax 3</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="port-forwarding">
                 <div class="card-header">🔀 Port Forwarding</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh -L 8080:localhost:80 user@hostname</div>
-                    <div class="cmd-desc">Local port forwarding (access remote port 80 via local 8080)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh -R 8080:localhost:80 user@hostname</div>
-                    <div class="cmd-desc">Remote port forwarding (expose local port 80 on remote 8080)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh -D 9090 user@hostname</div>
-                    <div class="cmd-desc">Dynamic port forwarding (SOCKS proxy)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh -L 3306:db.internal:3306 user@jumphost</div>
-                    <div class="cmd-desc">Access internal database through jump host</div>
-                </div>
-                <div class="note">
-                    <strong>Port Forwarding Use Cases:</strong><br>
-                    • Access internal services through bastion host<br>
-                    • Secure browsing through SOCKS proxy<br>
-                    • Database connections to remote servers
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="scp-file-transfer">
                 <div class="card-header">📁 SCP File Transfer</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">scp file.txt user@hostname:/path/</div>
-                    <div class="cmd-desc">Copy local file to remote</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">scp user@hostname:/path/file.txt .</div>
-                    <div class="cmd-desc">Copy remote file to local</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">scp -r directory/ user@hostname:/path/</div>
-                    <div class="cmd-desc">Copy directory recursively</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">scp -P 2222 file.txt user@hostname:/path/</div>
-                    <div class="cmd-desc">Copy using specific port</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">scp -i ~/.ssh/key.pem file.txt user@hostname:/path/</div>
-                    <div class="cmd-desc">Copy using specific key</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">scp -C file.txt user@hostname:/path/</div>
-                    <div class="cmd-desc">Copy with compression</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">scp user1@host1:/path/file user2@host2:/path/</div>
-                    <div class="cmd-desc">Copy between two remote hosts</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">scp -v file.txt user@hostname:/path/</div>
-                    <div class="cmd-desc">Verbose mode (show progress)</div>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="advanced-scp-options">
                 <div class="card-header">🔧 Advanced SCP Options</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">scp -p file.txt user@hostname:/path/</div>
-                    <div class="cmd-desc">Preserve file attributes (timestamps, permissions)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">scp -q file.txt user@hostname:/path/</div>
-                    <div class="cmd-desc">Quiet mode (suppress progress)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">scp -l 1000 file.txt user@hostname:/path/</div>
-                    <div class="cmd-desc">Limit bandwidth (Kbit/s)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">scp -o "ProxyJump=jumphost" file.txt user@target:/path/</div>
-                    <div class="cmd-desc">Copy through jump host</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">scp *.txt user@hostname:/path/</div>
-                    <div class="cmd-desc">Copy multiple files with wildcard</div>
-                </div>
-                <div class="tip">
-                    💡 For large transfers, consider using <code>rsync</code> instead:<br>
-                    <code>rsync -avz -e ssh file.txt user@hostname:/path/</code>
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="ssh-connection-testing">
                 <div class="card-header">🔍 SSH Connection Testing</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh -T git@github.com</div>
-                    <div class="cmd-desc">Test GitHub SSH connection</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh -vvv user@hostname</div>
-                    <div class="cmd-desc">Maximum verbosity (detailed debugging)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh -o ConnectTimeout=10 user@hostname</div>
-                    <div class="cmd-desc">Set connection timeout</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh -o StrictHostKeyChecking=no user@hostname</div>
-                    <div class="cmd-desc">Disable host key checking (use with caution)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh-keyscan hostname >> ~/.ssh/known_hosts</div>
-                    <div class="cmd-desc">Add host key to known_hosts</div>
-                </div>
-                <div class="warning">
-                    ⚠️ <strong>Warning:</strong> Disabling host key checking can expose you to man-in-the-middle attacks. Only use in trusted environments.
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="security-best-practices">
                 <div class="card-header">🛡️ Security Best Practices</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh-keygen -p -f ~/.ssh/id_rsa</div>
-                    <div class="cmd-desc">Change passphrase for existing key</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh-keygen -y -f ~/.ssh/id_rsa</div>
-                    <div class="cmd-desc">Extract public key from private key</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh-keygen -lf ~/.ssh/id_rsa.pub</div>
-                    <div class="cmd-desc">Show key fingerprint</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh-keygen -R hostname</div>
-                    <div class="cmd-desc">Remove host from known_hosts</div>
-                </div>
-                <div class="note">
-                    <strong>Security Checklist:</strong><br>
-                    ✓ Use Ed25519 or RSA 4096-bit keys<br>
-                    ✓ Always use passphrases for private keys<br>
-                    ✓ Set correct permissions (600 for private, 644 for public)<br>
-                    ✓ Disable password authentication on servers<br>
-                    ✓ Use SSH agent for key management<br>
-                    ✓ Regularly rotate SSH keys
+                <div class="code-block">
+                    
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="jump-hosts-proxyjump">
                 <div class="card-header">🌐 Jump Hosts & ProxyJump</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh -J jumphost user@target</div>
-                    <div class="cmd-desc">Connect through jump host</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh -J user1@jump1,user2@jump2 user@target</div>
-                    <div class="cmd-desc">Connect through multiple jump hosts</div>
-                </div>
                 <div class="code-block">
-                    <div class="code-line"># ~/.ssh/config with ProxyJump</div>
-                    <div class="code-line">Host target</div>
-                    <div class="code-line">    HostName target.internal</div>
-                    <div class="code-line">    User targetuser</div>
-                    <div class="code-line">    ProxyJump jumphost</div>
-                    <div class="code-line">    </div>
-                    <div class="code-line">Host jumphost</div>
-                    <div class="code-line">    HostName jump.example.com</div>
-                    <div class="code-line">    User jumpuser</div>
+                    <div class="code-line"># ~/.ssh/config with ProxyJump</div><div class="code-line">Host target</div><div class="code-line">    HostName target.internal</div><div class="code-line">    User targetuser</div><div class="code-line">    ProxyJump jumphost</div><div class="code-line"> </div><div class="code-line">Host jumphost</div><div class="code-line">    HostName jump.example.com</div><div class="code-line">    User jumpuser</div>
                 </div>
             </div>
-
-            <div class="card">
+            <div class="card" id="ssh-agent-management">
                 <div class="card-header">📋 SSH Agent Management</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">eval "$(ssh-agent -s)"</div>
-                    <div class="cmd-desc">Start SSH agent</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh-add -K ~/.ssh/id_rsa</div>
-                    <div class="cmd-desc">Add key to agent and keychain (macOS)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh-add -t 3600 ~/.ssh/id_rsa</div>
-                    <div class="cmd-desc">Add key with timeout (1 hour)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh-add -d ~/.ssh/id_rsa</div>
-                    <div class="cmd-desc">Remove specific key from agent</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh-add -L</div>
-                    <div class="cmd-desc">List public keys in agent</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">killall ssh-agent</div>
-                    <div class="cmd-desc">Stop SSH agent</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">🔐 SSH Tunneling & SOCKS</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh -D 1080 -C -N user@hostname</div>
-                    <div class="cmd-desc">Create SOCKS proxy with compression</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh -L 5432:db.internal:5432 user@jumphost -N</div>
-                    <div class="cmd-desc">PostgreSQL tunnel (no shell)</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh -R 0.0.0.0:8080:localhost:80 user@hostname</div>
-                    <div class="cmd-desc">Remote forward accessible from all interfaces</div>
-                </div>
-                <div class="note">
-                    <strong>Tunnel Flags:</strong><br>
-                    <code>-N</code> = No remote command (tunnel only)<br>
-                    <code>-f</code> = Background process<br>
-                    <code>-C</code> = Enable compression<br>
-                    <code>-g</code> = Allow remote hosts to connect
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">⚡ SSH Performance & Optimization</div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh -C user@hostname</div>
-                    <div class="cmd-desc">Enable compression</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh -o Compression=yes user@hostname</div>
-                    <div class="cmd-desc">Force compression</div>
-                </div>
-                <div class="cmd-row">
-                    <div class="cmd-name">ssh -o ControlMaster=auto -o ControlPath=~/.ssh/cm-%r@%h:%p user@hostname</div>
-                    <div class="cmd-desc">Enable connection multiplexing</div>
-                </div>
                 <div class="code-block">
-                    <div class="code-line"># ~/.ssh/config for performance</div>
-                    <div class="code-line">Host *</div>
-                    <div class="code-line">    ControlMaster auto</div>
-                    <div class="code-line">    ControlPath ~/.ssh/cm-%r@%h:%p</div>
-                    <div class="code-line">    ControlPersist 10m</div>
-                    <div class="code-line">    Compression yes</div>
-                    <div class="code-line">    ServerAliveInterval 60</div>
+                    
+                </div>
+            </div>
+            <div class="card" id="ssh-tunneling-socks">
+                <div class="card-header">🔐 SSH Tunneling & SOCKS</div>
+                <div class="code-block">
+                    
+                </div>
+            </div>
+            <div class="card" id="ssh-performance-optimization">
+                <div class="card-header">⚡ SSH Performance & Optimization</div>
+                <div class="code-block">
+                    <div class="code-line"># ~/.ssh/config for performance</div><div class="code-line">Host *</div><div class="code-line">    ControlMaster auto</div><div class="code-line">    ControlPath ~/.ssh/cm-%r@%h:%p</div><div class="code-line">    ControlPersist 10m</div><div class="code-line">    Compression yes</div><div class="code-line">    ServerAliveInterval 60</div>
+                </div>
+            </div>
+            <div class="card" id="common-ssh-config-examples">
+                <div class="card-header">📝 Common SSH Config Examples</div>
+                <div class="code-block">
+                    <div class="code-line"># GitHub</div><div class="code-line">Host github.com</div><div class="code-line">    HostName github.com</div><div class="code-line">    User git</div><div class="code-line">    IdentityFile ~/.ssh/github_rsa</div><div class="code-line"> </div><div class="code-line"># AWS EC2 Instance</div><div class="code-line">Host aws-prod</div><div class="code-line">    HostName ec2-xx-xx-xx-xx.compute.amazonaws.com</div><div class="code-line">    User ec2-user</div><div class="code-line">    IdentityFile ~/.ssh/aws-key.pem</div><div class="code-line"> </div><div class="code-line"># Internal Server via Jump Host</div><div class="code-line">Host internal-db</div><div class="code-line">    HostName db.internal.company.com</div><div class="code-line">    User dbadmin</div><div class="code-line">    ProxyJump bastion</div><div class="code-line">    LocalForward 5432 localhost:5432</div><div class="code-line"> </div><div class="code-line">Host bastion</div><div class="code-line">    HostName bastion.company.com</div><div class="code-line">    User admin</div><div class="code-line">    IdentityFile ~/.ssh/company_rsa</div>
                 </div>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header">📝 Common SSH Config Examples</div>
-            <div class="code-block">
-                <div class="code-line"># GitHub</div>
-                <div class="code-line">Host github.com</div>
-                <div class="code-line">    HostName github.com</div>
-                <div class="code-line">    User git</div>
-                <div class="code-line">    IdentityFile ~/.ssh/github_rsa</div>
-                <div class="code-line">    </div>
-                <div class="code-line"># AWS EC2 Instance</div>
-                <div class="code-line">Host aws-prod</div>
-                <div class="code-line">    HostName ec2-xx-xx-xx-xx.compute.amazonaws.com</div>
-                <div class="code-line">    User ec2-user</div>
-                <div class="code-line">    IdentityFile ~/.ssh/aws-key.pem</div>
-                <div class="code-line">    </div>
-                <div class="code-line"># Internal Server via Jump Host</div>
-                <div class="code-line">Host internal-db</div>
-                <div class="code-line">    HostName db.internal.company.com</div>
-                <div class="code-line">    User dbadmin</div>
-                <div class="code-line">    ProxyJump bastion</div>
-                <div class="code-line">    LocalForward 5432 localhost:5432</div>
-                <div class="code-line">    </div>
-                <div class="code-line">Host bastion</div>
-                <div class="code-line">    HostName bastion.company.com</div>
-                <div class="code-line">    User admin</div>
-                <div class="code-line">    IdentityFile ~/.ssh/company_rsa</div>
-            </div>
-        </div>
-
-        <div class="footer">
-            <p>SSH & SCP Essential Commands Reference</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">💡 Use <code>man ssh</code> and <code>man scp</code> for detailed documentation</p>
-        </div>
+        <footer>
+            <p>&copy; 2025 Cheatsheets Collection. Open source and community driven.</p>
+        </footer>
     </div>
 </body>
 </html>

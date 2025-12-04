@@ -6,222 +6,245 @@
     <meta name="description" content="Comprehensive collection of developer cheatsheets covering programming languages, algorithms, web development, networking, DevOps, and design patterns.">
     <title>Cheatsheets Collection</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="#" class="nav-brand">
+                <i class="ph ph-books"></i> Cheatsheets
+            </a>
+            <div class="nav-controls">
+                <button id="theme-toggle" class="btn-icon" aria-label="Toggle theme">
+                    <i class="ph ph-moon"></i>
+                </button>
+                <a href="https://github.com/keyurgolani/Cheatsheets" class="btn-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                    <i class="ph ph-github-logo"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
-        <header>
-            <h1>Cheatsheets Collection</h1>
-            <p>Quick reference guides for developers</p>
+        <header class="hero">
+            <h1>Developer Cheatsheets</h1>
+            <p>Quick reference guides for programming languages, algorithms, and tools. Designed for developers, by developers.</p>
+            
+            <div class="search-container">
+                <span class="search-icon"><i class="ph ph-magnifying-glass"></i></span>
+                <input type="text" class="search-input" placeholder="Search cheatsheets..." aria-label="Search cheatsheets">
+            </div>
         </header>
         
-        <main>
-            <section class="category">
-                <h2>Programming Languages</h2>
-                <div class="cheatsheets">
-                    <a href="cheatsheets/python.html" class="cheatsheet-card">
+        <main class="categories-grid">
+            <section class="category-section">
+                <h2><i class="ph ph-code"></i> Programming Languages</h2>
+                <div class="cheatsheets-grid">
+                    <a href="cheatsheets/python.html" class="card">
                         <h3>Python</h3>
-                        <p>Python syntax and libraries</p>
+                        <p>Syntax, data structures, and standard library essentials.</p>
                     </a>
-                    <a href="cheatsheets/java.html" class="cheatsheet-card">
+                    <a href="cheatsheets/java.html" class="card">
                         <h3>Java</h3>
-                        <p>Classes, interfaces, collections, and streams</p>
+                        <p>Classes, interfaces, collections, and streams.</p>
                     </a>
-                    <a href="cheatsheets/c-cpp.html" class="cheatsheet-card">
+                    <a href="cheatsheets/c-cpp.html" class="card">
                         <h3>C/C++</h3>
-                        <p>Pointers, memory management, and STL</p>
+                        <p>Pointers, memory management, and STL.</p>
                     </a>
-                    <a href="cheatsheets/go.html" class="cheatsheet-card">
+                    <a href="cheatsheets/go.html" class="card">
                         <h3>Go</h3>
-                        <p>Goroutines, channels, and concurrency</p>
+                        <p>Goroutines, channels, and concurrency patterns.</p>
                     </a>
                 </div>
             </section>
 
-            <section class="category">
-                <h2>Algorithms & Data Structures</h2>
-                <div class="cheatsheets">
-                    <a href="cheatsheets/big-o.html" class="cheatsheet-card">
+            <section class="category-section">
+                <h2><i class="ph ph-function"></i> Algorithms & Data Structures</h2>
+                <div class="cheatsheets-grid">
+                    <a href="cheatsheets/big-o.html" class="card">
                         <h3>Big O Notation</h3>
-                        <p>Algorithm complexity reference</p>
+                        <p>Time and space complexity reference guide.</p>
                     </a>
-                    <a href="cheatsheets/algorithms.html" class="cheatsheet-card">
+                    <a href="cheatsheets/algorithms.html" class="card">
                         <h3>Algorithms</h3>
-                        <p>Sorting, searching, and complexity analysis</p>
+                        <p>Sorting, searching, and common algorithm implementations.</p>
                     </a>
-                    <a href="cheatsheets/data-structures.html" class="cheatsheet-card">
+                    <a href="cheatsheets/data-structures.html" class="card">
                         <h3>Data Structures</h3>
-                        <p>Arrays, trees, graphs, and hash tables</p>
+                        <p>Arrays, trees, graphs, and hash tables.</p>
                     </a>
-                    <a href="cheatsheets/algorithm-patterns.html" class="cheatsheet-card">
+                    <a href="cheatsheets/algorithm-patterns.html" class="card">
                         <h3>Algorithm Patterns</h3>
-                        <p>Sliding window, two pointers, and more</p>
+                        <p>Sliding window, two pointers, and problem-solving patterns.</p>
                     </a>
-                    <a href="cheatsheets/dynamic-programming.html" class="cheatsheet-card">
+                    <a href="cheatsheets/dynamic-programming.html" class="card">
                         <h3>Dynamic Programming</h3>
-                        <p>Memoization, tabulation, and DP patterns</p>
+                        <p>Memoization, tabulation, and DP patterns.</p>
                     </a>
-                    <a href="cheatsheets/graph-algorithms.html" class="cheatsheet-card">
+                    <a href="cheatsheets/graph-algorithms.html" class="card">
                         <h3>Graph Algorithms</h3>
-                        <p>DFS, BFS, Dijkstra, and shortest paths</p>
+                        <p>DFS, BFS, Dijkstra, and shortest path algorithms.</p>
                     </a>
                 </div>
             </section>
 
-            <section class="category">
-                <h2>Web Development</h2>
-                <div class="cheatsheets">
-                    <a href="cheatsheets/html5.html" class="cheatsheet-card">
+            <section class="category-section">
+                <h2><i class="ph ph-globe"></i> Web Development</h2>
+                <div class="cheatsheets-grid">
+                    <a href="cheatsheets/html5.html" class="card">
                         <h3>HTML5</h3>
-                        <p>Semantic elements and accessibility</p>
+                        <p>Semantic elements, forms, and accessibility.</p>
                     </a>
-                    <a href="cheatsheets/css.html" class="cheatsheet-card">
+                    <a href="cheatsheets/css.html" class="card">
                         <h3>CSS</h3>
-                        <p>Flexbox, grid, and modern layouts</p>
+                        <p>Flexbox, grid, selectors, and modern layout techniques.</p>
                     </a>
-                    <a href="cheatsheets/javascript-dom.html" class="cheatsheet-card">
+                    <a href="cheatsheets/javascript-dom.html" class="card">
                         <h3>JavaScript DOM</h3>
-                        <p>Element manipulation and event handling</p>
+                        <p>Element manipulation, events, and browser APIs.</p>
                     </a>
-                    <a href="cheatsheets/react.html" class="cheatsheet-card">
+                    <a href="cheatsheets/react.html" class="card">
                         <h3>React</h3>
-                        <p>Hooks, components, and state management</p>
+                        <p>Hooks, components, lifecycle, and state management.</p>
                     </a>
                 </div>
             </section>
 
-            <section class="category">
-                <h2>Networking</h2>
-                <div class="cheatsheets">
-                    <a href="cheatsheets/http.html" class="cheatsheet-card">
+            <section class="category-section">
+                <h2><i class="ph ph-wifi-high"></i> Networking</h2>
+                <div class="cheatsheets-grid">
+                    <a href="cheatsheets/http.html" class="card">
                         <h3>HTTP</h3>
-                        <p>Status codes, methods, and headers</p>
+                        <p>Status codes, methods, headers, and caching.</p>
                     </a>
-                    <a href="cheatsheets/rest-api.html" class="cheatsheet-card">
+                    <a href="cheatsheets/rest-api.html" class="card">
                         <h3>REST API</h3>
-                        <p>Design principles and best practices</p>
+                        <p>Design principles, resources, and best practices.</p>
                     </a>
-                    <a href="cheatsheets/network-protocols.html" class="cheatsheet-card">
+                    <a href="cheatsheets/network-protocols.html" class="card">
                         <h3>Network Protocols</h3>
-                        <p>OSI model, TCP/IP, and port numbers</p>
+                        <p>OSI model, TCP/IP, UDP, and common ports.</p>
                     </a>
-                    <a href="cheatsheets/dns.html" class="cheatsheet-card">
+                    <a href="cheatsheets/dns.html" class="card">
                         <h3>DNS</h3>
-                        <p>Record types and resolution process</p>
+                        <p>Record types, resolution process, and troubleshooting.</p>
                     </a>
-                    <a href="cheatsheets/network-troubleshooting.html" class="cheatsheet-card">
+                    <a href="cheatsheets/network-troubleshooting.html" class="card">
                         <h3>Network Troubleshooting</h3>
-                        <p>Ping, traceroute, netstat, and tcpdump</p>
+                        <p>Ping, traceroute, netstat, and diagnostic tools.</p>
                     </a>
-                    <a href="cheatsheets/ssh-scp.html" class="cheatsheet-card">
+                    <a href="cheatsheets/ssh-scp.html" class="card">
                         <h3>SSH & SCP</h3>
-                        <p>Remote connections and file transfers</p>
+                        <p>Remote connections, keys, and file transfers.</p>
                     </a>
                 </div>
             </section>
 
-            <section class="category">
-                <h2>DevOps & Infrastructure</h2>
-                <div class="cheatsheets">
-                    <a href="cheatsheets/bash-scripting.html" class="cheatsheet-card">
+            <section class="category-section">
+                <h2><i class="ph ph-terminal-window"></i> DevOps & Infrastructure</h2>
+                <div class="cheatsheets-grid">
+                    <a href="cheatsheets/bash-scripting.html" class="card">
                         <h3>Bash Scripting</h3>
-                        <p>Shell scripting essentials</p>
+                        <p>Shell syntax, variables, loops, and functions.</p>
                     </a>
-                    <a href="cheatsheets/linux-commands.html" class="cheatsheet-card">
+                    <a href="cheatsheets/linux-commands.html" class="card">
                         <h3>Linux Commands</h3>
-                        <p>Essential terminal commands</p>
+                        <p>Essential terminal commands and file management.</p>
                     </a>
-                    <a href="cheatsheets/git.html" class="cheatsheet-card">
+                    <a href="cheatsheets/git.html" class="card">
                         <h3>Git</h3>
-                        <p>Version control commands</p>
+                        <p>Version control, branching, merging, and workflows.</p>
                     </a>
-                    <a href="cheatsheets/docker.html" class="cheatsheet-card">
+                    <a href="cheatsheets/docker.html" class="card">
                         <h3>Docker</h3>
-                        <p>Container commands and concepts</p>
+                        <p>Containers, images, volumes, and docker-compose.</p>
                     </a>
-                    <a href="cheatsheets/kubernetes.html" class="cheatsheet-card">
+                    <a href="cheatsheets/kubernetes.html" class="card">
                         <h3>Kubernetes</h3>
-                        <p>kubectl commands and resource management</p>
+                        <p>Pods, services, deployments, and kubectl commands.</p>
                     </a>
-                    <a href="cheatsheets/aws-cli.html" class="cheatsheet-card">
+                    <a href="cheatsheets/aws-cli.html" class="card">
                         <h3>AWS CLI</h3>
-                        <p>EC2, S3, IAM, and core services</p>
+                        <p>EC2, S3, IAM, and cloud resource management.</p>
                     </a>
-                    <a href="cheatsheets/nginx.html" class="cheatsheet-card">
+                    <a href="cheatsheets/nginx.html" class="card">
                         <h3>Nginx</h3>
-                        <p>Configuration and proxy settings</p>
+                        <p>Configuration, reverse proxy, and server blocks.</p>
                     </a>
-                    <a href="cheatsheets/tmux-screen.html" class="cheatsheet-card">
+                    <a href="cheatsheets/tmux-screen.html" class="card">
                         <h3>tmux & screen</h3>
-                        <p>Terminal multiplexer commands</p>
+                        <p>Terminal multiplexing and session management.</p>
                     </a>
                 </div>
             </section>
 
-            <section class="category">
-                <h2>Architecture & Design</h2>
-                <div class="cheatsheets">
-                    <a href="cheatsheets/design-patterns.html" class="cheatsheet-card">
+            <section class="category-section">
+                <h2><i class="ph ph-buildings"></i> Architecture & Design</h2>
+                <div class="cheatsheets-grid">
+                    <a href="cheatsheets/design-patterns.html" class="card">
                         <h3>Design Patterns</h3>
-                        <p>Creational, structural, and behavioral patterns</p>
+                        <p>Creational, structural, and behavioral patterns.</p>
                     </a>
-                    <a href="cheatsheets/solid-principles.html" class="cheatsheet-card">
+                    <a href="cheatsheets/solid-principles.html" class="card">
                         <h3>SOLID Principles</h3>
-                        <p>Object-oriented design principles</p>
+                        <p>Object-oriented design principles for maintainable code.</p>
                     </a>
-                    <a href="cheatsheets/microservices-patterns.html" class="cheatsheet-card">
+                    <a href="cheatsheets/microservices-patterns.html" class="card">
                         <h3>Microservices Patterns</h3>
-                        <p>Service decomposition and resilience</p>
+                        <p>Decomposition, communication, and resilience patterns.</p>
                     </a>
-                    <a href="cheatsheets/api-design-patterns.html" class="cheatsheet-card">
+                    <a href="cheatsheets/api-design-patterns.html" class="card">
                         <h3>API Design Patterns</h3>
-                        <p>Pagination, versioning, and authentication</p>
+                        <p>Pagination, filtering, versioning, and security.</p>
                     </a>
-                    <a href="cheatsheets/database-design-patterns.html" class="cheatsheet-card">
+                    <a href="cheatsheets/database-design-patterns.html" class="card">
                         <h3>Database Design Patterns</h3>
-                        <p>Normalization and indexing strategies</p>
+                        <p>Normalization, indexing, sharding, and replication.</p>
                     </a>
                 </div>
             </section>
 
-            <section class="category">
-                <h2>Design Systems & Reference</h2>
-                <div class="cheatsheets">
-                    <a href="cheatsheets/material-design.html" class="cheatsheet-card">
+            <section class="category-section">
+                <h2><i class="ph ph-palette"></i> Design Systems & Reference</h2>
+                <div class="cheatsheets-grid">
+                    <a href="cheatsheets/material-design.html" class="card">
                         <h3>Material Design</h3>
-                        <p>Color tokens, typography, and spacing</p>
+                        <p>Color system, typography, spacing, and components.</p>
                     </a>
-                    <a href="cheatsheets/ascii-symbols.html" class="cheatsheet-card">
+                    <a href="cheatsheets/ascii-symbols.html" class="card">
                         <h3>ASCII Symbols</h3>
-                        <p>Special characters and box drawing</p>
+                        <p>Special characters, arrows, and box drawing.</p>
                     </a>
                 </div>
             </section>
 
-            <section class="category">
-                <h2>Tools & Utilities</h2>
-                <div class="cheatsheets">
-                    <a href="cheatsheets/grep.html" class="cheatsheet-card">
+            <section class="category-section">
+                <h2><i class="ph ph-wrench"></i> Tools & Utilities</h2>
+                <div class="cheatsheets-grid">
+                    <a href="cheatsheets/grep.html" class="card">
                         <h3>Grep</h3>
-                        <p>Text search patterns</p>
+                        <p>Text search patterns and regular expressions.</p>
                     </a>
-                    <a href="cheatsheets/regex.html" class="cheatsheet-card">
+                    <a href="cheatsheets/regex.html" class="card">
                         <h3>Regular Expressions</h3>
-                        <p>Pattern matching guide</p>
+                        <p>Syntax, character classes, quantifiers, and groups.</p>
                     </a>
-                    <a href="cheatsheets/sed-awk.html" class="cheatsheet-card">
+                    <a href="cheatsheets/sed-awk.html" class="card">
                         <h3>Sed & Awk</h3>
-                        <p>Text processing tools</p>
+                        <p>Stream editing and text processing commands.</p>
                     </a>
-                    <a href="cheatsheets/sql.html" class="cheatsheet-card">
+                    <a href="cheatsheets/sql.html" class="card">
                         <h3>SQL</h3>
-                        <p>Database query language</p>
+                        <p>Queries, joins, aggregation, and database management.</p>
                     </a>
                 </div>
             </section>
         </main>
         
         <footer>
-            <p>&copy; 2025 Cheatsheets Collection</p>
+            <p>&copy; 2025 Cheatsheets Collection. Open source and community driven.</p>
         </footer>
     </div>
 </body>
